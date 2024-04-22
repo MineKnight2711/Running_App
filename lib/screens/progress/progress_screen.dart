@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_running_demo/utils/fonts.dart';
+import 'package:flutter_running_demo/config/colors.dart';
+import 'package:flutter_running_demo/config/fonts.dart';
+import 'package:flutter_running_demo/screens/progress/components/app_bar.dart';
+import 'package:flutter_running_demo/screens/progress/components/basic_activities/walk_report.dart';
+import 'package:flutter_running_demo/screens/progress/components/progress_banner.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'components/basic_activities/sleep_report.dart';
 
 class ProgressScreen extends StatelessWidget {
   const ProgressScreen({
@@ -10,41 +15,46 @@ class ProgressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor:
-            Color.fromARGB(255, 24, 19, 63), // Set the status bar color
-        statusBarIconBrightness: Brightness.dark,
-      ),
-    );
-    return SafeArea(
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(70.h),
-            child: Container(
-              color: Color.fromARGB(255, 24, 19, 63),
-              child: Row(
-                children: [
-                  IconButton(
-                    splashColor: Colors.white,
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: const ProgressAppBar(),
+      body: Container(
+        clipBehavior: Clip.none,
+        decoration: const BoxDecoration(gradient: AppColors.appTheme),
+        padding: EdgeInsets.only(top: 60.h),
+        child: SizedBox(
+          width: 1.sw,
+          height: 1.sh,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const ProgressBanner(),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Basic Activities",
+                        style: CustomGoogleFonts.roboto(
+                          fontSize: 18.r,
+                          color: AppColors.white100,
+                        ),
+                      ),
+                      const SleepReport(),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      const WalkReport()
+                    ],
                   ),
-                  Text(
-                    "Be active",
-                    style: CustomGoogleFonts.roboto(
-                        color: Colors.white, fontSize: 16.r),
-                  ),
-                  Spacer(),
-                  Icon(Icons.home),
-                ],
-              ),
-            )),
-        body: Center(
-          child: Text('Hello World!'),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

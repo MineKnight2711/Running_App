@@ -14,6 +14,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   get: ^4.6.6
   cupertino_icons: ^1.0.8
+  card_swiper: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -22,3 +23,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+  assets:
+    - assets/animations/
+    - assets/images/
+    - assets/images/actions/
+    - assets/images/basic_activities/
