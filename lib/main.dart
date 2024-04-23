@@ -1,11 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/linechart/line_chart.dart';
-import 'package:flutter_running_demo/linechart/pricePoints.dart';
-import 'package:flutter_running_demo/screens/performance/chart_screen.dart';
+import 'package:flutter_running_demo/test_widgets/test_animated_appbar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'screens/performance/performance_screen.dart';
-import 'screens/progress/progress_screen.dart';
+import 'package:get/get.dart';
+
+import 'screens/progress/activities/activities_screen.dart';
+
 
 void main() {
   runApp(const MainApp());
@@ -17,12 +17,18 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(360, 690),
+      designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: LineChartWidget(pricePoints),
+
+        home: const ActivitiesScreen(),
+        initialRoute: 'activities_screen',
+        routes: {
+          'activities_screen': (context) => const ActivitiesScreen(),
+          // 'test_screen': (context) => TestScreen(),
+        },
       ),
     );
   }
