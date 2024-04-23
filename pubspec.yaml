@@ -14,8 +14,11 @@ dependencies:
   flutter_screenutil: ^5.9.0
   get: ^4.6.6
   cupertino_icons: ^1.0.8
+
+  fl_chart: ^0.67.0
   card_swiper: ^3.0.1
   draggable_home: ^1.0.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
