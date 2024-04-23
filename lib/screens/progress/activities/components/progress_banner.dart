@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_running_demo/config/colors.dart';
+import 'package:flutter_running_demo/screens/progress/activities_details/activities_details.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../config/fonts.dart';
+import '../../../../config/fonts.dart';
 
 List<Map<String, dynamic>> actions = [
   {
@@ -58,13 +60,13 @@ class ProgressBanner extends StatelessWidget {
         children: [
           Container(
             width: 58.w,
-            height: 62.h,
-            padding: EdgeInsets.all(10.w),
+            height: 60.h,
+            padding: EdgeInsets.all(5.h),
             alignment: Alignment.center,
             child: Image.asset("assets/images/g_logo.jpg"),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 50),
+            padding: EdgeInsets.only(right: 10.w),
             child: Text(
               "Be Active, Be Healthy, Be Happy",
               style: CustomGoogleFonts.roboto(
@@ -78,11 +80,12 @@ class ProgressBanner extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 10.h),
-
+            padding: EdgeInsets.only(top: 30.h),
+            // color: Colors.red,
             // alignment: Alignment.center,
             width: 1.sw,
-            height: 0.4.sh - 111.h,
+            //Caculate Swiper height
+            height: 0.4.sh - (70.h + 34.r + 10.h),
             child: Swiper(
               itemCount: actions.length,
               viewportFraction: 0.5,
@@ -93,23 +96,26 @@ class ProgressBanner extends StatelessWidget {
               itemBuilder: (context, index) {
                 final item = actions[index];
 
-                return Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 45.r,
-                      backgroundColor: currentIndex == index
-                          ? AppColors.progressActionActive
-                          : AppColors.progressAction,
-                      child: Image.asset(
-                        item["imagePath"],
-                        scale: 0.7,
+                return GestureDetector(
+                  onTap: () => Get.to(() => const ActivitiesDetailsScreen()),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 45.r,
+                        backgroundColor: currentIndex == index
+                            ? AppColors.progressActionActive
+                            : AppColors.progressAction,
+                        child: Image.asset(
+                          item["imagePath"],
+                          scale: 0.7,
+                        ),
                       ),
-                    ),
-                    Text(
-                      item["name"],
-                      style: CustomGoogleFonts.roboto(fontSize: 16.r),
-                    )
-                  ],
+                      Text(
+                        item["name"],
+                        style: CustomGoogleFonts.roboto(fontSize: 16.r),
+                      )
+                    ],
+                  ),
                 );
               },
             ),

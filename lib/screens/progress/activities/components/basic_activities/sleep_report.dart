@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_running_demo/config/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../config/colors.dart';
-import '../../../../config/fonts.dart';
+import '../../../../../config/fonts.dart';
 
-class WalkReport extends StatelessWidget {
-  const WalkReport({super.key});
+class SleepReport extends StatelessWidget {
+  const SleepReport({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class WalkReport extends StatelessWidget {
                 color: AppColors.basicActivitiesCard,
               )),
           child: Padding(
-            padding: EdgeInsets.all(16.r),
+            padding: EdgeInsets.all(12.r),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -36,9 +36,9 @@ class WalkReport extends StatelessWidget {
                           color: const Color(0x0DFFFFFF),
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            scale: 0.7,
+                            scale: 1,
                             image: Image.asset(
-                                    "assets/images/basic_activities/footprint.png")
+                                    "assets/images/basic_activities/zz.png")
                                 .image,
                           ),
                         ),
@@ -74,32 +74,29 @@ class WalkReport extends StatelessWidget {
   //Score
   Widget buildScore() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Today',
+          'Score',
           style: CustomGoogleFonts.roboto(
             color: Colors.white,
             fontSize: 12.r,
           ),
         ),
-        SizedBox(width: 16.w),
-        Text.rich(
-          TextSpan(
-            children: [
-              TextSpan(
-                  text: '4365',
-                  style: CustomGoogleFonts.roboto(
-                      fontSize: 16.r,
-                      color: AppColors.white100,
-                      fontWeight: FontWeight.bold)),
-              TextSpan(
-                text: ' steps',
-                style: CustomGoogleFonts.roboto(
-                  fontSize: 14.r,
-                  color: AppColors.white100,
-                ),
-              ),
-            ],
+        SizedBox(width: 6.w),
+        Text(
+          '83/100',
+          style: CustomGoogleFonts.roboto(
+            color: Colors.white,
+            fontSize: 16.r,
+          ),
+        ),
+        SizedBox(width: 8.w),
+        Text(
+          '83/100',
+          style: CustomGoogleFonts.roboto(
+            color: Colors.white,
+            fontSize: 16.r,
           ),
         ),
       ],
@@ -111,10 +108,10 @@ class WalkReport extends StatelessWidget {
     return Row(
       children: [
         Text(
-          'Week Avg',
+          'Duration',
           style: CustomGoogleFonts.roboto(
             color: AppColors.white100,
-            fontSize: 16.0,
+            fontSize: 12.r,
           ),
         ),
         SizedBox(width: 16.w),
@@ -122,15 +119,15 @@ class WalkReport extends StatelessWidget {
           TextSpan(
             children: [
               TextSpan(
-                  text: '3123',
+                  text: '06:32',
                   style: CustomGoogleFonts.roboto(
                       fontSize: 16.r,
                       color: AppColors.white100,
                       fontWeight: FontWeight.bold)),
               TextSpan(
-                text: ' steps',
+                text: ' hours',
                 style: CustomGoogleFonts.roboto(
-                  fontSize: 14.r,
+                  fontSize: 12.r,
                   color: AppColors.white100,
                 ),
               ),
@@ -146,7 +143,7 @@ class WalkReport extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: const Color(0x80FF4747),
+          color: const Color(0x7f00d688),
           borderRadius: BorderRadius.circular(20),
           shape: BoxShape.rectangle),
       padding: const EdgeInsets.symmetric(
@@ -154,10 +151,10 @@ class WalkReport extends StatelessWidget {
         horizontal: 16.0,
       ),
       child: Text(
-        'Your activity level is low this week',
+        'You have GOOD sleep last night! Awesome!',
         style: CustomGoogleFonts.roboto(
           color: AppColors.white100,
-          fontSize: 16.0,
+          fontSize: 12.r,
         ),
       ),
     );

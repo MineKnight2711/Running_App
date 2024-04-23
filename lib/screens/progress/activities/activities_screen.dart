@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/colors.dart';
 import 'package:flutter_running_demo/config/fonts.dart';
-import 'package:flutter_running_demo/screens/progress/components/app_bar.dart';
-import 'package:flutter_running_demo/screens/progress/components/basic_activities/walk_report.dart';
-import 'package:flutter_running_demo/screens/progress/components/progress_banner.dart';
+import 'package:flutter_running_demo/screens/progress/activities/components/app_bar.dart';
+import 'package:flutter_running_demo/screens/progress/activities/components/basic_activities/walk_report.dart';
+import 'package:flutter_running_demo/screens/progress/activities/components/progress_banner.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'components/basic_activities/sleep_report.dart';
 
-class ProgressScreen extends StatelessWidget {
-  const ProgressScreen({
+class ActivitiesScreen extends GetView {
+  const ActivitiesScreen({
     super.key,
   });
 
@@ -17,7 +18,9 @@ class ProgressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const ProgressAppBar(),
+      appBar: const ProgressAppBar(
+        title: "Be active",
+      ),
       body: Container(
         clipBehavior: Clip.none,
         decoration: const BoxDecoration(gradient: AppColors.appTheme),

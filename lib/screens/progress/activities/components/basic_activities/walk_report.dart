@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/config/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../config/fonts.dart';
+import '../../../../../config/colors.dart';
+import '../../../../../config/fonts.dart';
 
-class SleepReport extends StatelessWidget {
-  const SleepReport({super.key});
+class WalkReport extends StatelessWidget {
+  const WalkReport({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +36,9 @@ class SleepReport extends StatelessWidget {
                           color: const Color(0x0DFFFFFF),
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            scale: 0.7,
+                            scale: 1,
                             image: Image.asset(
-                                    "assets/images/basic_activities/zz.png")
+                                    "assets/images/basic_activities/footprint.png")
                                 .image,
                           ),
                         ),
@@ -76,26 +76,30 @@ class SleepReport extends StatelessWidget {
     return Row(
       children: [
         Text(
-          'Score',
+          'Today',
           style: CustomGoogleFonts.roboto(
             color: Colors.white,
             fontSize: 12.r,
           ),
         ),
         SizedBox(width: 16.w),
-        Text(
-          '83/100',
-          style: CustomGoogleFonts.roboto(
-            color: Colors.white,
-            fontSize: 16.r,
-          ),
-        ),
-        SizedBox(width: 16.w),
-        Text(
-          '83/100',
-          style: CustomGoogleFonts.roboto(
-            color: Colors.white,
-            fontSize: 16.r,
+        Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                  text: '4365',
+                  style: CustomGoogleFonts.roboto(
+                      fontSize: 16.r,
+                      color: AppColors.white100,
+                      fontWeight: FontWeight.bold)),
+              TextSpan(
+                text: ' steps',
+                style: CustomGoogleFonts.roboto(
+                  fontSize: 12.r,
+                  color: AppColors.white100,
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -107,10 +111,10 @@ class SleepReport extends StatelessWidget {
     return Row(
       children: [
         Text(
-          'Duration',
+          'Week Avg',
           style: CustomGoogleFonts.roboto(
             color: AppColors.white100,
-            fontSize: 16.0,
+            fontSize: 12.r,
           ),
         ),
         SizedBox(width: 16.w),
@@ -118,15 +122,15 @@ class SleepReport extends StatelessWidget {
           TextSpan(
             children: [
               TextSpan(
-                  text: '06:32',
+                  text: '3123',
                   style: CustomGoogleFonts.roboto(
                       fontSize: 16.r,
                       color: AppColors.white100,
                       fontWeight: FontWeight.bold)),
               TextSpan(
-                text: ' hours',
+                text: ' steps',
                 style: CustomGoogleFonts.roboto(
-                  fontSize: 14.r,
+                  fontSize: 12.r,
                   color: AppColors.white100,
                 ),
               ),
@@ -142,7 +146,7 @@ class SleepReport extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: const Color(0x7f00d688),
+          color: const Color(0x80FF4747),
           borderRadius: BorderRadius.circular(20),
           shape: BoxShape.rectangle),
       padding: const EdgeInsets.symmetric(
@@ -150,7 +154,7 @@ class SleepReport extends StatelessWidget {
         horizontal: 16.0,
       ),
       child: Text(
-        'You have GOOD sleep last night! Awesome!',
+        'Your activity level is low this week',
         style: CustomGoogleFonts.roboto(
           color: AppColors.white100,
           fontSize: 16.0,
