@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../config/colors.dart';
-import '../../../../../config/fonts.dart';
+import '../../../../../../config/colors.dart';
+import '../../../../../../config/fonts.dart';
 
 class TrailDetailsFooter extends StatelessWidget {
+  final double distance, pace, ascent, calories;
+  final String time;
   const TrailDetailsFooter({
     super.key,
+    required this.distance,
+    required this.pace,
+    required this.ascent,
+    required this.calories,
+    required this.time,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 1.sw,
       height: 60,
-      color: Colors.grey[800],
+      color: const Color(0xFF2F2828).withOpacity(0.65),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -30,7 +38,7 @@ class TrailDetailsFooter extends StatelessWidget {
                 ),
               ),
               Text(
-                '4.8 km',
+                '$distance km',
                 style: CustomGoogleFonts.roboto(
                   fontSize: 16.r,
                   fontWeight: FontWeight.w500,
@@ -52,7 +60,7 @@ class TrailDetailsFooter extends StatelessWidget {
                 ),
               ),
               Text(
-                '00:15:57',
+                time,
                 style: CustomGoogleFonts.roboto(
                   fontSize: 16.r,
                   fontWeight: FontWeight.w500,
@@ -74,7 +82,7 @@ class TrailDetailsFooter extends StatelessWidget {
                 ),
               ),
               Text(
-                '3:12/km',
+                '$pace/km',
                 style: CustomGoogleFonts.roboto(
                   fontSize: 16.r,
                   fontWeight: FontWeight.w500,
@@ -96,7 +104,7 @@ class TrailDetailsFooter extends StatelessWidget {
                 ),
               ),
               Text(
-                '2m',
+                '${ascent}m',
                 style: CustomGoogleFonts.roboto(
                   fontSize: 16.r,
                   fontWeight: FontWeight.w500,
@@ -121,7 +129,7 @@ class TrailDetailsFooter extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '328',
+                  calories.toStringAsFixed(0),
                   style: CustomGoogleFonts.roboto(
                     fontSize: 16.r,
                     fontWeight: FontWeight.w500,
