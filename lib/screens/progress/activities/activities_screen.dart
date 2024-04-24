@@ -24,7 +24,7 @@ class ActivitiesScreen extends GetView {
       body: Container(
         clipBehavior: Clip.none,
         decoration: const BoxDecoration(gradient: AppColors.appTheme),
-        padding: EdgeInsets.only(top: 60.h),
+        padding: EdgeInsets.only(top: 70.h),
         child: SizedBox(
           width: 1.sw,
           height: 1.sh,

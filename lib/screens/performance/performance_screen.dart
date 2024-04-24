@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_running_demo/utils/fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../config/fonts.dart';
 
 class Performance extends StatelessWidget {
   const Performance({
