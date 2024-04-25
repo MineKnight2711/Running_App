@@ -1,4 +1,4 @@
-import 'package:flutter_running_demo/bargraph/individual_bar.dart';
+import 'package:flutter_running_demo/screens/performance/bargraph/individual_bar.dart';
 
 class BarData {
   final double janAmount;

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_running_demo/bargraph/bar_graph.dart';
+import 'package:flutter_running_demo/screens/performance/bargraph/bar_graph.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Chartscreen extends StatefulWidget {

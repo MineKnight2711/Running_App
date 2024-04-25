@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/bargraph/bar_data.dart';
+import 'package:flutter_running_demo/screens/performance/bargraph/bar_data.dart';
 
 class MyBarGraph extends StatelessWidget {
   final List monthSummary;

@@ -1,12 +1,15 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/linechart/pricePoints.dart';
+import 'package:flutter_running_demo/config/temp.dart';
+import 'package:flutter_running_demo/models/dropdown_activities_model.dart';
+import 'package:flutter_running_demo/screens/performance/linechart/pricePoints.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LineChartWidget extends StatelessWidget {
   final List<Pricepoints> points;
-  const LineChartWidget(this.points, {super.key});
+  const LineChartWidget({super.key, required this.points});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class LineChartWidget extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          DropdownMenuExample(),
+          DropDownActivitiesMenu(),
           PillButtonRow(),
           const nonButton(),
           AspectRatio(
@@ -40,6 +43,7 @@ class LineChartWidget extends StatelessWidget {
               ),
             ),
           ),
+          Containertotal(),
         ],
       ),
     );
@@ -176,47 +180,123 @@ class _nonButtonState extends State<nonButton> {
   }
 }
 
-class DropdownMenuExample extends StatefulWidget {
+class Containertotal extends StatefulWidget {
+  const Containertotal({super.key});
+
   @override
-  _DropdownMenuExampleState createState() => _DropdownMenuExampleState();
+  State<Containertotal> createState() => _ContainerState();
 }
 
-class _DropdownMenuExampleState extends State<DropdownMenuExample> {
-  String _selectedValue = '2.73';
-  final List<String> _options = ['2.73', '3.14', '4.20', '5.67'];
+class _ContainerState extends State<Containertotal> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
+      margin: const EdgeInsets.symmetric(horizontal: 80),
+      width: 1.sw,
+      height: 50.h,
+      child: Row(
+        children: [
+          Container(
+              width: 0.3.sw,
+              height: 50.h,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(12)),
+              child: Text('136km  Totaldistance')),
+          const SizedBox(
+            width: 20,
+          ),
+          Container(
+              width: 0.2.sw,
+              height: 50.h,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(12)),
+              child: Text('8               total run')),
+        ],
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      ),
+    );
+  }
+}
+
+class DropDownActivitiesMenu extends StatefulWidget {
+  const DropDownActivitiesMenu({super.key});
+
+  @override
+  State<DropDownActivitiesMenu> createState() => _DropDownActivitiesMenuState();
+}
+
+class _DropDownActivitiesMenuState extends State<DropDownActivitiesMenu> {
+  late ActivitiesDropDownModel _selected;
+  List<ActivitiesDropDownModel> activitiesDropDownList = [
+    ActivitiesDropDownModel(
+      icon: Icons.run_circle_rounded,
+      activityIndex: '4.2/km',
+      achievements: "Longest run",
+    ),
+    ActivitiesDropDownModel(
+      icon: Icons.hiking,
+      activityIndex: '500m',
+      achievements: "Highest hiking",
+    ),
+    ActivitiesDropDownModel(
+      icon: Icons.directions_walk,
+      activityIndex: '20km',
+      achievements: "Longest walk",
+    ),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _selected = activitiesDropDownList.first;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      margin: const EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
         color: Colors.grey[900],
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: DropdownButton<String>(
-        value: _selectedValue,
+      child: DropdownButton<ActivitiesDropDownModel>(
+        isExpanded: true,
+        value: _selected,
         icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
         iconSize: 24,
         elevation: 16,
         style: const TextStyle(color: Colors.black),
         underline: Container(),
-        onChanged: (String? newValue) {
+        onChanged: (newValue) {
           setState(() {
-            _selectedValue = newValue!;
+            _selected = newValue!;
           });
         },
-        items: _options.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
+        items: activitiesDropDownList
+            .map<DropdownMenuItem<ActivitiesDropDownModel>>((value) {
+          return DropdownMenuItem<ActivitiesDropDownModel>(
             value: value,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.arrow_forward_ios),
-                Text(
-                  '$value km - fastest run',
-                  style: TextStyle(
-                      color:
-                          value == _selectedValue ? Colors.grey : Colors.black),
+                Icon(
+                  value.icon,
+                  color: Colors.white,
                 ),
+                Text(
+                  '${value.activityIndex} - ${value.achievements}',
+                  style: TextStyle(
+                      color: value == _selected ? Colors.grey : Colors.black),
+                ),
+                SizedBox(
+                  width: 30.w,
+                )
               ],
             ),
           );
