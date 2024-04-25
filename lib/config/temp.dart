@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/models/dropdown_activities_model.dart';
+import 'dart:math';
 
+import 'package:collection/collection.dart';
+import 'package:flutter_running_demo/models/line_chart_point.dart';
 import '../models/trail_model.dart';
 
 List<TrailModel> trailTempList = [
@@ -42,3 +42,28 @@ List<TrailModel> trailTempList = [
     date: DateTime(2023, 4, 22),
   ),
 ];
+
+List<LineChartPoint> get lineChartPoints {
+  final random = Random();
+  final data = List.generate(43, (index) {
+    final x = index.toDouble();
+    final randomOffset =
+        random.nextDouble() * 10; // Random offset between 0 and 10
+    final y = 125 + 17.5 * sin(2 * pi * (x + randomOffset) / 15);
+    return LineChartPoint(x: x, y: y);
+  });
+
+  return data;
+}
+
+List<LineChartPoint> get rpePoints {
+  final random = Random();
+  return lineChartPoints
+      .map((point) => LineChartPoint(
+            x: point.x,
+            y: 90 +
+                (point.y - 125) +
+                random.nextDouble() * 30, // Random value between 0 and 30
+          ))
+      .toList();
+}
