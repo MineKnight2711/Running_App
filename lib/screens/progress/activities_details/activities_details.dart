@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/temp.dart';
+import 'package:flutter_running_demo/screens/progress/activities_details/components/share_sheet/share_sheet.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import '../../../config/colors.dart';
 import 'components/bottom_bar.dart';
-import 'components/search_sheet.dart';
+import 'components/search_sheet/search_sheet.dart';
 import 'components/sliver_header/sliver_header.dart';
 import 'components/trail_details/trail_details.dart';
 
@@ -53,16 +55,7 @@ class ActivitiesDetailsScreen extends GetView {
                         return Padding(
                           padding: EdgeInsets.only(bottom: 10.h),
                           child: TrailDetailsWidget(
-                            rpe: trail.rpe,
-                            title: trail.title,
-                            date: trail.date,
-                            place: trail.place,
-                            haveInfo: trail.haveInfo,
-                            distance: trail.distance,
-                            totalTime: trail.totalTime,
-                            pace: trail.pace,
-                            ascent: trail.ascent,
-                            calories: trail.calories,
+                            trail: trail,
                           ),
                         );
                       },

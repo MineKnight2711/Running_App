@@ -5,15 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../config/colors.dart';
 import '../../../../../config/fonts.dart';
 
-class SearchBy extends StatelessWidget {
+class SheetRow extends StatelessWidget {
   final IconData? iconData;
-  final String? searchBy;
+  final String? rowTitle;
   final double? spaceBetween;
   final Widget trailing;
-  const SearchBy(
+  const SheetRow(
       {super.key,
       this.iconData,
-      this.searchBy,
+      this.rowTitle,
       required this.trailing,
       this.spaceBetween});
 
@@ -29,9 +29,9 @@ class SearchBy extends StatelessWidget {
                 size: 24.r,
               )
             : const SizedBox.shrink(),
-        searchBy != null
+        rowTitle != null
             ? Text(
-                searchBy!,
+                rowTitle!,
                 textAlign: TextAlign.center,
                 style: CustomGoogleFonts.roboto(
                     fontSize: 16.r, color: AppColors.white100),
