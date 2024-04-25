@@ -1,7 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/screens/performance/linechart/pricePoints.dart';
-
 import 'line_chart.dart';
 
 class ChartExample extends StatelessWidget {

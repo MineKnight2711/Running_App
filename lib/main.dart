@@ -23,8 +23,8 @@ class MainApp extends StatelessWidget {
       splitScreenMode: true,
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: ChartExample(),
-        initialRoute: 'linechart_demo',
+        home: LineChartWidget(points: pricePoints),
+        initialRoute: 'linechart_screen',
         routes: {
           'activities_screen': (context) => const ActivitiesScreen(),
           'linechart_demo': (context) => ChartExample(),
