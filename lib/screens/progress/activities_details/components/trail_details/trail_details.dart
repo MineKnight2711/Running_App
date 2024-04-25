@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_running_demo/utils/data_convert.dart';
@@ -8,7 +9,7 @@ import 'components/trail_details_header.dart';
 class TrailDetailsWidget extends StatelessWidget {
   final String title, place;
   final double distance, pace, calories, ascent;
-  final int totalTime;
+  final int totalTime, rpe;
   final bool haveInfo;
   final DateTime date;
 
@@ -22,7 +23,8 @@ class TrailDetailsWidget extends StatelessWidget {
       required this.pace,
       required this.calories,
       required this.date,
-      required this.haveInfo});
+      required this.haveInfo,
+      required this.rpe});
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,44 @@ class TrailDetailsWidget extends StatelessWidget {
                         Image.asset("assets/images/activities_details/map.png")
                             .image,
                     fit: BoxFit.cover),
+              ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: SizedBox(
+                      width: 30.w,
+                      height: 40.h,
+                      child: Image.asset(
+                          "assets/images/activities_details/g_logo_bw.png"),
+                    ),
+                  ),
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Container(
+                      width: 30.w,
+                      height: 40.h,
+                      color: Colors.lightBlue,
+                      child: (() {
+                        String image = "";
+                        switch (rpe) {
+                          case 1:
+                            image = "green_rpe";
+
+                          case 2:
+                            image = "blue_rpe";
+
+                          default:
+                            image = "yellow_rpe";
+                        }
+                        return Image.asset(
+                            "assets/images/activities_details/$image.png");
+                      })(),
+                    ),
+                  ),
+                ],
               ),
             ),
             Positioned(

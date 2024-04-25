@@ -4,10 +4,8 @@ import 'package:flutter_running_demo/config/colors.dart';
 import 'package:flutter_running_demo/config/fonts.dart';
 import 'package:flutter_running_demo/screens/progress/activities_details/components/search_sheet/search_by.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../widgets/date_time_picker.dart';
 import 'search_sheet/activites_drow_down.dart';
-import 'search_sheet/search_sheet_header.dart';
 
 class SearchSheet extends StatelessWidget {
   const SearchSheet({super.key});

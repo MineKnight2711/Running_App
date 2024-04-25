@@ -37,7 +37,7 @@ class ActivitiesDetailsScreen extends GetView {
                         ),
                         backgroundColor: const Color(0xff222222),
                         builder: (context) {
-                          return SearchSheet();
+                          return const SearchSheet();
                         },
                       );
                     },
@@ -53,6 +53,7 @@ class ActivitiesDetailsScreen extends GetView {
                         return Padding(
                           padding: EdgeInsets.only(bottom: 10.h),
                           child: TrailDetailsWidget(
+                            rpe: trail.rpe,
                             title: trail.title,
                             date: trail.date,
                             place: trail.place,
@@ -72,7 +73,7 @@ class ActivitiesDetailsScreen extends GetView {
               ),
             ),
             Positioned(
-              top: 60.h,
+              top: 50.h,
               child: SizedBox(
                 width: 1.sw,
                 child: Image.asset(

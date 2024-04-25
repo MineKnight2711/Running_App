@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/screens/progress/activities_details/components/search_sheet.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../config/colors.dart';
@@ -29,7 +28,6 @@ class SliverHeader extends StatelessWidget {
           collapsedHeight: 105.h,
           flexibleSpace: FlexibleSpaceBar(
             collapseMode: CollapseMode.pin,
-            titlePadding: EdgeInsets.symmetric(vertical: 50.w),
             background: SliverHeaderButtons(
               isScrolledUnder: isScrolledUnder,
               onChartPress: onChartPress,

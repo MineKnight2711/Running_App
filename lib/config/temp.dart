@@ -4,6 +4,7 @@ List<TrailModel> trailTempList = [
   TrailModel(
     title: 'Ben Thanh Trail',
     place: 'Ben Thanh Market, Ho Cho Minh City',
+    rpe: 1,
     ascent: 500,
     distance: 10.5,
     pace: 8.2,
@@ -15,6 +16,7 @@ List<TrailModel> trailTempList = [
   TrailModel(
     title: 'Dam Sen Trail',
     place: 'District 11, Ho Cho Minh City',
+    rpe: 2,
     ascent: 300,
     distance: 8.0,
     pace: 7.5,
@@ -26,6 +28,7 @@ List<TrailModel> trailTempList = [
   TrailModel(
     title: 'Ho Ban Nguyet Trail',
     place: 'Half Moon Lake, District 7 ,Ho Cho Minh City',
+    rpe: 3,
     ascent: 200,
     distance: 8.0,
     pace: 7.5,
