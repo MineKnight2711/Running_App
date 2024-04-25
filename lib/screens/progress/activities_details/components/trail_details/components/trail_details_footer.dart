@@ -1,143 +1,179 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_running_demo/models/trail_model.dart';
+import 'package:flutter_running_demo/utils/data_convert.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../config/colors.dart';
 import '../../../../../../config/fonts.dart';
 
 class TrailDetailsFooter extends StatelessWidget {
-  final double distance, pace, ascent, calories;
-  final String time;
+  final bool? titleInFooter;
+  final TrailModel trail;
   const TrailDetailsFooter({
     super.key,
-    required this.distance,
-    required this.pace,
-    required this.ascent,
-    required this.calories,
-    required this.time,
+    required this.trail,
+    this.titleInFooter = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    int columnHeaderTextSize = 12;
+    int trailDetailsTextSize = titleInFooter! ? 14 : 16;
+    int columnGap = titleInFooter! ? 14 : 20;
     return Container(
       width: 1.sw,
-      height: 60,
+      height: titleInFooter! ? 70.h : 50.h,
       color: const Color(0xFF2F2828).withOpacity(0.65),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Distance',
-                style: CustomGoogleFonts.roboto(
-                  fontSize: 12.r,
-                  fontWeight: FontWeight.w300,
-                  color: const Color(0xFFB4AEAB),
-                ),
-              ),
-              Text(
-                '$distance km',
-                style: CustomGoogleFonts.roboto(
-                  fontSize: 16.r,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.white100,
-                ),
-              ),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Time',
-                style: CustomGoogleFonts.roboto(
-                  fontSize: 12.r,
-                  fontWeight: FontWeight.w300,
-                  color: const Color(0xFFB4AEAB),
-                ),
-              ),
-              Text(
-                time,
-                style: CustomGoogleFonts.roboto(
-                  fontSize: 16.r,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.white100,
-                ),
-              ),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Pace',
-                style: CustomGoogleFonts.roboto(
-                  fontSize: 12.r,
-                  fontWeight: FontWeight.w300,
-                  color: const Color(0xFFB4AEAB),
-                ),
-              ),
-              Text(
-                '$pace/km',
-                style: CustomGoogleFonts.roboto(
-                  fontSize: 16.r,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.white100,
-                ),
-              ),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Ascent',
-                style: CustomGoogleFonts.roboto(
-                  fontSize: 12.r,
-                  fontWeight: FontWeight.w300,
-                  color: const Color(0xFFB4AEAB),
-                ),
-              ),
-              Text(
-                '${ascent}m',
-                style: CustomGoogleFonts.roboto(
-                  fontSize: 16.r,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.white100,
-                ),
-              ),
-            ],
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Calories',
-                  textAlign: TextAlign.start,
-                  style: CustomGoogleFonts.roboto(
-                    fontSize: 12.r,
-                    fontWeight: FontWeight.w300,
-                    color: const Color(0xFFB4AEAB),
+          titleInFooter!
+              ? Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Text(
+                    trail.title,
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: trailDetailsTextSize.r,
+                      color: AppColors.white100,
+                    ),
                   ),
-                ),
-                Text(
-                  calories.toStringAsFixed(0),
-                  style: CustomGoogleFonts.roboto(
-                    fontSize: 16.r,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.white100,
+                )
+              : const SizedBox.shrink(),
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: 8.w,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Distance',
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: columnHeaderTextSize.r,
+                      fontWeight: FontWeight.w300,
+                      color: const Color(0xFFB4AEAB),
+                    ),
                   ),
-                ),
-              ],
-            ),
+                  Text(
+                    '${trail.distance} km',
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: trailDetailsTextSize.r,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.white100,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: columnGap.w,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Time',
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: columnHeaderTextSize.r,
+                      fontWeight: FontWeight.w300,
+                      color: const Color(0xFFB4AEAB),
+                    ),
+                  ),
+                  Text(
+                    DataConvert.minutesFromSeconds(trail.totalTime),
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: trailDetailsTextSize.r,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.white100,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: columnGap.w,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Pace',
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: columnHeaderTextSize.r,
+                      fontWeight: FontWeight.w300,
+                      color: const Color(0xFFB4AEAB),
+                    ),
+                  ),
+                  Text(
+                    '${trail.pace}/km',
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: trailDetailsTextSize.r,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.white100,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: columnGap.w,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Ascent',
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: columnHeaderTextSize.r,
+                      fontWeight: FontWeight.w300,
+                      color: const Color(0xFFB4AEAB),
+                    ),
+                  ),
+                  Text(
+                    '${trail.pace}m',
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: trailDetailsTextSize.r,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.white100,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: columnGap.w,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Calories',
+                    textAlign: TextAlign.start,
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: columnHeaderTextSize.r,
+                      fontWeight: FontWeight.w300,
+                      color: const Color(0xFFB4AEAB),
+                    ),
+                  ),
+                  Text(
+                    trail.calories.toStringAsFixed(0),
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: trailDetailsTextSize.r,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.white100,
+                    ),
+                  ),
+                  SizedBox(
+                    width: columnGap.w,
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),

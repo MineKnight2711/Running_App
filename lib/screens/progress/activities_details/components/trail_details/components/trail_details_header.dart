@@ -1,19 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_running_demo/models/trail_model.dart';
+import 'package:flutter_running_demo/utils/data_convert.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../config/colors.dart';
 import '../../../../../../config/fonts.dart';
+import '../../share_sheet/share_sheet.dart';
 
 class TrailDetailsHeader extends StatelessWidget {
-  final String title, date, place;
-  final bool haveInfo;
+  final TrailModel trail;
+
   const TrailDetailsHeader({
     super.key,
-    required this.title,
-    required this.date,
-    required this.place,
-    required this.haveInfo,
+    required this.trail,
   });
 
   @override
@@ -54,7 +55,7 @@ class TrailDetailsHeader extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      title,
+                      trail.title,
                       style: CustomGoogleFonts.roboto(
                           fontSize: 16.r, color: AppColors.white100),
                     ),
@@ -63,18 +64,38 @@ class TrailDetailsHeader extends StatelessWidget {
                     ),
                     Image.asset("assets/images/activities_details/people.png"),
                     const Spacer(),
-                    haveInfo
+                    trail.haveInfo
                         ? Image.asset(
                             "assets/images/activities_details/info.png",
-                            scale: 0.85,
+                            scale: 0.9,
                           )
                         : const SizedBox.shrink(),
                     SizedBox(
-                      width: 5.w,
+                      width: 10.w,
                     ),
-                    Image.asset(
-                      "assets/images/activities_details/share.png",
-                      scale: 0.85,
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
+                          ),
+                          backgroundColor: const Color(0xff222222),
+                          builder: (context) {
+                            return ShareSheet(
+                              trail: trail,
+                            );
+                          },
+                        );
+                      },
+                      child: Image.asset(
+                        "assets/images/activities_details/share.png",
+                        scale: 0.9,
+                      ),
                     )
                   ],
                 ),
@@ -84,7 +105,7 @@ class TrailDetailsHeader extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      date,
+                      DataConvert.dateTimeFormat(trail.date),
                       style: CustomGoogleFonts.roboto(
                           fontSize: 12.r,
                           fontWeight: FontWeight.w300,
@@ -92,7 +113,7 @@ class TrailDetailsHeader extends StatelessWidget {
                     ),
                     Flexible(
                       child: Text(
-                        ' | $place',
+                        ' | ${trail.place}',
                         overflow: TextOverflow.ellipsis,
                         style: CustomGoogleFonts.roboto(
                           fontSize: 12.r,

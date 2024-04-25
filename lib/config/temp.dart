@@ -26,7 +26,7 @@ List<TrailModel> trailTempList = [
     pace: 7.5,
     totalTime: 3600, // 1 hour
     calories: 520,
-    haveInfo: true,
+    haveInfo: false,
     date: DateTime(2023, 4, 22),
   ),
   TrailModel(
@@ -38,7 +38,7 @@ List<TrailModel> trailTempList = [
     pace: 7.5,
     totalTime: 3600, // 1 hour
     calories: 520,
-    haveInfo: true,
+    haveInfo: false,
     date: DateTime(2023, 4, 22),
   ),
 ];

@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/colors.dart';
 import 'package:flutter_running_demo/config/fonts.dart';
-import 'package:flutter_running_demo/screens/progress/activities_details/components/search_sheet/search_by.dart';
+import 'package:flutter_running_demo/screens/progress/activities_details/components/search_sheet/sheet_row.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../widgets/date_time_picker.dart';
-import 'search_sheet/activites_drow_down.dart';
+import '../../../../../widgets/date_time_picker.dart';
+import 'activites_drow_down.dart';
 
 class SearchSheet extends StatelessWidget {
   const SearchSheet({super.key});
@@ -22,8 +22,8 @@ class SearchSheet extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.w),
           child: Column(
             children: [
-              SearchBy(
-                searchBy: "Search",
+              SheetRow(
+                rowTitle: "Search",
                 spaceBetween: 220,
                 trailing: IconButton(
                   icon: Icon(
@@ -40,18 +40,18 @@ class SearchSheet extends StatelessWidget {
                 thickness: 0.5.r,
                 height: 32.h,
               ),
-              const SearchBy(
+              const SheetRow(
                 iconData: CupertinoIcons.arrow_2_circlepath,
-                searchBy: "On going activities",
+                rowTitle: "On going activities",
                 trailing: ActivitesDrowDown(),
               ),
               Divider(
                 thickness: 0.5.r,
                 height: 32.h,
               ),
-              SearchBy(
+              SheetRow(
                 iconData: Icons.calendar_today_outlined,
-                searchBy: "By time",
+                rowTitle: "By time",
                 trailing: DateTimePicker(
                   initialDate: DateTime.now(),
                   onChanged: (value) {},
@@ -61,9 +61,8 @@ class SearchSheet extends StatelessWidget {
                 thickness: 0.5.r,
                 height: 32.h,
               ),
-              SearchBy(
+              SheetRow(
                 iconData: Icons.abc,
-                // searchBy: "By time",
                 spaceBetween: 0,
                 trailing: SizedBox(
                   width: 0.75.sw,
