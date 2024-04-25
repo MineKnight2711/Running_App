@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/colors.dart';
 import '../../../../config/fonts.dart';
+import '../../../../widgets/home_action_button.dart';
 
 class ProgressAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -25,16 +26,9 @@ class ProgressAppBar extends StatelessWidget implements PreferredSizeWidget {
             CustomGoogleFonts.roboto(color: AppColors.white100, fontSize: 14.r),
       ),
       actions: [
-        GestureDetector(
+        ActionButton(
+          imagePath: "assets/images/home.png",
           onTap: () {},
-          child: CircleAvatar(
-            radius: 18,
-            backgroundColor: AppColors.white100.withOpacity(0.1),
-            child: Image.asset(
-              "assets/images/home.png",
-              scale: 1.1,
-            ),
-          ),
         ),
         SizedBox(
           width: 10.w,

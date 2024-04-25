@@ -48,7 +48,7 @@ class ProgressBanner extends StatelessWidget {
     int currentIndex = 0;
     return Container(
       width: 1.sw,
-      height: 0.4.sh,
+      height: 0.36.sh,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
@@ -80,12 +80,10 @@ class ProgressBanner extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 30.h),
-            // color: Colors.red,
-            // alignment: Alignment.center,
+            padding: EdgeInsets.only(top: 20.h),
             width: 1.sw,
             //Caculate Swiper height
-            height: 0.4.sh - (70.h + 34.r + 10.h),
+            height: 0.36.sh - (70.h + 34.r + 10.h),
             child: Swiper(
               itemCount: actions.length,
               viewportFraction: 0.5,
