@@ -28,11 +28,11 @@ class TransformButton extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: AppColors.basicActivitiesCard,
                 borderRadius: BorderRadius.all(
-                  Radius.circular(12),
+                  Radius.circular(20),
                 ),
               ),
               width: 130.w,
-              height: 30.h,
+              height: 35.h,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
