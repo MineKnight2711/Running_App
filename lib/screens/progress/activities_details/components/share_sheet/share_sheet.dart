@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_running_demo/config/colors.dart';
+import 'package:flutter_running_demo/config/fonts.dart';
 import 'package:flutter_running_demo/models/trail_model.dart';
 import 'package:flutter_running_demo/screens/progress/activities_details/components/search_sheet/sheet_row.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +14,7 @@ class ShareSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.7, //Kích cỡ sheet khi vừa hiện lên
+      initialChildSize: 0.75, //Kích cỡ sheet khi vừa hiện lên
       minChildSize: 0.3, //Khi ta kéo sheet về 0.3 chiều cao của nó, nó sẽ đóng
       maxChildSize: 0.95, //Chiều cao tối đa của sheet được phép kéo lên
       expand: false,
@@ -55,10 +57,77 @@ class ShareSheet extends StatelessWidget {
                   trail: trail,
                 ),
               ),
+              SizedBox(
+                height: 24.h,
+              ),
+              ShareOption(
+                image: "location_map",
+                option: "Publish on running map",
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              ShareOption(
+                image: "g_logo_white",
+                option: "Share to genki community",
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              ShareOption(
+                image: "more_option",
+                option: "More option",
+                onTap: () {},
+              ),
             ],
           ),
         );
       },
+    );
+  }
+}
+
+class ShareOption extends StatelessWidget {
+  final String image, option;
+  final VoidCallback onTap;
+  const ShareOption({
+    super.key,
+    required this.image,
+    required this.option,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: onTap,
+      child: Container(
+        height: 40.h,
+        decoration: BoxDecoration(
+          border: Border.all(
+              width: 1, color: const Color(0xFFFFFFFF).withOpacity(0.2)),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/images/activities_details/$image.png",
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            Text(
+              option,
+              style: CustomGoogleFonts.roboto(
+                  fontSize: 16.r, color: AppColors.white100),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
