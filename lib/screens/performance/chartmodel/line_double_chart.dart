@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../config/temp.dart';
+import '../bargraph/bar_graph.dart';
 import 'line_chart_fl.dart';
 
 List<double> monthSummary = [
