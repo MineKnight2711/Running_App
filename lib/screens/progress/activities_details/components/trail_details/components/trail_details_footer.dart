@@ -20,7 +20,7 @@ class TrailDetailsFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     int columnHeaderTextSize = 12;
     int trailDetailsTextSize = titleInFooter! ? 14 : 16;
-    int columnGap = titleInFooter! ? 14 : 20;
+    int columnGap = titleInFooter! ? 10 : 14;
     return Container(
       width: 1.sw,
       height: titleInFooter! ? 70.h : 50.h,

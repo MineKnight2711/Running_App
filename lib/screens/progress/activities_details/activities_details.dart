@@ -20,7 +20,9 @@ class ActivitiesDetailsScreen extends GetView {
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
                   SliverHeader(
-                    onChartPress: () {},
+                    onChartPress: () {
+                      AppRoutes.navigate(AppRoutes.performanceMetrics);
+                    },
                     onSearchPress: () {
                       showModalBottomSheet(
                         context: context,

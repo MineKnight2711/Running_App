@@ -25,7 +25,7 @@ class ShareSheet extends StatelessWidget {
             children: [
               SheetRow(
                 rowTitle: "Share option",
-                spaceBetween: 180,
+                spaceBetween: 140.w,
                 trailing: IconButton(
                   icon: Icon(
                     Icons.close,

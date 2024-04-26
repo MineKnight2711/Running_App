@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/screens/performance/components/dropdown_activities.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../config/temp.dart';
 
@@ -22,7 +21,6 @@ class ChartExample extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const DropDownActivitiesMenu(),
             AspectRatio(
               aspectRatio: 2.2,
               child: LineChart(

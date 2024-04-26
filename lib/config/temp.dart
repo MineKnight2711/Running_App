@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/models/line_chart_point.dart';
+import '../models/dropdown_activities_model.dart';
 import '../models/trail_model/trail_model.dart';
 
 List<TrailModel> trailTempList = [
@@ -66,3 +68,38 @@ List<LineChartPoint> get rpePoints {
           ))
       .toList();
 }
+
+List<ActivitiesDropDownModel> activitiesDropDownList = [
+  ActivitiesDropDownModel(
+    icon: Icons.run_circle_rounded,
+    activityIndex: '4.2/km',
+    achievements: "Longest run",
+  ),
+  ActivitiesDropDownModel(
+    icon: Icons.hiking,
+    activityIndex: '500m',
+    achievements: "Highest hiking",
+  ),
+  ActivitiesDropDownModel(
+    icon: Icons.directions_walk,
+    activityIndex: '20km',
+    achievements: "Longest walk",
+  ),
+];
+List<ActivitiesDropDownModel> activitiesDropDownList2 = [
+  ActivitiesDropDownModel(
+    icon: Icons.route,
+    activityIndex: '242.2km',
+    achievements: "Longest traveling",
+  ),
+  ActivitiesDropDownModel(
+    icon: Icons.pedal_bike,
+    activityIndex: '500m',
+    achievements: "Longest bycycling",
+  ),
+  ActivitiesDropDownModel(
+    icon: Icons.sports_gymnastics,
+    activityIndex: '10hour',
+    achievements: "Longest training",
+  ),
+];

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_running_demo/config/colors.dart';
+import 'package:flutter_running_demo/config/fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../models/dropdown_activities_model.dart';
 
 class DropDownActivitiesMenu extends StatefulWidget {
-  const DropDownActivitiesMenu({super.key});
+  final List<ActivitiesDropDownModel> activitiesList;
+  const DropDownActivitiesMenu({super.key, required this.activitiesList});
 
   @override
   State<DropDownActivitiesMenu> createState() => _DropDownActivitiesMenuState();
@@ -12,55 +14,40 @@ class DropDownActivitiesMenu extends StatefulWidget {
 
 class _DropDownActivitiesMenuState extends State<DropDownActivitiesMenu> {
   late ActivitiesDropDownModel _selected;
-  List<ActivitiesDropDownModel> activitiesDropDownList = [
-    ActivitiesDropDownModel(
-      icon: Icons.run_circle_rounded,
-      activityIndex: '4.2/km',
-      achievements: "Longest run",
-    ),
-    ActivitiesDropDownModel(
-      icon: Icons.hiking,
-      activityIndex: '500m',
-      achievements: "Highest hiking",
-    ),
-    ActivitiesDropDownModel(
-      icon: Icons.directions_walk,
-      activityIndex: '20km',
-      achievements: "Longest walk",
-    ),
-  ];
 
   @override
   void initState() {
     super.initState();
-    _selected = activitiesDropDownList.first;
+    _selected = widget.activitiesList.first;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 30),
-      margin: const EdgeInsets.symmetric(horizontal: 30),
+      // margin: const EdgeInsets.symmetric(horizontal: 30),
+      height: 35.h,
+      alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Colors.grey[900],
+        color: AppColors.basicActivitiesCard,
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: DropdownButton<ActivitiesDropDownModel>(
         isExpanded: true,
-        isDense: true,
+        // isDense: true,
+        dropdownColor: Colors.black,
         value: _selected,
-        icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
+        icon: const Icon(Icons.keyboard_arrow_down, color: AppColors.white100),
         iconSize: 24,
         elevation: 16,
-        style: const TextStyle(color: Colors.black),
+        style: CustomGoogleFonts.roboto(fontSize: 16.r),
         underline: Container(),
         onChanged: (newValue) {
           setState(() {
             _selected = newValue!;
           });
         },
-        items: activitiesDropDownList
-            .map<DropdownMenuItem<ActivitiesDropDownModel>>((value) {
+        items: widget.activitiesList.map((value) {
           return DropdownMenuItem<ActivitiesDropDownModel>(
             value: value,
             child: Row(
@@ -68,12 +55,30 @@ class _DropDownActivitiesMenuState extends State<DropDownActivitiesMenu> {
               children: [
                 Icon(
                   value.icon,
-                  color: value == _selected ? Colors.grey : Colors.black,
+                  color: Colors.white,
                 ),
-                Text(
-                  '${value.activityIndex} - ${value.achievements}',
-                  style: TextStyle(
-                      color: value == _selected ? Colors.grey : Colors.black),
+                SizedBox(
+                  width: 10.w,
+                ),
+                Flexible(
+                  child: Text.rich(
+                      TextSpan(children: [
+                        TextSpan(
+                          text: '${value.activityIndex} - ',
+                          style: CustomGoogleFonts.roboto(
+                            fontSize: 16.r,
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextSpan(
+                          text: value.achievements,
+                          style: CustomGoogleFonts.roboto(
+                            fontSize: 14.r,
+                            color: const Color(0xFFB4AEAB),
+                          ),
+                        )
+                      ]),
+                      overflow: TextOverflow.ellipsis),
                 ),
                 SizedBox(
                   width: 30.w,

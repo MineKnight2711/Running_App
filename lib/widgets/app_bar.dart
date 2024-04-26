@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../config/colors.dart';
-import '../../../../config/fonts.dart';
-import '../../../../widgets/home_action_button.dart';
+import '../config/colors.dart';
+import '../config/fonts.dart';
+import 'home_action_button.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Function()? onBackPress;
-  const CustomAppBar({super.key, required this.title, this.onBackPress});
+  final Widget? secondaryAction;
+  const CustomAppBar(
+      {super.key, required this.title, this.onBackPress, this.secondaryAction});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             CustomGoogleFonts.roboto(color: AppColors.white100, fontSize: 14.r),
       ),
       actions: [
+        secondaryAction ?? const SizedBox.shrink(),
+        SizedBox(
+          width: 5.w,
+        ),
         ActionButton(
           imagePath: "assets/images/home.png",
           onTap: () {},
@@ -38,5 +44,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(80.h);
 }
