@@ -22,7 +22,7 @@ class ChartExample extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            DropDownActivitiesMenu(),
+            const DropDownActivitiesMenu(),
             AspectRatio(
               aspectRatio: 2.2,
               child: LineChart(

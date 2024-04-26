@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_running_demo/models/trail_model.dart';
-import 'package:flutter_running_demo/utils/data_convert.dart';
+import 'package:flutter_running_demo/extensions/integer_extension.dart';
+import 'package:flutter_running_demo/models/trail_model/trail_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../config/colors.dart';
@@ -85,7 +85,7 @@ class TrailDetailsFooter extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    DataConvert.minutesFromSeconds(trail.totalTime),
+                    trail.totalTime.totalTimeToString(),
                     style: CustomGoogleFonts.roboto(
                       fontSize: trailDetailsTextSize.r,
                       fontWeight: FontWeight.w500,

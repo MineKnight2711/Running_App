@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/fonts.dart';
-import 'package:flutter_running_demo/utils/data_convert.dart';
+import 'package:flutter_running_demo/extensions/datetime_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +36,7 @@ class DateTimePicker extends StatelessWidget {
           children: [
             Obx(
               () => Text(
-                DataConvert.dateTimeFormatWithStringMonth(_selectedDate.value!),
+                _selectedDate.value!.dateTimeFormatWithStringMonth(),
                 style: CustomGoogleFonts.roboto(
                     fontSize: 16.r, color: Colors.white),
               ),

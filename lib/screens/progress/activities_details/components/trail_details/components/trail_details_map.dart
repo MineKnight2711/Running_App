@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../config/fonts.dart';
-import '../../../../../../models/trail_model.dart';
+import '../../../../../../models/trail_model/trail_model.dart';
 import 'trail_details_footer.dart';
 
 class TrailDetailsMapWidget extends StatelessWidget {

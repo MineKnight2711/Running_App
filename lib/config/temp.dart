@@ -1,8 +1,7 @@
 import 'dart:math';
 
-import 'package:collection/collection.dart';
 import 'package:flutter_running_demo/models/line_chart_point.dart';
-import '../models/trail_model.dart';
+import '../models/trail_model/trail_model.dart';
 
 List<TrailModel> trailTempList = [
   TrailModel(
