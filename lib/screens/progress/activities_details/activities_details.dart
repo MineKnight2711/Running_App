@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/config/temp.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../config/colors.dart';
-import 'components/bottom_bar.dart';
-import 'components/search_sheet/search_sheet.dart';
-import 'components/sliver_header/sliver_header.dart';
-import 'components/trail_details/trail_details.dart';
+import '../../../config/config_export.dart';
+import './components/components.dart';
 
 class ActivitiesDetailsScreen extends GetView {
   const ActivitiesDetailsScreen({super.key});
@@ -64,7 +60,7 @@ class ActivitiesDetailsScreen extends GetView {
               ),
             ),
             Positioned(
-              top: 50.h,
+              top: 0.055.sh,
               child: SizedBox(
                 width: 1.sw,
                 child: Image.asset(

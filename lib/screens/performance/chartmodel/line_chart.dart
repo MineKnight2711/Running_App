@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/models/dropdown_activities_model.dart';
 import 'package:flutter_running_demo/models/line_chart_point.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,13 +13,14 @@ class LineChartWidget extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // ignore: prefer_const_constructors
           PillButtonRow(),
-          const nonButton(),
+          const TrailDetailsButtons(),
           AspectRatio(
             aspectRatio: 2,
             child: LineChart(
               LineChartData(
-                titlesData: FlTitlesData(
+                titlesData: const FlTitlesData(
                   topTitles: AxisTitles(
                     sideTitles: SideTitles(showTitles: false),
                   ),
@@ -46,7 +46,7 @@ class LineChartWidget extends StatelessWidget {
               ),
             ),
           ),
-          Containertotal(),
+          const Containertotal(),
         ],
       ),
     );
@@ -54,11 +54,13 @@ class LineChartWidget extends StatelessWidget {
 }
 
 class PillButtonRow extends StatefulWidget {
+  const PillButtonRow({super.key});
+
   @override
-  _PillButtonRowState createState() => _PillButtonRowState();
+  PillButtonRowState createState() => PillButtonRowState();
 }
 
-class _PillButtonRowState extends State<PillButtonRow> {
+class PillButtonRowState extends State<PillButtonRow> {
   List<String> buttonTexts = ['Week', 'Month', 'Year'];
   int selectedIndex = 0;
 
@@ -110,7 +112,8 @@ class PillButton extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onPressed;
 
-  PillButton({
+  const PillButton({
+    super.key,
     required this.buttonText,
     required this.isSelected,
     required this.onPressed,
@@ -139,14 +142,14 @@ class PillButton extends StatelessWidget {
   }
 }
 
-class nonButton extends StatefulWidget {
-  const nonButton({super.key});
+class TrailDetailsButtons extends StatefulWidget {
+  const TrailDetailsButtons({super.key});
 
   @override
-  State<nonButton> createState() => _nonButtonState();
+  State<TrailDetailsButtons> createState() => _TrailDetailsButtonsState();
 }
 
-class _nonButtonState extends State<nonButton> {
+class _TrailDetailsButtonsState extends State<TrailDetailsButtons> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -199,6 +202,7 @@ class _ContainerState extends State<Containertotal> {
       width: 1.sw,
       height: 50.h,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Container(
               width: 0.3.sw,
@@ -207,7 +211,7 @@ class _ContainerState extends State<Containertotal> {
               decoration: BoxDecoration(
                   border: Border.all(width: 1, color: Colors.grey),
                   borderRadius: BorderRadius.circular(12)),
-              child: Text('136km  Totaldistance')),
+              child: const Text('136km  Totaldistance')),
           const SizedBox(
             width: 20,
           ),
@@ -218,9 +222,8 @@ class _ContainerState extends State<Containertotal> {
               decoration: BoxDecoration(
                   border: Border.all(width: 1, color: Colors.grey),
                   borderRadius: BorderRadius.circular(12)),
-              child: Text('8               total run')),
+              child: const Text('8               total run')),
         ],
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
       ),
     );
   }
