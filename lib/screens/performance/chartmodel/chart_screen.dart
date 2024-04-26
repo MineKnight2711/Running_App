@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/screens/performance/bargraph/bar_graph.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../config/temp.dart';
+
 class Chartscreen extends StatefulWidget {
   const Chartscreen({super.key});
 
@@ -10,20 +12,6 @@ class Chartscreen extends StatefulWidget {
 }
 
 class _ChartscreenState extends State<Chartscreen> {
-  List<double> monthSummary = [
-    4.40,
-    2.50,
-    43.42,
-    10.50,
-    100.20,
-    88.89,
-    90.10,
-    4.40,
-    2.50,
-    43.42,
-    10.50,
-    100.20,
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +22,7 @@ class _ChartscreenState extends State<Chartscreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              MyBarGraph(
-                monthSummary: monthSummary,
-              ),
+              MyBarGraph(),
             ],
           )),
     );

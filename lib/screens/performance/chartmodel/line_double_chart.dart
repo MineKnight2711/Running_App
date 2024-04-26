@@ -87,8 +87,7 @@ class ChartExample extends StatelessWidget {
               aspectRatio: 2,
               child: LineChartFL2Widget(),
             ),
-            AspectRatio(
-                aspectRatio: 2, child: MyBarGraph(monthSummary: monthSummary)),
+            AspectRatio(aspectRatio: 2, child: MyBarGraph()),
           ],
         ),
       ),
