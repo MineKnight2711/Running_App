@@ -1,3 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+part "trail_model.g.dart";
+
+@JsonSerializable(explicitToJson: true)
 class TrailModel {
   final String title;
   final String place;
@@ -21,4 +25,8 @@ class TrailModel {
     required this.haveInfo,
     required this.date,
   });
+  factory TrailModel.fromJson(Map<String, dynamic> json) =>
+      _$TrailModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TrailModelToJson(this);
 }

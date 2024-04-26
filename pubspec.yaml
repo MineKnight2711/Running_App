@@ -10,6 +10,7 @@ dependencies:
 
   flutter:
     sdk: flutter
+  
   google_fonts: ^6.2.1
   flutter_screenutil: ^5.9.0
   get: ^4.6.6
@@ -19,10 +20,14 @@ dependencies:
   card_swiper: ^3.0.1
   draggable_home: ^1.0.5
 
+  json_annotation: ^4.9.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  build_runner: ^2.4.9
+  json_serializable: ^6.8.0
 
 flutter:
   uses-material-design: true

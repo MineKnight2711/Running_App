@@ -1,11 +1,8 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_running_demo/config/colors.dart';
-import 'package:flutter_running_demo/screens/progress/activities_details/activities_details.dart';
+import 'package:flutter_running_demo/config/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 import '../../../../config/fonts.dart';
 
@@ -95,7 +92,7 @@ class ProgressBanner extends StatelessWidget {
                 final item = actions[index];
 
                 return GestureDetector(
-                  onTap: () => Get.to(() => const ActivitiesDetailsScreen()),
+                  onTap: () => AppRoutes.navigate(AppRoutes.activitiesDetais),
                   child: Column(
                     children: [
                       CircleAvatar(

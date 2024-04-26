@@ -18,7 +18,7 @@ class ActivitiesScreen extends GetView {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const ProgressAppBar(
+      appBar: const CustomAppBar(
         title: "Be active",
       ),
       body: Container(

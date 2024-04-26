@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_running_demo/models/trail_model.dart';
-import 'package:flutter_running_demo/utils/data_convert.dart';
+import 'package:flutter_running_demo/extensions/datetime_extension.dart';
+import 'package:flutter_running_demo/models/trail_model/trail_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../config/colors.dart';
@@ -105,7 +103,7 @@ class TrailDetailsHeader extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      DataConvert.dateTimeFormat(trail.date),
+                      trail.date.dateTimeFormat(),
                       style: CustomGoogleFonts.roboto(
                           fontSize: 12.r,
                           fontWeight: FontWeight.w300,

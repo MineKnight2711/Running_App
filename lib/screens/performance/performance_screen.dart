@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../config/fonts.dart';
 
-import '../../config/fonts.dart';
-
 class Performance extends StatelessWidget {
   const Performance({
     super.key,
@@ -24,7 +22,7 @@ class Performance extends StatelessWidget {
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(70.h),
             child: Container(
-              color: Color.fromARGB(255, 24, 19, 63),
+              color: const Color.fromARGB(255, 24, 19, 63),
               child: Row(
                 children: [
                   IconButton(
@@ -40,12 +38,12 @@ class Performance extends StatelessWidget {
                     style: CustomGoogleFonts.roboto(
                         color: Colors.white, fontSize: 16.r),
                   ),
-                  Spacer(),
-                  Icon(Icons.home),
+                  const Spacer(),
+                  const Icon(Icons.home),
                 ],
               ),
             )),
-        body: Center(
+        body: const Center(
           child: Text('Hello World!'),
         ),
       ),

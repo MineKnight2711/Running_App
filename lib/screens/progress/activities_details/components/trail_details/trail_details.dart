@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../models/trail_model.dart';
+import '../../../../../models/trail_model/trail_model.dart';
 import 'components/trail_details_header.dart';
 import 'components/trail_details_map.dart';
 
