@@ -1,7 +1,26 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../config/temp.dart';
+import '../../../config/temp.dart';
+import 'line_chart_fl.dart';
+
+List<double> monthSummary = [
+  20.0, // January
+  35.0, // February
+  45.0, // March
+  60.0, // April
+  75.0, // May
+  50.0, // June
+  40.0, // July
+  30.0, // August
+  25.0, // September
+  45.0, // October
+  55.0, // November
+  65.0, // December
+];
 
 class ChartExample extends StatelessWidget {
   final List<Color> gradientColors = [
@@ -62,6 +81,16 @@ class ChartExample extends StatelessWidget {
                 ),
               ),
             ),
+            AspectRatio(
+              aspectRatio: 2,
+              child: LineChartFLWidget(),
+            ),
+            AspectRatio(
+              aspectRatio: 2,
+              child: LineChartFL2Widget(),
+            ),
+            AspectRatio(
+                aspectRatio: 2, child: MyBarGraph(monthSummary: monthSummary)),
           ],
         ),
       ),
