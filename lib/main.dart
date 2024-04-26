@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/screens/performance/bargraph/bar_graph.dart';
-import 'package:flutter_running_demo/screens/performance/line_chart.dart';
-import 'package:flutter_running_demo/screens/performance/linechart/pricePoints.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'screens/performance/line_double_chart.dart';
+import 'screens/performance/chartmodel/line_double_chart.dart';
 import 'screens/progress/activities/activities_screen.dart';
 
 void main() {
@@ -23,15 +19,12 @@ class MainApp extends StatelessWidget {
       splitScreenMode: true,
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: LineChartWidget(points: pricePoints),
+        home: ChartExample(),
         initialRoute: 'linechart_screen',
         routes: {
           'activities_screen': (context) => const ActivitiesScreen(),
           'linechart_demo': (context) => ChartExample(),
-          'linechart_screen': (context) => LineChartWidget(
-                points: pricePoints,
-              ),
-          'barchart_screen': (context) => const MyBarGraph(monthSummary: []),
+          // 'test_screen': (context) => TestScreen(),
         },
       ),
     );

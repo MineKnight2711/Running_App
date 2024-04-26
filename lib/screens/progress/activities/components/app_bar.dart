@@ -5,10 +5,10 @@ import '../../../../config/colors.dart';
 import '../../../../config/fonts.dart';
 import '../../../../widgets/home_action_button.dart';
 
-class ProgressAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Function()? onBackPress;
-  const ProgressAppBar({super.key, required this.title, this.onBackPress});
+  const CustomAppBar({super.key, required this.title, this.onBackPress});
 
   @override
   Widget build(BuildContext context) {
