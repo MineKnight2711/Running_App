@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../config/temp.dart';
-import '../nested_chart/nested_chart.dart';
+import '../components/nested_chart.dart';
 import 'line_chart_fl.dart';
 
 List<double> monthSummary = [

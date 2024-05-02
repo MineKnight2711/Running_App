@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/screens/performance/nested_chart/nested_chart.dart';
+import 'package:flutter_running_demo/screens/performance/components/nested_chart.dart';
 import 'package:flutter_running_demo/screens/performance/components/activities_stats_button_row.dart';
 import 'package:flutter_running_demo/screens/performance/components/dropdown_activities.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../config/config_export.dart';
+import '../../models/intensity_model/intensity_model.dart';
 import '../../widgets/widget_export.dart';
+import 'components/performance_summary.dart';
 import 'components/period_button_row.dart';
+import 'components/charts/intensity_linechart.dart';
 
 class PerformanceMetricsScreen extends StatelessWidget {
   final List<String> periodButtonRow = [
@@ -26,6 +29,7 @@ class PerformanceMetricsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final IntensityModel intensity = IntensityModel.mock();
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -38,10 +42,11 @@ class PerformanceMetricsScreen extends StatelessWidget {
           ),
         ),
         body: Container(
-            width: 1.sw,
-            height: 1.sh,
-            decoration: const BoxDecoration(gradient: AppColors.appTheme),
-            padding: EdgeInsets.only(top: 50.h, left: 20.w, right: 20.w),
+          width: 1.sw,
+          height: 1.sh,
+          decoration: const BoxDecoration(gradient: AppColors.appTheme),
+          padding: EdgeInsets.only(top: 50.h, left: 20.w, right: 20.w),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -82,10 +87,31 @@ class PerformanceMetricsScreen extends StatelessWidget {
                 const AspectRatio(
                   aspectRatio: 2,
                   child: NestedChart(),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                const PerformanceSummary(
+                  totalDistance: 41,
+                  totalRuns: 3,
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  "Intensity",
+                  style: CustomGoogleFonts.roboto(
+                      color: AppColors.white100, fontSize: 18.r),
+                ),
+                AspectRatio(
+                  aspectRatio: 2,
+                  child: IntensityLineChart(intensity: intensity),
                 )
                 // AspectRatio(aspectRatio: 2, child: TestChart()),
               ],
-            )),
+            ),
+          ),
+        ),
       ),
     );
   }
