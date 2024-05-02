@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/screens/performance/bargraph/bar_graph.dart';
+import 'package:flutter_running_demo/screens/performance/chartmodel/line_double_chart.dart';
 import 'package:flutter_running_demo/screens/performance/components/activities_stats_row.dart';
 import 'package:flutter_running_demo/screens/performance/components/dropdown_activities.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
