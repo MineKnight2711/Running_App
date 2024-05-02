@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../config/temp.dart';
-import '../bargraph/bar_graph.dart';
+import '../nested_chart/nested_chart.dart';
 import 'line_chart_fl.dart';
 
 List<double> monthSummary = [
@@ -87,7 +87,7 @@ class ChartExample extends StatelessWidget {
               aspectRatio: 2,
               child: LineChartFL2Widget(),
             ),
-            AspectRatio(aspectRatio: 2, child: MyBarGraph()),
+            const AspectRatio(aspectRatio: 2, child: NestedChart()),
           ],
         ),
       ),
