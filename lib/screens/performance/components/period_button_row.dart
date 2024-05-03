@@ -77,13 +77,13 @@ class PillButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final buttonWidth = (size / 2) * 40;
-    final buttonHeight = (size / 2) * 90;
+    final buttonWidth = (size / 2) * 90;
+    final buttonHeight = buttonWidth / 3.5;
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: buttonWidth.h,
-        width: buttonHeight.w,
+        height: buttonHeight.h,
+        width: buttonWidth.w,
         alignment: Alignment.center,
         // padding: EdgeInsets.symmetric(horizontal: 8.w),
         margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),

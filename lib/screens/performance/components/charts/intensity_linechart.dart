@@ -79,7 +79,7 @@ class IntensityLineChart extends StatelessWidget {
                 .toList(),
             isCurved: true,
             barWidth: 2,
-            color: Colors.red,
+            color: const Color(0xFFFFFFFF).withOpacity(0.5),
           ),
         ],
       ),
