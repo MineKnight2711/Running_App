@@ -1,7 +1,4 @@
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_running_demo/screens/performance/components/nested_chart.dart';
 import 'package:flutter_running_demo/screens/performance/components/activities_stats_button_row.dart';
 import 'package:flutter_running_demo/screens/performance/components/dropdown_activities.dart';
@@ -120,78 +117,13 @@ class PerformanceMetricsScreen extends StatelessWidget {
                   aspectRatio: 2,
                   child: IntensityLineChart(intensity: intensity),
                 ),
-                SizedBox(width: 0.6.sw, height: 235.h, child: HeartRateChart())
+                SizedBox(width: 0.8.sw, height: 260.h, child: HeartRateChart())
 
                 // AspectRatio(aspectRatio: 2, child: TestChart()),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class PulseRateChart extends StatelessWidget {
-  const PulseRateChart({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BarChart(
-      BarChartData(
-        maxY: 190,
-        gridData: FlGridData(show: false),
-        borderData: FlBorderData(show: false),
-        barTouchData: BarTouchData(
-          enabled: false,
-        ),
-        titlesData: FlTitlesData(
-          show: true,
-          bottomTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              getTitlesWidget: (value, meta) {
-                return Text(value.toString());
-              },
-            ),
-          ),
-          leftTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 30,
-              getTitlesWidget: (double value, TitleMeta meta) {
-                return Text(
-                  value.toStringAsFixed(0),
-                  style: CustomGoogleFonts.roboto(color: AppColors.white100),
-                );
-              },
-            ),
-          ),
-        ),
-        barGroups: [
-          // Provide the data for each bar or zone
-
-          BarChartGroupData(
-            x: 0,
-            barRods: [
-              BarChartRodData(
-                rodStackItems: [BarChartRodStackItem(40, 150, Colors.yellow)],
-                width: 30.w,
-
-                borderRadius: BorderRadius.circular(4),
-                toY: 183, // Value or percentage for the "Power" zone
-                color: Colors.red, // Color for the "Power" zone
-              ),
-              BarChartRodData(
-                toY: 150, // Value or percentage for the "Power" zone
-                color: Colors.yellow, // Color for the "Power" zone
-              ),
-            ],
-          ),
-          // Add more BarChartGroupData for other zones
-        ],
       ),
     );
   }

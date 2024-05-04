@@ -120,21 +120,26 @@
 //     required this.percentage,
 //   });
 // }
+
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
-import 'package:flutter_running_demo/config/fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+
+import 'data/pulse_rate_chart_data.dart';
 
 class HeartRateChart extends StatelessWidget {
   const HeartRateChart({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<ChartData> chartData = [
-      ChartData('Rate', 115, 17, 15, 12, 15, 15),
-      ChartData('Time', 0, 0, 0, 0, 0, 0),
+    final List<PulseRateChartData> chartDatas = [
+      PulseRateChartData(color: 0xFFD795FF, pulseRateZones: 4.55),
+      PulseRateChartData(color: 0xffac4fe5, pulseRateZones: 15.9),
+      PulseRateChartData(color: 0xff891ecb, pulseRateZones: 19.32),
+      PulseRateChartData(color: 0xffff8b8b, pulseRateZones: 15.91),
+      PulseRateChartData(color: 0xFFFF4747, pulseRateZones: 19.32),
+      PulseRateChartData(color: 0xffb91d1d, pulseRateZones: 25)
     ];
     return SfCartesianChart(
       primaryXAxis: const CategoryAxis(
@@ -145,14 +150,14 @@ class HeartRateChart extends StatelessWidget {
 
       primaryYAxis: CategoryAxis(
         majorGridLines: const MajorGridLines(width: 0),
-        axisLine: const AxisLine(dashArray: [1.45, 10], width: 10),
-        initialVisibleMinimum: 110,
-        initialVisibleMaximum: 110,
+        axisLine: const AxisLine(dashArray: [1, 5], width: 10),
         labelStyle: CustomGoogleFonts.roboto(
             color: AppColors.white100, fontWeight: FontWeight.w300),
-        minimum: 110,
-        maximum: 187,
-        desiredIntervals: 5,
+        axisLabelFormatter: (axisLabelRenderArgs) => ChartAxisLabel("", null),
+        minimum: 0,
+        maximum: 100,
+
+        // desiredIntervals: 5,
         tickPosition: TickPosition.outside,
         axisBorderType: AxisBorderType.rectangle,
         majorTickLines: const MajorTickLines(width: 0),
@@ -161,50 +166,22 @@ class HeartRateChart extends StatelessWidget {
       plotAreaBorderWidth: 0,
       plotAreaBorderColor: Colors.transparent,
       series: [
-        StackedColumnSeries<ChartData, String>(
-          dataSource: chartData,
-          xValueMapper: (ChartData data, _) => data.x,
-          yValueMapper: (ChartData data, _) => data.y1,
-          color: const Color(0xFFD795FF),
+        StackedColumn100Series<PulseRateChartData, String>(
+          dataSource: chartDatas,
+          xValueMapper: (data, _) => "Rate",
+          yValueMapper: (data, _) => data.pulseRateZones,
+          pointColorMapper: (data, _) => Color(data.color),
           width: 1,
           borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(4),
-            bottomRight: Radius.circular(4),
+            topLeft: Radius.circular(4),
+            topRight: Radius.circular(4),
           ),
         ),
-        StackedColumnSeries<ChartData, String>(
-          dataSource: chartData,
-          xValueMapper: (ChartData data, _) => data.x,
-          yValueMapper: (ChartData data, _) => data.y2,
-          color: const Color(0xffac4fe5),
-          width: 1,
-        ),
-        StackedColumnSeries<ChartData, String>(
-          dataSource: chartData,
-          xValueMapper: (ChartData data, _) => data.x,
-          yValueMapper: (ChartData data, _) => data.y3,
-          color: const Color(0xff891ecb),
-          width: 1,
-        ),
-        StackedColumnSeries<ChartData, String>(
-          dataSource: chartData,
-          xValueMapper: (ChartData data, _) => data.x,
-          yValueMapper: (ChartData data, _) => data.y4,
-          color: const Color(0xffff8b8b),
-          width: 1,
-        ),
-        StackedColumnSeries<ChartData, String>(
-          dataSource: chartData,
-          xValueMapper: (ChartData data, _) => data.x,
-          yValueMapper: (ChartData data, _) => data.y5,
-          color: const Color(0xFFFF4747),
-          width: 1,
-        ),
-        StackedColumnSeries<ChartData, String>(
-          dataSource: chartData,
-          xValueMapper: (ChartData data, _) => data.x,
-          yValueMapper: (ChartData data, _) => data.y6,
-          color: const Color(0xffb91d1d),
+        StackedColumn100Series<PulseRateChartData, String>(
+          dataSource: chartDatas,
+          xValueMapper: (data, _) => "Fake",
+          yValueMapper: (data, _) => 0,
+          pointColorMapper: (data, _) => Color(data.color),
           width: 1,
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(4),
@@ -220,29 +197,29 @@ class HeartRateChart extends StatelessWidget {
         CartesianChartAnnotation(
             horizontalAlignment: ChartAlignment.center,
             widget: Container(
-              width: 0.27.sw,
+              width: 0.3.sw,
               height: 1,
               color: Colors.white,
             ),
             coordinateUnit: CoordinateUnit.point,
             x: "Rate",
-            y: 125),
+            y: 20),
         CartesianChartAnnotation(
             widget: SizedBox(
-              width: 100,
               height: 30,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 25,
-                    height: 1,
-                    color: const Color(0xffffffff), // White line container
+                  Expanded(
+                    child: Container(
+                      height: 1,
+                      color: const Color(0xffffffff), // White line container
+                    ),
                   ),
                   Container(
                     width: 50,
                     decoration: BoxDecoration(
-                        color: Color(0x0DFFFFFF), // Container with text
+                        color: const Color(0x0DFFFFFF), // Container with text
                         borderRadius: BorderRadius.circular(4)),
                     alignment: Alignment.center,
                     child: Text(
@@ -260,20 +237,9 @@ class HeartRateChart extends StatelessWidget {
               ),
             ),
             coordinateUnit: CoordinateUnit.point,
-            x: 'Time',
-            y: 130)
+            x: 'Fake',
+            y: 30)
       ],
     );
   }
-}
-
-class ChartData {
-  ChartData(this.x, this.y1, this.y2, this.y3, this.y4, this.y5, this.y6);
-  final String x;
-  final double y1;
-  final double y2;
-  final double y3;
-  final double y4;
-  final double y5;
-  final double y6;
 }
