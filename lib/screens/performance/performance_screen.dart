@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/screens/performance/components/nested_chart.dart';
 import 'package:flutter_running_demo/screens/performance/components/activities_stats_button_row.dart';
