@@ -1,70 +1,113 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../screens/performance/components/period_button_row.dart';
 
-class TestPrepared extends StatelessWidget {
+class TestPrepared extends StatefulWidget {
+  TestPrepared({super.key});
+
+  @override
+  State<TestPrepared> createState() => _TestPreparedState();
+}
+
+class _TestPreparedState extends State<TestPrepared> {
+  double _sheetPosition = 0.2;
+  final double _dragSensitivity = 1000;
+
   final List<String> periodButtonRow = [
     'Favorites',
     'Add_new',
     'Upcoming',
   ];
-  TestPrepared({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        bottomNavigationBar: Container(
-          height: 0.3.sh,
-          decoration: const BoxDecoration(gradient: AppColors.appTheme),
-          padding: EdgeInsets.only(top: 50.h, left: 20.w, right: 20.w),
+    return Scaffold(
+      body: DraggableScrollableSheet(
+        // expand: false,
+
+        minChildSize: 0.2,
+        initialChildSize: _sheetPosition,
+        maxChildSize: 0.9,
+        builder: (context, scrollController) => Container(
+          color: Colors.black,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Grabber(
+                onVerticalDragUpdate: (DragUpdateDetails details) {
+                  setState(() {
+                    _sheetPosition -= details.delta.dy / _dragSensitivity;
+                    if (_sheetPosition < 0.25) {
+                      _sheetPosition = 0.25;
+                    }
+                    if (_sheetPosition > 0.9) {
+                      _sheetPosition = 0.9;
+                    }
+                  });
+                },
+              ),
+              // Container(
+              //   width: 40,
+              //   height: 2,
+              //   margin: EdgeInsets.only(bottom: 10.h),
+              //   decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(50),
+              //       color: const Color(0xffb4aeab)),
+              // ),
               PeriodButtonRow(
                 listButton: periodButtonRow,
               ),
               SizedBox(
+                width: 1.sw,
+                height: 0.4.sh,
+                child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (context, index) => Container(
+                    margin: EdgeInsets.symmetric(vertical: 5.h),
+                    width: 1.sw,
+                    height: 0.2.sh,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+              SizedBox(
                 height: 16.h,
               ),
-              Row(
-                children: [
-                  SizedBox(height: 20.0),
-                  Text(
-                    'No prepared route',
-                    style: CustomGoogleFonts.roboto(
-                        fontSize: 16, color: Colors.white),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.timeline, color: Colors.white),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.settings, color: Colors.white),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.directions_run, color: Colors.white),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.sports, color: Colors.white),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.signal_cellular_alt, color: Colors.white),
-                  ),
-                ],
-              ),
-              // AspectRatio(aspectRatio: 2, child: TestChart()),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Grabber extends StatelessWidget {
+  const Grabber({
+    super.key,
+    required this.onVerticalDragUpdate,
+  });
+
+  final ValueChanged<DragUpdateDetails> onVerticalDragUpdate;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    return GestureDetector(
+      onVerticalDragUpdate: onVerticalDragUpdate,
+      child: Container(
+        width: double.infinity,
+        color: colorScheme.onSurface,
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 8.0),
+            width: 32.0,
+            height: 4.0,
+            decoration: BoxDecoration(
+              color: colorScheme.surfaceVariant,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
           ),
         ),
       ),
