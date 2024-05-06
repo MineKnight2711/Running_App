@@ -19,7 +19,7 @@ dependencies:
   fl_chart: ^0.67.0
   card_swiper: ^3.0.1
   draggable_home: ^1.0.5
-
+  
   json_annotation: ^4.9.0
 
 dev_dependencies:
