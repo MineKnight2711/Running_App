@@ -102,7 +102,7 @@ class ProgressBanner extends StatelessWidget {
                             : AppColors.progressAction,
                         child: Image.asset(
                           item["imagePath"],
-                          scale: 0.7,
+                          scale: 0.8,
                         ),
                       ),
                       Text(

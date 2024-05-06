@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ActivityStatsRow extends StatefulWidget {
   final List<String> listButton;
-  const ActivityStatsRow({super.key, required this.listButton});
+  final double size;
+  const ActivityStatsRow(
+      {super.key, required this.listButton, required this.size});
 
   @override
   State<ActivityStatsRow> createState() => _ActivityStatsRowState();
@@ -22,29 +24,26 @@ class _ActivityStatsRowState extends State<ActivityStatsRow> {
       width: 1.sw,
       height: 35.h,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: widget.listButton
             .asMap()
             .entries
             .map(
-              (entry) => SizedBox(
-                height: 35.h,
-                child: PillButton(
-                  size: 1.65,
-                  textColor: selectedIndex == entry.key
-                      ? AppColors.white100
-                      : Colors.black,
-                  buttonBackgroundColor: selectedIndex == entry.key
-                      ? const Color(0xfff26322)
-                      : AppColors.white100,
-                  buttonText: entry.value,
-                  isSelected: selectedIndex == entry.key,
-                  onPressed: () {
-                    setState(() {
-                      selectedIndex = entry.key;
-                    });
-                  },
-                ),
+              (entry) => PillButton(
+                size: widget.size,
+                textColor: selectedIndex == entry.key
+                    ? AppColors.white100
+                    : Colors.black,
+                buttonBackgroundColor: selectedIndex == entry.key
+                    ? const Color(0xfff26322)
+                    : AppColors.white100,
+                buttonText: entry.value,
+                isSelected: selectedIndex == entry.key,
+                onPressed: () {
+                  setState(() {
+                    selectedIndex = entry.key;
+                  });
+                },
               ),
             )
             .toList(),
