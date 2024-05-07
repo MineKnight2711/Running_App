@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/routes.dart';
+import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 void main() {
   runApp(const MainApp());
+  Get.put(MapController());
 }
 
 class MainApp extends StatelessWidget {
@@ -18,9 +20,8 @@ class MainApp extends StatelessWidget {
       splitScreenMode: true,
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        // home: ChartExample(),
-        initialRoute: AppRoutes.testprepared,
-
+        initialRoute: AppRoutes.activities,
+        // routes: routes,
         getPages: AppRoutes.getPages,
       ),
     );

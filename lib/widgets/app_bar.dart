@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../config/colors.dart';
 import '../config/fonts.dart';
+import '../config/routes.dart';
 import 'home_action_button.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -34,7 +35,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         ActionButton(
           imagePath: "assets/images/home.png",
-          onTap: () {},
+          onTap: () => AppRoutes.navigate(AppRoutes.home),
         ),
         SizedBox(
           width: 10.w,
