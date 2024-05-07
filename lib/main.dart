@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         // home: ChartExample(),
-        initialRoute: AppRoutes.testprepared,
+        initialRoute: AppRoutes.authorizemusicprovider,
 
         getPages: AppRoutes.getPages,
       ),

@@ -76,6 +76,7 @@ class TestPerformanceScreen extends StatelessWidget {
                   height: 16.h,
                 ),
                 ActivityStatsRow(
+                  size: 20,
                   listButton: activityStatsButtonRow,
                 ),
                 SizedBox(

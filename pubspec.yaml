@@ -37,6 +37,7 @@ flutter:
     # - assets/animations/
     - assets/images/
     - assets/svg/
+    - assets/svg/music_provider/
     - assets/images/actions/
     - assets/images/basic_activities/
     - assets/images/bottom_bar/

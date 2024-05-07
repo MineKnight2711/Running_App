@@ -30,7 +30,7 @@ class TestPrepared extends StatelessWidget {
               ),
               Row(
                 children: [
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Text(
                     'No prepared route',
                     style: CustomGoogleFonts.roboto(
@@ -43,23 +43,24 @@ class TestPrepared extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.timeline, color: Colors.white),
+                    icon: const Icon(Icons.timeline, color: Colors.white),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.settings, color: Colors.white),
+                    icon: const Icon(Icons.settings, color: Colors.white),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.directions_run, color: Colors.white),
+                    icon: const Icon(Icons.directions_run, color: Colors.white),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.sports, color: Colors.white),
+                    icon: const Icon(Icons.sports, color: Colors.white),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.signal_cellular_alt, color: Colors.white),
+                    icon: const Icon(Icons.signal_cellular_alt,
+                        color: Colors.white),
                   ),
                 ],
               ),

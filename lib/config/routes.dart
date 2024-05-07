@@ -1,5 +1,8 @@
 import 'package:flutter_running_demo/screens/performance/performance_screen.dart';
 import 'package:flutter_running_demo/screens/progress/activities/activities_screen.dart';
+import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_complete.dart';
+import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_note.dart';
+import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_screen.dart';
 import 'package:get/get.dart';
 import '../screens/progress/activities_details/activities_details.dart';
 import '../test_widgets_demo/test_alertdialog/test_comfirm_addtion.dart';
@@ -8,6 +11,7 @@ import '../test_widgets_demo/test_alertdialog/test_edit_confirmation.dart';
 import '../test_widgets_demo/test_alertdialog/test_remove_confirmation.dart';
 import '../test_widgets/test_screen.dart';
 import '../test_widgets_demo/test_alertdialog/test_screen2.dart';
+import '../test_widgets_demo/test_screen/authorize_music_provider.dart';
 import '../test_widgets_demo/test_screen/test_prepared.dart';
 
 class AppRoutes {
@@ -21,6 +25,10 @@ class AppRoutes {
   static const String _testremoveconfirmation = '/testremoveconfirmation';
   static const String _testeditconfirmation = '/testeditconfirmation';
   static const String _testprepared = '/testprepared';
+  static const String _preparedscreen = '/preparedscreen';
+  static const String _preparedcomplete = '/preparedcomplete';
+  static const String _preparednote = '/preparednote';
+  static const String _authorizemusicprovider = '/authorizemusicprovider';
 
   static String get activities => _activities;
   static String get activitiesDetais => _activitiesDetails;
@@ -32,6 +40,10 @@ class AppRoutes {
   static String get testremoveconfirmation => _testremoveconfirmation;
   static String get testeditconfirmation => _testeditconfirmation;
   static String get testprepared => _testprepared;
+  static String get preparedscreen => _preparedscreen;
+  static String get preparedcomplete => _preparedcomplete;
+  static String get preparednote => _preparednote;
+  static String get authorizemusicprovider => _authorizemusicprovider;
 
   static navigate(String query) {
     Get.toNamed(query);
@@ -90,6 +102,22 @@ class AppRoutes {
     GetPage(
         name: _testprepared,
         page: () => TestPrepared(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _preparedscreen,
+        page: () => PreparedScreen(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _preparedcomplete,
+        page: () => PreparedComplete(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _preparednote,
+        page: () => PreparedNote(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _authorizemusicprovider,
+        page: () => AuthorizeMusicProvider(),
         transition: Transition.rightToLeft),
   ];
 }
