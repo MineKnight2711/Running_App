@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/screens/performance/components/nested_chart.dart';
 import 'package:flutter_running_demo/screens/performance/components/activities_stats_button_row.dart';
-import 'package:flutter_running_demo/screens/performance/components/dropdown_activities.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../config/config_export.dart';
@@ -72,27 +71,34 @@ class PerformanceMetricsScreen extends GetView {
               //   activitiesList: activitiesDropDownList,
               // ),
               RecordDropdown(
+                iconData: Icons.directions_walk,
                 dropDownHeight: 0.38.sh,
                 horizontalButtonPadding: 20.w,
+                achievement: "Longest Walking",
+                record: "23km",
               ),
-
+              RecordDropdown(
+                iconData: Icons.route,
+                dropDownHeight: 0.38.sh,
+                horizontalButtonPadding: 20.w,
+                achievement: "Longest route",
+                record: "100km",
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 16.h,
-                    ),
-                    DropDownActivitiesMenu(
-                      activitiesList: activitiesDropDownList2,
-                    ),
-                    SizedBox(
-                      height: 20.h,
+                      height: 5.h,
                     ),
                     Text(
                       "Basic",
                       style: CustomGoogleFonts.roboto(
                           color: AppColors.white100, fontSize: 18.r),
+                    ),
+                    SizedBox(
+                      height: 20.h,
                     ),
                     PeriodButtonRow(
                       listButton: periodButtonRow,

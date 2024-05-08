@@ -4,9 +4,12 @@ import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'controllers/tabbar_controller.dart';
+
 void main() {
   runApp(const MainApp());
   Get.put(MapController());
+  Get.put(BottomTabBarController());
 }
 
 class MainApp extends StatelessWidget {

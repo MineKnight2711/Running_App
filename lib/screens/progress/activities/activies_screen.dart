@@ -15,8 +15,7 @@ class ActivitiesScreen extends StatefulWidget {
 
 class _ActivitiesScreenState extends State<ActivitiesScreen>
     with TickerProviderStateMixin<ActivitiesScreen> {
-  final BottomTabBarController bottomBarController =
-      Get.put(BottomTabBarController());
+  final bottomBarController = Get.find<BottomTabBarController>();
   @override
   void initState() {
     super.initState();
@@ -29,9 +28,12 @@ class _ActivitiesScreenState extends State<ActivitiesScreen>
       body: TabBarView(
         physics: const NeverScrollableScrollPhysics(),
         controller: bottomBarController.tabController.value,
-        children: const [ActivitiesDetailsScreen(), PreparationScreen()],
+        children: const [
+          ActivitiesDetailsScreen(),
+          PreparationScreen(),
+        ],
       ),
-      bottomNavigationBar: BottomNavigationTabBar(),
+      bottomNavigationBar: const BottomNavigationTabBar(),
     );
   }
 }
