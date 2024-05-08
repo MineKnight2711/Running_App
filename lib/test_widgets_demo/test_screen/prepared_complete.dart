@@ -3,6 +3,8 @@ import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PreparedComplete extends StatelessWidget {
+  const PreparedComplete({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,17 +82,17 @@ class PreparedComplete extends StatelessWidget {
                 onPressed: () {
                   // Xử lý khi nhấn nút "Complete"
                 },
-                child: Text(
-                  'Complete',
-                  style: CustomGoogleFonts.roboto(
-                      fontSize: 20, color: Colors.white),
-                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xfff26322),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 145.0,
                     vertical: 16.0,
                   ),
+                ),
+                child: Text(
+                  'Complete',
+                  style: CustomGoogleFonts.roboto(
+                      fontSize: 20, color: Colors.white),
                 ),
               ),
             ),
