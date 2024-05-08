@@ -20,9 +20,8 @@ class ActivitiesDetailsScreen extends GetView {
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
                   SliverHeader(
-                    onChartPress: () {
-                      AppRoutes.navigate(AppRoutes.performanceMetrics);
-                    },
+                    onChartPress: () =>
+                        AppRoutes.navigate(AppRoutes.performanceMetrics),
                     onSearchPress: () {
                       showModalBottomSheet(
                         context: context,
@@ -39,6 +38,7 @@ class ActivitiesDetailsScreen extends GetView {
                         },
                       );
                     },
+                    onHomeTap: () => AppRoutes.navigate(AppRoutes.home),
                   ),
                 ];
               },
@@ -62,7 +62,7 @@ class ActivitiesDetailsScreen extends GetView {
               ),
             ),
             Positioned(
-              top: 0.055.sh,
+              top: 0.07.sh,
               child: SizedBox(
                 width: 1.sw,
                 child: Image.asset(
@@ -74,7 +74,6 @@ class ActivitiesDetailsScreen extends GetView {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomBar(),
     );
   }
 }

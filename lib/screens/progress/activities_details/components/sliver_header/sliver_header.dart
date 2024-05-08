@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../config/colors.dart';
@@ -8,10 +9,12 @@ import 'sliver_header_buttons.dart';
 class SliverHeader extends StatelessWidget {
   final VoidCallback onSearchPress;
   final VoidCallback onChartPress;
+  final VoidCallback onHomeTap;
   const SliverHeader({
     super.key,
     required this.onSearchPress,
     required this.onChartPress,
+    required this.onHomeTap,
   });
 
   @override
@@ -39,9 +42,7 @@ class SliverHeader extends StatelessWidget {
               Icons.arrow_back,
               color: AppColors.white100,
             ),
-            onPressed: () {
-              Get.back();
-            },
+            onPressed: () => Get.back(),
           ),
           actions: [
             AnimatedScale(
@@ -63,7 +64,7 @@ class SliverHeader extends StatelessWidget {
             const SizedBox(width: 12),
             ActionButton(
               imagePath: "assets/images/home.png",
-              onTap: () {},
+              onTap: onHomeTap,
             ),
             const SizedBox(width: 12),
           ],

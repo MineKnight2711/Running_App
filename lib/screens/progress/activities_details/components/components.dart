@@ -10,4 +10,3 @@ export 'share_sheet/share_sheet.dart';
 export 'share_sheet/share_sheet_trail_details.dart';
 export 'sliver_header/sliver_header.dart';
 export 'sliver_header/sliver_header_buttons.dart';
-export '../../activities_details/components/bottom_bar.dart';

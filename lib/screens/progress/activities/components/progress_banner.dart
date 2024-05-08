@@ -3,37 +3,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/colors.dart';
 import 'package:flutter_running_demo/config/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../config/fonts.dart';
 
 List<Map<String, dynamic>> actions = [
   {
     'name': 'Gym',
-    'imagePath': 'assets/images/actions/gym.png',
+    'imagePath': 'gym',
   },
   {
     'name': 'Hike',
-    'imagePath': 'assets/images/actions/hike.png',
+    'imagePath': 'hike',
   },
   {
     'name': 'Qigong',
-    'imagePath': 'assets/images/actions/qigong.png',
+    'imagePath': 'qigong',
   },
   {
     'name': 'Ride',
-    'imagePath': 'assets/images/actions/ride.png',
+    'imagePath': 'ride',
   },
   {
     'name': 'Swim',
-    'imagePath': 'assets/images/actions/swim.png',
+    'imagePath': 'swim',
   },
   {
     'name': 'Walk',
-    'imagePath': 'assets/images/actions/walk.png',
+    'imagePath': 'walk',
   },
   {
     'name': 'Yoga',
-    'imagePath': 'assets/images/actions/yoga.png',
+    'imagePath': 'yoga',
   },
 ];
 
@@ -92,7 +93,7 @@ class ProgressBanner extends StatelessWidget {
                 final item = actions[index];
 
                 return GestureDetector(
-                  onTap: () => AppRoutes.navigate(AppRoutes.activitiesDetais),
+                  onTap: () => AppRoutes.navigate(AppRoutes.activities),
                   child: Column(
                     children: [
                       CircleAvatar(
@@ -100,9 +101,8 @@ class ProgressBanner extends StatelessWidget {
                         backgroundColor: currentIndex == index
                             ? AppColors.progressActionActive
                             : AppColors.progressAction,
-                        child: Image.asset(
-                          item["imagePath"],
-                          scale: 0.8,
+                        child: SvgPicture.asset(
+                          "assets/svg/activities/${item["imagePath"]}.svg",
                         ),
                       ),
                       Text(

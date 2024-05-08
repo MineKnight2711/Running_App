@@ -22,6 +22,8 @@ dependencies:
   draggable_home: ^1.0.5
   flutter_svg: ^2.0.10+1
   json_annotation: ^4.9.0
+  mapbox_polyline_points: ^0.0.5
+  mapbox_maps_flutter: ^0.4.3
 
 dev_dependencies:
   flutter_test:
@@ -39,6 +41,9 @@ flutter:
     - assets/svg/
     - assets/svg/music_provider/
     - assets/images/actions/
+    - assets/images/map_anotations/
     - assets/images/basic_activities/
-    - assets/images/bottom_bar/
     - assets/images/activities_details/
+    - assets/svg/
+    - assets/svg/activities/
+    - assets/svg/bottom_bar/
