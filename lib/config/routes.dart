@@ -3,6 +3,9 @@ import 'package:flutter_running_demo/screens/performance/performance_screen.dart
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_complete.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_note.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_screen.dart';
+import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sennor_status.dart';
+import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/running_clock.dart';
+import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/runstop.dart';
 import 'package:get/get.dart';
 import '../screens/progress/activities/activies_screen.dart';
 import '../test_widgets_demo/test_alertdialog/test_comfirm_addtion.dart';
@@ -32,6 +35,9 @@ class AppRoutes {
   static const String _authorizemusicprovider = '/authorizemusicprovider';
   static const String _mapsettingtorun = '/mapsettingtorun';
   static const String _audioguidance = '/audioguidance';
+  static const String _sennorstatus = '/sennorstatus';
+  static const String _runningclock = '/runningclock';
+  static const String _runstop = '/runstop';
 
   static String get activities => _activities;
   static String get home => _home;
@@ -49,6 +55,9 @@ class AppRoutes {
   static String get authorizemusicprovider => _authorizemusicprovider;
   static String get mapsettingtorun => _mapsettingtorun;
   static String get audioguidance => _audioguidance;
+  static String get sennorstatus => _sennorstatus;
+  static String get runningclock => _runningclock;
+  static String get runstop => _runstop;
 
   static navigate(String query) {
     Get.toNamed(
@@ -129,6 +138,18 @@ class AppRoutes {
     GetPage(
         name: _audioguidance,
         page: () => const AudioGuidance(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _sennorstatus,
+        page: () => const SennorStatus(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _runningclock,
+        page: () => const RunningClock(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _runstop,
+        page: () => const RunStop(),
         transition: Transition.rightToLeft),
   ];
 }
