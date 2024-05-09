@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../models/trail_model/trail_model.dart';
+import '../../../../../models/route_model/route_model.dart';
 import 'components/trail_details_header.dart';
 import 'components/trail_details_map.dart';
 
-class TrailDetailsWidget extends StatelessWidget {
-  final TrailModel trail;
+class RouteDetailsWidget extends StatelessWidget {
+  final RouteModel route;
 
-  const TrailDetailsWidget({
+  const RouteDetailsWidget({
     super.key,
-    required this.trail,
+    required this.route,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TrailDetailsHeader(
-          trail: trail,
+        RouteDetailsHeader(
+          route: route,
         ),
         Stack(
           children: [
@@ -31,9 +31,9 @@ class TrailDetailsWidget extends StatelessWidget {
                             .image,
                     fit: BoxFit.cover),
               ),
-              child: TrailDetailsMapWidget(
+              child: RouteDetailsMapWidget(
                 // haveRPE: false,
-                trail: trail,
+                route: route,
               ),
             ),
           ],

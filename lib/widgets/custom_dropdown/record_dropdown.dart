@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_running_demo/screens/progress/activities_details/components/components.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -84,8 +83,8 @@ class RecordDropdown extends StatelessWidget {
             height: _isExpanded.value ? dropDownHeight : 0,
             child: SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
-              child: TrailDetailsWidget(
-                trail: trailTempList.first,
+              child: RouteDetailsWidget(
+                route: routeTempList.first,
               ),
             ),
           ),

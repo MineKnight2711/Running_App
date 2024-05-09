@@ -1,126 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/controllers/map_controller.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
-import '../../screens/performance/components/period_button_row.dart';
-import 'components/sheet_grabber.dart';
+import '../../models/top_route_model/top_route_model.dart';
+import '../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
+import '../performance/components/period_button_row.dart';
+import 'components/components_export.dart';
 
-class PreparationScreen extends StatefulWidget {
-  const PreparationScreen({super.key});
+class PreparationScreen extends StatelessWidget {
+  PreparationScreen({super.key});
 
-  @override
-  State<PreparationScreen> createState() => _PreparationScreenState();
-}
-
-class _PreparationScreenState extends State<PreparationScreen> {
-  double _sheetPosition = 0.2;
-  final double _dragSensitivity = 1000;
-
-  final List<String> periodButtonRow = [
-    'Favorites',
-    'Add_new',
-    'Upcoming',
-  ];
   final mapController = Get.find<MapController>();
+
   @override
   Widget build(BuildContext context) {
+    final tempTopRoute = [
+      TopRouteModel(
+        attemps: 100,
+        rpePoint: 7,
+        latitude: 10.727392,
+        longitude: 106.724228,
+        distance: 10,
+        imagePath: "vector_1",
+        routeTitle: "Raymondienne",
+        time: const Duration(minutes: 55),
+      ),
+      TopRouteModel(
+        attemps: 3,
+        rpePoint: 9,
+        latitude: 10.726371,
+        longitude: 106.724881,
+        distance: 3,
+        imagePath: "vector_2",
+        routeTitle: "Tran Van Tra",
+        time: const Duration(minutes: 11),
+      ),
+      TopRouteModel(
+        attemps: 32,
+        rpePoint: 4,
+        latitude: 10.727318,
+        longitude: 106.721855,
+        distance: 20,
+        imagePath: "vector_2",
+        routeTitle: "Morison",
+        time: const Duration(minutes: 32),
+      ),
+      TopRouteModel(
+        attemps: 11,
+        rpePoint: 9,
+        latitude: 10.725190,
+        longitude: 106.722959,
+        distance: 4,
+        imagePath: "vector_3",
+        routeTitle: "Nam Sai Gon School",
+        time: const Duration(minutes: 22),
+      ),
+      TopRouteModel(
+        attemps: 11,
+        rpePoint: 9,
+        latitude: 10.7285405,
+        longitude: 106.7161719,
+        distance: 4,
+        imagePath: "vector_1",
+        routeTitle: "Cresent Mall route",
+        time: const Duration(minutes: 22),
+      ),
+      TopRouteModel(
+        attemps: 11,
+        rpePoint: 9,
+        latitude: 10.7294681,
+        longitude: 106.7173091,
+        distance: 4,
+        imagePath: "vector_3",
+        routeTitle: "Cresent Mall route",
+        time: const Duration(minutes: 22),
+      ),
+    ];
+    final List<String> periodButtonRow = [
+      'Favorites',
+      'Add_new',
+      'Upcoming',
+    ];
     return Scaffold(
       body: Stack(
         children: [
-          CustomMapWidget(),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: DraggableScrollableSheet(
-              // expand: false,
-
-              minChildSize: 0.2,
-              initialChildSize: _sheetPosition,
-              maxChildSize: 0.9,
-              builder: (context, scrollController) => Container(
-                height: 02,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(24),
-                  ),
-                ),
-                child: SingleChildScrollView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SheetGrabber(
-                        onVerticalDragUpdate: (DragUpdateDetails details) {
-                          setState(() {
-                            _sheetPosition -=
-                                details.delta.dy / _dragSensitivity;
-                            if (_sheetPosition < 0.25) {
-                              _sheetPosition = 0.25;
-                            }
-                            if (_sheetPosition > 0.9) {
-                              _sheetPosition = 0.9;
-                            }
-                          });
-                        },
-                      ),
-                      PeriodButtonRow(
-                        listButton: periodButtonRow,
-                      ),
-                      ElevatedButton(
-                          onPressed: () => mapController.createTempTopRoutes(),
-                          child: Text("Create points")),
-                      Column(
-                        children: [
-                          SizedBox(
-                            width: 1.sw,
-                            height: 0.4.sh,
-                            child: ListView.builder(
-                              itemCount: 10,
-                              itemBuilder: (context, index) => Container(
-                                margin: EdgeInsets.symmetric(vertical: 5.h),
-                                width: 1.sw,
-                                height: 0.2.sh,
-                                color: Colors.red,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 16.h,
-                      ),
-                    ],
-                  ),
-                ),
+          CustomMapWidget(
+            onMapLoad: (p0) => mapController.createTempTopRoutes(tempTopRoute),
+          ),
+          CustomDraggableSheet(
+            grabberBottomWidget: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: PeriodButtonRow(
+                listButton: periodButtonRow,
               ),
             ),
-          ),
+            sheetBody: ListTopRoutes(
+              topRoutes: tempTopRoute,
+            ),
+          )
         ],
-      ),
-    );
-  }
-}
-
-class CustomMapWidget extends StatelessWidget {
-  CustomMapWidget({super.key});
-  final mapController = Get.find<MapController>();
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => MapWidget(
-        key: const ValueKey("mapWidget"),
-        resourceOptions: ResourceOptions(
-            accessToken:
-                "pk.eyJ1IjoidGluaGthaXQiLCJhIjoiY2xoZXhkZmJ4MTB3MzNqczdza2MzcHE2YSJ9.tPQwbEWtA53iWlv3U8O0-g"),
-        cameraOptions: CameraOptions(
-          center: Point(coordinates: Position(106.722954, 10.726725)).toJson(),
-          zoom: mapController.zoomLevel.value,
-        ),
-        styleUri: MapboxStyles.MAPBOX_STREETS,
-        textureView: true,
-        onMapCreated: mapController.onMapCreated,
       ),
     );
   }

@@ -28,8 +28,8 @@ class _ActivitiesScreenState extends State<ActivitiesScreen>
       body: TabBarView(
         physics: const NeverScrollableScrollPhysics(),
         controller: bottomBarController.tabController.value,
-        children: const [
-          ActivitiesDetailsScreen(),
+        children: [
+          const ActivitiesDetailsScreen(),
           PreparationScreen(),
         ],
       ),

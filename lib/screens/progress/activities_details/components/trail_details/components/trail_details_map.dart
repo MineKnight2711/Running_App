@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../config/fonts.dart';
-import '../../../../../../models/trail_model/trail_model.dart';
+import '../../../../../../models/route_model/route_model.dart';
 import 'trail_details_footer.dart';
 
-class TrailDetailsMapWidget extends StatelessWidget {
-  final TrailModel trail;
+class RouteDetailsMapWidget extends StatelessWidget {
+  final RouteModel route;
   final bool? haveRPE, titleInFooter;
-  const TrailDetailsMapWidget({
+  const RouteDetailsMapWidget({
     super.key,
     this.haveRPE = true,
     this.titleInFooter = false,
-    required this.trail,
+    required this.route,
   });
 
   @override
@@ -40,7 +40,7 @@ class TrailDetailsMapWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     color: (() {
                       int color = 0;
-                      switch (trail.rpe) {
+                      switch (route.rpe) {
                         case 1:
                           color = 0x4D00D688;
 
@@ -58,7 +58,7 @@ class TrailDetailsMapWidget extends StatelessWidget {
                     children: [
                       (() {
                         String image = "";
-                        switch (trail.rpe) {
+                        switch (route.rpe) {
                           case 1:
                             image = "green_rpe";
 
@@ -103,7 +103,7 @@ class TrailDetailsMapWidget extends StatelessWidget {
           bottom: 0,
           child: TrailDetailsFooter(
             titleInFooter: titleInFooter,
-            trail: trail,
+            trail: route,
           ),
         ),
       ],

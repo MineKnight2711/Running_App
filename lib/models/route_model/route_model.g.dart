@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'trail_model.dart';
+part of 'route_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-TrailModel _$TrailModelFromJson(Map<String, dynamic> json) => TrailModel(
+RouteModel _$RouteModelFromJson(Map<String, dynamic> json) => RouteModel(
       rpe: (json['rpe'] as num).toInt(),
       title: json['title'] as String,
       place: json['place'] as String,
@@ -19,7 +19,7 @@ TrailModel _$TrailModelFromJson(Map<String, dynamic> json) => TrailModel(
       date: DateTime.parse(json['date'] as String),
     );
 
-Map<String, dynamic> _$TrailModelToJson(TrailModel instance) =>
+Map<String, dynamic> _$RouteModelToJson(RouteModel instance) =>
     <String, dynamic>{
       'title': instance.title,
       'place': instance.place,

@@ -60,7 +60,9 @@ class AppRoutes {
   static String get runstop => _runstop;
 
   static navigate(String query) {
-    Get.toNamed(query);
+    Get.toNamed(
+      query,
+    );
   }
 
   static navigateToDetails(

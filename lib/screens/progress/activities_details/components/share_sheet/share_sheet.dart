@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/colors.dart';
 import 'package:flutter_running_demo/config/fonts.dart';
-import 'package:flutter_running_demo/models/trail_model/trail_model.dart';
 import 'package:flutter_running_demo/screens/progress/activities_details/components/search_sheet/sheet_row.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../models/route_model/route_model.dart';
 import '../trail_details/components/trail_details_map.dart';
 
 class ShareSheet extends StatelessWidget {
-  final TrailModel trail;
-  const ShareSheet({super.key, required this.trail});
+  final RouteModel route;
+  const ShareSheet({super.key, required this.route});
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +51,10 @@ class ShareSheet extends StatelessWidget {
                             .image,
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(12)),
-                child: TrailDetailsMapWidget(
+                child: RouteDetailsMapWidget(
                   haveRPE: false,
                   titleInFooter: true,
-                  trail: trail,
+                  route: route,
                 ),
               ),
               SizedBox(
