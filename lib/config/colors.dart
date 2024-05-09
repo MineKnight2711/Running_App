@@ -20,7 +20,8 @@ class AppColors {
 
   static const Color white100 = Color(0xffffffff);
   static const Color transparent = Colors.transparent;
-
+  static const Color appButton = Color(0xfff26322);
+  static Color annotationButton = const Color(0xFF2F2828).withOpacity(0.65);
   static const Color progressAction = Color(0xff76b5ff);
   static const Color progressActionActive = Color(0xff00d688);
   static const Color basicActivitiesCard = Color(0x0DFFFFFF);

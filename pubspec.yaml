@@ -10,22 +10,46 @@ dependencies:
 
   flutter:
     sdk: flutter
+  
   google_fonts: ^6.2.1
   flutter_screenutil: ^5.9.0
   get: ^4.6.6
   cupertino_icons: ^1.0.8
+  intl: ^0.19.0
+  fl_chart: ^0.67.0
+  syncfusion_flutter_charts: ^25.1.42+1
   card_swiper: ^3.0.1
+  draggable_home: ^1.0.5
+  flutter_svg: ^2.0.10+1
+  json_annotation: ^4.9.0
+  mapbox_polyline_points: ^0.0.5
+  mapbox_maps_flutter: ^0.4.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  build_runner: ^2.4.9
+  json_serializable: ^6.8.0
 
 flutter:
   uses-material-design: true
   
   assets:
-    - assets/animations/
+    # - assets/animations/
     - assets/images/
+    - assets/svg/
+    - assets/svg/music_provider/
     - assets/images/actions/
+    - assets/images/map_anotations/
     - assets/images/basic_activities/
+    - assets/images/activities_details/
+    - assets/svg/
+    - assets/svg/preparation/
+    - assets/svg/preparation/map_anotations/
+    - assets/svg/preparation/route_item_options/
+    - assets/svg/preparation/route_vector/
+    - assets/svg/preparation/rpe/
+    - assets/svg/preparation/
+    - assets/svg/activities/
+    - assets/svg/bottom_bar/
