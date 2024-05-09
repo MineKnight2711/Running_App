@@ -11,7 +11,9 @@ import '../test_widgets_demo/test_alertdialog/test_edit_confirmation.dart';
 import '../test_widgets_demo/test_alertdialog/test_remove_confirmation.dart';
 import '../test_widgets/test_screen.dart';
 import '../test_widgets_demo/test_alertdialog/test_screen2.dart';
-import '../widgets/music_provider_sheet/music_provider_sheet.dart';
+import '../test_widgets_demo/test_screen/run_map_setting/run_setting/audio_guidance.dart';
+import '../test_widgets_demo/test_screen/run_map_setting/run_setting/map_setting.dart';
+import '../test_widgets_demo/test_screen/run_map_setting/music_provider_sheet/music_provider_sheet.dart';
 
 class AppRoutes {
   static const String _home = '/';
@@ -28,6 +30,8 @@ class AppRoutes {
   static const String _preparedcomplete = '/preparedcomplete';
   static const String _preparednote = '/preparednote';
   static const String _authorizemusicprovider = '/authorizemusicprovider';
+  static const String _mapsettingtorun = '/mapsettingtorun';
+  static const String _audioguidance = '/audioguidance';
 
   static String get activities => _activities;
   static String get home => _home;
@@ -43,6 +47,8 @@ class AppRoutes {
   static String get preparedcomplete => _preparedcomplete;
   static String get preparednote => _preparednote;
   static String get authorizemusicprovider => _authorizemusicprovider;
+  static String get mapsettingtorun => _mapsettingtorun;
+  static String get audioguidance => _audioguidance;
 
   static navigate(String query) {
     Get.toNamed(query);
@@ -113,6 +119,14 @@ class AppRoutes {
     GetPage(
         name: _authorizemusicprovider,
         page: () => const AuthorizeMusicProvider(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _mapsettingtorun,
+        page: () => const MapSettingToRun(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _audioguidance,
+        page: () => const AudioGuidance(),
         transition: Transition.rightToLeft),
   ];
 }
