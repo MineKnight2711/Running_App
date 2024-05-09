@@ -9,7 +9,7 @@ class AudioGuidance extends StatefulWidget {
   const AudioGuidance({super.key});
 
   @override
-  _AudioGuidanceState createState() => _AudioGuidanceState();
+  State<AudioGuidance> createState() => _AudioGuidanceState();
 }
 
 class _AudioGuidanceState extends State<AudioGuidance> {
