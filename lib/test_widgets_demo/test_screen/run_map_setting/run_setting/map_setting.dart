@@ -8,7 +8,7 @@ class MapSettingToRun extends StatefulWidget {
   const MapSettingToRun({super.key});
 
   @override
-  _MapSettingToRunState createState() => _MapSettingToRunState();
+  State<MapSettingToRun> createState() => _MapSettingToRunState();
 }
 
 class _MapSettingToRunState extends State<MapSettingToRun> {
