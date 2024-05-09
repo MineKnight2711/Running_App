@@ -25,10 +25,10 @@ class SliverHeader extends StatelessWidget {
 
         return SliverAppBar(
           backgroundColor: AppColors.appTheme.colors.first,
-          expandedHeight: 170.h,
+          expandedHeight: 160.h,
           floating: true,
           pinned: true,
-          collapsedHeight: 105.h,
+          collapsedHeight: 100.h,
           flexibleSpace: FlexibleSpaceBar(
             collapseMode: CollapseMode.pin,
             background: SliverHeaderButtons(

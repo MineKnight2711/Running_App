@@ -47,22 +47,22 @@ class ActivitiesDetailsScreen extends GetView {
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final trail = trailTempList[index];
+                        final route = routeTempList[index];
                         return Padding(
                           padding: EdgeInsets.only(bottom: 10.h),
-                          child: TrailDetailsWidget(
-                            trail: trail,
+                          child: RouteDetailsWidget(
+                            route: route,
                           ),
                         );
                       },
-                      childCount: trailTempList.length,
+                      childCount: routeTempList.length,
                     ),
                   ),
                 ],
               ),
             ),
             Positioned(
-              top: 0.07.sh,
+              top: 0.08.sh,
               child: SizedBox(
                 width: 1.sw,
                 child: Image.asset(

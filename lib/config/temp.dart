@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/models/line_chart_point.dart';
 import '../models/dropdown_activities_model.dart';
-import '../models/trail_model/trail_model.dart';
+import '../models/route_model/route_model.dart';
 
-List<TrailModel> trailTempList = [
-  TrailModel(
+List<RouteModel> routeTempList = [
+  RouteModel(
     title: 'Ben Thanh Trail',
     place: 'Ben Thanh Market, Ho Cho Minh City',
     rpe: 1,
@@ -18,7 +18,7 @@ List<TrailModel> trailTempList = [
     haveInfo: true,
     date: DateTime(2023, 4, 24),
   ),
-  TrailModel(
+  RouteModel(
     title: 'Dam Sen Trail',
     place: 'District 11, Ho Cho Minh City',
     rpe: 2,
@@ -30,7 +30,7 @@ List<TrailModel> trailTempList = [
     haveInfo: false,
     date: DateTime(2023, 4, 22),
   ),
-  TrailModel(
+  RouteModel(
     title: 'Ho Ban Nguyet Trail',
     place: 'Half Moon Lake, District 7 ,Ho Cho Minh City',
     rpe: 3,

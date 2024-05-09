@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
-part "trail_model.g.dart";
+part "route_model.g.dart";
 
 @JsonSerializable(explicitToJson: true)
-class TrailModel {
+class RouteModel {
   final String title;
   final String place;
   final double ascent;
@@ -13,7 +13,7 @@ class TrailModel {
   final bool haveInfo;
   final DateTime date;
 
-  TrailModel({
+  RouteModel({
     required this.rpe,
     required this.title,
     required this.place,
@@ -25,8 +25,8 @@ class TrailModel {
     required this.haveInfo,
     required this.date,
   });
-  factory TrailModel.fromJson(Map<String, dynamic> json) =>
-      _$TrailModelFromJson(json);
+  factory RouteModel.fromJson(Map<String, dynamic> json) =>
+      _$RouteModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TrailModelToJson(this);
+  Map<String, dynamic> toJson() => _$RouteModelToJson(this);
 }

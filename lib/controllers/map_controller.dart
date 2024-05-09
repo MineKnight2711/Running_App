@@ -1,11 +1,9 @@
-import 'dart:math';
-import 'dart:typed_data';
-
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_running_demo/models/top_route_model/top_route_model.dart';
 import 'package:get/get.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
+
+import '../utils/map_annotation_click_listener.dart';
 
 class MapController extends GetxController {
   Rx<MapboxMap?> mapboxMap = Rx<MapboxMap?>(null);
@@ -22,16 +20,11 @@ class MapController extends GetxController {
   RxString latitude = "".obs;
   RxString longLatitude = "".obs;
 
-  // Rx<List<Prediction>> places = Rx<List<Prediction>>([]);
-  // final TextEditingController searchController = TextEditingController();
-  // Rx<Result?> details = Rx<Result?>(null);
-  // Rx<LocationResponse?> selectedLocation = Rx<LocationResponse?>(null);
-  @override
-  void onInit() {
-    super.onInit();
-    // _mapApi = MapApi();
-    createTempTopRoutes();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   // _mapApi = MapApi();
+  // }
 
   Position getCentroid(List<Position> points) {
     if (points.isEmpty) {
@@ -62,8 +55,6 @@ class MapController extends GetxController {
 
   void centerCamera(List<Position> positions) async {
     final pos = getCentroid(positions);
-    print("Lat: ${pos.lat}");
-    print("Lng: ${pos.lng}");
     final centeredPoint = Point(coordinates: pos);
 
     final ByteData bytes =
@@ -90,70 +81,13 @@ class MapController extends GetxController {
     mapboxMap.value?.flyTo(
         CameraOptions(
             anchor: ScreenCoordinate(x: 0, y: 0),
-            zoom: 15,
+            zoom: 14,
             bearing: 180,
             pitch: 30),
         MapAnimationOptions(duration: 3000, startDelay: 0));
   }
 
-  void createTempTopRoutes() {
-    final tempTopRoute = [
-      TopRouteModel(
-        attemps: 100,
-        rpePoint: 7,
-        latitude: 10.727392,
-        longitude: 106.724228,
-        distance: 10,
-        routeTitle: "Raymondienne",
-        time: const Duration(minutes: 55),
-      ),
-      TopRouteModel(
-        attemps: 3,
-        rpePoint: 9,
-        latitude: 10.726371,
-        longitude: 106.724881,
-        distance: 3,
-        routeTitle: "Tran Van Tra",
-        time: const Duration(minutes: 11),
-      ),
-      TopRouteModel(
-        attemps: 32,
-        rpePoint: 4,
-        latitude: 10.727318,
-        longitude: 106.721855,
-        distance: 20,
-        routeTitle: "Morison",
-        time: const Duration(minutes: 32),
-      ),
-      TopRouteModel(
-        attemps: 11,
-        rpePoint: 9,
-        latitude: 10.725190,
-        longitude: 106.722959,
-        distance: 4,
-        routeTitle: "Nam Sai Gon School",
-        time: const Duration(minutes: 22),
-      ),
-      TopRouteModel(
-        attemps: 11,
-        rpePoint: 9,
-        latitude: 10.7285405,
-        longitude: 106.7161719,
-        distance: 4,
-        routeTitle: "Cresent Mall route",
-        time: const Duration(minutes: 22),
-      ),
-      TopRouteModel(
-        attemps: 11,
-        rpePoint: 9,
-        latitude: 10.7294681,
-        longitude: 106.7173091,
-        distance: 4,
-        routeTitle: "Cresent Mall route",
-        time: const Duration(minutes: 22),
-      ),
-    ];
-
+  void createTempTopRoutes(List<TopRouteModel> listTopRoute) {
     mapboxMap.value?.annotations
         .createPointAnnotationManager()
         .then((pointAnnotationManager) async {
@@ -161,7 +95,7 @@ class MapController extends GetxController {
 
       final positions = <Position>[];
 
-      for (var route in tempTopRoute) {
+      for (var route in listTopRoute) {
         positions.add(
           Position(route.longitude, route.latitude),
         );
@@ -169,7 +103,7 @@ class MapController extends GetxController {
       final ByteData bytes =
           await rootBundle.load('assets/images/map_anotations/route.png');
       final Uint8List imagesData = bytes.buffer.asUint8List();
-      centerCamera(tempTopRoute
+      centerCamera(listTopRoute
           .map((route) => Position(route.longitude, route.latitude))
           .toList());
       pointAnnotationManager.createMulti(positions
@@ -198,6 +132,10 @@ class MapController extends GetxController {
     mapboxMap.value = mapboxMapCreate;
   }
 
+  selectAnotation(int anotation) {
+    print("anotation selected : $anotation");
+  }
+
   void zoomIn() {
     print("Zoom level $zoomLevel");
     zoomLevel.value++;
@@ -221,8 +159,10 @@ class MapController extends GetxController {
             pitch: 0),
         MapAnimationOptions(duration: 2000, startDelay: 0));
   }
+}
 
-  // Future<String> predictLocation(String predictString) async {
+
+// Future<String> predictLocation(String predictString) async {
   //   ResponseBaseModel responseBaseModel =
   //       await _mapApi.getPredictLocation(predictString);
 
@@ -342,11 +282,3 @@ class MapController extends GetxController {
   //     );
   //   });
   // }
-}
-
-class AnnotationClickListener extends OnPointAnnotationClickListener {
-  @override
-  void onPointAnnotationClick(PointAnnotation annotation) {
-    print("onAnnotationClick, id: ${annotation.id}");
-  }
-}

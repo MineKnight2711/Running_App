@@ -1,7 +1,7 @@
 class TopRouteModel {
   final int attemps, rpePoint;
   final double longitude, latitude, distance;
-  final String routeTitle;
+  final String routeTitle, imagePath;
   final Duration time;
 
   TopRouteModel(
@@ -10,6 +10,7 @@ class TopRouteModel {
       required this.longitude,
       required this.latitude,
       required this.distance,
+      required this.imagePath,
       required this.routeTitle,
       required this.time});
 }

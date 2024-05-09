@@ -45,7 +45,9 @@ class AppRoutes {
   static String get authorizemusicprovider => _authorizemusicprovider;
 
   static navigate(String query) {
-    Get.toNamed(query);
+    Get.toNamed(
+      query,
+    );
   }
 
   static navigateToDetails(

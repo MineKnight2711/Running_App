@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/extensions/datetime_extension.dart';
-import 'package:flutter_running_demo/models/trail_model/trail_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../config/colors.dart';
 import '../../../../../../config/fonts.dart';
+import '../../../../../../models/route_model/route_model.dart';
 import '../../share_sheet/share_sheet.dart';
 
-class TrailDetailsHeader extends StatelessWidget {
-  final TrailModel trail;
+class RouteDetailsHeader extends StatelessWidget {
+  final RouteModel route;
 
-  const TrailDetailsHeader({
+  const RouteDetailsHeader({
     super.key,
-    required this.trail,
+    required this.route,
   });
 
   @override
@@ -53,7 +53,7 @@ class TrailDetailsHeader extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      trail.title,
+                      route.title,
                       style: CustomGoogleFonts.roboto(
                           fontSize: 16.r, color: AppColors.white100),
                     ),
@@ -62,7 +62,7 @@ class TrailDetailsHeader extends StatelessWidget {
                     ),
                     Image.asset("assets/images/activities_details/people.png"),
                     const Spacer(),
-                    trail.haveInfo
+                    route.haveInfo
                         ? Image.asset(
                             "assets/images/activities_details/info.png",
                             scale: 0.9,
@@ -85,7 +85,7 @@ class TrailDetailsHeader extends StatelessWidget {
                           backgroundColor: const Color(0xff222222),
                           builder: (context) {
                             return ShareSheet(
-                              trail: trail,
+                              route: route,
                             );
                           },
                         );
@@ -103,7 +103,7 @@ class TrailDetailsHeader extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      trail.date.dateTimeFormat(),
+                      route.date.dateTimeFormat(),
                       style: CustomGoogleFonts.roboto(
                           fontSize: 12.r,
                           fontWeight: FontWeight.w300,
@@ -111,7 +111,7 @@ class TrailDetailsHeader extends StatelessWidget {
                     ),
                     Flexible(
                       child: Text(
-                        ' | ${trail.place}',
+                        ' | ${route.place}',
                         overflow: TextOverflow.ellipsis,
                         style: CustomGoogleFonts.roboto(
                           fontSize: 12.r,

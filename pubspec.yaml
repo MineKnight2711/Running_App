@@ -45,5 +45,9 @@ flutter:
     - assets/images/basic_activities/
     - assets/images/activities_details/
     - assets/svg/
+    - assets/svg/preparation/
+    - assets/svg/preparation/route_vector/
+    - assets/svg/preparation/rpe/
+    - assets/svg/preparation/
     - assets/svg/activities/
     - assets/svg/bottom_bar/
