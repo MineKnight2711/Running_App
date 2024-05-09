@@ -15,7 +15,6 @@ class TabModel {
 
 class BottomTabBarController extends GetxController {
   final tabs = <TabModel>[].obs;
-  final Rx<TabModel?> selectedTab = Rx<TabModel?>(null);
   Rx<TabController?> tabController = Rx<TabController?>(null);
   late TickerProvider _tickerProvider;
   double tabSpacing(double screenWidth) {
@@ -32,11 +31,6 @@ class BottomTabBarController extends GetxController {
     );
     tabs.stream.listen(_onTabChanged);
     createConstantTabs();
-    selectedTab.value = tabs.first;
-  }
-
-  void selectTab(int index) {
-    selectedTab.value = tabs[index];
   }
 
   void _onTabChanged(List<TabModel>? tabs) {

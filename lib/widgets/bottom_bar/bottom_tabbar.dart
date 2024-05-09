@@ -5,9 +5,27 @@ import 'package:get/get.dart';
 import '../../config/config_export.dart';
 import '../../controllers/tabbar_controller.dart';
 
-class BottomNavigationTabBar extends StatelessWidget {
+class BottomNavigationTabBar extends StatefulWidget {
+  const BottomNavigationTabBar({super.key});
+
+  @override
+  State<BottomNavigationTabBar> createState() => _BottomNavigationTabBarState();
+}
+
+class _BottomNavigationTabBarState extends State<BottomNavigationTabBar> {
+  int currentIndex = 0;
   final bottomTabBarController = Get.find<BottomTabBarController>();
-  BottomNavigationTabBar({super.key});
+  @override
+  void initState() {
+    super.initState();
+    bottomTabBarController.tabController.value?.addListener(() {
+      if (bottomTabBarController.tabController.value!.indexIsChanging) {
+        setState(() {
+          currentIndex = bottomTabBarController.tabController.value!.index;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,25 +33,22 @@ class BottomNavigationTabBar extends StatelessWidget {
       color: const Color(0xff2c2a2d),
       child: TabBar(
         physics: const NeverScrollableScrollPhysics(),
-        onTap: (value) => bottomTabBarController.selectTab(value),
         tabs: bottomTabBarController.tabs
             .map(
               (tab) => SizedBox(
                 width: 1.sw / 4.5,
                 height: 1.sh / 12,
                 child: Tab(
-                    icon: Obx(
-                      () => SvgPicture.asset(
-                        "assets/svg/bottom_bar/${tab.imagePath}.svg",
-                        width: 24,
-                        height: 24,
-                        colorFilter: ColorFilter.mode(
-                            bottomTabBarController.selectedTab.value?.tag ==
-                                    tab.tag
-                                ? Colors.orange
-                                : Colors.white,
-                            BlendMode.srcATop),
-                      ),
+                    icon: SvgPicture.asset(
+                      "assets/svg/bottom_bar/${tab.imagePath}.svg",
+                      width: 24,
+                      height: 24,
+                      colorFilter: ColorFilter.mode(
+                          currentIndex ==
+                                  bottomTabBarController.tabs.indexOf(tab)
+                              ? Colors.orange
+                              : Colors.white,
+                          BlendMode.srcATop),
                     ),
                     text: tab.name),
               ),
