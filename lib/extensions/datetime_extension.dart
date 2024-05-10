@@ -10,6 +10,10 @@ extension DateTimeFormat on DateTime {
     return formattedDateTime;
   }
 
+  String toDayAndMonthString() {
+    return '$day/$month';
+  }
+
   String dateTimeFormatWithStringMonth() {
     String pattern = 'd MMMM yyyy';
 

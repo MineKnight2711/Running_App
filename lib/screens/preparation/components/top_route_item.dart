@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../config/config_export.dart';
 import '../../../models/top_route_model/top_route_model.dart';
+import 'top_rop_item_options.dart';
 
 class RouteItemWidget extends StatelessWidget {
   final bool isSelected;
@@ -17,11 +18,11 @@ class RouteItemWidget extends StatelessWidget {
       children: [
         Container(
           width: 1.sw,
-          height: isSelected ? 130.h : 85.h,
+          height: isSelected ? 130.h : 80.h,
           padding: isSelected
               ? EdgeInsets.symmetric(vertical: 5.h)
-              : EdgeInsets.only(bottom: 10.h),
-          margin: EdgeInsets.symmetric(vertical: 10.h),
+              : EdgeInsets.zero,
+          margin: EdgeInsets.symmetric(vertical: 5.h),
           decoration: BoxDecoration(
               color: isSelected
                   ? AppColors.basicActivitiesCard
@@ -123,7 +124,7 @@ class RouteItemWidget extends StatelessWidget {
                 ),
                 isSelected
                     ? SizedBox(
-                        height: 5.h,
+                        height: 10.h,
                       )
                     : const SizedBox.shrink(),
                 isSelected ? const RouteItemOption() : const SizedBox.shrink(),
@@ -157,80 +158,5 @@ class RouteItemWidget extends StatelessWidget {
       rpe = 'Invalid RPE Point';
     }
     return rpe;
-  }
-}
-
-class RouteItemOption extends StatelessWidget {
-  const RouteItemOption({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 40.h,
-      decoration: BoxDecoration(
-        color: AppColors.basicActivitiesCard,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.zero,
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              shape: const CircleBorder(),
-            ),
-            onPressed: () {},
-            child: SvgPicture.asset(
-                "assets/svg/preparation/route_item_options/check.svg"),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.zero,
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              shape: const CircleBorder(),
-            ),
-            onPressed: () {},
-            child: SvgPicture.asset(
-                "assets/svg/preparation/route_item_options/info.svg"),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.zero,
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              shape: const CircleBorder(),
-            ),
-            onPressed: () {},
-            child: SvgPicture.asset(
-                "assets/svg/preparation/route_item_options/share.svg"),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.zero,
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              shape: const CircleBorder(),
-            ),
-            onPressed: () {},
-            child: SvgPicture.asset(
-                "assets/svg/preparation/route_item_options/edit.svg"),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.zero,
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              shape: const CircleBorder(),
-            ),
-            onPressed: () {},
-            child: SvgPicture.asset(
-                "assets/svg/preparation/route_item_options/delete.svg"),
-          ),
-        ],
-      ),
-    );
   }
 }

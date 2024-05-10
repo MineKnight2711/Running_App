@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/screens/performance/components/nested_chart.dart';
-import 'package:flutter_running_demo/screens/performance/components/activities_stats_button_row.dart';
+import 'package:flutter_running_demo/screens/performance/components/charts/data/intensity_tempdata.dart';
+import 'package:flutter_running_demo/screens/performance/components/charts/data/nested_chart_tempdata.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../config/config_export.dart';
 import '../../models/intensity_model/intensity_model.dart';
 import '../../widgets/custom_dropdown/record_dropdown.dart';
 import '../../widgets/widget_export.dart';
-import 'components/charts/heart_rate_chart.dart';
-import 'components/performance_summary.dart';
-import 'components/period_button_row.dart';
-import 'components/charts/intensity_linechart.dart';
+import 'components/components_export.dart';
+import 'components/charts/charts_export.dart';
 
 class PerformanceMetricsScreen extends GetView {
   final List<String> periodButtonRow = [
@@ -35,7 +33,12 @@ class PerformanceMetricsScreen extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    final IntensityModel intensity = IntensityModel.mock();
+    final Rx<RecordType> selectedType = RecordType.weekly.obs;
+    final Rx<DetailsRecordType> selectedDetailsType =
+        DetailsRecordType.distance.obs;
+    final Rx<IntensityChartType> selectedIntensityChartType =
+        IntensityChartType.pulseRate.obs;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: CustomAppBar(
@@ -101,6 +104,21 @@ class PerformanceMetricsScreen extends GetView {
                       height: 20.h,
                     ),
                     PeriodButtonRow(
+                      onSelectedIndex: (value) {
+                        switch (value) {
+                          case 0:
+                            selectedType.value = RecordType.weekly;
+                            break;
+                          case 1:
+                            selectedType.value = RecordType.monthly;
+                            break;
+                          case 2:
+                            selectedType.value = RecordType.yearly;
+                            break;
+                          default:
+                            break;
+                        }
+                      },
                       listButton: periodButtonRow,
                     ),
                     SizedBox(
@@ -108,11 +126,41 @@ class PerformanceMetricsScreen extends GetView {
                     ),
                     ActivityStatsRow(
                       size: 1.65,
+                      onSelectedIndex: (index) {
+                        switch (index) {
+                          case 0:
+                            selectedDetailsType.value =
+                                DetailsRecordType.distance;
+                            break;
+                          case 1:
+                            selectedDetailsType.value = DetailsRecordType.time;
+                            break;
+                          case 2:
+                            selectedDetailsType.value =
+                                DetailsRecordType.ascent;
+                            break;
+                          case 3:
+                            selectedDetailsType.value =
+                                DetailsRecordType.calories;
+                            break;
+                          default:
+                            break;
+                        }
+                      },
                       listButton: activityStatsButtonRow,
                     ),
-                    const AspectRatio(
-                      aspectRatio: 2,
-                      child: NestedChart(),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    SizedBox(
+                      width: 1.sw,
+                      height: 0.2.sh,
+                      child: Obx(
+                        () => NestedChart(
+                          detailsRecordType: selectedDetailsType.value,
+                          recordType: selectedType.value,
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 10.h,
@@ -129,13 +177,70 @@ class PerformanceMetricsScreen extends GetView {
                       style: CustomGoogleFonts.roboto(
                           color: AppColors.white100, fontSize: 18.r),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          style: IconButton.styleFrom(
+                              backgroundColor: AppColors.basicActivitiesCard),
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.chevron_left,
+                            color: AppColors.white100,
+                          ),
+                        ),
+                        Text(
+                          "Latest run, 27/06/2023",
+                          style: CustomGoogleFonts.roboto(
+                              fontSize: 14.r, color: AppColors.white100),
+                        ),
+                        IconButton(
+                          style: IconButton.styleFrom(
+                              backgroundColor: AppColors.basicActivitiesCard),
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.chevron_right,
+                            color: AppColors.white100,
+                          ),
+                        ),
+                      ],
+                    ),
                     ActivityStatsRow(
                       size: 1.9,
+                      onSelectedIndex: (index) {
+                        switch (index) {
+                          case 0:
+                            selectedIntensityChartType.value =
+                                IntensityChartType.pulseRate;
+                            break;
+                          case 1:
+                            selectedIntensityChartType.value =
+                                IntensityChartType.pace;
+                            break;
+                          case 2:
+                            selectedIntensityChartType.value =
+                                IntensityChartType.overlay;
+                            break;
+                          default:
+                            break;
+                        }
+                      },
                       listButton: chartButtonRow,
                     ),
                     AspectRatio(
                       aspectRatio: 2,
-                      child: IntensityLineChart(intensity: intensity),
+                      child: Obx(
+                        () => IntensityLineChart(
+                          intensityChartType: selectedIntensityChartType.value,
+                          intensity: IntensityModel.mock(
+                              numPoints: 50, minBpm: 80, maxBpm: 160),
+                          pace: IntensityModel.mock(
+                            numPoints: 40,
+                            minBpm: 100,
+                            maxBpm: 180,
+                          ),
+                        ),
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
