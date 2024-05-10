@@ -19,7 +19,6 @@ class PeriodButtonRowState extends State<PeriodButtonRow> {
       decoration: BoxDecoration(
           border: Border.all(color: const Color(0x33FFFFFF), width: 1),
           borderRadius: BorderRadius.circular(50)),
-      // margin: EdgeInsets.symmetric(horizontal: 5.w),
       width: 1.sw,
       height: 35.h,
       child: Row(

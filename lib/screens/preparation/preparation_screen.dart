@@ -71,7 +71,7 @@ class PreparationScreen extends StatelessWidget {
         longitude: 106.7173091,
         distance: 4,
         imagePath: "vector_3",
-        routeTitle: "Cresent Mall route",
+        routeTitle: "Saigon Exhibition and Convention Center",
         time: const Duration(minutes: 22),
       ),
     ];
@@ -86,9 +86,16 @@ class PreparationScreen extends StatelessWidget {
           CustomMapWidget(
             onMapLoad: (p0) => mapController.createTempTopRoutes(tempTopRoute),
           ),
+          Positioned(
+            top: 40,
+            // left: 10,
+            child: HorizontalAnnotations(),
+          ),
+          Positioned(top: 270, left: 366, child: VerticalAnnotations()),
           CustomDraggableSheet(
+            dragSensitivity: 800,
             grabberBottomWidget: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: PeriodButtonRow(
                 listButton: periodButtonRow,
               ),

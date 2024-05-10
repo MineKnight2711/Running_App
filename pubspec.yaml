@@ -47,6 +47,8 @@ flutter:
     - assets/images/activities_details/
     - assets/svg/
     - assets/svg/preparation/
+    - assets/svg/preparation/map_anotations/
+    - assets/svg/preparation/route_item_options/
     - assets/svg/preparation/route_vector/
     - assets/svg/preparation/rpe/
     - assets/svg/preparation/

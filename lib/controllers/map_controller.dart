@@ -6,6 +6,7 @@ import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import '../utils/map_annotation_click_listener.dart';
 
 class MapController extends GetxController {
+  RxString currentMapViewStyle = MapboxStyles.MAPBOX_STREETS.obs;
   Rx<MapboxMap?> mapboxMap = Rx<MapboxMap?>(null);
   Rx<PointAnnotationManager?> pointManager = Rx<PointAnnotationManager?>(null);
   Rx<PolylineAnnotationManager?> polylineManager =
@@ -23,7 +24,7 @@ class MapController extends GetxController {
   // @override
   // void onInit() {
   //   super.onInit();
-  //   // _mapApi = MapApi();
+
   // }
 
   Position getCentroid(List<Position> points) {
@@ -130,6 +131,8 @@ class MapController extends GetxController {
 
   onMapCreated(MapboxMap mapboxMapCreate) {
     mapboxMap.value = mapboxMapCreate;
+    mapboxMap.value?.scaleBar.updateSettings(ScaleBarSettings(enabled: false));
+    mapboxMap.value?.compass.updateSettings(CompassSettings(enabled: false));
   }
 
   selectAnotation(int anotation) {
@@ -137,7 +140,6 @@ class MapController extends GetxController {
   }
 
   void zoomIn() {
-    print("Zoom level $zoomLevel");
     zoomLevel.value++;
     mapboxMap.value?.flyTo(
         CameraOptions(
@@ -149,7 +151,6 @@ class MapController extends GetxController {
   }
 
   void zoomOut() {
-    print("Zoom level $zoomLevel");
     zoomLevel.value--;
     mapboxMap.value?.flyTo(
         CameraOptions(
@@ -158,6 +159,14 @@ class MapController extends GetxController {
             bearing: 0,
             pitch: 0),
         MapAnimationOptions(duration: 2000, startDelay: 0));
+  }
+
+  changeMapStyle() {
+    if (currentMapViewStyle.value == MapboxStyles.MAPBOX_STREETS) {
+      currentMapViewStyle.value = MapboxStyles.SATELLITE_STREETS;
+    } else {
+      currentMapViewStyle.value = MapboxStyles.MAPBOX_STREETS;
+    }
   }
 }
 

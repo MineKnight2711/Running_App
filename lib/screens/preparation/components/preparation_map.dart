@@ -10,8 +10,13 @@ class CustomMapWidget extends StatelessWidget {
   final mapController = Get.find<MapController>();
   @override
   Widget build(BuildContext context) {
+    mapController.mapboxMap.value?.scaleBar
+        .updateSettings(ScaleBarSettings(enabled: false));
+    mapController.mapboxMap.value?.compass
+        .updateSettings(CompassSettings(enabled: false));
     return Obx(
       () => MapWidget(
+        styleUri: mapController.currentMapViewStyle.value,
         onMapLoadedListener: onMapLoad,
         key: const ValueKey("mapWidget"),
         resourceOptions: ResourceOptions(
@@ -21,7 +26,6 @@ class CustomMapWidget extends StatelessWidget {
           center: Point(coordinates: Position(106.722954, 10.726725)).toJson(),
           zoom: mapController.zoomLevel.value,
         ),
-        styleUri: MapboxStyles.MAPBOX_STREETS,
         textureView: true,
         onMapCreated: mapController.onMapCreated,
       ),
