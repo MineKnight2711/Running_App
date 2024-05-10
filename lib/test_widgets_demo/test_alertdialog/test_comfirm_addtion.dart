@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
 
 class TestConfirmAddtion extends StatelessWidget {
+  const TestConfirmAddtion({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,11 +18,11 @@ class TestConfirmAddtion extends StatelessWidget {
                     backgroundColor: Colors.black,
                     title: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.add,
                           color: Colors.blue,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Text(
                           'Confirm addtion',
                           style: CustomGoogleFonts.roboto(color: Colors.white),
@@ -48,7 +50,7 @@ class TestConfirmAddtion extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,
                           ),
-                          child: Text(
+                          child: const Text(
                             'Yes,add',
                           ))
                     ],
@@ -56,7 +58,7 @@ class TestConfirmAddtion extends StatelessWidget {
                 },
               );
             },
-            child: Text('Show Alert Dialog'),
+            child: const Text('Show Alert Dialog'),
           ),
         ),
       ),

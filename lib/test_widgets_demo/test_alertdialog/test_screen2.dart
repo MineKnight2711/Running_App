@@ -3,12 +3,14 @@ import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TestPreparationScreen extends StatelessWidget {
+  const TestPreparationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         bottomNavigationBar: Container(
-          decoration: BoxDecoration(gradient: AppColors.appTheme),
+          decoration: const BoxDecoration(gradient: AppColors.appTheme),
           height: 0.5.sh,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,34 +67,35 @@ class TestPreparationScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {},
-                child: Text('Save to favorites'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
                 ),
+                child: const Text('Save to favorites'),
               ),
-              SizedBox(height: 32.0),
+              const SizedBox(height: 32.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.timeline, color: Colors.white),
+                    icon: const Icon(Icons.timeline, color: Colors.white),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.settings, color: Colors.white),
+                    icon: const Icon(Icons.settings, color: Colors.white),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.directions_run, color: Colors.blue),
+                    icon: const Icon(Icons.directions_run, color: Colors.blue),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.sports, color: Colors.white),
+                    icon: const Icon(Icons.sports, color: Colors.white),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.signal_cellular_alt, color: Colors.white),
+                    icon: const Icon(Icons.signal_cellular_alt,
+                        color: Colors.white),
                   ),
                 ],
               ),

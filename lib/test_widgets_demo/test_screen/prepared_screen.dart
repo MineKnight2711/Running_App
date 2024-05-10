@@ -3,8 +3,11 @@ import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PreparedScreen extends StatefulWidget {
+  const PreparedScreen({super.key});
+
   @override
-  _PreparedScreenState createState() => _PreparedScreenState();
+  @override
+  State<PreparedScreen> createState() => _PreparedScreenState();
 }
 
 class _PreparedScreenState extends State<PreparedScreen> {
@@ -29,7 +32,7 @@ class _PreparedScreenState extends State<PreparedScreen> {
                   hintStyle: CustomGoogleFonts.roboto(
                       fontSize: 16, color: Colors.white)),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -46,7 +49,7 @@ class _PreparedScreenState extends State<PreparedScreen> {
               ],
             ),
             CheckboxListTile(
-              activeColor: Color(0xfff26322),
+              activeColor: const Color(0xfff26322),
               checkColor: Colors.white,
               title: Text(
                 'Open to public',
@@ -61,7 +64,7 @@ class _PreparedScreenState extends State<PreparedScreen> {
               },
             ),
             CheckboxListTile(
-              activeColor: Color(0xfff26322),
+              activeColor: const Color(0xfff26322),
               checkColor: Colors.white,
               title: Text(
                 'Add to upcoming run list',
@@ -78,7 +81,7 @@ class _PreparedScreenState extends State<PreparedScreen> {
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xfff26322)),
+                    backgroundColor: const Color(0xfff26322)),
                 onPressed: () {
                   // Xử lý khi nhấn nút "Save to favorites"
                 },
@@ -89,7 +92,7 @@ class _PreparedScreenState extends State<PreparedScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -98,35 +101,35 @@ class _PreparedScreenState extends State<PreparedScreen> {
                   onPressed: () {
                     // Xử lý khi nhấn nút "Progress"
                   },
-                  icon: Icon(Icons.timeline),
+                  icon: const Icon(Icons.timeline),
                 ),
                 IconButton(
                   color: Colors.white,
                   onPressed: () {
                     // Xử lý khi nhấn nút "Preparation"
                   },
-                  icon: Icon(Icons.settings),
+                  icon: const Icon(Icons.settings),
                 ),
                 IconButton(
                   color: Colors.white,
                   onPressed: () {
                     // Xử lý khi nhấn nút "Ready"
                   },
-                  icon: Icon(Icons.check_circle),
+                  icon: const Icon(Icons.check_circle),
                 ),
                 IconButton(
                   color: Colors.white,
                   onPressed: () {
                     // Xử lý khi nhấn nút "Train"
                   },
-                  icon: Icon(Icons.directions_run),
+                  icon: const Icon(Icons.directions_run),
                 ),
                 IconButton(
                   color: Colors.white,
                   onPressed: () {
                     // Xử lý khi nhấn nút "Challenge"
                   },
-                  icon: Icon(Icons.emoji_events),
+                  icon: const Icon(Icons.emoji_events),
                 ),
               ],
             ),

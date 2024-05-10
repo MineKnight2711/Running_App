@@ -42,9 +42,7 @@ class ReadyToRun extends StatelessWidget {
               const SizedBox(height: 32),
               Center(
                 child: GestureDetector(
-                  onTap: () {
-                    print('da nhan');
-                  },
+                  onTap: () {},
                   child: Container(
                     width: 80,
                     height: 80,

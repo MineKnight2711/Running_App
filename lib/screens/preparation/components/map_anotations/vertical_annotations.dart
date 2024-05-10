@@ -11,7 +11,6 @@ class VerticalAnnotations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(mapController.currentMapViewStyle.value);
     return Column(
       children: [
         MapAnnotationItem(onPressed: () {}, assetSvg: "compass"),

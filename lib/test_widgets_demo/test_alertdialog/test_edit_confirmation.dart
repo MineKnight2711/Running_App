@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
 
 class TestEditConfirmation extends StatelessWidget {
+  const TestEditConfirmation({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,11 +18,11 @@ class TestEditConfirmation extends StatelessWidget {
                     backgroundColor: Colors.black,
                     title: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.remove,
                           color: Color(0xfff26322),
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Text(
                           'Rename ‘Dam Sen Trail‘',
                           style: CustomGoogleFonts.roboto(color: Colors.white),
@@ -50,16 +52,16 @@ class TestEditConfirmation extends StatelessWidget {
                           Navigator.of(context).pop();
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xfff26322),
+                          backgroundColor: const Color(0xfff26322),
                         ),
-                        child: Text('Change'),
+                        child: const Text('Change'),
                       ),
                     ],
                   );
                 },
               );
             },
-            child: Text('Show Alert Dialog'),
+            child: const Text('Show Alert Dialog'),
           ),
         ),
       ),

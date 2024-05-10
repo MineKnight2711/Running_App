@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
 
 class TestConfirmDeletion extends StatelessWidget {
+  const TestConfirmDeletion({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,11 +18,11 @@ class TestConfirmDeletion extends StatelessWidget {
                     backgroundColor: Colors.black,
                     title: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.delete,
                           color: Colors.red,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Text(
                           'Confirm deletion',
                           style: CustomGoogleFonts.roboto(color: Colors.white),
@@ -49,14 +51,14 @@ class TestConfirmDeletion extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red,
                         ),
-                        child: Text('Yes, delete'),
+                        child: const Text('Yes, delete'),
                       ),
                     ],
                   );
                 },
               );
             },
-            child: Text('Show Alert Dialog'),
+            child: const Text('Show Alert Dialog'),
           ),
         ),
       ),

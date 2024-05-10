@@ -136,7 +136,7 @@ class MapController extends GetxController {
   }
 
   selectAnotation(int anotation) {
-    print("anotation selected : $anotation");
+    // print("anotation selected : $anotation");
   }
 
   void zoomIn() {
