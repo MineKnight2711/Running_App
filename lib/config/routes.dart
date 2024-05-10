@@ -1,8 +1,11 @@
 import 'package:flutter_running_demo/screens/home_screen/home_screen.dart';
 import 'package:flutter_running_demo/screens/performance/performance_screen.dart';
+import 'package:flutter_running_demo/test_widgets/metric_info.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_complete.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_note.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_screen.dart';
+import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sending_location.dart';
+import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/run_to_ready.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sennor_status.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/running_clock.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/runstop.dart';
@@ -38,6 +41,9 @@ class AppRoutes {
   static const String _sennorstatus = '/sennorstatus';
   static const String _runningclock = '/runningclock';
   static const String _runstop = '/runstop';
+  static const String _metricinfo = '/metricinfo';
+  static const String _readytorun = '/readytorun';
+  static const String _sendinglocation = '/sendinglocation';
 
   static String get activities => _activities;
   static String get home => _home;
@@ -58,6 +64,9 @@ class AppRoutes {
   static String get sennorstatus => _sennorstatus;
   static String get runningclock => _runningclock;
   static String get runstop => _runstop;
+  static String get metricinfo => _metricinfo;
+  static String get readytorun => _readytorun;
+  static String get sendinglocation => _sendinglocation;
 
   static navigate(String query) {
     Get.toNamed(
@@ -150,6 +159,18 @@ class AppRoutes {
     GetPage(
         name: _runstop,
         page: () => const RunStop(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _metricinfo,
+        page: () => const MetricInfo(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _readytorun,
+        page: () => const ReadyToRun(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _sendinglocation,
+        page: () => const SendingLocation(),
         transition: Transition.rightToLeft),
   ];
 }

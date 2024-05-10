@@ -24,6 +24,7 @@ dependencies:
   json_annotation: ^4.9.0
   mapbox_polyline_points: ^0.0.5
   mapbox_maps_flutter: ^0.4.3
+  country_picker: ^2.0.25
 
 dev_dependencies:
   flutter_test:
