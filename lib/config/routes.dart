@@ -25,7 +25,7 @@ import '../test_widgets_demo/test_screen/schedule.dart';
 
 class AppRoutes {
   static const String _home = '/';
-  static const String _activities = '/activities';
+  static const String _tabbarview = '/tabbarview';
   static const String _performanceMetrics = '/performance-metrics';
   static const String _detailRoute = '/detail-route';
   static const String _testscreen = '/testscreen';
@@ -49,7 +49,7 @@ class AppRoutes {
   static const String _sendinglocation = '/sendinglocation';
   static const String _scheduleScreen = '/scheduleScreen';
 
-  static String get activities => _activities;
+  static String get tabbarview => _tabbarview;
   static String get home => _home;
   static String get performanceMetrics => _performanceMetrics;
   static String get detailRoute => _detailRoute;
@@ -103,8 +103,8 @@ class AppRoutes {
         page: () => const HomeScreen(),
         transition: Transition.rightToLeft),
     GetPage(
-        name: _activities,
-        page: () => const ActivitiesScreen(),
+        name: _tabbarview,
+        page: () => const TabBarViewScreen(),
         transition: Transition.rightToLeft),
     GetPage(
         name: _performanceMetrics,

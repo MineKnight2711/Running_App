@@ -6,14 +6,14 @@ import 'package:get/get.dart';
 
 import '../../../widgets/bottom_bar/bottom_tabbar.dart';
 
-class ActivitiesScreen extends StatefulWidget {
-  const ActivitiesScreen({super.key});
+class TabBarViewScreen extends StatefulWidget {
+  const TabBarViewScreen({super.key});
 
   @override
-  State<ActivitiesScreen> createState() => _ActivitiesScreenState();
+  State<TabBarViewScreen> createState() => _TabBarViewScreenState();
 }
 
-class _ActivitiesScreenState extends State<ActivitiesScreen>
+class _TabBarViewScreenState extends State<TabBarViewScreen>
     with TickerProviderStateMixin {
   final bottomBarController = Get.find<BottomTabBarController>();
   @override
