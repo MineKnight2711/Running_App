@@ -185,7 +185,15 @@ class MapTypeOption extends StatelessWidget {
       onTap: () {
         onSelected(type);
       },
-      child: SizedBox(
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              width: 0.2,
+              color: AppColors.basicActivitiesCard.withOpacity(0.9),
+            ),
+          ),
+        ),
         height: 50.h,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

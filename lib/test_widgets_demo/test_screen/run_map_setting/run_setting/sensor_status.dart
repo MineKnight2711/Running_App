@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/fonts.dart';
 
-class SennorStatus extends StatelessWidget {
-  const SennorStatus({super.key});
+class SensorStatus extends StatelessWidget {
+  const SensorStatus({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,10 @@ class SennorStatus extends StatelessWidget {
                 const Icon(CupertinoIcons.xmark, color: Colors.white),
               ],
             ),
-            const SizedBox(height: 25),
+            Divider(
+              thickness: 0.5.r,
+              height: 32,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -83,8 +86,9 @@ class SennorStatus extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
+            Divider(
+              thickness: 0.5.r,
+              height: 32,
             ),
             const SizedBox(height: 16),
             Text(
@@ -99,12 +103,32 @@ class SennorStatus extends StatelessWidget {
                   CustomGoogleFonts.roboto(fontSize: 14, color: Colors.white),
             ),
             const SizedBox(height: 8),
-            Text(
-              '2. Go to EWS settings > to enable it through Genki app.',
-              style:
-                  CustomGoogleFonts.roboto(fontSize: 14, color: Colors.white),
+            Text.rich(
+              TextSpan(children: [
+                TextSpan(
+                  text: 'Go to',
+                  style: CustomGoogleFonts.roboto(
+                    fontSize: 14,
+                    color: AppColors.white100,
+                  ),
+                ),
+                TextSpan(
+                  text: ' EWS settings >  ',
+                  style: CustomGoogleFonts.roboto(
+                    fontSize: 14,
+                    color: AppColors.appButton,
+                  ),
+                ),
+                TextSpan(
+                  text: "to enable it through Genki app",
+                  style: CustomGoogleFonts.roboto(
+                    fontSize: 14,
+                    color: AppColors.white100,
+                  ),
+                ),
+              ]),
             ),
-            const SizedBox(height: 430.0),
+            const SizedBox(height: 410.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

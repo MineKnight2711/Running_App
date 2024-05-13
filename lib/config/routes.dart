@@ -9,7 +9,7 @@ import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_note
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_screen.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sending_location.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/run_to_ready.dart';
-import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sennor_status.dart';
+import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sensor_status.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/running_clock.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/runstop.dart';
 import 'package:get/get.dart';
@@ -21,6 +21,7 @@ import '../test_widgets_demo/test_alertdialog/test_screen2.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/run_setting/audio_guidance.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/run_setting/map_setting.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/music_provider_sheet/music_provider_sheet.dart';
+import '../test_widgets_demo/test_screen/schedule.dart';
 
 class AppRoutes {
   static const String _home = '/';
@@ -46,6 +47,7 @@ class AppRoutes {
   static const String _metricinfo = '/metricinfo';
   static const String _readytorun = '/readytorun';
   static const String _sendinglocation = '/sendinglocation';
+  static const String _scheduleScreen = '/scheduleScreen';
 
   static String get activities => _activities;
   static String get home => _home;
@@ -70,6 +72,7 @@ class AppRoutes {
   static String get metricinfo => _metricinfo;
   static String get readytorun => _readytorun;
   static String get sendinglocation => _sendinglocation;
+  static String get scheduleScreen => _scheduleScreen;
 
   static navigate(String query) {
     Get.toNamed(
@@ -149,7 +152,7 @@ class AppRoutes {
         transition: Transition.rightToLeft),
     GetPage(
         name: _sennorstatus,
-        page: () => const SennorStatus(),
+        page: () => const SensorStatus(),
         transition: Transition.rightToLeft),
     GetPage(
         name: _runningclock,
@@ -170,6 +173,10 @@ class AppRoutes {
     GetPage(
         name: _sendinglocation,
         page: () => const SendingLocation(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _scheduleScreen,
+        page: () => const ScheduleScreen(),
         transition: Transition.rightToLeft),
   ];
 }

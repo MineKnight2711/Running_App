@@ -27,6 +27,8 @@ class _PreparedScreenState extends State<PreparedScreen> {
           children: [
             TextField(
               controller: _routeNameController,
+              style:
+                  CustomGoogleFonts.roboto(fontSize: 16, color: Colors.white),
               decoration: InputDecoration(
                   hintText: 'Name your route',
                   hintStyle: CustomGoogleFonts.roboto(

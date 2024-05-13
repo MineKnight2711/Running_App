@@ -35,8 +35,9 @@ class SendingLocation extends StatelessWidget {
                 const Icon(CupertinoIcons.xmark, color: Colors.white),
               ],
             ),
-            const SizedBox(
-              height: 30,
+            Divider(
+              thickness: 0.5.r,
+              height: 32,
             ),
             Text(
               'Share your location during run for up to 2 safety contacts.',
@@ -62,7 +63,10 @@ class SendingLocation extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 16.0),
+            Divider(
+              thickness: 0.5.r,
+              height: 32,
+            ),
             Text(
               'Add safety contacts:',
               style: CustomGoogleFonts.roboto(
@@ -71,7 +75,9 @@ class SendingLocation extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 const Icon(Icons.star, color: Colors.red),
@@ -83,7 +89,10 @@ class SendingLocation extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            Divider(
+              thickness: 0.5.r,
+              height: 32,
+            ),
             Row(
               children: [
                 const Icon(Icons.star, color: Colors.red),
@@ -95,7 +104,13 @@ class SendingLocation extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 30),
+            Divider(
+              thickness: 0.5.r,
+              height: 32,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -119,7 +134,7 @@ class SendingLocation extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 330,
+              height: 280,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

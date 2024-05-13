@@ -3,7 +3,6 @@ import 'package:flutter_running_demo/config/routes.dart';
 import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import 'controllers/tabbar_controller.dart';
 
 void main() {
@@ -23,7 +22,7 @@ class MainApp extends StatelessWidget {
       splitScreenMode: true,
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.activities,
+        initialRoute: AppRoutes.scheduleScreen,
         // routes: routes,
         getPages: AppRoutes.getPages,
       ),
