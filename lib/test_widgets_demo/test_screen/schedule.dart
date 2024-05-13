@@ -25,7 +25,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        height: 0.85.sh,
+        height: 0.7.sh,
         decoration: const BoxDecoration(
           color: Color(0xFF222222),
           borderRadius: BorderRadius.only(
@@ -175,7 +175,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               ),
             ),
             const SizedBox(
-              height: 100,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
