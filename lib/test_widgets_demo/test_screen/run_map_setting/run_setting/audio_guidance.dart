@@ -58,7 +58,10 @@ class _AudioGuidanceState extends State<AudioGuidance> {
                 const Icon(CupertinoIcons.xmark, color: Colors.white),
               ],
             ),
-            const SizedBox(height: 20),
+            Divider(
+              thickness: 0.5.r,
+              height: 32,
+            ),
             Column(
               children: types
                   .map(
@@ -159,7 +162,15 @@ class AudioGuidanceOption extends StatelessWidget {
       onTap: () {
         onSelected(type);
       },
-      child: SizedBox(
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              width: 0.2,
+              color: AppColors.basicActivitiesCard.withOpacity(0.9),
+            ),
+          ),
+        ),
         height: 50.h,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
