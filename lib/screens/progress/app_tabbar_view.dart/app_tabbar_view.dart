@@ -16,32 +16,25 @@ class ActivitiesScreen extends StatefulWidget {
 class _ActivitiesScreenState extends State<ActivitiesScreen>
     with TickerProviderStateMixin {
   final bottomBarController = Get.find<BottomTabBarController>();
-  late PageController _pageViewController;
   @override
   void initState() {
     super.initState();
-    _pageViewController = PageController();
     bottomBarController.initTabController(this);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
+      body: TabBarView(
         physics: const NeverScrollableScrollPhysics(),
-        controller: _pageViewController,
-        children: [
-          const ProgressScreen(),
+        controller: bottomBarController.tabController.value,
+        children: const [
+          ProgressScreen(),
           PreparationScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationTabBar(
-        onTabChange: (index) {
-          print(index);
-          _pageViewController.animateToPage(index,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeIn);
-        },
+        onTabChange: (index) {},
       ),
     );
   }

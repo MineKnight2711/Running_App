@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
       splitScreenMode: true,
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.scheduleScreen,
+        initialRoute: AppRoutes.home,
         // routes: routes,
         getPages: AppRoutes.getPages,
       ),
