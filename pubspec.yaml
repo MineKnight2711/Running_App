@@ -10,7 +10,6 @@ dependencies:
 
   flutter:
     sdk: flutter
-  
   google_fonts: ^6.2.1
   flutter_screenutil: ^5.9.0
   get: ^4.6.6
@@ -47,6 +46,7 @@ flutter:
     - assets/images/activities_details/
     - assets/svg/
     - assets/svg/preparation/
+    - assets/svg/preparation/alert_dialog/
     - assets/svg/preparation/map_anotations/
     - assets/svg/preparation/route_item_options/
     - assets/svg/preparation/route_vector/

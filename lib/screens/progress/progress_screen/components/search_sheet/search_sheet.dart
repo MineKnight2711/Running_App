@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/colors.dart';
 import 'package:flutter_running_demo/config/fonts.dart';
-import 'package:flutter_running_demo/screens/progress/activities_details/components/search_sheet/sheet_row.dart';
+import 'package:flutter_running_demo/screens/progress/progress_screen/components/search_sheet/sheet_row.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../widgets/date_time_picker.dart';
 import 'activites_drow_down.dart';

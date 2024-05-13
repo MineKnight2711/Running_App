@@ -18,7 +18,7 @@ class RouteItemWidget extends StatelessWidget {
       children: [
         Container(
           width: 1.sw,
-          height: isSelected ? 130.h : 80.h,
+          height: isSelected ? 0.2.sh : 80.h,
           padding: isSelected
               ? EdgeInsets.symmetric(vertical: 5.h)
               : EdgeInsets.zero,
@@ -127,7 +127,11 @@ class RouteItemWidget extends StatelessWidget {
                         height: 10.h,
                       )
                     : const SizedBox.shrink(),
-                isSelected ? const RouteItemOption() : const SizedBox.shrink(),
+                isSelected
+                    ? RouteItemOption(
+                        route: route,
+                      )
+                    : const SizedBox.shrink(),
               ],
             ),
           ),

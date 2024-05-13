@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/controllers/tabbar_controller.dart';
 import 'package:flutter_running_demo/screens/preparation/preparation_screen.dart';
-import 'package:flutter_running_demo/screens/progress/activities_details/activities_details.dart';
+import 'package:flutter_running_demo/screens/progress/progress_screen/progress_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../widgets/bottom_bar/bottom_tabbar.dart';
@@ -14,26 +14,35 @@ class ActivitiesScreen extends StatefulWidget {
 }
 
 class _ActivitiesScreenState extends State<ActivitiesScreen>
-    with TickerProviderStateMixin<ActivitiesScreen> {
+    with TickerProviderStateMixin {
   final bottomBarController = Get.find<BottomTabBarController>();
+  late PageController _pageViewController;
   @override
   void initState() {
     super.initState();
+    _pageViewController = PageController();
     bottomBarController.initTabController(this);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TabBarView(
+      body: PageView(
         physics: const NeverScrollableScrollPhysics(),
-        controller: bottomBarController.tabController.value,
+        controller: _pageViewController,
         children: [
-          const ActivitiesDetailsScreen(),
+          const ProgressScreen(),
           PreparationScreen(),
         ],
       ),
-      bottomNavigationBar: const BottomNavigationTabBar(),
+      bottomNavigationBar: BottomNavigationTabBar(
+        onTabChange: (index) {
+          print(index);
+          _pageViewController.animateToPage(index,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn);
+        },
+      ),
     );
   }
 }

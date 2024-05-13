@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../config/colors.dart';
-import '../../../../../config/fonts.dart';
+import '../../../config/colors.dart';
+import '../../../config/fonts.dart';
 
 class WalkReport extends StatelessWidget {
   const WalkReport({super.key});

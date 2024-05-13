@@ -6,13 +6,20 @@ import '../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
 import '../performance/components/period_button_row.dart';
 import 'components/components_export.dart';
 
-class PreparationScreen extends StatelessWidget {
-  PreparationScreen({super.key});
+class PreparationScreen extends StatefulWidget {
+  const PreparationScreen({super.key});
 
+  @override
+  State<PreparationScreen> createState() => _PreparationScreenState();
+}
+
+class _PreparationScreenState extends State<PreparationScreen>
+    with AutomaticKeepAliveClientMixin {
   final mapController = Get.find<MapController>();
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final tempTopRoute = [
       TopRouteModel(
         attemps: 100,
@@ -77,21 +84,24 @@ class PreparationScreen extends StatelessWidget {
     ];
     final List<String> periodButtonRow = [
       'Favorites',
-      'Add_new',
+      'Add-new',
       'Upcoming',
     ];
     return Scaffold(
       body: Stack(
         children: [
           CustomMapWidget(
-            onMapLoad: (p0) => mapController.createTempTopRoutes(tempTopRoute),
+            onMapCreate: (mapBoxMap) {
+              mapController.onMapCreated(mapBoxMap);
+              mapController.createTempTopRoutes(tempTopRoute);
+            },
           ),
           Positioned(
             top: 40,
             // left: 10,
             child: HorizontalAnnotations(),
           ),
-          Positioned(top: 270, left: 366, child: VerticalAnnotations()),
+          Positioned(top: 200, right: 0, child: VerticalAnnotations()),
           CustomDraggableSheet(
             dragSensitivity: 800,
             grabberBottomWidget: Padding(
@@ -108,4 +118,7 @@ class PreparationScreen extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

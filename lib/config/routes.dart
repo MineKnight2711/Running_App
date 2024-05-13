@@ -12,7 +12,7 @@ import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setti
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/running_clock.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/runstop.dart';
 import 'package:get/get.dart';
-import '../screens/progress/activities/activies_screen.dart';
+import '../screens/progress/app_tabbar_view.dart/app_tabbar_view.dart';
 import '../test_widgets_demo/test_alertdialog/test_comfirm_addtion.dart';
 import '../test_widgets_demo/test_alertdialog/test_confirm_deletion.dart';
 import '../test_widgets_demo/test_alertdialog/test_edit_confirmation.dart';

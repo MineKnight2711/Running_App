@@ -5,7 +5,7 @@ import 'package:flutter_running_demo/config/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../config/fonts.dart';
+import '../../../config/fonts.dart';
 
 List<Map<String, dynamic>> actions = [
   {
