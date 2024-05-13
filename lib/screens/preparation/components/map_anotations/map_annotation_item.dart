@@ -17,7 +17,7 @@ class MapAnnotationItem extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: SvgPicture.asset(
-          "assets/svg/preparation/map_anotations/$assetSvg.svg"),
+          "assets/svg/preparation/map_annotations/$assetSvg.svg"),
     );
   }
 }

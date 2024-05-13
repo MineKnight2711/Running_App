@@ -44,10 +44,12 @@ flutter:
     - assets/images/map_anotations/
     - assets/images/basic_activities/
     - assets/images/activities_details/
+    - assets/images/details_route_images/
     - assets/svg/
     - assets/svg/preparation/
+    - assets/svg/preparation/details_route/
     - assets/svg/preparation/alert_dialog/
-    - assets/svg/preparation/map_anotations/
+    - assets/svg/preparation/map_annotations/
     - assets/svg/preparation/route_item_options/
     - assets/svg/preparation/route_vector/
     - assets/svg/preparation/rpe/

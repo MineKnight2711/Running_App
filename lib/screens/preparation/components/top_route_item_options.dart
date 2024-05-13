@@ -45,7 +45,9 @@ class RouteItemOption extends StatelessWidget {
                 "assets/svg/preparation/route_item_options/check.svg"),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              AppRoutes.navigateToDetails(AppRoutes.detailRoute, route);
+            },
             child: SvgPicture.asset(
                 "assets/svg/preparation/route_item_options/info.svg"),
           ),
