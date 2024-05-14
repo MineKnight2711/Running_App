@@ -6,7 +6,8 @@ import '../../config/config_export.dart';
 import '../../controllers/tabbar_controller.dart';
 
 class BottomNavigationTabBar extends StatefulWidget {
-  const BottomNavigationTabBar({super.key});
+  final Function(int index) onTabChange;
+  const BottomNavigationTabBar({super.key, required this.onTabChange});
 
   @override
   State<BottomNavigationTabBar> createState() => _BottomNavigationTabBarState();
@@ -15,47 +16,56 @@ class BottomNavigationTabBar extends StatefulWidget {
 class _BottomNavigationTabBarState extends State<BottomNavigationTabBar> {
   int currentIndex = 0;
   final bottomTabBarController = Get.find<BottomTabBarController>();
-  @override
-  void initState() {
-    super.initState();
-    bottomTabBarController.tabController.value?.addListener(() {
-      if (bottomTabBarController.tabController.value!.indexIsChanging) {
-        setState(() {
-          currentIndex = bottomTabBarController.tabController.value!.index;
-        });
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xff2c2a2d),
+      color: AppColors.sheetBackground,
       child: TabBar(
-        physics: const NeverScrollableScrollPhysics(),
-        tabs: bottomTabBarController.tabs
-            .map(
-              (tab) => SizedBox(
-                width: 1.sw / 4.5,
-                height: 1.sh / 12,
-                child: Tab(
-                    icon: SvgPicture.asset(
-                      "assets/svg/bottom_bar/${tab.imagePath}.svg",
-                      width: 24,
-                      height: 24,
-                      colorFilter: ColorFilter.mode(
-                          currentIndex ==
-                                  bottomTabBarController.tabs.indexOf(tab)
-                              ? Colors.orange
-                              : Colors.white,
-                          BlendMode.srcATop),
-                    ),
-                    text: tab.name),
+        isScrollable: false,
+        onTap: (index) => setState(() {
+          currentIndex = bottomTabBarController.currentTabIndex.value = index;
+          widget.onTabChange(index);
+        }),
+        tabs: [
+          Tab(
+            icon: SvgPicture.asset(
+              "assets/svg/bottom_bar/progress.svg",
+              colorFilter: ColorFilter.mode(
+                currentIndex == 0 ? AppColors.appButton : AppColors.white100,
+                BlendMode.srcATop,
               ),
-            )
-            .toList(),
-        labelStyle: CustomGoogleFonts.roboto(fontSize: 12.r),
-        labelColor: Colors.orange,
+            ),
+            child: Text(
+              "Preparation",
+              style: CustomGoogleFonts.roboto(
+                fontSize: 12.r,
+                color: currentIndex == 0
+                    ? AppColors.appButton
+                    : AppColors.white100,
+              ),
+            ),
+          ),
+          Tab(
+            icon: SvgPicture.asset(
+              "assets/svg/bottom_bar/preparation.svg",
+              colorFilter: ColorFilter.mode(
+                currentIndex == 1 ? AppColors.appButton : AppColors.white100,
+                BlendMode.srcATop,
+              ),
+            ),
+            child: Text(
+              "Preparation",
+              style: CustomGoogleFonts.roboto(
+                fontSize: 12.r,
+                color: currentIndex == 1
+                    ? AppColors.appButton
+                    : AppColors.white100,
+              ),
+            ),
+            // text: "Preparation",
+          ),
+        ],
         unselectedLabelColor: AppColors.white100,
         controller: bottomTabBarController.tabController.value,
         indicatorColor: Colors.transparent,

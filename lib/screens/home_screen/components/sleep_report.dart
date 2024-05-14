@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../config/fonts.dart';
+import '../../../config/fonts.dart';
 
 class SleepReport extends StatelessWidget {
   const SleepReport({super.key});

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../config/colors.dart';
 import '../config/fonts.dart';
@@ -10,18 +11,34 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Function()? onBackPress;
   final Widget? secondaryAction;
+  final bool? showHomeButton;
   const CustomAppBar(
-      {super.key, required this.title, this.onBackPress, this.secondaryAction});
+      {super.key,
+      required this.title,
+      this.onBackPress,
+      this.secondaryAction,
+      this.showHomeButton = true});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
-      leading: IconButton(
-        splashColor: AppColors.transparent,
-        icon: const Icon(Icons.arrow_back, color: AppColors.white100),
+      leadingWidth: 55.w,
+      titleSpacing: 5,
+      leading: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: const CircleBorder(),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          padding: const EdgeInsets.all(10),
+        ),
         onPressed: onBackPress,
+        child: SvgPicture.asset(
+          "assets/svg/preparation/map_annotations/back.svg",
+          width: 20,
+          height: 30,
+        ),
       ),
       title: Text(
         title,
@@ -33,10 +50,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         SizedBox(
           width: 5.w,
         ),
-        ActionButton(
-          imagePath: "assets/images/home.png",
-          onTap: () => AppRoutes.navigate(AppRoutes.home),
-        ),
+        showHomeButton!
+            ? ActionButton(
+                imagePath: "assets/images/home.png",
+                onTap: () => AppRoutes.navigate(AppRoutes.home),
+              )
+            : const SizedBox.shrink(),
         SizedBox(
           width: 10.w,
         )

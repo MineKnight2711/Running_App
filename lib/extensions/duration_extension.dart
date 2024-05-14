@@ -6,6 +6,11 @@ extension DurationParsing on Duration {
     return formattedTime;
   }
 
+  String durationToHour() {
+    String formattedTime = '${inHours.toString()}h${(inMinutes % 60)}m';
+    return formattedTime;
+  }
+
   Duration sum(Duration other) =>
       Duration(seconds: inSeconds + other.inSeconds);
 }

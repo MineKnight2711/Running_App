@@ -21,20 +21,36 @@ class SliverHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverLayoutBuilder(
       builder: (context, constraints) {
-        final isScrolledUnder = (constraints.scrollOffset > 100.h);
+        final isScrolledUnder = (constraints.scrollOffset > 165.h);
 
         return SliverAppBar(
           backgroundColor: AppColors.appTheme.colors.first,
-          expandedHeight: 160.h,
+          expandedHeight: 165.h,
           floating: true,
           pinned: true,
-          collapsedHeight: 100.h,
+          collapsedHeight: 105.h,
           flexibleSpace: FlexibleSpaceBar(
             collapseMode: CollapseMode.pin,
             background: SliverHeaderButtons(
               isScrolledUnder: isScrolledUnder,
               onChartPress: onChartPress,
               onSearchPress: onSearchPress,
+            ),
+            // centerTitle: ,
+            titlePadding: isScrolledUnder
+                ? EdgeInsets.zero
+                : EdgeInsets.only(bottom: 50.h),
+            title: AnimatedSlide(
+              duration: const Duration(milliseconds: 500),
+              offset:
+                  isScrolledUnder ? const Offset(0, 0.15) : const Offset(0, 0),
+              child: SizedBox(
+                width: 1.sw,
+                child: Image.asset(
+                  "assets/images/activities_details/activities_details_banner.png",
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
           leading: IconButton(

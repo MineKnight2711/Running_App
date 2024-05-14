@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/extensions/duration_extension.dart';
+import 'package:flutter_running_demo/extensions/integer_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../config/config_export.dart';
 import '../../../models/top_route_model/top_route_model.dart';
-import 'top_rop_item_options.dart';
+import 'top_route_item_options.dart';
 
 class RouteItemWidget extends StatelessWidget {
   final bool isSelected;
@@ -18,7 +19,7 @@ class RouteItemWidget extends StatelessWidget {
       children: [
         Container(
           width: 1.sw,
-          height: isSelected ? 130.h : 80.h,
+          height: isSelected ? 0.2.sh : 80.h,
           padding: isSelected
               ? EdgeInsets.symmetric(vertical: 5.h)
               : EdgeInsets.zero,
@@ -71,7 +72,7 @@ class RouteItemWidget extends StatelessWidget {
                                 width: 15.w,
                               ),
                               SvgPicture.asset(
-                                  "assets/svg/preparation/rpe/${getRpeSvgAsset(route.rpePoint)}.svg"),
+                                  "assets/svg/preparation/rpe/${route.rpePoint.getRpeSvgAsset()}.svg"),
                               SizedBox(
                                 width: 5.w,
                               ),
@@ -127,7 +128,11 @@ class RouteItemWidget extends StatelessWidget {
                         height: 10.h,
                       )
                     : const SizedBox.shrink(),
-                isSelected ? const RouteItemOption() : const SizedBox.shrink(),
+                isSelected
+                    ? RouteItemOption(
+                        route: route,
+                      )
+                    : const SizedBox.shrink(),
               ],
             ),
           ),
@@ -138,25 +143,5 @@ class RouteItemWidget extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  String getRpeSvgAsset(int rpePoint) {
-    String rpe;
-    if (rpePoint == 10) {
-      rpe = '10';
-    } else if (rpePoint == 9) {
-      rpe = '9';
-    } else if (rpePoint >= 7 && rpePoint <= 8) {
-      rpe = '7-8';
-    } else if (rpePoint >= 4 && rpePoint <= 6) {
-      rpe = '4-6';
-    } else if (rpePoint >= 2 && rpePoint <= 3) {
-      rpe = '2-3';
-    } else if (rpePoint == 1) {
-      rpe = '1';
-    } else {
-      rpe = 'Invalid RPE Point';
-    }
-    return rpe;
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter_running_demo/config/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../config/fonts.dart';
+import '../../../config/fonts.dart';
 
 List<Map<String, dynamic>> actions = [
   {
@@ -93,7 +93,7 @@ class ProgressBanner extends StatelessWidget {
                 final item = actions[index];
 
                 return GestureDetector(
-                  onTap: () => AppRoutes.navigate(AppRoutes.activities),
+                  onTap: () => AppRoutes.navigate(AppRoutes.tabbarview),
                   child: Column(
                     children: [
                       CircleAvatar(

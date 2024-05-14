@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
-import 'package:flutter_running_demo/screens/progress/activities_details/components/components.dart';
+import 'package:flutter_running_demo/screens/progress/progress_screen/components/components.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 

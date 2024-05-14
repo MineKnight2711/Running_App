@@ -73,4 +73,25 @@ extension IntegerParsing on int {
     }
     return monthName;
   }
+
+  String getRpeSvgAsset() {
+    String rpe;
+    int rpePoint = this;
+    if (rpePoint == 10) {
+      rpe = '10';
+    } else if (rpePoint == 9) {
+      rpe = '9';
+    } else if (rpePoint >= 7 && rpePoint <= 8) {
+      rpe = '7-8';
+    } else if (rpePoint >= 4 && rpePoint <= 6) {
+      rpe = '4-6';
+    } else if (rpePoint >= 2 && rpePoint <= 3) {
+      rpe = '2-3';
+    } else if (rpePoint == 1) {
+      rpe = '1';
+    } else {
+      rpe = 'Invalid RPE Point';
+    }
+    return rpe;
+  }
 }

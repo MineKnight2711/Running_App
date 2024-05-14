@@ -164,8 +164,10 @@ class MapController extends GetxController {
   changeMapStyle() {
     if (currentMapViewStyle.value == MapboxStyles.MAPBOX_STREETS) {
       currentMapViewStyle.value = MapboxStyles.SATELLITE_STREETS;
+      mapboxMap.value?.loadStyleURI(MapboxStyles.SATELLITE_STREETS);
     } else {
       currentMapViewStyle.value = MapboxStyles.MAPBOX_STREETS;
+      mapboxMap.value?.loadStyleURI(MapboxStyles.MAPBOX_STREETS);
     }
   }
 }
