@@ -3,15 +3,15 @@
 import 'package:flutter_running_demo/screens/home_screen/home_screen.dart';
 import 'package:flutter_running_demo/screens/performance/performance_screen.dart';
 import 'package:flutter_running_demo/screens/progress/details_route_screen/details_route_screen.dart';
+import 'package:flutter_running_demo/screens/run/show_clock/runstop.dart';
 import 'package:flutter_running_demo/test_widgets/metric_info.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_complete.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_note.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_screen.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sending_location.dart';
-import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/run_to_ready.dart';
+import 'package:flutter_running_demo/screens/run/show_clock/run_to_ready.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sensor_status.dart';
-import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/running_clock.dart';
-import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_show_clock/runstop.dart';
+import 'package:flutter_running_demo/screens/run/show_clock/running_show_clock_screen.dart';
 import 'package:get/get.dart';
 import '../screens/progress/app_tabbar_view.dart/app_tabbar_view.dart';
 
@@ -43,7 +43,7 @@ class AppRoutes {
   static const String _audioguidance = '/audioguidance';
   static const String _sennorstatus = '/sennorstatus';
   static const String _runningclock = '/runningclock';
-  static const String _runstop = '/runstop';
+  static const String _runshowmap = '/runshowmap';
   static const String _metricinfo = '/metricinfo';
   static const String _readytorun = '/readytorun';
   static const String _sendinglocation = '/sendinglocation';
@@ -68,7 +68,7 @@ class AppRoutes {
   static String get audioguidance => _audioguidance;
   static String get sennorstatus => _sennorstatus;
   static String get runningclock => _runningclock;
-  static String get runstop => _runstop;
+  static String get runshowmap => _runshowmap;
   static String get metricinfo => _metricinfo;
   static String get readytorun => _readytorun;
   static String get sendinglocation => _sendinglocation;
@@ -156,10 +156,10 @@ class AppRoutes {
         transition: Transition.rightToLeft),
     GetPage(
         name: _runningclock,
-        page: () => const RunningClock(),
+        page: () => RunningClock(),
         transition: Transition.rightToLeft),
     GetPage(
-        name: _runstop,
+        name: _runshowmap,
         page: () => const RunStop(),
         transition: Transition.rightToLeft),
     GetPage(

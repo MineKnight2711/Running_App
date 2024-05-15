@@ -24,4 +24,7 @@ class AppFontSizes {
   static final double size16 = 16.r;
   static final double size18 = 18.r;
   static final double size20 = 20.r;
+  static double customSize(double customSize) {
+    return customSize.r;
+  }
 }
