@@ -1,42 +1,36 @@
 import 'package:flutter/material.dart';
-
 import 'sheet_grabber.dart';
 
-class CustomDraggableSheet extends StatefulWidget {
-  final double? sheetPosition, dragSensitivity;
-  final Widget? grabberBottomWidget, sheetBody;
-  const CustomDraggableSheet({
+class CustomDraggableSheetWidget extends StatefulWidget {
+  final Widget Function(
+      BuildContext context, ScrollController scrollController)? sheetBody;
+  final Widget? grabberBottom;
+  const CustomDraggableSheetWidget({
     super.key,
-    this.grabberBottomWidget = const SizedBox.shrink(),
-    this.sheetBody = const SizedBox.shrink(),
-    this.sheetPosition = 0.2,
-    this.dragSensitivity = 1000,
+    this.sheetBody,
+    this.grabberBottom = const SizedBox.shrink(),
   });
 
   @override
-  State<CustomDraggableSheet> createState() => _CustomDraggableSheetState();
+  State<CustomDraggableSheetWidget> createState() =>
+      _CustomDraggableSheetWidgetState();
 }
 
-class _CustomDraggableSheetState extends State<CustomDraggableSheet> {
-  late double _sheetPosition;
-  late double _dragSensitivity;
-  @override
-  void initState() {
-    super.initState();
-    _sheetPosition = widget.sheetPosition ?? 0.2;
-    _dragSensitivity = widget.dragSensitivity ?? 1000;
-  }
+class _CustomDraggableSheetWidgetState
+    extends State<CustomDraggableSheetWidget> {
+  double _sheetPosition = 0.25;
+  final double _dragSensitivity = 800;
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: DraggableScrollableSheet(
-        minChildSize: 0.2,
+    return DraggableScrollableSheet(
+        maxChildSize: _sheetPosition,
         initialChildSize: _sheetPosition,
-        maxChildSize: 0.9,
-        builder: (context, scrollController) => Container(
-            // height: 02,
+        minChildSize: _sheetPosition,
+        expand: false,
+        snap: true,
+        builder: (context, scrollController) {
+          return Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onSurface,
               borderRadius: const BorderRadius.only(
@@ -44,29 +38,31 @@ class _CustomDraggableSheetState extends State<CustomDraggableSheet> {
                 topRight: Radius.circular(24),
               ),
             ),
-            child: SingleChildScrollView(
-              physics: const NeverScrollableScrollPhysics(),
-              child: Column(
-                children: [
-                  SheetGrabber(
-                    onVerticalDragUpdate: (details) {
-                      setState(() {
-                        _sheetPosition -= details.delta.dy / _dragSensitivity;
-                        if (_sheetPosition < 0.25) {
-                          _sheetPosition = 0.25;
-                        }
-                        if (_sheetPosition > 0.9) {
-                          _sheetPosition = 0.9;
-                        }
-                      });
-                    },
-                    grabberBottomWidget: widget.grabberBottomWidget,
-                  ),
-                  widget.sheetBody!
-                ],
-              ),
-            )),
-      ),
-    );
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                // Put all heading in column.
+                SheetGrabber(
+                  onVerticalDragUpdate: (details) {
+                    setState(() {
+                      _sheetPosition -= details.delta.dy / _dragSensitivity;
+                      if (_sheetPosition < 0.25) {
+                        _sheetPosition = 0.25;
+                      }
+                      if (_sheetPosition > 0.9) {
+                        _sheetPosition = 0.9;
+                      }
+                    });
+                  },
+                  grabberBottom: widget.grabberBottom!,
+                ),
+
+                Expanded(
+                  child: widget.sheetBody!(context, scrollController),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

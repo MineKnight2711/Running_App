@@ -20,6 +20,27 @@ class PreparationTypeTabbar extends StatefulWidget {
 class _PreparationTypeTabbarState extends State<PreparationTypeTabbar> {
   int currentIndex = 0;
   @override
+  void initState() {
+    super.initState();
+    widget.tabController.addListener(_handleTabChange);
+  }
+
+  @override
+  void dispose() {
+    widget.tabController.removeListener(_handleTabChange);
+    super.dispose();
+  }
+
+  void _handleTabChange() {
+    setState(() {
+      currentIndex = widget.tabController.index;
+    });
+    if (widget.onSelectedIndex != null) {
+      widget.onSelectedIndex!(currentIndex);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -28,62 +49,36 @@ class _PreparationTypeTabbarState extends State<PreparationTypeTabbar> {
       width: AppSpacings.widthByScreenWidth(1),
       height: AppSpacings.customVerticalSpacing(35),
       child: TabBar(
-        dividerHeight: 0,
-        padding: const EdgeInsets.only(top: 2),
-        indicatorPadding: EdgeInsets.zero,
-        labelPadding: EdgeInsets.zero,
-        controller: widget.tabController,
-        automaticIndicatorColorAdjustment: false,
-        indicatorColor: Colors.transparent,
-        labelStyle: CustomGoogleFonts.roboto(
-            fontSize: AppFontSizes.size14,
-            fontWeight: FontWeight.w700,
-            color: AppColors.white100),
-        unselectedLabelStyle: CustomGoogleFonts.roboto(
-            fontSize: AppFontSizes.size14,
-            fontWeight: FontWeight.w400,
-            color: AppColors.white100),
-        onTap: (value) {
-          setState(() {
-            currentIndex = widget.tabController.index = value;
-          });
-          if (widget.onSelectedIndex != null) {
-            widget.onSelectedIndex!(value);
-          }
-        },
-        tabs: [
-          Container(
-            width: AppSpacings.horizontalSpacing30 * 3,
-            decoration: BoxDecoration(
-              color: currentIndex == 0 ? const Color(0xfff26322) : null,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: Tab(
-              text: widget.listButton[0],
-            ),
-          ),
-          Container(
-            width: AppSpacings.horizontalSpacing30 * 3,
-            decoration: BoxDecoration(
-              color: currentIndex == 1 ? const Color(0xfff26322) : null,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: Tab(
-              text: widget.listButton[1],
-            ),
-          ),
-          Container(
-            width: AppSpacings.horizontalSpacing30 * 3,
-            decoration: BoxDecoration(
-              color: currentIndex == 2 ? const Color(0xfff26322) : null,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: Tab(
-              text: widget.listButton[2],
-            ),
-          ),
-        ],
-      ),
+          dividerHeight: 0,
+          padding: const EdgeInsets.only(top: 2),
+          indicatorPadding: EdgeInsets.zero,
+          labelPadding: EdgeInsets.zero,
+          controller: widget.tabController,
+          automaticIndicatorColorAdjustment: false,
+          indicatorColor: Colors.transparent,
+          labelStyle: CustomGoogleFonts.roboto(
+              fontSize: AppFontSizes.size14,
+              fontWeight: FontWeight.w700,
+              color: AppColors.white100),
+          unselectedLabelStyle: CustomGoogleFonts.roboto(
+              fontSize: AppFontSizes.size14,
+              fontWeight: FontWeight.w400,
+              color: AppColors.white100),
+          tabs: widget.listButton.asMap().entries.map((entry) {
+            return Container(
+              width: AppSpacings.horizontalSpacing30 * 3,
+              decoration: BoxDecoration(
+                color: currentIndex == entry.key ||
+                        widget.tabController.index == entry.key
+                    ? const Color(0xfff26322)
+                    : null,
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: Tab(
+                text: entry.value,
+              ),
+            );
+          }).toList()),
     );
   }
 }

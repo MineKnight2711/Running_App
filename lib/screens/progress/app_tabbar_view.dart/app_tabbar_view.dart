@@ -3,7 +3,6 @@ import 'package:flutter_running_demo/controllers/tabbar_controller.dart';
 import 'package:flutter_running_demo/screens/preparation/preparation_screen.dart';
 import 'package:flutter_running_demo/screens/progress/progress_screen/progress_screen.dart';
 import 'package:get/get.dart';
-
 import '../../../widgets/bottom_bar/bottom_tabbar.dart';
 
 class TabBarViewScreen extends StatefulWidget {
