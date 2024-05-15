@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:get/get.dart';
 import '../../models/top_route_model/top_route_model.dart';
 import '../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
-import '../performance/components/period_button_row.dart';
 import 'components/components_export.dart';
+import 'components/preparation_tabbar.dart';
+
+enum PreparationType { favorites, addNew, upcoming }
 
 class PreparationScreen extends StatefulWidget {
   const PreparationScreen({super.key});
@@ -14,8 +17,16 @@ class PreparationScreen extends StatefulWidget {
 }
 
 class _PreparationScreenState extends State<PreparationScreen>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
+  late Rx<TabController> _tabController;
+  final currentPreparationType = PreparationType.favorites.obs;
   final mapController = Get.find<MapController>();
+  @override
+  void initState() {
+    super.initState();
+    _tabController =
+        TabController(length: PreparationType.values.length, vsync: this).obs;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,6 +158,7 @@ class _PreparationScreenState extends State<PreparationScreen>
       'Add-new',
       'Upcoming',
     ];
+
     return Scaffold(
       body: Stack(
         children: [
@@ -163,17 +175,47 @@ class _PreparationScreenState extends State<PreparationScreen>
           ),
           Positioned(top: 200, right: 0, child: VerticalAnnotations()),
           CustomDraggableSheet(
-            dragSensitivity: 800,
-            grabberBottomWidget: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: PeriodButtonRow(
-                listButton: periodButtonRow,
+              dragSensitivity: 800,
+              grabberBottomWidget: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Obx(
+                  () => PreparationTypeTabbar(
+                    tabController: _tabController.value,
+                    onSelectedIndex: (index) {
+                      switch (index) {
+                        case 0:
+                          currentPreparationType.value =
+                              PreparationType.favorites;
+
+                          break;
+                        case 1:
+                          currentPreparationType.value = PreparationType.addNew;
+
+                          break;
+                        case 2:
+                          currentPreparationType.value =
+                              PreparationType.upcoming;
+
+                          break;
+                        default:
+                      }
+                    },
+                    listButton: periodButtonRow,
+                  ),
+                ),
               ),
-            ),
-            sheetBody: ListTopRoutes(
-              topRoutes: tempTopRoute,
-            ),
-          )
+              sheetBody: SizedBox(
+                width: AppSpacings.widthByScreenWidth(1),
+                height: AppSpacings.heightByScreenHeight(0.8),
+                child: TabBarView(
+                  controller: _tabController.value,
+                  children: [
+                    ListTopRoutes(topRoutes: tempTopRoute),
+                    ListTopRoutes(topRoutes: tempTopRoute),
+                    ListTopRoutes(topRoutes: tempTopRoute),
+                  ],
+                ),
+              ))
         ],
       ),
     );

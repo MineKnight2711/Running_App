@@ -45,6 +45,7 @@ flutter:
     - assets/images/basic_activities/
     - assets/images/activities_details/
     - assets/images/details_route_images/
+    - assets/images/details_route_images/runners/
     - assets/svg/
     - assets/svg/preparation/
     - assets/svg/preparation/details_route/

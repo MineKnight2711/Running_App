@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 
 class PeriodButtonRow extends StatelessWidget {
   final List<String> listButton;
-  final Function(int)? onSelectedIndex;
+
+  final Function(int index)? onSelectedIndex;
   const PeriodButtonRow({
     super.key,
     required this.listButton,
