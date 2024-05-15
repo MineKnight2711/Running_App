@@ -24,121 +24,224 @@ class RunningClock extends StatelessWidget {
             const SizedBox(
               height: 100,
             ),
-            Text(
-              'Time',
-              style:
-                  CustomGoogleFonts.roboto(fontSize: 16, color: Colors.white),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              '00:04:15',
-              style: TextStyle(
-                  fontSize: 48,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Avg. pace',
-                      style: CustomGoogleFonts.roboto(
-                          fontSize: 16, color: Colors.white),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '5.27',
-                      style: CustomGoogleFonts.roboto(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                    Text(
-                      '/km',
-                      style: CustomGoogleFonts.roboto(
-                          fontSize: 16, color: Colors.white),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Split avg. pace',
-                      style: CustomGoogleFonts.roboto(
-                          fontSize: 16, color: Colors.white),
-                    ),
-                    const SizedBox(height: 8),
-                    const Row(
-                      children: [
-                        Icon(Icons.circle, color: Colors.green, size: 16),
-                        SizedBox(width: 4),
-                        Icon(Icons.circle, color: Colors.green, size: 16),
-                        SizedBox(width: 4),
-                        Icon(Icons.circle, color: Colors.green, size: 16),
-                        SizedBox(width: 4),
-                        Icon(Icons.circle, color: Colors.green, size: 16),
-                        SizedBox(width: 4),
-                        Icon(Icons.circle, color: Colors.green, size: 16),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Distance',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      '800',
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              height: 90.h,
+              width: 400,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: const Color(0xff2c2a2d),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Time',
+                    style: CustomGoogleFonts.roboto(
+                        fontSize: 16, color: Colors.white),
+                  ),
+                  const Center(
+                    child: Text(
+                      '00:04:15',
                       style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 52,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                    Text(
-                      'm',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Pulse rate',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      '126',
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                    Text(
-                      'BPM',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 360),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              height: 90.h,
+              width: 400,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: const Color(0xff2c2a2d),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: 'Avg. pace',
+                      style: CustomGoogleFonts.roboto(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ),
+                  Center(
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '         5.27',
+                            style: CustomGoogleFonts.roboto(
+                                fontSize: 52,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          TextSpan(
+                            text: '                    /km',
+                            style: CustomGoogleFonts.roboto(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              height: 90.h,
+              width: 400,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: const Color(0xff2c2a2d),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: 'Split Avg. pace',
+                      style: CustomGoogleFonts.roboto(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.circle, color: Colors.green, size: 16),
+                      SizedBox(width: 4),
+                      Icon(Icons.circle, color: Colors.green, size: 16),
+                      SizedBox(width: 4),
+                      Icon(Icons.circle, color: Colors.green, size: 16),
+                      SizedBox(width: 4),
+                      Icon(Icons.circle, color: Colors.green, size: 16),
+                      SizedBox(width: 4),
+                      Icon(Icons.circle, color: Colors.green, size: 16),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              height: 90.h,
+              width: 400,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: const Color(0xff2c2a2d),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: 'Distance',
+                      style: CustomGoogleFonts.roboto(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Center(
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '         800',
+                            style: CustomGoogleFonts.roboto(
+                                fontSize: 52,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          TextSpan(
+                            text: '                      m',
+                            style: CustomGoogleFonts.roboto(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              height: 90.h,
+              width: 400,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: const Color(0xff2c2a2d),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: 'Pulse rate',
+                      style: CustomGoogleFonts.roboto(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Center(
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '          126',
+                            style: CustomGoogleFonts.roboto(
+                                fontSize: 52,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          TextSpan(
+                            text: '                   BPM',
+                            style: CustomGoogleFonts.roboto(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

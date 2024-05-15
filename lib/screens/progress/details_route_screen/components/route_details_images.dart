@@ -37,10 +37,29 @@ class RouteDetailsImages extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: route.images
-                .map((image) => Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Image.asset(
-                          "assets/images/details_route_images/$image.png"),
+                .map((image) => GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: AlertDialog(
+                                content: InteractiveViewer(
+                                  child: Image.asset(
+                                      "assets/images/details_route_images/$image.png"),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Image.asset(
+                            "assets/images/details_route_images/$image.png"),
+                      ),
                     ))
                 .toList(),
           ),

@@ -135,7 +135,7 @@ class TrailDetailsFooter extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${trail.pace}m',
+                    '${trail.ascent}m',
                     style: CustomGoogleFonts.roboto(
                       fontSize: trailDetailsTextSize.r,
                       fontWeight: FontWeight.w500,

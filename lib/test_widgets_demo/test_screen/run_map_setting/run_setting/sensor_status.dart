@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../config/fonts.dart';
-
 class SensorStatus extends StatelessWidget {
   const SensorStatus({super.key});
 
