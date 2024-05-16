@@ -3,10 +3,10 @@ import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_running_demo/widgets/alert_dialogs/confirm_alert_dialogs.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../models/top_route_model/top_route_model.dart';
+import '../../../../models/route_model/route_model.dart';
 
 class RouteItemOption extends StatelessWidget {
-  final TopRouteModel route;
+  final RouteModel route;
   const RouteItemOption({super.key, required this.route});
 
   @override
@@ -61,7 +61,7 @@ class RouteItemOption extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (context) => ConfirmAlertDialogs(
-                  title: "Rename '${route.routeTitle}'",
+                  title: "Rename '${route.title}'",
                   content: TextField(
                     style: CustomGoogleFonts.roboto(
                       color: AppColors.white100,

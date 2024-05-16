@@ -4,12 +4,12 @@ import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_running_demo/models/runner_model.dart/runner_model.dart';
 import 'package:flutter_running_demo/widgets/app_bar.dart';
 import 'package:get/get.dart';
-import '../../../models/top_route_model/top_route_model.dart';
+import '../../../models/route_model/route_model.dart';
 import 'components/components_export.dart';
 import 'components/route_details_top_runner_list.dart';
 
 class DetailsRouteScreen extends GetView {
-  final TopRouteModel route = Get.arguments;
+  final RouteModel route = Get.arguments;
   DetailsRouteScreen({super.key});
 
   @override

@@ -3,15 +3,18 @@ import 'package:flutter_running_demo/extensions/duration_extension.dart';
 import 'package:flutter_running_demo/extensions/integer_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../config/config_export.dart';
-import '../../../models/top_route_model/top_route_model.dart';
-import 'top_route_item_options.dart';
+import '../../../../config/config_export.dart';
+import '../../../../models/route_model/route_model.dart';
 
 class RouteItemWidget extends StatelessWidget {
   final bool isSelected;
-  final TopRouteModel route;
+  final Widget isSelectedWidget;
+  final RouteModel route;
   const RouteItemWidget(
-      {super.key, required this.route, required this.isSelected});
+      {super.key,
+      required this.route,
+      required this.isSelected,
+      this.isSelectedWidget = const SizedBox.shrink()});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,7 @@ class RouteItemWidget extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  route.routeTitle,
+                                  route.title,
                                   overflow: TextOverflow.ellipsis,
                                   style: CustomGoogleFonts.roboto(
                                       fontSize: 16.r,
@@ -72,7 +75,7 @@ class RouteItemWidget extends StatelessWidget {
                                 width: 15.w,
                               ),
                               SvgPicture.asset(
-                                  "assets/svg/preparation/rpe/${route.rpePoint.getRpeSvgAsset()}.svg"),
+                                  "assets/svg/preparation/rpe/${route.rpe.getRpeSvgAsset()}.svg"),
                               SizedBox(
                                 width: 5.w,
                               ),
@@ -128,11 +131,7 @@ class RouteItemWidget extends StatelessWidget {
                         height: 10.h,
                       )
                     : const SizedBox.shrink(),
-                isSelected
-                    ? RouteItemOption(
-                        route: route,
-                      )
-                    : const SizedBox.shrink(),
+                isSelected ? isSelectedWidget : const SizedBox.shrink(),
               ],
             ),
           ),

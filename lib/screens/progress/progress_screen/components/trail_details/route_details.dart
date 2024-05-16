@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../models/route_model/route_model.dart';
-import 'components/trail_details_header.dart';
-import 'components/trail_details_map.dart';
+import 'components/route_details_header.dart';
+import 'components/route_details_map.dart';
 
 class RouteDetailsWidget extends StatelessWidget {
   final RouteModel route;

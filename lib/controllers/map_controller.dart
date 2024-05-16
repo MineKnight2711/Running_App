@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_running_demo/models/top_route_model/top_route_model.dart';
+import 'package:flutter_running_demo/models/route_model/route_model.dart';
 import 'package:get/get.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
@@ -88,7 +88,7 @@ class MapController extends GetxController {
         MapAnimationOptions(duration: 3000, startDelay: 0));
   }
 
-  void createTempTopRoutes(List<TopRouteModel> listTopRoute) {
+  void createTempTopRoutes(List<RouteModel> listTopRoute) {
     mapboxMap.value?.annotations
         .createPointAnnotationManager()
         .then((pointAnnotationManager) async {

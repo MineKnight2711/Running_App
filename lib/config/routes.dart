@@ -21,7 +21,6 @@ import '../test_widgets_demo/test_alertdialog/test_screen2.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/run_setting/audio_guidance.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/run_setting/map_setting.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/music_provider_sheet/music_provider_sheet.dart';
-import '../test_widgets_demo/test_screen/schedule.dart';
 
 class AppRoutes {
   static const String _home = '/';
@@ -47,7 +46,6 @@ class AppRoutes {
   static const String _metricinfo = '/metricinfo';
   static const String _readytorun = '/readytorun';
   static const String _sendinglocation = '/sendinglocation';
-  static const String _scheduleScreen = '/scheduleScreen';
 
   static String get tabbarview => _tabbarview;
   static String get home => _home;
@@ -72,7 +70,6 @@ class AppRoutes {
   static String get metricinfo => _metricinfo;
   static String get readytorun => _readytorun;
   static String get sendinglocation => _sendinglocation;
-  static String get scheduleScreen => _scheduleScreen;
 
   static navigate(String query) {
     Get.toNamed(
@@ -173,10 +170,6 @@ class AppRoutes {
     GetPage(
         name: _sendinglocation,
         page: () => const SendingLocation(),
-        transition: Transition.rightToLeft),
-    GetPage(
-        name: _scheduleScreen,
-        page: () => const ScheduleScreen(),
         transition: Transition.rightToLeft),
   ];
 }

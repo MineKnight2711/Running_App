@@ -4,10 +4,10 @@ import 'package:flutter_running_demo/extensions/integer_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../config/config_export.dart';
-import '../../../../models/top_route_model/top_route_model.dart';
+import '../../../../models/route_model/route_model.dart';
 
 class RouteDetailInfo extends StatelessWidget {
-  final TopRouteModel route;
+  final RouteModel route;
   const RouteDetailInfo({super.key, required this.route});
 
   @override
@@ -26,7 +26,7 @@ class RouteDetailInfo extends StatelessWidget {
               Flexible(
                 flex: 5,
                 child: Text(
-                  route.routeTitle,
+                  route.title,
                   style: CustomGoogleFonts.roboto(
                     color: AppColors.white100,
                     fontSize: 16.r,
@@ -42,7 +42,7 @@ class RouteDetailInfo extends StatelessWidget {
                 width: 10.w,
               ),
               SvgPicture.asset(
-                  "assets/svg/preparation/rpe/${route.rpePoint.getRpeSvgAsset()}.svg"),
+                  "assets/svg/preparation/rpe/${route.rpe.getRpeSvgAsset()}.svg"),
               Text(
                 " RPE",
                 style: CustomGoogleFonts.roboto(

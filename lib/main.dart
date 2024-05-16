@@ -23,6 +23,7 @@ class MainApp extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.tabbarview,
+
         // routes: routes,
         getPages: AppRoutes.getPages,
       ),

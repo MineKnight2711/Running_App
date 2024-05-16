@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../config/config_export.dart';
 
-class PreparationTypeTabbar extends StatefulWidget {
+class PreparationTabbar extends StatefulWidget {
   final TabController tabController;
   final List<String> listButton;
 
   final Function(int index)? onSelectedIndex;
-  const PreparationTypeTabbar({
+  const PreparationTabbar({
     super.key,
     required this.listButton,
     this.onSelectedIndex,
@@ -14,10 +14,10 @@ class PreparationTypeTabbar extends StatefulWidget {
   });
 
   @override
-  State<PreparationTypeTabbar> createState() => _PreparationTypeTabbarState();
+  State<PreparationTabbar> createState() => _PreparationTabbarState();
 }
 
-class _PreparationTypeTabbarState extends State<PreparationTypeTabbar> {
+class _PreparationTabbarState extends State<PreparationTabbar> {
   int currentIndex = 0;
   @override
   void initState() {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../config/config_export.dart';
-import '../../../../models/top_route_model/top_route_model.dart';
+import '../../../../models/route_model/route_model.dart';
 
 class RouteDetailsImages extends StatelessWidget {
-  final TopRouteModel route;
+  final RouteModel route;
   const RouteDetailsImages({super.key, required this.route});
 
   @override

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../config/fonts.dart';
 import '../../../../../../models/route_model/route_model.dart';
-import 'trail_details_footer.dart';
+import 'route_details_footer.dart';
 
 class RouteDetailsMapWidget extends StatelessWidget {
   final RouteModel route;
@@ -101,9 +101,9 @@ class RouteDetailsMapWidget extends StatelessWidget {
         ),
         Positioned(
           bottom: 0,
-          child: TrailDetailsFooter(
+          child: RouteDetailsFooter(
             titleInFooter: titleInFooter,
-            trail: route,
+            route: route,
           ),
         ),
       ],

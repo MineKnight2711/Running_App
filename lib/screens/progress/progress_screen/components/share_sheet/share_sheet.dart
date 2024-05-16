@@ -5,7 +5,7 @@ import 'package:flutter_running_demo/screens/progress/progress_screen/components
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../models/route_model/route_model.dart';
-import '../trail_details/components/trail_details_map.dart';
+import '../trail_details/components/route_details_map.dart';
 
 class ShareSheet extends StatelessWidget {
   final RouteModel route;

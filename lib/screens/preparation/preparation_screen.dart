@@ -5,11 +5,9 @@ import 'package:flutter_running_demo/config/spacings.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../controllers/map_controller.dart';
-import '../../models/top_route_model/top_route_model.dart';
+import '../../models/route_model/route_model.dart';
 import '../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
 import 'components/components_export.dart';
-import 'components/preparation_tabbar.dart';
-import 'components/top_route_item.dart';
 import 'data/list_top_route_model.dart';
 
 enum PreparationType { favorites, addNew, upcoming }
@@ -66,7 +64,7 @@ class _PreparationScreenState extends State<PreparationScreen>
               grabberBottom: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  PreparationTypeTabbar(
+                  PreparationTabbar(
                     listButton: preTypes,
                     tabController: _tabController,
                     onSelectedIndex: onSelectedIndex,
@@ -88,10 +86,11 @@ class _PreparationScreenState extends State<PreparationScreen>
                       scrollController: scrollController,
                       routes: tempTopRoute,
                     ),
-                    UpcomingRoute(
+                    UpcomingListRoute(
                       scrollController: scrollController,
                       anyTimeRoutes: tempTopRoute.sublist(0, 2),
-                      byTimeRoutes: tempTopRoute.sublist(0, 1),
+                      byTimeRoutes: tempTopRoute.sublist(
+                          tempTopRoute.length - 1, tempTopRoute.length),
                     ),
                   ],
                 );
@@ -180,44 +179,6 @@ class _PreparationScreenState extends State<PreparationScreen>
   bool get wantKeepAlive => true;
 }
 
-class UpcomingRoute extends StatelessWidget {
-  final List<TopRouteModel> anyTimeRoutes;
-  final List<TopRouteModel> byTimeRoutes;
-  final ScrollController? scrollController;
-  const UpcomingRoute({
-    super.key,
-    required this.scrollController,
-    required this.anyTimeRoutes,
-    required this.byTimeRoutes,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final Rxn<TopRouteModel> selectedRoute = Rxn<TopRouteModel>();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Anytime (${anyTimeRoutes.length})",
-          style: CustomGoogleFonts.roboto(
-            fontSize: AppFontSizes.size16,
-            color: TextColor.white,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        Text(
-          "By time (${byTimeRoutes.length})",
-          style: CustomGoogleFonts.roboto(
-            fontSize: AppFontSizes.size16,
-            color: TextColor.white,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 // ListView.builder(
 //       padding: EdgeInsets.zero,
 //       controller: scrollController, // assign controller here
@@ -233,7 +194,7 @@ class UpcomingRoute extends StatelessWidget {
 //       ),
 //     );
 class RoutePreparationList extends StatelessWidget {
-  final List<TopRouteModel> routes;
+  final List<RouteModel> routes;
   final ScrollController scrollController;
   const RoutePreparationList({
     super.key,
@@ -243,7 +204,7 @@ class RoutePreparationList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Rxn<TopRouteModel> selectedRoute = Rxn<TopRouteModel>();
+    final Rxn<RouteModel> selectedRoute = Rxn<RouteModel>();
     return ListView.builder(
       padding: EdgeInsets.zero,
       controller: scrollController, // assign controller here
@@ -254,6 +215,9 @@ class RoutePreparationList extends StatelessWidget {
           () => RouteItemWidget(
             isSelected: selectedRoute.value == routes[index],
             route: routes[index],
+            isSelectedWidget: RouteItemOption(
+              route: routes[index],
+            ),
           ),
         ),
       ),
