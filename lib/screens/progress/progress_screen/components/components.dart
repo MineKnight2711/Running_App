@@ -1,7 +1,7 @@
-export 'trail_details/route_details.dart';
-export 'trail_details/components/route_details_footer.dart';
-export 'trail_details/components/route_details_header.dart';
-export 'trail_details/components/route_details_map.dart';
+export 'route_details/route_details.dart';
+export 'route_details/components/route_details_footer.dart';
+export 'route_details/components/route_details_header.dart';
+export 'route_details/components/route_details_map.dart';
 export 'search_sheet/activites_drow_down.dart';
 export 'search_sheet/search_sheet.dart';
 export 'search_sheet/search_sheet_header.dart';

@@ -3,6 +3,7 @@ import '../../config/config_export.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../controllers/map_controller.dart';
+import '../../utils/navigator_key.dart';
 import '../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
 import 'components/components_export.dart';
 import 'data/list_top_route_model.dart';
@@ -50,7 +51,59 @@ class _PreparationScreenState extends State<PreparationScreen>
             },
           ),
           Positioned(top: 40, child: HorizontalAnnotations()),
-          Positioned(top: 200, right: 0, child: VerticalAnnotations()),
+          Positioned(
+              top: 200,
+              right: 0,
+              child: VerticalAnnotations(
+                onPrepareRoutePressed: () {
+                  showModalBottomSheet(
+                    context:
+                        NavigatorKeys.secondaryNavigatorKey.currentContext!,
+                    // isScrollControlled: true,
+                    // shape: const RoundedRectangleBorder(
+                    //   borderRadius: BorderRadius.only(
+                    //     topLeft: Radius.circular(20),
+                    //     topRight: Radius.circular(20),
+                    //   ),
+                    // ),
+                    // enableDrag: true,
+                    // backgroundColor: const Color(0xff222222),
+                    builder: (context) {
+                      // return DraggableScrollableSheet(
+
+                      //   maxChildSize: 0.9,
+                      //   minChildSize: 0.25,
+                      //   initialChildSize: 0.9,
+                      //   expand: false,
+
+                      //   builder: (context, scrollController) {
+                      //     return Column(
+                      //       children: [
+                      //         Container(
+                      //             width: AppSpacings.widthByScreenWidth(1),
+                      //             height: AppSpacings.heightByScreenHeight(0.1),
+                      //             color: Colors.white),
+                      //       ],
+                      //     );
+                      //   },
+                      // );
+                      return CustomDraggableSheetWidget(
+                        grabberBottom: Container(
+                            width: AppSpacings.widthByScreenWidth(1),
+                            height: AppSpacings.heightByScreenHeight(0.1),
+                            color: Colors.white),
+                        sheetBody: (context, scrollController) {
+                          return Container(
+                            color: Colors.yellow,
+                            width: AppSpacings.widthByScreenWidth(1),
+                            height: AppSpacings.heightByScreenHeight(0.8),
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+              )),
           Align(
             alignment: Alignment.bottomCenter,
             child: CustomDraggableSheetWidget(

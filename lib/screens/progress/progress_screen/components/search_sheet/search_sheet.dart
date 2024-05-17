@@ -13,7 +13,7 @@ class SearchSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.5, //Kích cỡ sheet khi vừa hiện lên
+      initialChildSize: 0.55, //Kích cỡ sheet khi vừa hiện lên
       minChildSize: 0.3, //Khi ta kéo sheet về 0.3 chiều cao của nó, nó sẽ đóng
       maxChildSize: 0.95, //Chiều cao tối đa của sheet được phép kéo lên
       expand: false,

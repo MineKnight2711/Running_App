@@ -4,6 +4,8 @@ import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'utils/navigator_key.dart';
+
 void main() {
   runApp(const MainApp());
   Get.put(MapController());
@@ -22,6 +24,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.tabbarview,
         getPages: AppRoutes.getPages,
+        navigatorKey: NavigatorKeys.mainNavigatorKey,
       ),
     );
   }

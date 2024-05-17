@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../../config/config_export.dart';
 import '../../../../models/route_model/route_model.dart';
+import '../../../../utils/navigator_key.dart';
 
 class UpcommingRouteItemOptions extends StatelessWidget {
   final RouteModel route;
@@ -27,7 +28,10 @@ class UpcommingRouteItemOptions extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                Get.bottomSheet(const PreparationScheduleSheet());
+                showModalBottomSheet(
+                  context: NavigatorKeys.secondaryNavigatorKey.currentContext!,
+                  builder: (context) => const PreparationScheduleSheet(),
+                );
               },
               child: SvgPicture.asset(
                   "assets/svg/preparation/route_item_options/schedule.svg"),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/screens/preparation/preparation_screen.dart';
 import 'package:flutter_running_demo/screens/progress/progress_screen/progress_screen.dart';
-import '../../../widgets/bottom_bar/bottom_tabbar.dart';
+import '../../utils/navigator_key.dart';
+import '../../widgets/bottom_bar/bottom_tabbar.dart';
 
 class TabBarViewScreen extends StatefulWidget {
   const TabBarViewScreen({super.key});
@@ -23,13 +24,20 @@ class _TabBarViewScreenState extends State<TabBarViewScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TabBarView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _tabController,
-        children: const [
-          ProgressScreen(),
-          PreparationScreen(),
-        ],
+      body: Navigator(
+        key: NavigatorKeys.secondaryNavigatorKey,
+        onGenerateRoute: (routeSettings) {
+          return MaterialPageRoute(
+            builder: (context) => TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _tabController,
+              children: const [
+                ProgressScreen(),
+                PreparationScreen(),
+              ],
+            ),
+          );
+        },
       ),
       bottomNavigationBar: BottomNavigationTabBar(
         tabController: _tabController,
