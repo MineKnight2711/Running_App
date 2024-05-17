@@ -10,7 +10,7 @@ class DashedRect extends StatelessWidget {
       {super.key,
       this.color = Colors.black,
       this.strokeWidth = 1,
-      this.gap = 20});
+      this.gap = 10.0});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class DashRectPainter extends CustomPainter {
 
   DashRectPainter({
     this.strokeWidth = 5.0,
-    this.color = Colors.grey,
+    this.color = Colors.red,
     this.gap = 5.0,
     this.radius = 0.0,
   });

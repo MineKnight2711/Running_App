@@ -3,6 +3,7 @@
 import 'package:flutter_running_demo/screens/home_screen/home_screen.dart';
 import 'package:flutter_running_demo/screens/performance/performance_screen.dart';
 import 'package:flutter_running_demo/screens/progress/details_route_screen/details_route_screen.dart';
+import 'package:flutter_running_demo/screens/run/ready_to_run/load_prepared_road_map.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/components/music_pause_clock.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/components/music_play_clock.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/components/run_finished.dart';
@@ -52,6 +53,7 @@ class AppRoutes {
   static const String _musicplaylock = '/musicplaylock';
   static const String _musicpauselock = '/musicpauselock';
   static const String _runfinished = '/runfinished';
+  static const String _loadpreparedroadmap = '/loadpreparedroadmap';
 
   static String get tabbarview => _tabbarview;
   static String get home => _home;
@@ -79,6 +81,7 @@ class AppRoutes {
   static String get musicplaylock => _musicplaylock;
   static String get musicpauselock => _musicpauselock;
   static String get runfinished => _runfinished;
+  static String get loadpreparedroadmap => _loadpreparedroadmap;
 
   static navigate(String query) {
     Get.toNamed(
@@ -191,6 +194,10 @@ class AppRoutes {
     GetPage(
         name: _runfinished,
         page: () => const RunFinished(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _loadpreparedroadmap,
+        page: () => const LoadPreparedRoadMap(),
         transition: Transition.rightToLeft),
   ];
 }

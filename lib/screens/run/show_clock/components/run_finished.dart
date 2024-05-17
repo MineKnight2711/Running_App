@@ -1,11 +1,8 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
-import 'package:flutter_running_demo/config/fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../utils/dash_border.dart';
 import '../../../progress/details_route_screen/components/route_details_elevation_chart.dart';
 import '../../../progress/details_route_screen/components/route_details_map_terrain.dart';
@@ -69,16 +66,16 @@ class RunFinished extends StatelessWidget {
                         fontSize: 16, color: Colors.white)),
               ),
               Container(
-                height: 0.2.sh,
+                height: 0.15.sh,
                 width: 1.sw,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: Colors.black12,
                 ),
-                child: DashedRect(
+                child: const DashedRect(
                   color: Colors.grey,
                   strokeWidth: 1.5,
-                  gap: 10,
+                  gap: 6,
                 ),
               ),
               const SizedBox(
@@ -197,9 +194,11 @@ class RunFinished extends StatelessWidget {
                       children: [
                         const Icon(Icons.star, color: Colors.white),
                         const SizedBox(width: 8),
-                        Text('Save to favorite',
-                            style: CustomGoogleFonts.roboto(
-                                fontSize: 14, color: Colors.white)),
+                        Text(
+                          'Save to favorite',
+                          style: CustomGoogleFonts.roboto(
+                              fontSize: 14, color: Colors.white),
+                        ),
                       ],
                     ),
                   ),
