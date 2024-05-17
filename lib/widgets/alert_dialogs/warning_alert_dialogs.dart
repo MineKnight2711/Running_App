@@ -22,7 +22,9 @@ class WarningAlertDialogs extends StatelessWidget {
     return AlertDialog(
       backgroundColor: AppColors.sheetBackground,
       icon: SvgPicture.asset(
-          "assets/svg/preparation/alert_dialog/$iconSvgPath.svg"),
+        iconSvgPath,
+        width: 80,
+      ),
       title: Text(
         title,
         style: CustomGoogleFonts.roboto(

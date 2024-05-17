@@ -19,55 +19,61 @@ class UpcomingListRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Rxn<RouteModel> selectedRoute = Rxn<RouteModel>();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Anytime (${anyTimeRoutes.length})",
-          style: CustomGoogleFonts.roboto(
-            fontSize: AppFontSizes.size16,
-            color: TextColor.white,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        ...anyTimeRoutes.map(
-          (route) => GestureDetector(
-            onTap: () => selectedRoute.value = route,
-            child: Obx(
-              () => RouteItemWidget(
-                route: route,
-                isSelected: selectedRoute.value == route,
-                isSelectedWidget: UpcommingRouteItemOptions(
-                  route: route,
-                ),
-              ),
+    return SingleChildScrollView(
+      controller: scrollController,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Anytime (${anyTimeRoutes.length})",
+            style: CustomGoogleFonts.roboto(
+              fontSize: AppFontSizes.size16,
+              color: TextColor.white,
+              fontWeight: FontWeight.w700,
             ),
           ),
-        ),
-        Text(
-          "By time (${byTimeRoutes.length})",
-          style: CustomGoogleFonts.roboto(
-            fontSize: AppFontSizes.size16,
-            color: TextColor.white,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        timeNavigationRow,
-        ...byTimeRoutes.map(
-          (route) => GestureDetector(
-            onTap: () => selectedRoute.value = route,
-            child: Obx(
-              () => RouteItemWidget(
-                route: route,
-                isSelected: selectedRoute.value == route,
-                isSelectedWidget: UpcommingRouteItemOptions(
-                  route: route,
+          ...anyTimeRoutes.asMap().entries.map(
+                (entry) => GestureDetector(
+                  onTap: () => selectedRoute.value = entry.value,
+                  child: Obx(
+                    () => RouteItemWidget(
+                      showDivider: !(entry.key ==
+                          anyTimeRoutes.length -
+                              1), // Set showDivider to false for the last item
+                      route: entry.value,
+                      isSelected: selectedRoute.value == entry.value,
+                      isSelectedWidget: UpcommingRouteItemOptions(
+                        route: entry.value,
+                      ),
+                    ),
+                  ),
                 ),
               ),
+          Text(
+            "By time (${byTimeRoutes.length})",
+            style: CustomGoogleFonts.roboto(
+              fontSize: AppFontSizes.size16,
+              color: TextColor.white,
+              fontWeight: FontWeight.w700,
             ),
           ),
-        ),
-      ],
+          ...byTimeRoutes.asMap().entries.map(
+                (entry) => GestureDetector(
+                  onTap: () => selectedRoute.value = entry.value,
+                  child: Obx(
+                    () => RouteItemWidget(
+                      showDivider: !(entry.key == byTimeRoutes.length - 1),
+                      route: entry.value,
+                      isSelected: selectedRoute.value == entry.value,
+                      isSelectedWidget: UpcommingRouteItemOptions(
+                        route: entry.value,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+        ],
+      ),
     );
   }
 

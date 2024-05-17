@@ -7,14 +7,15 @@ import '../../../../config/config_export.dart';
 import '../../../../models/route_model/route_model.dart';
 
 class RouteItemWidget extends StatelessWidget {
-  final bool isSelected;
+  final bool isSelected, showDivider;
   final Widget isSelectedWidget;
   final RouteModel route;
   const RouteItemWidget(
       {super.key,
       required this.route,
       required this.isSelected,
-      this.isSelectedWidget = const SizedBox.shrink()});
+      this.isSelectedWidget = const SizedBox.shrink(),
+      this.showDivider = true});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +23,12 @@ class RouteItemWidget extends StatelessWidget {
       children: [
         Container(
           width: 1.sw,
-          height: isSelected ? 0.2.sh : 80.h,
+          height: isSelected ? 125.h : 70.h,
           padding: isSelected
               ? EdgeInsets.symmetric(vertical: 5.h)
               : EdgeInsets.zero,
           margin: EdgeInsets.symmetric(vertical: 5.h),
+          alignment: Alignment.center,
           decoration: BoxDecoration(
               color: isSelected
                   ? AppColors.basicActivitiesCard
@@ -136,10 +138,12 @@ class RouteItemWidget extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(
-          height: 0,
-          thickness: 0.3,
-        ),
+        showDivider
+            ? const Divider(
+                height: 0,
+                thickness: 0.3,
+              )
+            : const SizedBox.shrink(),
       ],
     );
   }

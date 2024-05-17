@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/screens/preparation/components/components_export.dart';
+import 'package:flutter_running_demo/widgets/alert_dialogs/confirm_alert_dialogs.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import '../../../../config/config_export.dart';
 import '../../../../models/route_model/route_model.dart';
 
@@ -25,18 +27,24 @@ class UpcommingRouteItemOptions extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                showBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return const PreparationScheduleSheet();
-                  },
-                );
+                Get.bottomSheet(const PreparationScheduleSheet());
               },
               child: SvgPicture.asset(
                   "assets/svg/preparation/route_item_options/schedule.svg"),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.dialog(ConfirmAlertDialogs(
+                    title: 'Remove confirmation',
+                    content: Text(
+                      "Are you sure you want to remove the route for upcoming run?",
+                      textAlign: TextAlign.center,
+                      style: CustomGoogleFonts.roboto(
+                          color: Colors.white, fontWeight: FontWeight.w400),
+                    ),
+                    confirmButtonText: "Yes, remove",
+                    iconSvgPath: "delete_schedule"));
+              },
               child: SvgPicture.asset(
                   "assets/svg/preparation/route_item_options/delete.svg"),
             ),

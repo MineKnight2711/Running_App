@@ -44,7 +44,7 @@ class ConfirmAlertDialogs extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               child: Container(
                 width: 300.w,
-                height: 50.h,
+                height: 45.h,
                 decoration: BoxDecoration(
                   color: confirmButtonColorGradient != null
                       ? null
@@ -68,7 +68,7 @@ class ConfirmAlertDialogs extends StatelessWidget {
             ),
             TextButton(
               style: TextButton.styleFrom(
-                minimumSize: Size(0.4.sw, 0.09.sh),
+                minimumSize: Size(0.4.sw, 0.04.sh),
               ),
               onPressed: () {
                 Navigator.of(context).pop();

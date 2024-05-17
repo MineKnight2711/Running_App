@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../config/config_export.dart';
+import '../../../../widgets/alert_dialogs/confirm_alert_dialogs.dart';
 import '../../../../widgets/alert_dialogs/warning_alert_dialogs.dart';
 import 'schedule_date_picker_column.dart';
 import 'schedule_sheet_action_buttons.dart';
@@ -37,7 +38,7 @@ class ScheduleDatePicker extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: AppSpacings.customVerticalSpacing(190),
+          height: AppSpacings.customVerticalSpacing(195),
           width: AppSpacings.widthByScreenWidth(1),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +102,18 @@ class ScheduleDatePicker extends StatelessWidget {
             seletecScheduleTime(seletedHours.value, seletedMinutes.value,
                 selectedDay.value, selectedMonth.value, selectedYear.value);
           },
-          onDeletePressed: () {},
+          onDeletePressed: () {
+            Get.dialog(ConfirmAlertDialogs(
+                title: 'Remove confirmation',
+                content: Text(
+                  "Are you sure you want to remove the route for upcoming run?",
+                  textAlign: TextAlign.center,
+                  style: CustomGoogleFonts.roboto(
+                      color: Colors.white, fontWeight: FontWeight.w400),
+                ),
+                confirmButtonText: "Yes, remove",
+                iconSvgPath: "delete_schedule"));
+          },
         ),
       ],
     );
@@ -110,7 +122,24 @@ class ScheduleDatePicker extends StatelessWidget {
   String seletecScheduleTime(
       int hours, int minutes, int day, int month, int year) {
     String timeSelected = "";
-    if (hours > 0 && minutes > 0) {
+    if (hours != 0 || minutes != 0) {
+      timeSelected = "${hours}h:${minutes}m | $year-$month-$day";
+      Get.dialog(
+        SizedBox(
+          width: AppSpacings.widthByScreenWidth(0.5),
+          height: AppSpacings.heightByScreenHeight(0.7),
+          child: WarningAlertDialogs(
+            title: "You have successfully choose schedule time!",
+            content: Text(
+              timeSelected,
+              style: CustomGoogleFonts.roboto(
+                  fontSize: AppFontSizes.size16, color: TextColor.white),
+              textAlign: TextAlign.center,
+            ),
+            iconSvgPath: "assets/svg/preparation/rpe/4-6.svg",
+          ),
+        ),
+      );
     } else {
       Get.dialog(
         SizedBox(
@@ -119,7 +148,7 @@ class ScheduleDatePicker extends StatelessWidget {
           child: const WarningAlertDialogs(
             title: "You haven't choose the times yet!",
             content: SizedBox.shrink(),
-            iconSvgPath: "assets/svg/preparation/rpe/2-3.svg",
+            iconSvgPath: "assets/svg/preparation/rpe/7-8.svg",
           ),
         ),
       );

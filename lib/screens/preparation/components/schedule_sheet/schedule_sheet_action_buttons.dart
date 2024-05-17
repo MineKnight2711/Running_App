@@ -19,7 +19,7 @@ class ScheduleSheetActionButtons extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.appButton,
             padding: const EdgeInsets.symmetric(
-              horizontal: 160.0,
+              horizontal: 130.0,
               vertical: 10,
             ),
             shape: RoundedRectangleBorder(

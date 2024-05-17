@@ -1,12 +1,45 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_running_demo/models/route_model/route_model.dart';
+import 'package:flutter_running_demo/screens/preparation/data/list_top_route_model.dart';
 import 'package:get/get.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
 import '../utils/map_annotation_click_listener.dart';
 
+enum MapDirection {
+  north,
+  east,
+  south,
+  west,
+}
+
+extension MapDirectionExtension on MapDirection {
+  double get numericValue {
+    switch (this) {
+      case MapDirection.north:
+        return 0;
+      case MapDirection.south:
+        return 180;
+      case MapDirection.west:
+        return 270;
+      case MapDirection.east:
+        return 90;
+      default:
+        return 0;
+    }
+  }
+
+  MapDirection get next {
+    List<MapDirection> values = MapDirection.values;
+    int currentIndex = values.indexOf(this);
+    int nextIndex = (currentIndex + 1) % values.length;
+    return values[nextIndex];
+  }
+}
+
 class MapController extends GetxController {
   RxString currentMapViewStyle = MapboxStyles.MAPBOX_STREETS.obs;
+  MapDirection currentMapDirection = MapDirection.north;
   Rx<MapboxMap?> mapboxMap = Rx<MapboxMap?>(null);
   Rx<PointAnnotationManager?> pointManager = Rx<PointAnnotationManager?>(null);
   Rx<PolylineAnnotationManager?> polylineManager =
@@ -20,103 +53,12 @@ class MapController extends GetxController {
   RxString searchText = "".obs;
   RxString latitude = "".obs;
   RxString longLatitude = "".obs;
-
-  // @override
-  // void onInit() {
-  //   super.onInit();
-
-  // }
-
-  Position getCentroid(List<Position> points) {
-    if (points.isEmpty) {
-      return Position(0, 0);
-    } else if (points.length == 1) {
-      return points[0];
-    }
-    double lowerX = points[0].lat.toDouble();
-    double lowerY = points[0].lng.toDouble();
-    double higherX = points[0].lat.toDouble();
-    double higherY = points[0].lng.toDouble();
-    for (int i = 1; i < points.length; i++) {
-      if (points[i].lat.toDouble() > higherX) {
-        higherX = points[i].lat.toDouble();
-      }
-      if (points[i].lat.toDouble() < lowerX) {
-        lowerX = points[i].lat.toDouble();
-      }
-      if (points[i].lng.toDouble() > higherY) {
-        higherY = points[i].lng.toDouble();
-      }
-      if (points[i].lng.toDouble() < lowerY) {
-        lowerY = points[i].lng.toDouble();
-      }
-    }
-    return Position((higherY + lowerY) / 2, (higherX + lowerX) / 2);
-  }
-
-  void centerCamera(List<Position> positions) async {
-    final pos = getCentroid(positions);
-    final centeredPoint = Point(coordinates: pos);
-
-    final ByteData bytes =
-        await rootBundle.load('assets/images/map_anotations/position.png');
-    final Uint8List imagesData = bytes.buffer.asUint8List();
-    pointManager.value?.create(PointAnnotationOptions(
-      geometry: centeredPoint.toJson(),
-      image: imagesData,
-      iconSize: 1.5,
-    ));
-    centerCameraOnCoordinate(
-      pos.lat.toDouble(),
-      pos.lng.toDouble(),
-    );
-  }
-
-  void centerCameraOnCoordinate(double lat, double longLat) {
-    mapboxMap.value?.setCamera(CameraOptions(
-        center: Point(
-          coordinates: Position(longLat, lat),
-        ).toJson(),
-        zoom: 12.0));
-
-    mapboxMap.value?.flyTo(
-        CameraOptions(
-            anchor: ScreenCoordinate(x: 0, y: 0),
-            zoom: 14,
-            bearing: 180,
-            pitch: 30),
-        MapAnimationOptions(duration: 3000, startDelay: 0));
-  }
-
-  void createTempTopRoutes(List<RouteModel> listTopRoute) {
-    mapboxMap.value?.annotations
-        .createPointAnnotationManager()
-        .then((pointAnnotationManager) async {
-      pointManager.value = pointAnnotationManager;
-
-      final positions = <Position>[];
-
-      for (var route in listTopRoute) {
-        positions.add(
-          Position(route.longitude, route.latitude),
-        );
-      }
-      final ByteData bytes =
-          await rootBundle.load('assets/images/map_anotations/route.png');
-      final Uint8List imagesData = bytes.buffer.asUint8List();
-      centerCamera(listTopRoute
-          .map((route) => Position(route.longitude, route.latitude))
-          .toList());
-      pointAnnotationManager.createMulti(positions
-          .map((e) => PointAnnotationOptions(
-                iconSize: 3,
-                geometry: Point(coordinates: e).toJson(),
-                image: imagesData,
-              ))
-          .toList());
-      pointAnnotationManager
-          .addOnPointAnnotationClickListener(AnnotationClickListener());
-    });
+  // Rxn<RouteModel> selectedRoute=
+  late RxList<RouteModel> listRoute;
+  @override
+  void onInit() {
+    super.onInit();
+    listRoute = tempTopRoute.obs;
   }
 
   @override
@@ -125,8 +67,7 @@ class MapController extends GetxController {
     searchText.value = latitude.value = longLatitude.value = "";
     isShow.value = false;
     isHidden.value = true;
-    // selectedLocation.value = null;
-    // searchController.clear();
+    listRoute.clear();
   }
 
   onMapCreated(MapboxMap mapboxMapCreate) {
@@ -135,8 +76,10 @@ class MapController extends GetxController {
     mapboxMap.value?.compass.updateSettings(CompassSettings(enabled: false));
   }
 
-  selectAnotation(int anotation) {
-    // print("anotation selected : $anotation");
+  selectAnotation(int anotationIndex) {
+    if (listRoute.isNotEmpty) {
+      print("${listRoute[anotationIndex].title}");
+    }
   }
 
   void zoomIn() {
@@ -169,6 +112,106 @@ class MapController extends GetxController {
       currentMapViewStyle.value = MapboxStyles.MAPBOX_STREETS;
       mapboxMap.value?.loadStyleURI(MapboxStyles.MAPBOX_STREETS);
     }
+  }
+
+  changeMapDirection() {
+    currentMapDirection = currentMapDirection.next;
+    mapboxMap.value?.flyTo(
+      CameraOptions(bearing: currentMapDirection.numericValue.toDouble()),
+      MapAnimationOptions(duration: 500),
+    );
+  }
+
+  Position getCentroid(List<Position> points) {
+    if (points.isEmpty) {
+      return Position(0, 0);
+    } else if (points.length == 1) {
+      return points[0];
+    }
+    double lowerX = points[0].lat.toDouble();
+    double lowerY = points[0].lng.toDouble();
+    double higherX = points[0].lat.toDouble();
+    double higherY = points[0].lng.toDouble();
+    for (int i = 1; i < points.length; i++) {
+      if (points[i].lat.toDouble() > higherX) {
+        higherX = points[i].lat.toDouble();
+      }
+      if (points[i].lat.toDouble() < lowerX) {
+        lowerX = points[i].lat.toDouble();
+      }
+      if (points[i].lng.toDouble() > higherY) {
+        higherY = points[i].lng.toDouble();
+      }
+      if (points[i].lng.toDouble() < lowerY) {
+        lowerY = points[i].lng.toDouble();
+      }
+    }
+    return Position((higherY + lowerY) / 2, (higherX + lowerX) / 2);
+  }
+
+  void _centerCamera(List<Position> positions) async {
+    final pos = getCentroid(positions);
+    final centeredPoint = Point(coordinates: pos);
+
+    final ByteData bytes =
+        await rootBundle.load('assets/images/map_anotations/position.png');
+    final Uint8List imagesData = bytes.buffer.asUint8List();
+    pointManager.value?.create(PointAnnotationOptions(
+      geometry: centeredPoint.toJson(),
+      image: imagesData,
+      iconSize: 1.5,
+    ));
+    _centerCameraOnCoordinate(
+      pos.lat.toDouble(),
+      pos.lng.toDouble(),
+    );
+  }
+
+  void _centerCameraOnCoordinate(double lat, double longLat) {
+    mapboxMap.value?.setCamera(CameraOptions(
+        center: Point(
+          coordinates: Position(longLat, lat),
+        ).toJson(),
+        zoom: 12.0));
+
+    mapboxMap.value?.flyTo(
+        CameraOptions(
+            anchor: ScreenCoordinate(x: 0, y: 0),
+            zoom: 14,
+            bearing: MapDirection.north.numericValue,
+            pitch: 30),
+        MapAnimationOptions(duration: 3000, startDelay: 0));
+  }
+
+  void createTempTopRoutes() {
+    mapboxMap.value?.annotations
+        .createPointAnnotationManager()
+        .then((pointAnnotationManager) async {
+      pointManager.value = pointAnnotationManager;
+
+      final positions = <Position>[];
+
+      for (var route in listRoute) {
+        positions.add(
+          Position(route.longitude, route.latitude),
+        );
+      }
+      final ByteData bytes =
+          await rootBundle.load('assets/images/map_anotations/route.png');
+      final Uint8List imagesData = bytes.buffer.asUint8List();
+      _centerCamera(listRoute
+          .map((route) => Position(route.longitude, route.latitude))
+          .toList());
+      pointAnnotationManager.createMulti(positions
+          .map((e) => PointAnnotationOptions(
+                iconSize: 3,
+                geometry: Point(coordinates: e).toJson(),
+                image: imagesData,
+              ))
+          .toList());
+      pointAnnotationManager
+          .addOnPointAnnotationClickListener(AnnotationClickListener());
+    });
   }
 }
 
