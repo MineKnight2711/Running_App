@@ -20,7 +20,7 @@ class PerformanceSummary extends StatelessWidget {
       children: [
         Container(
           width: 135.w,
-          height: 55.h,
+          height: 60.h,
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
               color: AppColors.basicActivitiesCard,
@@ -45,7 +45,7 @@ class PerformanceSummary extends StatelessWidget {
         ),
         Container(
           width: 135.w,
-          height: 55.h,
+          height: 60.h,
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
               color: AppColors.basicActivitiesCard,
@@ -61,9 +61,10 @@ class PerformanceSummary extends StatelessWidget {
               Text(
                 "Total runs",
                 style: CustomGoogleFonts.roboto(
-                    fontSize: 14.r,
-                    color: AppColors.white100,
-                    fontWeight: FontWeight.w200),
+                  fontSize: 14.r,
+                  color: AppColors.white100,
+                  fontWeight: FontWeight.w200,
+                ),
               )
             ],
           ),

@@ -9,7 +9,7 @@ class PreparationScheduleSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSpacings.heightByScreenHeight(0.5),
+      height: AppSpacings.heightByScreenHeight(0.55),
       decoration: const BoxDecoration(
         color: Color(0xFF222222),
         borderRadius: BorderRadius.only(
@@ -29,7 +29,23 @@ class PreparationScheduleSheet extends StatelessWidget {
                     CustomGoogleFonts.roboto(fontSize: 20, color: Colors.white),
               ),
               const Spacer(),
-              const Icon(CupertinoIcons.xmark, color: Colors.white),
+              SizedBox(
+                width: AppSpacings.horizontalSpacing30,
+                height: AppSpacings.verticalSpacing30,
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    CupertinoIcons.xmark,
+                    size: 20,
+                    color: AppColors.white100.withOpacity(0.5),
+                  ),
+                ),
+              ),
             ],
           ),
           const Divider(

@@ -19,7 +19,7 @@ class RouteDetailsFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int columnHeaderTextSize = 12;
-    int trailDetailsTextSize = titleInFooter! ? 14 : 16;
+    int trailDetailsTextSize = titleInFooter! ? 13 : 15;
     int columnGap = titleInFooter! ? 10 : 14;
     return Container(
       width: 1.sw,

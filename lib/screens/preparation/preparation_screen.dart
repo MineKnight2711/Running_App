@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/config/colors.dart';
-import 'package:flutter_running_demo/config/fonts.dart';
-import 'package:flutter_running_demo/config/spacings.dart';
+import '../../config/config_export.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../controllers/map_controller.dart';
-import '../../models/route_model/route_model.dart';
 import '../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
 import 'components/components_export.dart';
 import 'data/list_top_route_model.dart';
@@ -49,14 +46,10 @@ class _PreparationScreenState extends State<PreparationScreen>
           CustomMapWidget(
             onMapCreate: (mapBoxMap) {
               mapController.onMapCreated(mapBoxMap);
-              mapController.createTempTopRoutes(tempTopRoute);
+              mapController.createTempTopRoutes();
             },
           ),
-          Positioned(
-            top: 40,
-            // left: 10,
-            child: HorizontalAnnotations(),
-          ),
+          Positioned(top: 40, child: HorizontalAnnotations()),
           Positioned(top: 200, right: 0, child: VerticalAnnotations()),
           Align(
             alignment: Alignment.bottomCenter,
@@ -82,10 +75,57 @@ class _PreparationScreenState extends State<PreparationScreen>
                       scrollController: scrollController,
                       routes: tempTopRoute,
                     ),
-                    RoutePreparationList(
-                      scrollController: scrollController,
-                      routes: tempTopRoute,
+                    Column(
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          horizontalTitleGap: 10,
+                          leading: SvgPicture.asset(
+                            "assets/svg/preparation/add_new_route/run.svg",
+                          ),
+                          title: Text(
+                            "Press running man icon to check existing route and save to your favorite or upcoming run",
+                            style: CustomGoogleFonts.roboto(
+                              fontSize: AppFontSizes.size14,
+                              color: AppColors.white100,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          horizontalTitleGap: 10,
+                          leading: SvgPicture.asset(
+                              "assets/svg/preparation/add_new_route/hand.svg"),
+                          title: Text(
+                            "Press and hold a point on the map or press the hand icon to add waypoints along the route",
+                            style: CustomGoogleFonts.roboto(
+                              fontSize: AppFontSizes.size14,
+                              color: AppColors.white100,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          horizontalTitleGap: 10,
+                          leading: SvgPicture.asset(
+                              "assets/svg/preparation/add_new_route/pen.svg"),
+                          title: Text(
+                            "Use the pen icon to directly draw path",
+                            style: CustomGoogleFonts.roboto(
+                              fontSize: AppFontSizes.size14,
+                              color: AppColors.white100,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
+                    // RoutePreparationList(
+                    //   scrollController: scrollController,
+                    //   routes: tempTopRoute,
+                    // ),
                     UpcomingListRoute(
                       scrollController: scrollController,
                       anyTimeRoutes: tempTopRoute.sublist(0, 2),
@@ -177,50 +217,4 @@ class _PreparationScreenState extends State<PreparationScreen>
 
   @override
   bool get wantKeepAlive => true;
-}
-
-// ListView.builder(
-//       padding: EdgeInsets.zero,
-//       controller: scrollController, // assign controller here
-//       itemCount: routes.length,
-//       itemBuilder: (_, index) => GestureDetector(
-//         onTap: () => selectedRoute.value = routes[index],
-//         child: Obx(
-//           () => RouteItemWidget(
-//             isSelected: selectedRoute.value == routes[index],
-//             route: routes[index],
-//           ),
-//         ),
-//       ),
-//     );
-class RoutePreparationList extends StatelessWidget {
-  final List<RouteModel> routes;
-  final ScrollController scrollController;
-  const RoutePreparationList({
-    super.key,
-    required this.routes,
-    required this.scrollController,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final Rxn<RouteModel> selectedRoute = Rxn<RouteModel>();
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      controller: scrollController, // assign controller here
-      itemCount: routes.length,
-      itemBuilder: (_, index) => GestureDetector(
-        onTap: () => selectedRoute.value = routes[index],
-        child: Obx(
-          () => RouteItemWidget(
-            isSelected: selectedRoute.value == routes[index],
-            route: routes[index],
-            isSelectedWidget: RouteItemOption(
-              route: routes[index],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }

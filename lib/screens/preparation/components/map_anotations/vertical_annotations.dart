@@ -13,7 +13,11 @@ class VerticalAnnotations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        MapAnnotationItem(onPressed: () {}, assetSvg: "compass"),
+        MapAnnotationItem(
+            onPressed: () {
+              mapController.changeMapDirection();
+            },
+            assetSvg: "compass"),
         SizedBox(
           height: 10.h,
         ),

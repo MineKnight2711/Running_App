@@ -12,18 +12,18 @@ class CustomMapWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => MapWidget(
-          styleUri: mapController.currentMapViewStyle.value,
-          key: const ValueKey("mapWidget"),
-          resourceOptions: ResourceOptions(
-              accessToken:
-                  "pk.eyJ1IjoidGluaGthaXQiLCJhIjoiY2xoZXhkZmJ4MTB3MzNqczdza2MzcHE2YSJ9.tPQwbEWtA53iWlv3U8O0-g"),
-          cameraOptions: CameraOptions(
-            center:
-                Point(coordinates: Position(106.722954, 10.726725)).toJson(),
-            zoom: mapController.zoomLevel.value,
-          ),
-          textureView: true,
-          onMapCreated: onMapCreate),
+        styleUri: mapController.currentMapViewStyle.value,
+        key: const ValueKey("mapWidget"),
+        resourceOptions: ResourceOptions(
+            accessToken:
+                "pk.eyJ1IjoidGluaGthaXQiLCJhIjoiY2xoZXhkZmJ4MTB3MzNqczdza2MzcHE2YSJ9.tPQwbEWtA53iWlv3U8O0-g"),
+        cameraOptions: CameraOptions(
+          center: Point(coordinates: Position(106.722954, 10.726725)).toJson(),
+          zoom: mapController.zoomLevel.value,
+        ),
+        textureView: true,
+        onMapCreated: onMapCreate,
+      ),
     );
   }
 }

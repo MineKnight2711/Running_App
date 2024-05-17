@@ -10,6 +10,7 @@ dependencies:
 
   flutter:
     sdk: flutter
+  dotted_border: ^2.1.0
   google_fonts: ^6.2.1
   flutter_screenutil: ^5.9.0
   get: ^4.6.6
@@ -50,6 +51,7 @@ flutter:
     - assets/svg/
     - assets/svg/music/
     - assets/svg/preparation/
+    - assets/svg/preparation/add_new_route/
     - assets/svg/preparation/details_route/
     - assets/svg/preparation/alert_dialog/
     - assets/svg/preparation/map_annotations/

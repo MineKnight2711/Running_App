@@ -61,7 +61,7 @@ class RunnerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppSpacings.customVerticalSpacing(80),
+      height: AppSpacings.customVerticalSpacing(75),
       child: Column(
         children: [
           Row(

@@ -17,7 +17,7 @@ import 'package:flutter_running_demo/screens/run/show_clock/run_to_ready.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sensor_status.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/running_show_clock_screen.dart';
 import 'package:get/get.dart';
-import '../screens/progress/app_tabbar_view.dart/app_tabbar_view.dart';
+import '../screens/progress/app_tabbar_view/app_tabbar_view.dart';
 
 import '../test_widgets_demo/test_alertdialog/test_remove_confirmation.dart';
 import '../test_widgets/test_screen.dart';
