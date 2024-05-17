@@ -95,6 +95,7 @@ class RouteDetailsElevationChart extends StatelessWidget {
                 ),
               ),
               gridData: FlGridData(
+                verticalInterval: 5,
                 getDrawingHorizontalLine: (value) {
                   return const FlLine(color: AppColors.basicActivitiesCard);
                 },

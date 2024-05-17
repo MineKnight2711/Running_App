@@ -42,12 +42,14 @@ flutter:
     - assets/svg/
     - assets/svg/music_provider/
     - assets/images/actions/
+    - assets/images/music/
     - assets/images/map_anotations/
     - assets/images/basic_activities/
     - assets/images/activities_details/
     - assets/images/details_route_images/
     - assets/images/details_route_images/runners/
     - assets/svg/
+    - assets/svg/music/
     - assets/svg/preparation/
     - assets/svg/preparation/add_new_route/
     - assets/svg/preparation/details_route/
@@ -56,6 +58,8 @@ flutter:
     - assets/svg/preparation/route_item_options/
     - assets/svg/preparation/route_vector/
     - assets/svg/preparation/rpe/
+    - assets/svg/preparation/rate_rpe/
     - assets/svg/preparation/
     - assets/svg/activities/
+    - assets/svg/runing_finished_stastitic/
     - assets/svg/bottom_bar/

@@ -3,6 +3,9 @@
 import 'package:flutter_running_demo/screens/home_screen/home_screen.dart';
 import 'package:flutter_running_demo/screens/performance/performance_screen.dart';
 import 'package:flutter_running_demo/screens/progress/details_route_screen/details_route_screen.dart';
+import 'package:flutter_running_demo/screens/run/show_clock/components/music_pause_clock.dart';
+import 'package:flutter_running_demo/screens/run/show_clock/components/music_play_clock.dart';
+import 'package:flutter_running_demo/screens/run/show_clock/components/run_finished.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/runstop.dart';
 import 'package:flutter_running_demo/test_widgets/metric_info.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_complete.dart';
@@ -46,6 +49,9 @@ class AppRoutes {
   static const String _metricinfo = '/metricinfo';
   static const String _readytorun = '/readytorun';
   static const String _sendinglocation = '/sendinglocation';
+  static const String _musicplaylock = '/musicplaylock';
+  static const String _musicpauselock = '/musicpauselock';
+  static const String _runfinished = '/runfinished';
 
   static String get tabbarview => _tabbarview;
   static String get home => _home;
@@ -70,6 +76,9 @@ class AppRoutes {
   static String get metricinfo => _metricinfo;
   static String get readytorun => _readytorun;
   static String get sendinglocation => _sendinglocation;
+  static String get musicplaylock => _musicplaylock;
+  static String get musicpauselock => _musicpauselock;
+  static String get runfinished => _runfinished;
 
   static navigate(String query) {
     Get.toNamed(
@@ -170,6 +179,18 @@ class AppRoutes {
     GetPage(
         name: _sendinglocation,
         page: () => const SendingLocation(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _musicplaylock,
+        page: () => const MusicPlayClock(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _musicpauselock,
+        page: () => const MusicPauseClock(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: _runfinished,
+        page: () => const RunFinished(),
         transition: Transition.rightToLeft),
   ];
 }
