@@ -5,8 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../config/config_export.dart';
 import '../../models/intensity_model/intensity_model.dart';
-import '../../widgets/custom_dropdown/record_dropdown.dart';
+import '../../widgets/custom_dropdown/custom_dropdown_widget.dart';
 import '../../widgets/widget_export.dart';
+import '../progress/progress_screen/components/route_details/route_details.dart';
 import 'components/components_export.dart';
 import 'components/charts/charts_export.dart';
 
@@ -73,19 +74,31 @@ class PerformanceMetricsScreen extends GetView {
               // DropDownActivitiesMenu(
               //   activitiesList: activitiesDropDownList,
               // ),
-              RecordDropdown(
+              CustomDropdownWidget(
                 iconData: Icons.directions_walk,
                 dropDownHeight: 0.38.sh,
                 horizontalButtonPadding: 20.w,
-                achievement: "Longest Walking",
-                record: "23km",
+                title: "23km",
+                subtitle: "Longest Walking",
+                dropDownWidget: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: RouteDetailsWidget(
+                    route: routeTempList[2],
+                  ),
+                ),
               ),
-              RecordDropdown(
+              CustomDropdownWidget(
                 iconData: Icons.route,
                 dropDownHeight: 0.38.sh,
                 horizontalButtonPadding: 20.w,
-                achievement: "Longest route",
-                record: "100km",
+                title: "100km",
+                subtitle: "Longest Route",
+                dropDownWidget: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: RouteDetailsWidget(
+                    route: routeTempList.first,
+                  ),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),

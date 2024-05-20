@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/screens/preparation/preparation_screen.dart';
 import 'package:flutter_running_demo/screens/progress/progress_screen/progress_screen.dart';
-import '../../utils/navigator_key.dart';
+import 'package:flutter_running_demo/utils/navigator_key.dart';
 import '../../widgets/bottom_bar/bottom_tabbar.dart';
 
 class TabBarViewScreen extends StatefulWidget {
@@ -26,7 +26,7 @@ class _TabBarViewScreenState extends State<TabBarViewScreen>
     return Scaffold(
       body: Navigator(
         key: NavigatorKeys.secondaryNavigatorKey,
-        onGenerateRoute: (routeSettings) {
+        onGenerateRoute: (settings) {
           return MaterialPageRoute(
             builder: (context) => TabBarView(
               physics: const NeverScrollableScrollPhysics(),

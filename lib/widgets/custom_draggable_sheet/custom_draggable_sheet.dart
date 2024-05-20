@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
+
 import 'sheet_grabber.dart';
 
 class CustomDraggableSheetWidget extends StatefulWidget {
   final Widget Function(
-      BuildContext context, ScrollController scrollController)? sheetBody;
+          BuildContext context, ScrollController scrollController)?
+      sheetBodyBuilder;
+  final double sheetPostiton, inititalSize, minSize, maxSize, dragSensitivity;
+
+  final bool isSnap, usingInititalSize;
   final Widget? grabberBottom;
   const CustomDraggableSheetWidget({
     super.key,
-    this.sheetBody,
+    this.sheetBodyBuilder,
+    this.isSnap = false,
     this.grabberBottom = const SizedBox.shrink(),
+    this.sheetPostiton = 0.25,
+    this.dragSensitivity = 800,
+    this.minSize = 0.25,
+    this.maxSize = 0.9,
+    this.inititalSize = 0.25,
+    this.usingInititalSize = false,
   });
 
   @override
@@ -18,17 +30,25 @@ class CustomDraggableSheetWidget extends StatefulWidget {
 
 class _CustomDraggableSheetWidgetState
     extends State<CustomDraggableSheetWidget> {
-  double _sheetPosition = 0.25;
-  final double _dragSensitivity = 800;
+  late double _sheetPosition;
+  late double _dragSensitivity;
+  @override
+  void initState() {
+    super.initState();
+    _sheetPosition = widget.sheetPostiton;
+    _dragSensitivity = widget.dragSensitivity;
+  }
 
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-        maxChildSize: _sheetPosition,
+        maxChildSize:
+            widget.usingInititalSize ? widget.maxSize : _sheetPosition,
         initialChildSize: _sheetPosition,
-        minChildSize: _sheetPosition,
+        minChildSize:
+            widget.usingInititalSize ? widget.minSize : _sheetPosition,
         expand: false,
-        snap: true,
+        snap: widget.isSnap,
         builder: (context, scrollController) {
           return Container(
             decoration: BoxDecoration(
@@ -41,7 +61,6 @@ class _CustomDraggableSheetWidgetState
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                // Put all heading in column.
                 SheetGrabber(
                   onVerticalDragUpdate: (details) {
                     setState(() {
@@ -56,10 +75,11 @@ class _CustomDraggableSheetWidgetState
                   },
                   grabberBottom: widget.grabberBottom!,
                 ),
-
-                Expanded(
-                  child: widget.sheetBody!(context, scrollController),
-                ),
+                widget.sheetBodyBuilder != null
+                    ? Expanded(
+                        child:
+                            widget.sheetBodyBuilder!(context, scrollController))
+                    : const SizedBox.shrink(),
               ],
             ),
           );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../config/config_export.dart';
+import '../../../widgets/bottom_bar/bottom_tabbar.dart';
 import 'components/components.dart';
 
 class ProgressScreen extends GetView {
