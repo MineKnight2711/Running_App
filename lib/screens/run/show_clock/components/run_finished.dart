@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/config/config_export.dart';
+import '../../../.././config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../progress/details_route_screen/components/route_details_elevation_chart.dart';
@@ -65,35 +65,9 @@ class RunFinished extends StatelessWidget {
                     hintStyle: CustomGoogleFonts.roboto(
                         fontSize: 16, color: Colors.white)),
               ),
-              const SizedBox(height: 20),
-              DottedBorder(
-                radius: const Radius.circular(20),
-                padding: EdgeInsets.zero,
-                borderType: BorderType.RRect,
-                color: const Color(0xFFFFFFFF).withOpacity(0.2),
-                strokeWidth: 1.5,
-                dashPattern: const [10, 5],
-                child: Container(
-                    width: 400,
-                    height: 130,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: const Color(0xFFFFFFFF).withOpacity(0.2),
-                    ),
-                    alignment: Alignment.center,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset('assets/svg/image.svg'),
-                        Text(
-                          'Add photos / videos',
-                          style: CustomGoogleFonts.roboto(
-                              fontSize: 14, color: Colors.white),
-                        ),
-                      ],
-                    )),
+              const SizedBox(
+                height: 20,
               ),
-              const SizedBox(height: 20),
               Column(
                 children: [
                   Row(

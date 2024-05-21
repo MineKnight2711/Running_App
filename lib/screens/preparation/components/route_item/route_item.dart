@@ -7,7 +7,7 @@ import '../../../../config/config_export.dart';
 import '../../../../models/route_model/route_model.dart';
 
 class RouteItemWidget extends StatelessWidget {
-  final bool isSelected, showDivider;
+  final bool isSelected, showDivider, haveSelectedBackGround, haveRunnerAttemps;
   final Widget isSelectedWidget;
   final RouteModel route;
   const RouteItemWidget(
@@ -15,7 +15,9 @@ class RouteItemWidget extends StatelessWidget {
       required this.route,
       required this.isSelected,
       this.isSelectedWidget = const SizedBox.shrink(),
-      this.showDivider = true});
+      this.showDivider = true,
+      this.haveSelectedBackGround = true,
+      this.haveRunnerAttemps = true});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class RouteItemWidget extends StatelessWidget {
       children: [
         Container(
           width: 1.sw,
-          height: isSelected ? 125.h : 70.h,
+          height: isSelected ? 134.h : 74.h,
           padding: isSelected
               ? EdgeInsets.symmetric(vertical: 5.h)
               : EdgeInsets.zero,
@@ -45,7 +47,11 @@ class RouteItemWidget extends StatelessWidget {
                       width: 0.2.sw,
                       height: 0.2.sw,
                       decoration: BoxDecoration(
-                        color: AppColors.basicActivitiesCard,
+                        color: haveSelectedBackGround
+                            ? (isSelected
+                                ? AppColors.basicActivitiesCard
+                                : Colors.transparent)
+                            : Colors.transparent,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       alignment: Alignment.center,
@@ -111,18 +117,20 @@ class RouteItemWidget extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                  "assets/svg/preparation/run.svg"),
-                              Text(
-                                " ${route.attemps} runners attempted",
-                                style: CustomGoogleFonts.roboto(
-                                    fontSize: 16.r,
-                                    color: TextColor.secondaryText),
-                              ),
-                            ],
-                          )
+                          haveRunnerAttemps
+                              ? Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                        "assets/svg/preparation/run.svg"),
+                                    Text(
+                                      " ${route.attemps} runners attempted",
+                                      style: CustomGoogleFonts.roboto(
+                                          fontSize: 16.r,
+                                          color: TextColor.secondaryText),
+                                    ),
+                                  ],
+                                )
+                              : const SizedBox.shrink()
                         ],
                       ),
                     )
@@ -139,9 +147,9 @@ class RouteItemWidget extends StatelessWidget {
           ),
         ),
         showDivider
-            ? const Divider(
-                height: 0,
-                thickness: 0.3,
+            ? Divider(
+                height: 5.h,
+                thickness: 0.4,
               )
             : const SizedBox.shrink(),
       ],

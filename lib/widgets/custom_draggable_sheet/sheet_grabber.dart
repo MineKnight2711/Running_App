@@ -15,7 +15,7 @@ class SheetGrabber extends StatelessWidget {
       onVerticalDragUpdate: onVerticalDragUpdate,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
+        children: [
           Align(
             alignment: Alignment.topCenter,
             child: Container(

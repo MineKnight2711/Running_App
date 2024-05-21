@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:flutter_running_demo/screens/home_screen/home_screen.dart';
 import 'package:flutter_running_demo/screens/performance/performance_screen.dart';
 import 'package:flutter_running_demo/screens/progress/details_route_screen/details_route_screen.dart';
@@ -21,7 +20,7 @@ import '../screens/app_tabbar_view/app_tabbar_view.dart';
 
 import '../test_widgets/test_fimage_picker.dart';
 import '../test_widgets_demo/test_alertdialog/test_remove_confirmation.dart';
-import '../test_widgets/test_screen.dart';
+
 import '../test_widgets_demo/test_alertdialog/test_screen2.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/run_setting/audio_guidance.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/run_setting/map_setting.dart';
@@ -32,7 +31,6 @@ class AppRoutes {
   static const String _tabbarview = '/tabbarview';
   static const String _performanceMetrics = '/performance-metrics';
   static const String _detailRoute = '/detail-route';
-  static const String _testscreen = '/testscreen';
   static const String _testscreen2 = '/testscreen2';
   static const String _testconfirmdeletion = '/testconfirmdeletion';
   static const String _testconfirmaddtion = '/testconfirmaddtion';
@@ -61,7 +59,6 @@ class AppRoutes {
   static String get home => _home;
   static String get performanceMetrics => _performanceMetrics;
   static String get detailRoute => _detailRoute;
-  static String get testscreen => _testscreen;
   static String get testscreen2 => _testscreen2;
   static String get testconfirmdeletion => _testconfirmdeletion;
   static String get testconfirmaddtion => _testconfirmaddtion;
@@ -125,10 +122,6 @@ class AppRoutes {
     GetPage(
         name: _detailRoute,
         page: () => DetailsRouteScreen(),
-        transition: Transition.rightToLeft),
-    GetPage(
-        name: _testscreen,
-        page: () => TestPerformanceScreen(),
         transition: Transition.rightToLeft),
     GetPage(
         name: _testscreen2,

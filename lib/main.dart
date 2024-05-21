@@ -1,13 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_running_demo/config/routes.dart';
 import 'package:flutter_running_demo/controllers/map_controller.dart';
+import 'package:flutter_running_demo/utils/navigator_key.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'utils/navigator_key.dart';
-
 void main() {
-  runApp(const MainApp());
+  WidgetsFlutterBinding.ensureInitialized()
+      .addObserver(MyAppLifecycleObserver());
+  runApp(const PopScope(canPop: false, child: MainApp()));
   Get.put(MapController());
 }
 
@@ -25,6 +28,9 @@ class MainApp extends StatelessWidget {
         initialRoute: AppRoutes.imagepicker,
         getPages: AppRoutes.getPages,
         navigatorKey: NavigatorKeys.mainNavigatorKey,
+        navigatorObservers: [
+          MyNavigatorObserver(),
+        ],
       ),
     );
   }

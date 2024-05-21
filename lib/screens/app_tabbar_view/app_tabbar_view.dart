@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/screens/preparation/preparation_screen.dart';
 import 'package:flutter_running_demo/screens/progress/progress_screen/progress_screen.dart';
-import '../../utils/navigator_key.dart';
+import 'package:flutter_running_demo/utils/navigator_key.dart';
+import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import '../../widgets/bottom_bar/bottom_tabbar.dart';
 
 class TabBarViewScreen extends StatefulWidget {
@@ -14,7 +16,7 @@ class TabBarViewScreen extends StatefulWidget {
 class _TabBarViewScreenState extends State<TabBarViewScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
-
+  final RxBool canPop = false.obs;
   @override
   void initState() {
     super.initState();
@@ -23,25 +25,38 @@ class _TabBarViewScreenState extends State<TabBarViewScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Navigator(
-        key: NavigatorKeys.secondaryNavigatorKey,
-        onGenerateRoute: (routeSettings) {
-          return MaterialPageRoute(
-            builder: (context) => TabBarView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _tabController,
-              children: const [
-                ProgressScreen(),
-                PreparationScreen(),
-              ],
-            ),
-          );
+    return Obx(
+      () => PopScope(
+        canPop: canPop.value,
+        onPopInvoked: (didPop) async {
+          if (!NavigatorKeys.mainNavigatorKey.currentState!.canPop()) {
+            Logger().i('Main navigator was popped');
+            NavigatorKeys.secondaryNavigatorKey.currentState!.pop();
+          }
         },
-      ),
-      bottomNavigationBar: BottomNavigationTabBar(
-        tabController: _tabController,
-        onTabChange: (index) {},
+        child: Scaffold(
+          body: Navigator(
+            key: NavigatorKeys.secondaryNavigatorKey,
+            onGenerateRoute: (settings) {
+              return MaterialPageRoute(
+                builder: (context) => Scaffold(
+                  body: TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: _tabController,
+                    children: const [
+                      ProgressScreen(),
+                      PreparationScreen(),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+          bottomNavigationBar: BottomNavigationTabBar(
+            tabController: _tabController,
+            onTabChange: (index) {},
+          ),
+        ),
       ),
     );
   }
