@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_running_demo/models/runner_model.dart/runner_model.dart';
@@ -104,22 +103,6 @@ class DetailsRouteScreen extends GetView {
               SizedBox(height: AppSpacings.verticalSpacing20),
               RouteDetailsTopRunnerList(topRunners: topRunners),
               SizedBox(height: AppSpacings.verticalSpacing30),
-              DottedBorder(
-                radius: Radius.circular(20),
-                padding: EdgeInsets.zero,
-                borderType: BorderType.RRect,
-                color: const Color(0xFFFFFFFF).withOpacity(0.2),
-                strokeWidth: 1.5,
-                dashPattern: [10, 5],
-                child: Container(
-                  width: 400,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFFFFFFFF).withOpacity(0.2),
-                  ),
-                ),
-              ),
             ],
           ),
         ),

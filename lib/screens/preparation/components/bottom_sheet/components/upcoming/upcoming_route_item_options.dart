@@ -3,9 +3,9 @@ import 'package:flutter_running_demo/screens/preparation/components/components_e
 import 'package:flutter_running_demo/widgets/alert_dialogs/confirm_alert_dialogs.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../../../config/config_export.dart';
-import '../../../../models/route_model/route_model.dart';
-import '../../../../utils/navigator_key.dart';
+import '../../../../../../config/config_export.dart';
+import '../../../../../../models/route_model/route_model.dart';
+import '../../../../../../utils/navigator_key.dart';
 
 class UpcommingRouteItemOptions extends StatelessWidget {
   final RouteModel route;

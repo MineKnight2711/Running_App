@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../../config/config_export.dart';
-import '../data/list_top_route_model.dart';
+import '../../../../../config/config_export.dart';
+import '../../../data/list_top_route_model.dart';
 
 enum PreparationType { favorites, addNew, upcoming }
 

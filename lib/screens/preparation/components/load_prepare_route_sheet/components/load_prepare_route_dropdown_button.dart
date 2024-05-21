@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../models/route_model/route_model.dart';
 import '../../../../../widgets/custom_dropdown/custom_dropdown_widget.dart';
-import '../../route_item/route_item.dart';
+import '../../bottom_sheet/components/route_item.dart';
 import 'load_prepare_route_item_option.dart';
 
 class PrepareRouteMapDropdownButtonWidget extends StatelessWidget {

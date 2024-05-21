@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../config/config_export.dart';
-import '../../../models/route_model/route_model.dart';
-import 'route_item/route_item.dart';
-import 'route_item/upcoming_route_item_options.dart';
+import '../../../../../../config/config_export.dart';
+import '../../../../../../models/route_model/route_model.dart';
+import '../route_item.dart';
+import 'upcoming_route_item_options.dart';
 
 class UpcomingListRoute extends StatelessWidget {
   final List<RouteModel> anyTimeRoutes;

@@ -3,8 +3,8 @@ import 'package:flutter_running_demo/extensions/duration_extension.dart';
 import 'package:flutter_running_demo/extensions/integer_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../config/config_export.dart';
-import '../../../../models/route_model/route_model.dart';
+import '../../../../../config/config_export.dart';
+import '../../../../../models/route_model/route_model.dart';
 
 class RouteItemWidget extends StatelessWidget {
   final bool isSelected, showDivider, haveSelectedBackGround, haveRunnerAttemps;

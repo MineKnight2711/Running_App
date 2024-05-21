@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 
 class NavigatorKeys {
@@ -11,6 +10,7 @@ class MyNavigatorObserver extends NavigatorObserver {
   @override
   void didPop(Route route, Route? previousRoute) {
     super.didPop(route, previousRoute);
+    Logger().i('Route was popped ${route.settings.name}');
   }
 }
 

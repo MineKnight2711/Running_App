@@ -1,12 +1,14 @@
 import 'dart:math';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../.././config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../progress/details_route_screen/components/route_details_elevation_chart.dart';
 import '../../../progress/details_route_screen/components/route_details_map_terrain.dart';
 
-class RunFinished extends StatelessWidget {
+class RunFinished extends GetView {
   const RunFinished({super.key});
 
   @override
@@ -63,6 +65,25 @@ class RunFinished extends StatelessWidget {
                     hintText: 'Name your route',
                     hintStyle: CustomGoogleFonts.roboto(
                         fontSize: 16, color: Colors.white)),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              DottedBorder(
+                radius: const Radius.circular(20),
+                padding: EdgeInsets.zero,
+                borderType: BorderType.RRect,
+                color: const Color(0xFFFFFFFF).withOpacity(0.2),
+                strokeWidth: 1.5,
+                dashPattern: const [10, 5],
+                child: Container(
+                  width: 400,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xFFFFFFFF).withOpacity(0.2),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 20,

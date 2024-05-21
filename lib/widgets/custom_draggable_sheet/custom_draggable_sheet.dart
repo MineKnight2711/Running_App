@@ -6,9 +6,9 @@ class CustomDraggableSheetWidget extends StatefulWidget {
   final Widget Function(
           BuildContext context, ScrollController scrollController)?
       sheetBodyBuilder;
-  final double sheetPostiton, inititalSize, minSize, maxSize, dragSensitivity;
+  final double? sheetPostiton, inititalSize, minSize, maxSize, dragSensitivity;
 
-  final bool isSnap, usingInititalSize;
+  final bool isSnap, showGrabber;
   final Widget? grabberBottom;
   const CustomDraggableSheetWidget({
     super.key,
@@ -19,8 +19,8 @@ class CustomDraggableSheetWidget extends StatefulWidget {
     this.dragSensitivity = 800,
     this.minSize = 0.25,
     this.maxSize = 0.9,
-    this.inititalSize = 0.25,
-    this.usingInititalSize = false,
+    this.inititalSize,
+    this.showGrabber = true,
   });
 
   @override
@@ -35,18 +35,20 @@ class _CustomDraggableSheetWidgetState
   @override
   void initState() {
     super.initState();
-    _sheetPosition = widget.sheetPostiton;
-    _dragSensitivity = widget.dragSensitivity;
+    _sheetPosition = widget.inititalSize ?? widget.sheetPostiton ?? 0.9;
+    _dragSensitivity = widget.dragSensitivity ?? 800;
   }
 
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-        maxChildSize:
-            widget.usingInititalSize ? widget.maxSize : _sheetPosition,
+        maxChildSize: widget.inititalSize != null
+            ? widget.maxSize ?? 0.9
+            : _sheetPosition,
         initialChildSize: _sheetPosition,
-        minChildSize:
-            widget.usingInititalSize ? widget.minSize : _sheetPosition,
+        minChildSize: widget.inititalSize != null
+            ? widget.minSize ?? 0.25
+            : _sheetPosition,
         expand: false,
         snap: widget.isSnap,
         builder: (context, scrollController) {
@@ -65,14 +67,15 @@ class _CustomDraggableSheetWidgetState
                   onVerticalDragUpdate: (details) {
                     setState(() {
                       _sheetPosition -= details.delta.dy / _dragSensitivity;
-                      if (_sheetPosition < 0.25) {
-                        _sheetPosition = 0.25;
+                      if (_sheetPosition < (widget.minSize ?? 0.25)) {
+                        _sheetPosition = widget.minSize ?? 0.25;
                       }
-                      if (_sheetPosition > 0.9) {
-                        _sheetPosition = 0.9;
+                      if (_sheetPosition > (widget.maxSize ?? 0.9)) {
+                        _sheetPosition = widget.maxSize ?? 0.9;
                       }
                     });
                   },
+                  showGrabber: widget.showGrabber,
                   grabberBottom: widget.grabberBottom!,
                 ),
                 widget.sheetBodyBuilder != null

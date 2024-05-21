@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../models/route_model/route_model.dart';
-import 'route_item/favorites_route_item_options.dart';
-import 'route_item/route_item.dart';
+import '../../../../../../models/route_model/route_model.dart';
+import 'favorites_route_item_options.dart';
+import '../route_item.dart';
 
 class RoutePreparationList extends StatelessWidget {
   final List<RouteModel> routes;

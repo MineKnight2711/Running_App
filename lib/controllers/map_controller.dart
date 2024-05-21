@@ -53,7 +53,7 @@ class MapController extends GetxController {
   RxString searchText = "".obs;
   RxString latitude = "".obs;
   RxString longLatitude = "".obs;
-  // Rxn<RouteModel> selectedRoute=
+  Rxn<RouteModel> selectedRoute = Rxn<RouteModel>();
   late RxList<RouteModel> listRoute;
   @override
   void onInit() {
@@ -78,7 +78,7 @@ class MapController extends GetxController {
 
   selectAnotation(int anotationIndex) {
     if (listRoute.isNotEmpty) {
-      print("${listRoute[anotationIndex].title}");
+      selectedRoute.value = listRoute[anotationIndex];
     }
   }
 

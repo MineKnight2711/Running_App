@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/config/config_export.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../../config/config_export.dart';
+import '../../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
 
-class TestPreparationScreen extends StatelessWidget {
-  const TestPreparationScreen({super.key});
+class RouteSaveToFavoriteBottomSheet extends StatelessWidget {
+  const RouteSaveToFavoriteBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Align(
+      alignment: Alignment.bottomCenter,
+      child: CustomDraggableSheetWidget(
+        showGrabber: false,
+        inititalSize: 0.3,
+        maxSize: 0.3,
+        grabberBottom: SaveToFavoriteBottomSheetGrabberBottom(),
+      ),
+    );
+  }
+}
+
+class SaveToFavoriteBottomSheetGrabberBottom extends StatelessWidget {
+  const SaveToFavoriteBottomSheetGrabberBottom({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +31,7 @@ class TestPreparationScreen extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(gradient: AppColors.appTheme),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-      height: 0.5.sh,
+      height: AppSpacings.heightByScreenHeight(0.5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -23,11 +40,11 @@ class TestPreparationScreen extends StatelessWidget {
           ),
           Text(
             'Name Your Route',
-            style:
-                CustomGoogleFonts.roboto(fontSize: 16.r, color: Colors.white),
+            style: CustomGoogleFonts.roboto(
+                fontSize: AppFontSizes.size16, color: Colors.white),
           ),
-          Divider(
-            thickness: 0.5.r,
+          const Divider(
+            thickness: 0.5,
             height: 22,
           ),
           const SizedBox(
@@ -39,20 +56,20 @@ class TestPreparationScreen extends StatelessWidget {
               Text(
                 'Distance: 1.2 km',
                 style: CustomGoogleFonts.roboto(
-                    fontSize: 14.r, color: Colors.white),
+                    fontSize: AppFontSizes.size14, color: Colors.white),
               ),
               Text(
                 'Elevation: 12 m',
                 style: CustomGoogleFonts.roboto(
-                    fontSize: 14.r, color: Colors.white),
+                    fontSize: AppFontSizes.size14, color: Colors.white),
               ),
             ],
           ),
           const SizedBox(
             height: 20,
           ),
-          Divider(
-            thickness: 0.5.r,
+          const Divider(
+            thickness: 0.5,
             height: 22,
           ),
           Row(
@@ -77,8 +94,8 @@ class TestPreparationScreen extends StatelessWidget {
               ),
             ],
           ),
-          Divider(
-            thickness: 0.5.r,
+          const Divider(
+            thickness: 0.5,
             height: 22,
           ),
           Row(

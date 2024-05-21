@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 class MapAnnotationItem extends StatelessWidget {
   final String assetSvg;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   const MapAnnotationItem(
       {super.key, required this.assetSvg, required this.onPressed});
 
