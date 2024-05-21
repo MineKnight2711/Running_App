@@ -19,25 +19,26 @@ class RoutePreparationList extends StatelessWidget {
     final Rxn<RouteModel> selectedRoute = Rxn<RouteModel>();
 
     return ListView.separated(
-        padding: EdgeInsets.zero,
-        controller: scrollController,
-        itemCount: routes.length,
-        separatorBuilder: (context, index) => const Divider(
-              height: 5,
-              thickness: 0.4,
+      padding: EdgeInsets.zero,
+      controller: scrollController,
+      itemCount: routes.length,
+      separatorBuilder: (context, index) => const Divider(
+        height: 5,
+        thickness: 0.4,
+      ),
+      itemBuilder: (_, index) => GestureDetector(
+        onTap: () => selectedRoute.value = routes[index],
+        child: Obx(
+          () => RouteItemWidget(
+            showDivider: false,
+            isSelected: selectedRoute.value == routes[index],
+            route: routes[index],
+            isSelectedWidget: RouteItemOption(
+              route: routes[index],
             ),
-        itemBuilder: (_, index) => GestureDetector(
-              onTap: () => selectedRoute.value = routes[index],
-              child: Obx(
-                () => RouteItemWidget(
-                  showDivider: !(index == routes.length - 1),
-                  isSelected: selectedRoute.value == routes[index],
-                  route: routes[index],
-                  isSelectedWidget: RouteItemOption(
-                    route: routes[index],
-                  ),
-                ),
-              ),
-            ));
+          ),
+        ),
+      ),
+    );
   }
 }

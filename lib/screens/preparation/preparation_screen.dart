@@ -32,50 +32,48 @@ class _PreparationScreenState extends State<PreparationScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          CustomMapWidget(
-            onMapCreate: (mapBoxMap) {
-              mapController.onMapCreated(mapBoxMap);
-              mapController.createTempTopRoutes();
-            },
-          ),
-          Positioned(top: 40, child: HorizontalAnnotations()),
-          Positioned(
-            top: 200,
-            right: 0,
-            child: VerticalAnnotations(
-              onPrepareRoutePressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  backgroundColor: AppColors.sheetBackground,
-                  builder: (context) => DraggableScrollableSheet(
-                    expand: false,
-                    maxChildSize: 0.9,
-                    minChildSize: 0.25,
-                    initialChildSize: 0.9,
-                    builder: (context, scrollController) =>
-                        SingleChildScrollView(
-                      controller: scrollController,
-                      child: PreparedRouteMapSheetWidget(
-                        scrollController: scrollController,
-                        scheduleRoutes: tempTopRoute.sublist(2, 4),
-                        readyForAnytimeRoutes: tempTopRoute.sublist(3, 6),
-                      ),
+    return Stack(
+      children: [
+        CustomMapWidget(
+          onMapCreate: (mapBoxMap) {
+            mapController.onMapCreated(mapBoxMap);
+            mapController.createTempTopRoutes();
+          },
+        ),
+        Positioned(top: 40, child: HorizontalAnnotations()),
+        Positioned(
+          top: 200,
+          right: 0,
+          child: VerticalAnnotations(
+            onPrepareRoutePressed: () {
+              showModalBottomSheet(
+                context: NavigatorKeys.secondaryNavigatorKey.currentContext!,
+                isScrollControlled: true,
+                useRootNavigator: false,
+                backgroundColor: AppColors.sheetBackground,
+                builder: (context) => DraggableScrollableSheet(
+                  expand: false,
+                  maxChildSize: 0.9,
+                  minChildSize: 0.25,
+                  initialChildSize: 0.9,
+                  builder: (context, scrollController) => SingleChildScrollView(
+                    controller: scrollController,
+                    child: PreparedRouteMapSheetWidget(
+                      scrollController: scrollController,
+                      scheduleRoutes: tempTopRoute.sublist(2, 4),
+                      readyForAnytimeRoutes: tempTopRoute.sublist(3, 6),
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
-          PreparationScreenBottomSheet(
-            tabController: _tabController,
-            onSelectedIndex: onSelectedIndex,
-          )
-        ],
-      ),
+        ),
+        PreparationScreenBottomSheet(
+          tabController: _tabController,
+          onSelectedIndex: onSelectedIndex,
+        )
+      ],
     );
   }
 

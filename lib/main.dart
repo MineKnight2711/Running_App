@@ -8,6 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized()
+      .addObserver(MyAppLifecycleObserver());
   runApp(const PopScope(canPop: false, child: MainApp()));
   Get.put(MapController());
 }
@@ -25,6 +27,10 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.tabbarview,
         getPages: AppRoutes.getPages,
+        navigatorKey: NavigatorKeys.mainNavigatorKey,
+        navigatorObservers: [
+          MyNavigatorObserver(),
+        ],
       ),
     );
   }
