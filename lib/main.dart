@@ -25,7 +25,7 @@ class MainApp extends StatelessWidget {
       splitScreenMode: true,
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.imagepicker,
+        initialRoute: AppRoutes.tabbarview,
         getPages: AppRoutes.getPages,
         navigatorKey: NavigatorKeys.mainNavigatorKey,
         navigatorObservers: [

@@ -1,9 +1,9 @@
 import 'dart:math';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import '../../../.././config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../../../utils/dash_border.dart';
 import '../../../progress/details_route_screen/components/route_details_elevation_chart.dart';
 import '../../../progress/details_route_screen/components/route_details_map_terrain.dart';
 

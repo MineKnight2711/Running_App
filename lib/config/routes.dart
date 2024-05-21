@@ -18,7 +18,6 @@ import 'package:flutter_running_demo/screens/run/show_clock/running_show_clock_s
 import 'package:get/get.dart';
 import '../screens/app_tabbar_view/app_tabbar_view.dart';
 
-import '../test_widgets/test_fimage_picker.dart';
 import '../test_widgets_demo/test_alertdialog/test_remove_confirmation.dart';
 
 import '../test_widgets_demo/test_alertdialog/test_screen2.dart';
@@ -53,7 +52,6 @@ class AppRoutes {
   static const String _musicpauselock = '/musicpauselock';
   static const String _runfinished = '/runfinished';
   static const String _loadpreparedroadmap = '/loadpreparedroadmap';
-  static const String _imagepicker = '/imagepicker';
 
   static String get tabbarview => _tabbarview;
   static String get home => _home;
@@ -81,7 +79,6 @@ class AppRoutes {
   static String get musicpauselock => _musicpauselock;
   static String get runfinished => _runfinished;
   static String get loadpreparedroadmap => _loadpreparedroadmap;
-  static String get imagepicker => _imagepicker;
 
   static navigate(String query) {
     Get.toNamed(
@@ -194,10 +191,6 @@ class AppRoutes {
     GetPage(
         name: _loadpreparedroadmap,
         page: () => const LoadPreparedRoadMap(),
-        transition: Transition.rightToLeft),
-    GetPage(
-        name: _imagepicker,
-        page: () => TestImagePicker(),
         transition: Transition.rightToLeft),
   ];
 }
