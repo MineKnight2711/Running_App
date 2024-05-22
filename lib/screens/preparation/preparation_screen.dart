@@ -21,7 +21,6 @@ class _PreparationScreenState extends State<PreparationScreen>
   @override
   void initState() {
     super.initState();
-
     _tabController = TabController(
       length: PreparationType.values.length,
       vsync: this,
@@ -29,9 +28,16 @@ class _PreparationScreenState extends State<PreparationScreen>
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     final RxBool isRouteSelected = false.obs;
+    final RxBool isRouteAdd = false.obs;
     return Stack(
       children: [
         CustomMapWidget(
@@ -42,17 +48,29 @@ class _PreparationScreenState extends State<PreparationScreen>
         ),
         Positioned(top: 40, child: HorizontalAnnotations()),
         Positioned(
-          top: 200,
+          top: 150,
           right: 0,
           child: Obx(
             () => VerticalAnnotations(
+              isRouteAdd: mapController.selectedRouteToAdd.value != null,
               isRouteSelected: isRouteSelected.value,
               onUndoPress: () {
                 isRouteSelected.toggle();
                 mapController.selectedRoute.value = null;
               },
+              onCheckPress: () {
+                isRouteSelected.toggle();
+                isRouteAdd.toggle();
+                mapController.selectRouteToAdd();
+              },
               onClosePress: () => isRouteSelected.toggle(),
               onHandPress: () => isRouteSelected.toggle(),
+              onAddUndoPress: () {
+                isRouteAdd.value = isRouteSelected.value = false;
+                mapController.selectedRouteToAdd.value = null;
+                mapController.resetPointAndAnotation();
+                mapController.createTempTopRoutes();
+              },
               onPrepareRoutePressed: () {
                 showModalBottomSheet(
                   context: NavigatorKeys.secondaryNavigatorKey.currentContext!,
@@ -86,11 +104,14 @@ class _PreparationScreenState extends State<PreparationScreen>
                       .toStringAsFixed(1),
                   elevation: '12',
                 )
-              : PreparationScreenBottomSheet(
-                  mapController: mapController,
-                  tabController: _tabController,
-                  onSelectedIndex: onSelectedIndex,
-                );
+              : (isRouteAdd.value &&
+                      mapController.selectedRouteToAdd.value != null
+                  ? RouteSaveToFavoriteBottomSheet(mapController: mapController)
+                  : PreparationScreenBottomSheet(
+                      mapController: mapController,
+                      tabController: _tabController,
+                      onSelectedIndex: onSelectedIndex,
+                    ));
         }),
       ],
     );

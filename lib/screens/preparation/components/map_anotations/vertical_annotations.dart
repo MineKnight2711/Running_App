@@ -5,10 +5,12 @@ import '../../../../controllers/map_controller.dart';
 import 'map_annotation_item.dart';
 
 class VerticalAnnotations extends StatelessWidget {
-  final bool isRouteSelected;
+  final bool isRouteSelected, isRouteAdd;
   final VoidCallback onPrepareRoutePressed,
       onClosePress,
       onHandPress,
+      onCheckPress,
+      onAddUndoPress,
       onUndoPress;
   final mapController = Get.find<MapController>();
   VerticalAnnotations(
@@ -17,16 +19,18 @@ class VerticalAnnotations extends StatelessWidget {
       required this.isRouteSelected,
       required this.onClosePress,
       required this.onHandPress,
-      required this.onUndoPress});
+      required this.onCheckPress,
+      required this.onUndoPress,
+      required this.isRouteAdd,
+      required this.onAddUndoPress});
 
   @override
   Widget build(BuildContext context) {
-    final isShowBottomSheet = false.obs;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         MapAnnotationItem(
-          onPressed: !isRouteSelected
+          onPressed: !isRouteSelected && !isRouteAdd
               ? () {
                   mapController.changeMapDirection();
                 }
@@ -38,7 +42,7 @@ class VerticalAnnotations extends StatelessWidget {
             ? Column(
                 children: [
                   MapAnnotationItem(
-                    onPressed: !isRouteSelected
+                    onPressed: !isRouteSelected && !isRouteAdd
                         ? () {
                             mapController.changeMapStyle();
                           }
@@ -50,14 +54,14 @@ class VerticalAnnotations extends StatelessWidget {
               )
             : const SizedBox.shrink(),
         MapAnnotationItem(
-          onPressed: !isRouteSelected ? () {} : null,
+          onPressed: !isRouteSelected && !isRouteAdd ? () {} : null,
           assetSvg: "layer",
         ),
         SizedBox(height: 10.h),
         Obx(() {
           return mapController.selectedRoute.value == null
               ? MapAnnotationItem(
-                  onPressed: () {},
+                  onPressed: isRouteAdd ? null : () {},
                   assetSvg: "target",
                 )
               : Row(
@@ -78,9 +82,7 @@ class VerticalAnnotations extends StatelessWidget {
                           : const Offset(-10, 0),
                       duration: const Duration(milliseconds: 500),
                       child: MapAnnotationItem(
-                        onPressed: () {
-                          isShowBottomSheet.value = true;
-                        },
+                        onPressed: onCheckPress,
                         assetSvg: "check",
                       ),
                     ),
@@ -97,10 +99,35 @@ class VerticalAnnotations extends StatelessWidget {
                 );
         }),
         SizedBox(height: 10.h),
-        MapAnnotationItem(
-          onPressed: !isRouteSelected ? onPrepareRoutePressed : null,
-          assetSvg: "pen",
-        ),
+        Obx(() {
+          return mapController.selectedRouteToAdd.value == null
+              ? MapAnnotationItem(
+                  onPressed: !isRouteSelected && !isRouteAdd
+                      ? onPrepareRoutePressed
+                      : null,
+                  assetSvg: "pen",
+                )
+              : Row(
+                  children: [
+                    AnimatedSlide(
+                      offset: mapController.selectedRouteToAdd.value != null
+                          ? const Offset(0.25, 0)
+                          : const Offset(-10, 0),
+                      duration: const Duration(milliseconds: 500),
+                      child: MapAnnotationItem(
+                        onPressed: onAddUndoPress,
+                        assetSvg: "undo",
+                      ),
+                    ),
+                    MapAnnotationItem(
+                      onPressed: mapController.selectedRouteToAdd.value != null
+                          ? onAddUndoPress
+                          : null,
+                      assetSvg: "pen",
+                    )
+                  ],
+                );
+        }),
       ],
     );
   }

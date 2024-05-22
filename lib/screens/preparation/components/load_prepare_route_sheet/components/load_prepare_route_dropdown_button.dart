@@ -49,6 +49,7 @@ class PrepareRouteMapDropdownButtonWidget extends StatelessWidget {
           },
           child: Obx(
             () => RouteItemWidget(
+              showDivider: false,
               isSelected: selectedRoute.value == routes[index],
               haveSelectedBackGround: false,
               route: routes[index],

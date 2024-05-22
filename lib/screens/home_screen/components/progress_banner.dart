@@ -93,7 +93,7 @@ class ProgressBanner extends StatelessWidget {
                 final item = actions[index];
 
                 return GestureDetector(
-                  onTap: () => AppRoutes.navigate(AppRoutes.tabbarview),
+                  onTap: () => AppRoutes.navigateReplace(AppRoutes.tabbarview),
                   child: Column(
                     children: [
                       CircleAvatar(

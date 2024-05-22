@@ -99,6 +99,13 @@ class AppRoutes {
     Get.offNamed(query);
   }
 
+  static navigateOffUntil(String query) {
+    Get.offNamedUntil(
+      query,
+      (route) => true,
+    );
+  }
+
   static navigateBack() {
     Get.back();
   }

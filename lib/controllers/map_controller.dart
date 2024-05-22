@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_running_demo/models/route_model/route_model.dart';
 import 'package:flutter_running_demo/screens/preparation/data/list_top_route_model.dart';
 import 'package:get/get.dart';
+// ignore: unused_import
+import 'package:logger/logger.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
+import '../config/colors.dart';
 import '../utils/map_annotation_click_listener.dart';
 
 enum MapDirection {
@@ -40,34 +44,30 @@ extension MapDirectionExtension on MapDirection {
 class MapController extends GetxController {
   RxString currentMapViewStyle = MapboxStyles.MAPBOX_STREETS.obs;
   MapDirection currentMapDirection = MapDirection.north;
-  Rx<MapboxMap?> mapboxMap = Rx<MapboxMap?>(null);
-  Rx<PointAnnotationManager?> pointManager = Rx<PointAnnotationManager?>(null);
-  Rx<PolylineAnnotationManager?> polylineManager =
-      Rx<PolylineAnnotationManager?>(null);
-  RxInt mapWidgetKey = 0.obs;
-  RxDouble zoomLevel = 15.0.obs;
+  late Rxn<MapboxMap> mapboxMap;
+  late Rxn<PointAnnotationManager> pointManager;
+  late Rxn<PolylineAnnotationManager> polylineManager;
+  late RxDouble zoomLevel;
 
-  RxBool isShow = false.obs;
-  RxBool isHidden = true.obs;
-
-  RxString searchText = "".obs;
-  RxString latitude = "".obs;
-  RxString longLatitude = "".obs;
-  Rxn<RouteModel> selectedRoute = Rxn<RouteModel>();
+  late Rxn<RouteModel> selectedRoute;
+  late Rxn<RouteModel> selectedRouteToAdd;
   late RxList<RouteModel> listRoute;
+
   @override
   void onInit() {
     super.onInit();
+    mapboxMap = Rxn<MapboxMap>();
+    pointManager = Rxn<PointAnnotationManager>();
+    polylineManager = Rxn<PolylineAnnotationManager>();
+    zoomLevel = 15.0.obs;
+    selectedRoute = Rxn<RouteModel>();
+    selectedRouteToAdd = Rxn<RouteModel>();
     listRoute = tempTopRoute.obs;
   }
 
-  @override
-  void refresh() {
-    super.refresh();
-    searchText.value = latitude.value = longLatitude.value = "";
-    isShow.value = false;
-    isHidden.value = true;
-    listRoute.clear();
+  void resetPointAndAnotation() {
+    pointManager.value?.deleteAll();
+    polylineManager.value?.deleteAll();
   }
 
   onMapCreated(MapboxMap mapboxMapCreate) {
@@ -77,7 +77,8 @@ class MapController extends GetxController {
   }
 
   selectAnotation(int anotationIndex) {
-    if (listRoute.isNotEmpty) {
+    if (listRoute.isNotEmpty &&
+        (anotationIndex >= 0 && anotationIndex < listRoute.length)) {
       selectedRoute.value = listRoute[anotationIndex];
     }
   }
@@ -122,7 +123,7 @@ class MapController extends GetxController {
     );
   }
 
-  Position getCentroid(List<Position> points) {
+  Position _getCenterPoint(List<Position> points) {
     if (points.isEmpty) {
       return Position(0, 0);
     } else if (points.length == 1) {
@@ -149,17 +150,16 @@ class MapController extends GetxController {
     return Position((higherY + lowerY) / 2, (higherX + lowerX) / 2);
   }
 
-  void _centerCamera(List<Position> positions) async {
-    final pos = getCentroid(positions);
+  void _centerCameraOnCenterPoint(List<Position> positions) async {
+    final pos = _getCenterPoint(positions);
     final centeredPoint = Point(coordinates: pos);
 
-    final ByteData bytes =
-        await rootBundle.load('assets/images/map_anotations/position.png');
-    final Uint8List imagesData = bytes.buffer.asUint8List();
+    final Uint8List images =
+        await loadImageToUnit8List("assets/images/map_anotations/position.png");
     pointManager.value?.create(PointAnnotationOptions(
       geometry: centeredPoint.toJson(),
-      image: imagesData,
-      iconSize: 1.5,
+      image: images,
+      iconSize: 2,
     ));
     _centerCameraOnCoordinate(
       pos.lat.toDouble(),
@@ -176,10 +176,10 @@ class MapController extends GetxController {
 
     mapboxMap.value?.flyTo(
         CameraOptions(
-            anchor: ScreenCoordinate(x: 0, y: 0),
-            zoom: 14,
-            bearing: MapDirection.north.numericValue,
-            pitch: 30),
+          // anchor: ScreenCoordinate(x: 0, y: 0),
+          zoom: 14,
+          bearing: MapDirection.north.numericValue,
+        ),
         MapAnimationOptions(duration: 3000, startDelay: 0));
   }
 
@@ -196,24 +196,97 @@ class MapController extends GetxController {
           Position(route.longitude, route.latitude),
         );
       }
-      final ByteData bytes =
-          await rootBundle.load('assets/images/map_anotations/route.png');
-      final Uint8List imagesData = bytes.buffer.asUint8List();
-      _centerCamera(listRoute
+      final Uint8List images =
+          await loadImageToUnit8List("assets/images/map_anotations/route.png");
+      _centerCameraOnCenterPoint(listRoute
           .map((route) => Position(route.longitude, route.latitude))
           .toList());
-      pointAnnotationManager.createMulti(positions
+      pointManager.value?.createMulti(positions
           .map((e) => PointAnnotationOptions(
-                iconSize: 3,
-                geometry: Point(coordinates: e).toJson(),
-                image: imagesData,
-              ))
+              iconSize: 3,
+              geometry: Point(coordinates: e).toJson(),
+              image: images))
           .toList());
-      pointAnnotationManager
-          .addOnPointAnnotationClickListener(AnnotationClickListener());
+      pointManager.value
+          ?.addOnPointAnnotationClickListener(AnnotationClickListener());
+    });
+  }
+
+  Future<Uint8List> loadImageToUnit8List(String path) async {
+    final ByteData bytes = await rootBundle.load(path);
+    return bytes.buffer.asUint8List();
+  }
+
+  void selectRouteToAdd() async {
+    selectedRouteToAdd.value = selectedRoute.value;
+    selectedRoute.value = null;
+    resetPointAndAnotation();
+    String jsonString =
+        await rootBundle.loadString('assets/geojson/tranvantraroute.geojson');
+    Map<String, dynamic> geoJson = jsonDecode(jsonString);
+    List coordinates = geoJson['features'][0]['geometry']['coordinates'];
+
+    int startPosition = 0;
+    int middlePosition = (coordinates.length / 2).floor();
+    int endPosition = coordinates.length - 1;
+    _centerCameraOnCoordinate(
+      coordinates[middlePosition][1],
+      coordinates[middlePosition][0],
+    );
+    List<Map<int, String>> preparedRoutePolylineAndPoints = [
+      {startPosition: "start"},
+      {middlePosition: "position"},
+      {endPosition: "stop"}
+    ];
+
+    mapboxMap.value?.annotations
+        .createPointAnnotationManager()
+        .then((pointAnnotationManager) async {
+      pointManager.value = pointAnnotationManager;
+      final listPosition = <Map<Uint8List, Position>>[];
+      for (final point in preparedRoutePolylineAndPoints) {
+        Logger().i("Key index ${point.keys.first}");
+        final Uint8List image = await loadImageToUnit8List(
+            "assets/images/map_anotations/${point.values.first}.png");
+        listPosition.add({
+          image: Position(
+            coordinates[point.keys.first][0],
+            coordinates[point.keys.first][1],
+          )
+        });
+      }
+
+      pointManager.value?.createMulti(listPosition
+          .map(
+            (position) => PointAnnotationOptions(
+              geometry: Point(coordinates: position.values.first).toJson(),
+              iconSize: 2,
+              image: position.keys.first,
+            ),
+          )
+          .toList());
+    });
+
+    final List<Position> routeLinePositions =
+        coordinates.map((cor) => Position(cor[0], cor[1])).toList();
+    mapboxMap.value?.annotations
+        .createPolylineAnnotationManager()
+        .then((polylineAnnotationManager) async {
+      polylineManager.value = polylineAnnotationManager;
+      polylineManager.value?.create(
+        PolylineAnnotationOptions(
+          geometry: LineString(
+            coordinates: routeLinePositions,
+          ).toJson(),
+          lineColor: AppColors.appButton.value,
+          lineWidth: 1,
+        ),
+      );
     });
   }
 }
+
+
 
 
 // Future<String> predictLocation(String predictString) async {

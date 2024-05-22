@@ -42,6 +42,7 @@ flutter:
   
   assets:
     # - assets/animations/
+    - assets/geojson/
     - assets/images/
     - assets/svg/
     - assets/svg/music_provider/

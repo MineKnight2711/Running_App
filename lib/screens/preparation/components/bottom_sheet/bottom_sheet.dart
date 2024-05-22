@@ -29,6 +29,9 @@ class PreparationScreenBottomSheet extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: CustomDraggableSheetWidget(
+        inititalSize: 0.25,
+        maxSize: 0.85,
+        minSize: 0.25,
         grabberBottom: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import '../../../../../config/colors.dart';
 import '../../../../../widgets/home_action_button.dart';
 import 'sliver_header_buttons.dart';
@@ -58,7 +57,7 @@ class SliverHeader extends StatelessWidget {
               Icons.arrow_back,
               color: AppColors.white100,
             ),
-            onPressed: () => Get.back(),
+            onPressed: () {},
           ),
           actions: [
             AnimatedScale(
