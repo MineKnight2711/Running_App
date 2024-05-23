@@ -3,6 +3,7 @@ import 'package:flutter_running_demo/screens/home_screen/home_screen.dart';
 import 'package:flutter_running_demo/screens/performance/performance_screen.dart';
 import 'package:flutter_running_demo/screens/progress/details_route_screen/details_route_screen.dart';
 import 'package:flutter_running_demo/screens/run/ready_to_run/load_prepared_road_map.dart';
+import 'package:flutter_running_demo/screens/run/ready_to_run/ready_to_run_screen.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/components/music_pause_clock.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/components/music_play_clock.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/components/run_finished.dart';
@@ -12,15 +13,11 @@ import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_comp
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_note.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_screen.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sending_location.dart';
-import 'package:flutter_running_demo/screens/run/show_clock/run_to_ready.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sensor_status.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/running_show_clock_screen.dart';
 import 'package:get/get.dart';
 import '../screens/app_tabbar_view/app_tabbar_view.dart';
-
 import '../test_widgets_demo/test_alertdialog/test_remove_confirmation.dart';
-
-import '../test_widgets_demo/test_alertdialog/test_screen2.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/run_setting/audio_guidance.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/run_setting/map_setting.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/music_provider_sheet/music_provider_sheet.dart';
@@ -30,7 +27,6 @@ class AppRoutes {
   static const String _tabbarview = '/tabbarview';
   static const String _performanceMetrics = '/performance-metrics';
   static const String _detailRoute = '/detail-route';
-  static const String _testscreen2 = '/testscreen2';
   static const String _testconfirmdeletion = '/testconfirmdeletion';
   static const String _testconfirmaddtion = '/testconfirmaddtion';
   static const String _testremoveconfirmation = '/testremoveconfirmation';
@@ -57,7 +53,6 @@ class AppRoutes {
   static String get home => _home;
   static String get performanceMetrics => _performanceMetrics;
   static String get detailRoute => _detailRoute;
-  static String get testscreen2 => _testscreen2;
   static String get testconfirmdeletion => _testconfirmdeletion;
   static String get testconfirmaddtion => _testconfirmaddtion;
   static String get testremoveconfirmation => _testremoveconfirmation;
@@ -128,10 +123,6 @@ class AppRoutes {
         page: () => DetailsRouteScreen(),
         transition: Transition.rightToLeft),
     GetPage(
-        name: _testscreen2,
-        page: () => TestPreparationScreen(),
-        transition: Transition.rightToLeft),
-    GetPage(
       name: _testremoveconfirmation,
       page: () => TestRemoveConfirmation(),
     ),
@@ -177,7 +168,7 @@ class AppRoutes {
         transition: Transition.rightToLeft),
     GetPage(
         name: _readytorun,
-        page: () => const ReadyToRun(),
+        page: () => ReadyToRunScreen(),
         transition: Transition.rightToLeft),
     GetPage(
         name: _sendinglocation,

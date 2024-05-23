@@ -1,4 +1,3 @@
-export './preparation_map.dart';
 export 'map_anotations/horizontal_annotations.dart';
 export 'map_anotations/vertical_annotations.dart';
 export 'schedule_sheet/schedule_sheet.dart';

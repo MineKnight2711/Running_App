@@ -3,6 +3,7 @@ import 'package:flutter_running_demo/utils/navigator_key.dart';
 import '../../config/config_export.dart';
 import 'package:get/get.dart';
 import '../../controllers/map_controller.dart';
+import '../../widgets/custom_map_widget/custom_map_widget.dart';
 import 'components/components_export.dart';
 import 'data/list_top_route_model.dart';
 

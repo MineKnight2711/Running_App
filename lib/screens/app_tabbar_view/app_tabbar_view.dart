@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_running_demo/screens/preparation/preparation_screen.dart';
 import 'package:flutter_running_demo/screens/progress/progress_screen/progress_screen.dart';
 import 'package:flutter_running_demo/utils/navigator_key.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import '../../widgets/bottom_bar/bottom_tabbar.dart';
+import '../run/ready_to_run/ready_to_run_screen.dart';
 
 class TabBarViewScreen extends StatefulWidget {
   const TabBarViewScreen({super.key});
@@ -20,7 +22,7 @@ class _TabBarViewScreenState extends State<TabBarViewScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -43,9 +45,10 @@ class _TabBarViewScreenState extends State<TabBarViewScreen>
                   body: TabBarView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: _tabController,
-                    children: const [
-                      ProgressScreen(),
-                      PreparationScreen(),
+                    children: [
+                      const ProgressScreen(),
+                      const PreparationScreen(),
+                      ReadyToRunScreen(),
                     ],
                   ),
                 ),
@@ -54,7 +57,11 @@ class _TabBarViewScreenState extends State<TabBarViewScreen>
           ),
           bottomNavigationBar: BottomNavigationTabBar(
             tabController: _tabController,
-            onTabChange: (index) {},
+            onTabChange: (index) {
+              if (index == 2) {
+                AppRoutes.navigate(AppRoutes.readytorun);
+              }
+            },
           ),
         ),
       ),

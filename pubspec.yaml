@@ -56,6 +56,7 @@ flutter:
     - assets/svg/
     - assets/svg/music/
     - assets/svg/preparation/
+    - assets/svg/ready_to_run/
     - assets/svg/preparation/add_new_route/
     - assets/svg/preparation/details_route/
     - assets/svg/preparation/alert_dialog/

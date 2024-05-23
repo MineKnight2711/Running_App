@@ -78,7 +78,8 @@ class MapController extends GetxController {
 
   selectAnotation(int anotationIndex) {
     if (listRoute.isNotEmpty &&
-        (anotationIndex >= 0 && anotationIndex < listRoute.length)) {
+        (anotationIndex >= 0 && anotationIndex < listRoute.length) &&
+        selectedRouteToAdd.value == null) {
       selectedRoute.value = listRoute[anotationIndex];
     }
   }
@@ -98,10 +99,11 @@ class MapController extends GetxController {
     zoomLevel.value--;
     mapboxMap.value?.flyTo(
         CameraOptions(
-            anchor: ScreenCoordinate(x: 0, y: 0),
-            zoom: zoomLevel.value,
-            bearing: 0,
-            pitch: 0),
+          anchor: ScreenCoordinate(x: 0, y: 0),
+          zoom: zoomLevel.value,
+          bearing: 0,
+          pitch: 0,
+        ),
         MapAnimationOptions(duration: 2000, startDelay: 0));
   }
 
@@ -168,16 +170,19 @@ class MapController extends GetxController {
   }
 
   void _centerCameraOnCoordinate(double lat, double longLat) {
-    mapboxMap.value?.setCamera(CameraOptions(
-        center: Point(
-          coordinates: Position(longLat, lat),
-        ).toJson(),
-        zoom: 12.0));
+    // mapboxMap.value?.setCamera(CameraOptions(
+    //     center: Point(
+    //       coordinates: Position(longLat, lat),
+    //     ).toJson(),
+    //     zoom: 12.0));
 
     mapboxMap.value?.flyTo(
         CameraOptions(
-          // anchor: ScreenCoordinate(x: 0, y: 0),
+          anchor: ScreenCoordinate(x: 0, y: 0),
           zoom: 14,
+          center: Point(
+            coordinates: Position(longLat, lat),
+          ).toJson(),
           bearing: MapDirection.north.numericValue,
         ),
         MapAnimationOptions(duration: 3000, startDelay: 0));

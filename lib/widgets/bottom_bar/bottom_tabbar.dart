@@ -22,6 +22,9 @@ class BottomNavigationTabBar extends StatelessWidget {
           onTap: (index) {
             currentIndex.value = tabController.index = index;
             onTabChange(index);
+            if (index == 2) {
+              currentIndex.value = tabController.index = 0;
+            }
           },
           tabs: [
             Tab(
@@ -59,6 +62,26 @@ class BottomNavigationTabBar extends StatelessWidget {
                 style: CustomGoogleFonts.roboto(
                   fontSize: 12.r,
                   color: currentIndex.value == 1
+                      ? AppColors.appButton
+                      : AppColors.white100,
+                ),
+              ),
+            ),
+            Tab(
+              icon: SvgPicture.asset(
+                "assets/svg/bottom_bar/ready.svg",
+                colorFilter: ColorFilter.mode(
+                  currentIndex.value == 2
+                      ? AppColors.appButton
+                      : AppColors.white100,
+                  BlendMode.srcATop,
+                ),
+              ),
+              child: Text(
+                "Ready",
+                style: CustomGoogleFonts.roboto(
+                  fontSize: 12.r,
+                  color: currentIndex.value == 2
                       ? AppColors.appButton
                       : AppColors.white100,
                 ),
