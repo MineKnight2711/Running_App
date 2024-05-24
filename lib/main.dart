@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_running_demo/config/routes.dart';
-import 'package:flutter_running_demo/controllers/map_controller.dart';
+import 'package:flutter_running_demo/controllers/preparation_map_controller.dart';
 import 'package:flutter_running_demo/utils/navigator_key.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -11,8 +11,7 @@ import 'package:get/get.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized()
       .addObserver(MyAppLifecycleObserver());
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: [SystemUiOverlay.top]);
+
   runApp(const PopScope(canPop: false, child: MainApp()));
   Get.put(MapController());
 }

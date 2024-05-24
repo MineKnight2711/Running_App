@@ -15,14 +15,14 @@ class RouteDetailsTopRunnerList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: AppSpacings.widthByScreenWidth(1),
-      height: topRunners.length * AppSpacings.customVerticalSpacing(80) + 35,
+      width: AppSpacings.sw(1),
+      height: topRunners.length * AppSpacings.cvs(80) + 35,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              SizedBox(width: AppSpacings.horizontalSpacing15),
+              SizedBox(width: AppSpacings.hs15),
               Text(
                 'Top runners',
                 style: CustomGoogleFonts.roboto(
@@ -31,7 +31,7 @@ class RouteDetailsTopRunnerList extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              SizedBox(width: AppSpacings.horizontalSpacing30 * 5.2),
+              SizedBox(width: AppSpacings.hs30 * 5.2),
               Text(
                 'Record',
                 style: CustomGoogleFonts.roboto(
@@ -42,7 +42,7 @@ class RouteDetailsTopRunnerList extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: AppSpacings.verticalSpacing10),
+          SizedBox(height: AppSpacings.vs10),
           ...topRunners.map(
             (runner) => RunnerTile(
               runner: runner,
@@ -61,7 +61,7 @@ class RunnerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppSpacings.customVerticalSpacing(75),
+      height: AppSpacings.cvs(75),
       child: Column(
         children: [
           Row(
@@ -75,10 +75,10 @@ class RunnerTile extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              SizedBox(width: AppSpacings.horizontalSpacing10),
+              SizedBox(width: AppSpacings.hs10),
               Image.asset(
                   "assets/images/details_route_images/runners/${runner.name}.png"),
-              SizedBox(width: AppSpacings.horizontalSpacing15),
+              SizedBox(width: AppSpacings.hs15),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,9 +126,9 @@ class RunnerTile extends StatelessWidget {
             ],
           ),
           Divider(
-            height: AppSpacings.verticalSpacing25,
+            height: AppSpacings.vs25,
             thickness: 0.5,
-            indent: AppSpacings.horizontalSpacing15 * 1.2,
+            indent: AppSpacings.hs15 * 1.2,
           )
         ],
       ),

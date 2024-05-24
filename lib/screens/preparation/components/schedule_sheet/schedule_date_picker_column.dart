@@ -26,8 +26,8 @@ class ScheduleDatePickerColumn extends StatelessWidget {
           style: CustomGoogleFonts.roboto(fontSize: 16, color: Colors.white),
         ),
         SizedBox(
-          width: AppSpacings.customHorizontalSpacing(60),
-          height: AppSpacings.customVerticalSpacing(170),
+          width: AppSpacings.chs(60),
+          height: AppSpacings.cvs(170),
           child: ListWheelScrollView(
             itemExtent: 30,
             perspective: 0.01,

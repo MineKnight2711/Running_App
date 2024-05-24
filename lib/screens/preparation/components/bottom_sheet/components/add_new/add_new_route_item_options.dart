@@ -16,8 +16,8 @@ class AddNewRouteItemOption extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
-        width: AppSpacings.horizontalSpacing20 * 8,
-        height: AppSpacings.verticalSpacing10 * 4,
+        width: AppSpacings.hs20 * 8,
+        height: AppSpacings.vs10 * 4,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             color: AppColors.basicActivitiesCard),
@@ -29,13 +29,13 @@ class AddNewRouteItemOption extends StatelessWidget {
               child: SvgPicture.asset(
                   "assets/svg/preparation/route_item_options/star.svg"),
             ),
-            SizedBox(width: AppSpacings.horizontalSpacing10),
+            SizedBox(width: AppSpacings.hs10),
             InkWell(
               onTap: onAddPressed,
               child: SvgPicture.asset(
                   "assets/svg/preparation/route_item_options/check.svg"),
             ),
-            SizedBox(width: AppSpacings.horizontalSpacing10),
+            SizedBox(width: AppSpacings.hs10),
             InkWell(
               onTap: onInfoPressed,
               child: SvgPicture.asset(

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/config/config_export.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_running_demo/screens/preparation/preparation_screen.dart';
 import 'package:flutter_running_demo/screens/progress/progress_screen/progress_screen.dart';
 import 'package:flutter_running_demo/utils/navigator_key.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
-import '../../widgets/bottom_bar/bottom_tabbar.dart';
-import '../run/ready_to_run/ready_to_run_screen.dart';
+import '../../widgets/bottom_bar/bottom_bar.dart';
 
 class TabBarViewScreen extends StatefulWidget {
   const TabBarViewScreen({super.key});
@@ -22,7 +21,7 @@ class _TabBarViewScreenState extends State<TabBarViewScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -33,36 +32,50 @@ class _TabBarViewScreenState extends State<TabBarViewScreen>
         onPopInvoked: (didPop) async {
           if (!NavigatorKeys.mainNavigatorKey.currentState!.canPop()) {
             Logger().i('Main navigator was popped');
-            NavigatorKeys.secondaryNavigatorKey.currentState!.pop();
+            // NavigatorKeys.secondaryNavigatorKey.currentState!.pop();
+          }
+          if (!NavigatorKeys.secondaryNavigatorKey.currentState!.canPop()) {
+            Logger().i('Secondary navigator was popped');
           }
         },
-        child: Scaffold(
-          body: Navigator(
-            key: NavigatorKeys.secondaryNavigatorKey,
-            onGenerateRoute: (settings) {
-              return MaterialPageRoute(
-                builder: (context) => Scaffold(
-                  body: TabBarView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: _tabController,
-                    children: [
-                      const ProgressScreen(),
-                      const PreparationScreen(),
-                      ReadyToRunScreen(),
-                    ],
-                  ),
+        child: SafeArea(
+          top: false,
+          child: Scaffold(
+              body: Stack(
+            children: [
+              PopScope(
+                canPop: canPop.value,
+                onPopInvoked: (didPop) async {
+                  if (NavigatorKeys.secondaryNavigatorKey.currentState!
+                      .canPop()) {
+                    Logger().i('Secondary navigator was popped');
+                  }
+                },
+                child: Navigator(
+                  key: NavigatorKeys.secondaryNavigatorKey,
+                  onGenerateRoute: (settings) {
+                    return MaterialPageRoute(
+                      builder: (context) => TabBarView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        controller: _tabController,
+                        children: const [
+                          ProgressScreen(),
+                          PreparationScreen(),
+                        ],
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
-          bottomNavigationBar: BottomNavigationTabBar(
-            tabController: _tabController,
-            onTabChange: (index) {
-              if (index == 2) {
-                AppRoutes.navigate(AppRoutes.readytorun);
-              }
-            },
-          ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: BottomNavigationTabBar(
+                  tabController: _tabController,
+                  onTabChange: (index) {},
+                ),
+              ),
+            ],
+          )),
         ),
       ),
     );

@@ -9,10 +9,9 @@ class BottomNavigationTabBar extends StatelessWidget {
   final Function(int index) onTabChange;
   const BottomNavigationTabBar(
       {super.key, required this.onTabChange, required this.tabController});
-
   @override
   Widget build(BuildContext context) {
-    final RxInt currentIndex = 0.obs;
+    final RxInt currentIndex = tabController.index.obs;
     return Container(
       color: AppColors.sheetBackground,
       height: 50.h,
@@ -67,26 +66,26 @@ class BottomNavigationTabBar extends StatelessWidget {
                 ),
               ),
             ),
-            Tab(
-              icon: SvgPicture.asset(
-                "assets/svg/bottom_bar/ready.svg",
-                colorFilter: ColorFilter.mode(
-                  currentIndex.value == 2
-                      ? AppColors.appButton
-                      : AppColors.white100,
-                  BlendMode.srcATop,
-                ),
-              ),
-              child: Text(
-                "Ready",
-                style: CustomGoogleFonts.roboto(
-                  fontSize: 12.r,
-                  color: currentIndex.value == 2
-                      ? AppColors.appButton
-                      : AppColors.white100,
-                ),
-              ),
-            ),
+            // Tab(
+            //   icon: SvgPicture.asset(
+            //     "assets/svg/bottom_bar/ready.svg",
+            //     colorFilter: ColorFilter.mode(
+            //       currentIndex.value == 2
+            //           ? AppColors.appButton
+            //           : AppColors.white100,
+            //       BlendMode.srcATop,
+            //     ),
+            //   ),
+            //   child: Text(
+            //     "Ready",
+            //     style: CustomGoogleFonts.roboto(
+            //       fontSize: 12.r,
+            //       color: currentIndex.value == 2
+            //           ? AppColors.appButton
+            //           : AppColors.white100,
+            //     ),
+            //   ),
+            // ),
           ],
           unselectedLabelColor: AppColors.white100,
           controller: tabController,
@@ -96,6 +95,32 @@ class BottomNavigationTabBar extends StatelessWidget {
           dividerHeight: 0,
         ),
       ),
+    );
+  }
+}
+
+class CustomBottomNavigationBar extends StatelessWidget {
+  final Function(int index)? onIndexChange;
+  const CustomBottomNavigationBar({
+    super.key,
+    this.onIndexChange,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      backgroundColor: AppColors.sheetBackground,
+      items: [
+        BottomNavigationBarItem(
+          icon: SvgPicture.asset('"assets/svg/bottom_bar/progress.svg'),
+          label: "Progress",
+        ),
+        BottomNavigationBarItem(
+          icon: SvgPicture.asset('"assets/svg/bottom_bar/preparation.svg'),
+          label: "Preparation",
+        ),
+      ],
+      onTap: onIndexChange,
     );
   }
 }

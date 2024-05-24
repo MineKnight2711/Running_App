@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../controllers/map_controller.dart';
+import '../../../../controllers/preparation_map_controller.dart';
 import 'map_annotation_item.dart';
 
 class VerticalAnnotations extends StatelessWidget {
-  final bool isRouteSelected, isRouteAdd;
+  final bool isRouteSelected, isRouteAdd, showEditButton;
   final VoidCallback onPrepareRoutePressed,
       onClosePress,
       onHandPress,
       onCheckPress,
       onAddUndoPress,
       onUndoPress;
+  final VoidCallback? onRotateMapPressed, onChangeStylePressed;
   final mapController = Get.find<MapController>();
-  VerticalAnnotations(
-      {super.key,
-      required this.onPrepareRoutePressed,
-      required this.isRouteSelected,
-      required this.onClosePress,
-      required this.onHandPress,
-      required this.onCheckPress,
-      required this.onUndoPress,
-      required this.isRouteAdd,
-      required this.onAddUndoPress});
+  VerticalAnnotations({
+    super.key,
+    required this.onPrepareRoutePressed,
+    required this.isRouteSelected,
+    required this.onClosePress,
+    required this.onHandPress,
+    required this.onCheckPress,
+    required this.onUndoPress,
+    required this.isRouteAdd,
+    required this.onAddUndoPress,
+    this.showEditButton = true,
+    this.onRotateMapPressed,
+    this.onChangeStylePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -101,12 +106,14 @@ class VerticalAnnotations extends StatelessWidget {
         SizedBox(height: 10.h),
         Obx(() {
           return mapController.selectedRouteToAdd.value == null
-              ? MapAnnotationItem(
-                  onPressed: !isRouteSelected && !isRouteAdd
-                      ? onPrepareRoutePressed
-                      : null,
-                  assetSvg: "pen",
-                )
+              ? showEditButton
+                  ? MapAnnotationItem(
+                      onPressed: !isRouteSelected && !isRouteAdd
+                          ? onPrepareRoutePressed
+                          : null,
+                      assetSvg: "pen",
+                    )
+                  : const SizedBox.shrink()
               : Row(
                   children: [
                     AnimatedSlide(

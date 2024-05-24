@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:flutter_running_demo/controllers/map_direction.dart';
 import 'package:flutter_running_demo/models/route_model/route_model.dart';
 import 'package:flutter_running_demo/screens/preparation/data/list_top_route_model.dart';
 import 'package:get/get.dart';
@@ -9,37 +10,6 @@ import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
 import '../config/colors.dart';
 import '../utils/map_annotation_click_listener.dart';
-
-enum MapDirection {
-  north,
-  east,
-  south,
-  west,
-}
-
-extension MapDirectionExtension on MapDirection {
-  double get numericValue {
-    switch (this) {
-      case MapDirection.north:
-        return 0;
-      case MapDirection.south:
-        return 180;
-      case MapDirection.west:
-        return 270;
-      case MapDirection.east:
-        return 90;
-      default:
-        return 0;
-    }
-  }
-
-  MapDirection get next {
-    List<MapDirection> values = MapDirection.values;
-    int currentIndex = values.indexOf(this);
-    int nextIndex = (currentIndex + 1) % values.length;
-    return values[nextIndex];
-  }
-}
 
 class MapController extends GetxController {
   RxString currentMapViewStyle = MapboxStyles.MAPBOX_STREETS.obs;
@@ -53,6 +23,10 @@ class MapController extends GetxController {
   late Rxn<RouteModel> selectedRouteToAdd;
   late RxList<RouteModel> listRoute;
 
+  final RxBool isRouteSelected = false.obs;
+  final RxBool isRouteAdd = false.obs;
+  final RxBool isReadyToRun = false.obs;
+  final RxBool isRunning = false.obs;
   @override
   void onInit() {
     super.onInit();
@@ -154,7 +128,12 @@ class MapController extends GetxController {
 
   void _centerCameraOnCenterPoint(List<Position> positions) async {
     final pos = _getCenterPoint(positions);
-    final centeredPoint = Point(coordinates: pos);
+
+    _centerCameraOnCoordinate(pos);
+  }
+
+  void _centerCameraOnCoordinate(Position postition) async {
+    final centeredPoint = Point(coordinates: postition);
 
     final Uint8List images =
         await loadImageToUnit8List("assets/images/map_anotations/position.png");
@@ -163,25 +142,12 @@ class MapController extends GetxController {
       image: images,
       iconSize: 2,
     ));
-    _centerCameraOnCoordinate(
-      pos.lat.toDouble(),
-      pos.lng.toDouble(),
-    );
-  }
-
-  void _centerCameraOnCoordinate(double lat, double longLat) {
-    // mapboxMap.value?.setCamera(CameraOptions(
-    //     center: Point(
-    //       coordinates: Position(longLat, lat),
-    //     ).toJson(),
-    //     zoom: 12.0));
-
     mapboxMap.value?.flyTo(
         CameraOptions(
           anchor: ScreenCoordinate(x: 0, y: 0),
           zoom: 14,
           center: Point(
-            coordinates: Position(longLat, lat),
+            coordinates: postition,
           ).toJson(),
           bearing: MapDirection.north.numericValue,
         ),
@@ -234,10 +200,10 @@ class MapController extends GetxController {
     int startPosition = 0;
     int middlePosition = (coordinates.length / 2).floor();
     int endPosition = coordinates.length - 1;
-    _centerCameraOnCoordinate(
-      coordinates[middlePosition][1],
+    _centerCameraOnCoordinate(Position(
       coordinates[middlePosition][0],
-    );
+      coordinates[middlePosition][1],
+    ));
     List<Map<int, String>> preparedRoutePolylineAndPoints = [
       {startPosition: "start"},
       {middlePosition: "position"},

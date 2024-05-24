@@ -12,7 +12,7 @@ class RouteDetailsMapAndTerrain extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: AppSpacings.verticalSpacing10),
+        SizedBox(height: AppSpacings.vs10),
         Text(
           "Map & Terrain",
           style: CustomGoogleFonts.roboto(
@@ -20,12 +20,12 @@ class RouteDetailsMapAndTerrain extends StatelessWidget {
               fontWeight: FontWeight.w700,
               color: TextColor.white),
         ),
-        SizedBox(height: AppSpacings.horizontalSpacing10),
+        SizedBox(height: AppSpacings.hs10),
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: SizedBox(
-            width: AppSpacings.widthByScreenWidth(1),
-            height: AppSpacings.heightByScreenHeight(0.3),
+            width: AppSpacings.sw(1),
+            height: AppSpacings.sh(0.3),
             child: Column(
               children: [
                 Image.asset(
@@ -40,7 +40,7 @@ class RouteDetailsMapAndTerrain extends StatelessWidget {
                     ),
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  height: AppSpacings.customVerticalSpacing(50),
+                  height: AppSpacings.cvs(50),
                   child: Row(
                     children: [
                       const OrangeOval(

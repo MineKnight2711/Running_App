@@ -29,7 +29,7 @@ class AppColors {
   static const Color white100 = Color(0xffffffff);
   static const Color sheetBackground = Color(0xff222222);
   static const Color transparent = Colors.transparent;
-  static const Color confirmAlertDialogDeleteButton = Color(0xffff4747);
+  static const Color cancleButton = Color(0xffff4747);
   static const Color appButton = Color(0xfff26322);
   static Color annotationButton = const Color(0xFF2F2828).withOpacity(0.65);
   static const Color progressAction = Color(0xff76b5ff);

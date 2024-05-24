@@ -46,8 +46,8 @@ class _PreparationTabbarState extends State<PreparationTabbar> {
       decoration: BoxDecoration(
           border: Border.all(color: const Color(0x33FFFFFF), width: 1),
           borderRadius: BorderRadius.circular(50)),
-      width: AppSpacings.widthByScreenWidth(1),
-      height: AppSpacings.customVerticalSpacing(35),
+      width: AppSpacings.sw(1),
+      height: AppSpacings.cvs(35),
       child: TabBar(
           dividerHeight: 0,
           padding: const EdgeInsets.only(top: 2),
@@ -66,7 +66,7 @@ class _PreparationTabbarState extends State<PreparationTabbar> {
               color: AppColors.white100),
           tabs: widget.listButton.asMap().entries.map((entry) {
             return Container(
-              width: AppSpacings.horizontalSpacing30 * 3,
+              width: AppSpacings.hs30 * 3,
               decoration: BoxDecoration(
                 color: currentIndex == entry.key ||
                         widget.tabController.index == entry.key

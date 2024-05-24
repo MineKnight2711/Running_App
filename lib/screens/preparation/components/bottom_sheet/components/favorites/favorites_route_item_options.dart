@@ -99,7 +99,7 @@ class RouteItemOption extends StatelessWidget {
                   ),
                   iconSvgPath: "delete",
                   confirmButtonText: "Yes, delete",
-                  confirmButtonColor: AppColors.confirmAlertDialogDeleteButton,
+                  confirmButtonColor: AppColors.cancleButton,
                 ),
               );
             },

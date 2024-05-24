@@ -2,8 +2,7 @@
 import 'package:flutter_running_demo/screens/home_screen/home_screen.dart';
 import 'package:flutter_running_demo/screens/performance/performance_screen.dart';
 import 'package:flutter_running_demo/screens/progress/details_route_screen/details_route_screen.dart';
-import 'package:flutter_running_demo/screens/run/ready_to_run/load_prepared_road_map.dart';
-import 'package:flutter_running_demo/screens/run/ready_to_run/ready_to_run_screen.dart';
+import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/ready_to_run/load_prepared_road_map.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/components/music_pause_clock.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/components/music_play_clock.dart';
 import 'package:flutter_running_demo/screens/run/show_clock/components/run_finished.dart';
@@ -19,7 +18,6 @@ import 'package:get/get.dart';
 import '../screens/app_tabbar_view/app_tabbar_view.dart';
 import '../test_widgets_demo/test_alertdialog/test_remove_confirmation.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/run_setting/audio_guidance.dart';
-import '../test_widgets_demo/test_screen/run_map_setting/run_setting/map_setting.dart';
 import '../test_widgets_demo/test_screen/run_map_setting/music_provider_sheet/music_provider_sheet.dart';
 
 class AppRoutes {
@@ -36,13 +34,11 @@ class AppRoutes {
   static const String _preparedcomplete = '/preparedcomplete';
   static const String _preparednote = '/preparednote';
   static const String _authorizemusicprovider = '/authorizemusicprovider';
-  static const String _mapsettingtorun = '/mapsettingtorun';
   static const String _audioguidance = '/audioguidance';
   static const String _sennorstatus = '/sennorstatus';
   static const String _runningclock = '/runningclock';
   static const String _runshowmap = '/runshowmap';
   static const String _metricinfo = '/metricinfo';
-  static const String _readytorun = '/readytorun';
   static const String _sendinglocation = '/sendinglocation';
   static const String _musicplaylock = '/musicplaylock';
   static const String _musicpauselock = '/musicpauselock';
@@ -62,13 +58,11 @@ class AppRoutes {
   static String get preparedcomplete => _preparedcomplete;
   static String get preparednote => _preparednote;
   static String get authorizemusicprovider => _authorizemusicprovider;
-  static String get mapsettingtorun => _mapsettingtorun;
   static String get audioguidance => _audioguidance;
   static String get sennorstatus => _sennorstatus;
   static String get runningclock => _runningclock;
   static String get runshowmap => _runshowmap;
   static String get metricinfo => _metricinfo;
-  static String get readytorun => _readytorun;
   static String get sendinglocation => _sendinglocation;
   static String get musicplaylock => _musicplaylock;
   static String get musicpauselock => _musicpauselock;
@@ -82,6 +76,10 @@ class AppRoutes {
   }
 
   static navigateToDetails(String route, dynamic arguments) {
+    Get.toNamed(route, arguments: arguments);
+  }
+
+  static navigateWithArguments(String route, {required dynamic arguments}) {
     Get.toNamed(route, arguments: arguments);
   }
 
@@ -143,10 +141,6 @@ class AppRoutes {
         page: () => const AuthorizeMusicProvider(),
         transition: Transition.rightToLeft),
     GetPage(
-        name: _mapsettingtorun,
-        page: () => const MapSettingToRun(),
-        transition: Transition.rightToLeft),
-    GetPage(
         name: _audioguidance,
         page: () => const AudioGuidance(),
         transition: Transition.rightToLeft),
@@ -165,10 +159,6 @@ class AppRoutes {
     GetPage(
         name: _metricinfo,
         page: () => const MetricInfo(),
-        transition: Transition.rightToLeft),
-    GetPage(
-        name: _readytorun,
-        page: () => ReadyToRunScreen(),
         transition: Transition.rightToLeft),
     GetPage(
         name: _sendinglocation,

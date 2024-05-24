@@ -8,7 +8,7 @@ class SplitAvaragePaceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppSpacings.verticalSpacing30 * 1.75,
+      height: AppSpacings.vs30 * 1.75,
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

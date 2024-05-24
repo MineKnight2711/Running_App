@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../config/config_export.dart';
-import '../../../controllers/map_controller.dart';
-import '../../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
+import '../../../../../config/config_export.dart';
+import '../../../../../controllers/preparation_map_controller.dart';
+import '../../../../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
 
 class RouteSaveToFavoriteBottomSheet extends StatelessWidget {
   final MapController mapController;
@@ -11,16 +11,13 @@ class RouteSaveToFavoriteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: CustomDraggableSheetWidget(
-        showGrabber: false,
-        inititalSize: 0.43,
-        maxSize: 0.43,
-        minSize: 0.43,
-        grabberBottom: SaveToFavoriteBottomSheetBody(
-          mapController: mapController,
-        ),
+    return CustomDraggableSheetWidget(
+      showGrabber: false,
+      inititalSize: 0.43,
+      maxSize: 0.43,
+      minSize: 0.43,
+      grabberBottom: SaveToFavoriteBottomSheetBody(
+        mapController: mapController,
       ),
     );
   }
@@ -66,7 +63,7 @@ class SaveToFavoriteBottomSheetBody extends StatelessWidget {
                 )),
           ),
           const SizedBox(
-            height: 20,
+            height: 15,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,7 +113,7 @@ class SaveToFavoriteBottomSheetBody extends StatelessWidget {
           ),
           const Divider(
             thickness: 0.5,
-            height: 30,
+            height: 20,
           ),
           Row(
             children: [
@@ -142,7 +139,7 @@ class SaveToFavoriteBottomSheetBody extends StatelessWidget {
           ),
           const Divider(
             thickness: 0.5,
-            height: 30,
+            height: 20,
           ),
           Row(
             children: [

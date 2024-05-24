@@ -16,8 +16,8 @@ class UpcommingRouteItemOptions extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
-        height: AppSpacings.verticalSpacing20 * 2,
-        width: AppSpacings.horizontalSpacing30 * 4,
+        height: AppSpacings.vs20 * 2,
+        width: AppSpacings.hs30 * 4,
         // alignment: Alignment.center,
         decoration: BoxDecoration(
           color: AppColors.basicActivitiesCard,

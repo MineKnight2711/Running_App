@@ -9,7 +9,7 @@ class PreparationScheduleSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSpacings.heightByScreenHeight(0.55),
+      height: AppSpacings.sh(0.55),
       decoration: const BoxDecoration(
         color: Color(0xFF222222),
         borderRadius: BorderRadius.only(
@@ -30,8 +30,8 @@ class PreparationScheduleSheet extends StatelessWidget {
               ),
               const Spacer(),
               SizedBox(
-                width: AppSpacings.horizontalSpacing30,
-                height: AppSpacings.verticalSpacing30,
+                width: AppSpacings.hs30,
+                height: AppSpacings.vs30,
                 child: IconButton(
                   style: IconButton.styleFrom(
                     padding: EdgeInsets.zero,

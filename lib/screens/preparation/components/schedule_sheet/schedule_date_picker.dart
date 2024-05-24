@@ -38,8 +38,8 @@ class ScheduleDatePicker extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: AppSpacings.customVerticalSpacing(195),
-          width: AppSpacings.widthByScreenWidth(1),
+          height: AppSpacings.cvs(195),
+          width: AppSpacings.sw(1),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -126,8 +126,8 @@ class ScheduleDatePicker extends StatelessWidget {
       timeSelected = "${hours}h:${minutes}m | $year-$month-$day";
       Get.dialog(
         SizedBox(
-          width: AppSpacings.widthByScreenWidth(0.5),
-          height: AppSpacings.heightByScreenHeight(0.7),
+          width: AppSpacings.sw(0.5),
+          height: AppSpacings.sh(0.7),
           child: WarningAlertDialogs(
             title: "You have successfully choose schedule time!",
             content: Text(
@@ -143,8 +143,8 @@ class ScheduleDatePicker extends StatelessWidget {
     } else {
       Get.dialog(
         SizedBox(
-          width: AppSpacings.widthByScreenWidth(0.5),
-          height: AppSpacings.heightByScreenHeight(0.7),
+          width: AppSpacings.sw(0.5),
+          height: AppSpacings.sh(0.7),
           child: const WarningAlertDialogs(
             title: "You haven't choose the times yet!",
             content: SizedBox.shrink(),

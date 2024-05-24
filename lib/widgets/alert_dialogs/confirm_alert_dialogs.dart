@@ -48,8 +48,7 @@ class ConfirmAlertDialogs extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: confirmButtonColorGradient != null
                       ? null
-                      : (confirmButtonColor ??
-                          AppColors.confirmAlertDialogDeleteButton),
+                      : (confirmButtonColor ?? AppColors.cancleButton),
                   gradient: confirmButtonColorGradient,
                   borderRadius: BorderRadius.circular(12),
                 ),

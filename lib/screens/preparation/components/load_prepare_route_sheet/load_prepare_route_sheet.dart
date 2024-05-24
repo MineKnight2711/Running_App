@@ -56,7 +56,7 @@ class PreparedRouteMapSheetWidget extends StatelessWidget {
             thickness: 0.5,
             color: const Color(0xFFFFFFFF).withOpacity(0.2),
           ),
-          SizedBox(height: AppSpacings.verticalSpacing10),
+          SizedBox(height: AppSpacings.vs10),
           PrepareRouteMapDropdownButtonWidget(
             routes: scheduleRoutes,
             scrollController: scrollController,

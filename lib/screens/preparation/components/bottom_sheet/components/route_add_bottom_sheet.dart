@@ -1,32 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../config/config_export.dart';
-import '../../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
+import '../../../../../config/config_export.dart';
+import '../../../../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
 
 class RouteAddBottomSheet extends StatelessWidget {
+  final VoidCallback onCompletePressed;
   final String distance, elevation;
-  const RouteAddBottomSheet(
-      {super.key, required this.distance, required this.elevation});
+  const RouteAddBottomSheet({
+    super.key,
+    required this.distance,
+    required this.elevation,
+    required this.onCompletePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-        alignment: Alignment.bottomCenter,
-        child: CustomDraggableSheetWidget(
-          showGrabber: false,
-          inititalSize: 0.3,
-          maxSize: 0.3,
-          grabberBottom: AddBottomSheetGrabberBottom(
-              distance: distance, elevation: elevation),
-        ));
+    return CustomDraggableSheetWidget(
+      showGrabber: false,
+      inititalSize: 0.3,
+      maxSize: 0.3,
+      minSize: 0.3,
+      grabberBottom: AddBottomSheetGrabberBottom(
+          onCompletePressed: onCompletePressed,
+          distance: distance,
+          elevation: elevation),
+    );
   }
 }
 
 class AddBottomSheetGrabberBottom extends StatelessWidget {
+  final VoidCallback onCompletePressed;
   const AddBottomSheetGrabberBottom({
     super.key,
     required this.distance,
     required this.elevation,
+    required this.onCompletePressed,
   });
 
   final String distance;
@@ -36,8 +44,7 @@ class AddBottomSheetGrabberBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: AppSpacings.horizontalSpacing20,
-          vertical: AppSpacings.verticalSpacing15),
+          horizontal: AppSpacings.hs20, vertical: AppSpacings.vs15),
       child: Column(
         children: [
           Row(
@@ -97,7 +104,7 @@ class AddBottomSheetGrabberBottom extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: AppSpacings.verticalSpacing20),
+          SizedBox(height: AppSpacings.vs20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.appButton,
@@ -107,7 +114,7 @@ class AddBottomSheetGrabberBottom extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            onPressed: () {},
+            onPressed: onCompletePressed,
             child: Text(
               "Complete",
               style: CustomGoogleFonts.roboto(

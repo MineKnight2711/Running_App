@@ -62,25 +62,25 @@ class DetailsRouteScreen extends GetView {
       extendBodyBehindAppBar: true,
       body: Container(
         padding: EdgeInsets.only(
-            top: AppSpacings.verticalSpacing20 * 4,
-            left: AppSpacings.horizontalSpacing20,
-            right: AppSpacings.horizontalSpacing20),
+            top: AppSpacings.vs20 * 4,
+            left: AppSpacings.hs20,
+            right: AppSpacings.hs20),
         // margin: const EdgeInsets.symmetric(horizontal: 20),
         decoration: const BoxDecoration(gradient: AppColors.appTheme),
         child: SingleChildScrollView(
           child: Column(
             children: [
               RouteDetailInfo(route: route),
-              SizedBox(height: AppSpacings.verticalSpacing10),
+              SizedBox(height: AppSpacings.vs10),
               RouteDetailsImages(route: route),
               const RouteDetailsMapAndTerrain(),
               RouteDetailsElevationChart(datas: generateFakeData(20)),
-              SizedBox(height: AppSpacings.verticalSpacing30),
+              SizedBox(height: AppSpacings.vs30),
               const RouteDetailsGenkiCommunityChart(),
-              SizedBox(height: AppSpacings.verticalSpacing20),
+              SizedBox(height: AppSpacings.vs20),
               Container(
-                width: AppSpacings.widthByScreenWidth(1),
-                height: AppSpacings.customVerticalSpacing(70),
+                width: AppSpacings.sw(1),
+                height: AppSpacings.cvs(70),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: AppColors.basicActivitiesCard,
@@ -100,9 +100,9 @@ class DetailsRouteScreen extends GetView {
                   ),
                 ),
               ),
-              SizedBox(height: AppSpacings.verticalSpacing20),
+              SizedBox(height: AppSpacings.vs20),
               RouteDetailsTopRunnerList(topRunners: topRunners),
-              SizedBox(height: AppSpacings.verticalSpacing30),
+              SizedBox(height: AppSpacings.vs30),
             ],
           ),
         ),

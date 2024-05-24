@@ -11,7 +11,7 @@ class RecordFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      height: AppSpacings.customVerticalSpacing(90),
+      height: AppSpacings.cvs(90),
       width: 400,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),

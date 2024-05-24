@@ -21,10 +21,10 @@ class RouteDetailsElevationChart extends StatelessWidget {
               fontWeight: FontWeight.w700,
               color: TextColor.white),
         ),
-        SizedBox(height: AppSpacings.verticalSpacing10),
+        SizedBox(height: AppSpacings.vs10),
         SizedBox(
-          width: AppSpacings.widthByScreenWidth(1),
-          height: AppSpacings.heightByScreenHeight(0.3),
+          width: AppSpacings.sw(1),
+          height: AppSpacings.sh(0.3),
           child: LineChart(
             LineChartData(
               maxX: 20,
@@ -67,12 +67,12 @@ class RouteDetailsElevationChart extends StatelessWidget {
                         (value.toInt() > meta.min.toInt() &&
                                 value.toInt() < meta.max.toInt())
                             ? Container(
-                                width: AppSpacings.customHorizontalSpacing(1),
-                                height: AppSpacings.verticalSpacing5,
+                                width: AppSpacings.chs(1),
+                                height: AppSpacings.vs5,
                                 color: AppColors.white100,
                               )
                             : SizedBox(
-                                height: AppSpacings.verticalSpacing5,
+                                height: AppSpacings.vs5,
                               ),
                         Text(
                           value.toInt() == 0
