@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76f1d53-f173-43fc-8253-f8471a0e5fc9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/dart.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/dart.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +67,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716775539398</updated>
-      <workItem from="1716775541313" duration="2105000" />
+      <workItem from="1716775541313" duration="2602000" />
     </task>
     <servers />
   </component>
