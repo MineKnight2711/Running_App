@@ -2,41 +2,57 @@ import 'package:flutter/material.dart';
 
 import 'sheet_grabber.dart';
 
-class CustomDraggableSheet extends StatefulWidget {
-  final double? sheetPosition, dragSensitivity;
-  final Widget? grabberBottomWidget, sheetBody;
-  const CustomDraggableSheet({
+class CustomDraggableSheetWidget extends StatefulWidget {
+  final Widget Function(
+          BuildContext context, ScrollController scrollController)?
+      sheetBodyBuilder;
+  final double? sheetPostiton, inititalSize, minSize, maxSize, dragSensitivity;
+
+  final bool isSnap, showGrabber;
+  final Widget? grabberBottom;
+  const CustomDraggableSheetWidget({
     super.key,
-    this.grabberBottomWidget = const SizedBox.shrink(),
-    this.sheetBody = const SizedBox.shrink(),
-    this.sheetPosition = 0.2,
-    this.dragSensitivity = 1000,
+    this.sheetBodyBuilder,
+    this.isSnap = false,
+    this.grabberBottom = const SizedBox.shrink(),
+    this.sheetPostiton = 0.25,
+    this.dragSensitivity = 800,
+    this.minSize = 0.25,
+    this.maxSize = 0.9,
+    this.inititalSize,
+    this.showGrabber = true,
   });
 
   @override
-  State<CustomDraggableSheet> createState() => _CustomDraggableSheetState();
+  State<CustomDraggableSheetWidget> createState() =>
+      _CustomDraggableSheetWidgetState();
 }
 
-class _CustomDraggableSheetState extends State<CustomDraggableSheet> {
+class _CustomDraggableSheetWidgetState
+    extends State<CustomDraggableSheetWidget> {
   late double _sheetPosition;
   late double _dragSensitivity;
   @override
   void initState() {
     super.initState();
-    _sheetPosition = widget.sheetPosition ?? 0.2;
-    _dragSensitivity = widget.dragSensitivity ?? 1000;
+    _sheetPosition = widget.inititalSize ?? widget.sheetPostiton ?? 0.9;
+    _dragSensitivity = widget.dragSensitivity ?? 800;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: DraggableScrollableSheet(
-        minChildSize: 0.2,
+    return DraggableScrollableSheet(
+        maxChildSize: widget.inititalSize != null
+            ? widget.maxSize ?? 0.9
+            : _sheetPosition,
         initialChildSize: _sheetPosition,
-        maxChildSize: 0.9,
-        builder: (context, scrollController) => Container(
-            // height: 02,
+        minChildSize: widget.inititalSize != null
+            ? widget.minSize ?? 0.25
+            : _sheetPosition,
+        expand: false,
+        snap: widget.isSnap,
+        builder: (context, scrollController) {
+          return Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onSurface,
               borderRadius: const BorderRadius.only(
@@ -44,29 +60,32 @@ class _CustomDraggableSheetState extends State<CustomDraggableSheet> {
                 topRight: Radius.circular(24),
               ),
             ),
-            child: SingleChildScrollView(
-              physics: const NeverScrollableScrollPhysics(),
-              child: Column(
-                children: [
-                  SheetGrabber(
-                    onVerticalDragUpdate: (details) {
-                      setState(() {
-                        _sheetPosition -= details.delta.dy / _dragSensitivity;
-                        if (_sheetPosition < 0.25) {
-                          _sheetPosition = 0.25;
-                        }
-                        if (_sheetPosition > 0.9) {
-                          _sheetPosition = 0.9;
-                        }
-                      });
-                    },
-                    grabberBottomWidget: widget.grabberBottomWidget,
-                  ),
-                  widget.sheetBody!
-                ],
-              ),
-            )),
-      ),
-    );
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                SheetGrabber(
+                  onVerticalDragUpdate: (details) {
+                    setState(() {
+                      _sheetPosition -= details.delta.dy / _dragSensitivity;
+                      if (_sheetPosition < (widget.minSize ?? 0.25)) {
+                        _sheetPosition = widget.minSize ?? 0.25;
+                      }
+                      if (_sheetPosition > (widget.maxSize ?? 0.9)) {
+                        _sheetPosition = widget.maxSize ?? 0.9;
+                      }
+                    });
+                  },
+                  showGrabber: widget.showGrabber,
+                  grabberBottom: widget.grabberBottom!,
+                ),
+                widget.sheetBodyBuilder != null
+                    ? Expanded(
+                        child:
+                            widget.sheetBodyBuilder!(context, scrollController))
+                    : const SizedBox.shrink(),
+              ],
+            ),
+          );
+        });
   }
 }

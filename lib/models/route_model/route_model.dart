@@ -3,28 +3,31 @@ part "route_model.g.dart";
 
 @JsonSerializable(explicitToJson: true)
 class RouteModel {
-  final String title;
-  final String place;
-  final double ascent;
-  final double distance;
-  final double pace;
-  final int totalTime, rpe;
+  final String title, place, imagePath;
+  final double longitude, latitude, distance, ascent, pace;
+  final int rpe, attemps;
   final double calories;
   final bool haveInfo;
   final DateTime date;
+  final Duration time;
+  final List<String> images;
 
-  RouteModel({
-    required this.rpe,
-    required this.title,
-    required this.place,
-    required this.ascent,
-    required this.distance,
-    required this.pace,
-    required this.totalTime,
-    required this.calories,
-    required this.haveInfo,
-    required this.date,
-  });
+  RouteModel(
+      {required this.title,
+      required this.place,
+      required this.imagePath,
+      required this.longitude,
+      required this.latitude,
+      required this.distance,
+      required this.ascent,
+      required this.pace,
+      required this.rpe,
+      required this.attemps,
+      required this.calories,
+      required this.haveInfo,
+      required this.date,
+      required this.time,
+      required this.images});
   factory RouteModel.fromJson(Map<String, dynamic> json) =>
       _$RouteModelFromJson(json);
 

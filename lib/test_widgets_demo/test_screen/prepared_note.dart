@@ -10,6 +10,8 @@ class PreparedNote extends StatelessWidget {
     'Add_new',
     'Upcoming',
   ];
+
+  PreparedNote({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

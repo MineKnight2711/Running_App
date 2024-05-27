@@ -7,28 +7,39 @@ part of 'route_model.dart';
 // **************************************************************************
 
 RouteModel _$RouteModelFromJson(Map<String, dynamic> json) => RouteModel(
-      rpe: (json['rpe'] as num).toInt(),
       title: json['title'] as String,
       place: json['place'] as String,
-      ascent: (json['ascent'] as num).toDouble(),
+      imagePath: json['imagePath'] as String,
+      longitude: (json['longitude'] as num).toDouble(),
+      latitude: (json['latitude'] as num).toDouble(),
       distance: (json['distance'] as num).toDouble(),
+      ascent: (json['ascent'] as num).toDouble(),
       pace: (json['pace'] as num).toDouble(),
-      totalTime: (json['totalTime'] as num).toInt(),
+      rpe: (json['rpe'] as num).toInt(),
+      attemps: (json['attemps'] as num).toInt(),
       calories: (json['calories'] as num).toDouble(),
       haveInfo: json['haveInfo'] as bool,
       date: DateTime.parse(json['date'] as String),
+      time: Duration(microseconds: (json['time'] as num).toInt()),
+      images:
+          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$RouteModelToJson(RouteModel instance) =>
     <String, dynamic>{
       'title': instance.title,
       'place': instance.place,
-      'ascent': instance.ascent,
+      'imagePath': instance.imagePath,
+      'longitude': instance.longitude,
+      'latitude': instance.latitude,
       'distance': instance.distance,
+      'ascent': instance.ascent,
       'pace': instance.pace,
-      'totalTime': instance.totalTime,
       'rpe': instance.rpe,
+      'attemps': instance.attemps,
       'calories': instance.calories,
       'haveInfo': instance.haveInfo,
       'date': instance.date.toIso8601String(),
+      'time': instance.time.inMicroseconds,
+      'images': instance.images,
     };

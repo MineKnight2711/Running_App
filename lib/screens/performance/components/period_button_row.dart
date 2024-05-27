@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class PeriodButtonRow extends StatefulWidget {
+class PeriodButtonRow extends StatelessWidget {
   final List<String> listButton;
-  const PeriodButtonRow({super.key, required this.listButton});
 
-  @override
-  PeriodButtonRowState createState() => PeriodButtonRowState();
-}
-
-class PeriodButtonRowState extends State<PeriodButtonRow> {
-  int selectedIndex = 0;
+  final Function(int index)? onSelectedIndex;
+  const PeriodButtonRow({
+    super.key,
+    required this.listButton,
+    this.onSelectedIndex,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final RxInt currentIndex = 0.obs;
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: const Color(0x33FFFFFF), width: 1),
@@ -23,26 +24,30 @@ class PeriodButtonRowState extends State<PeriodButtonRow> {
       height: 35.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: widget.listButton
+        children: listButton
             .asMap()
             .entries
             .map(
               (entry) => Row(
                 children: [
-                  PillButton(
-                    size: 2,
-                    buttonBackgroundColor: selectedIndex == entry.key
-                        ? const Color(0xfff26322)
-                        : AppColors.transparent,
-                    buttonText: entry.value,
-                    isSelected: selectedIndex == entry.key,
-                    onPressed: () {
-                      setState(() {
-                        selectedIndex = entry.key;
-                      });
-                    },
+                  Obx(
+                    () => PillButton(
+                      size: 2,
+                      buttonBackgroundColor: currentIndex.value == entry.key
+                          ? const Color(0xfff26322)
+                          : AppColors.transparent,
+                      buttonText: entry.value,
+                      isSelected: currentIndex.value == entry.key,
+                      onPressed: () {
+                        currentIndex.value = entry.key;
+
+                        if (onSelectedIndex != null) {
+                          onSelectedIndex!(currentIndex.value);
+                        }
+                      },
+                    ),
                   ),
-                  if (entry.key != widget.listButton.length - 1)
+                  if (entry.key != listButton.length - 1)
                     Container(
                       width: 1.w,
                       height: 18.h,

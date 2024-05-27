@@ -10,10 +10,11 @@ class IntensityModel {
     required this.distanceRange,
     required this.rpmRange,
   });
-  factory IntensityModel.mock() {
-    const numPoints = 100;
-    const minBpm = 90.0;
-    const maxBpm = 160.0;
+  factory IntensityModel.mock(
+      {required double minBpm,
+      required double maxBpm,
+      required int numPoints}) {
+    const numPoints = 40;
     const rpmRange = 180.0;
     const distanceRange = 15.0;
 

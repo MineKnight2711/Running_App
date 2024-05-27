@@ -10,7 +10,7 @@ dependencies:
 
   flutter:
     sdk: flutter
-  
+  dotted_border: ^2.1.0
   google_fonts: ^6.2.1
   flutter_screenutil: ^5.9.0
   get: ^4.6.6
@@ -24,6 +24,11 @@ dependencies:
   json_annotation: ^4.9.0
   mapbox_polyline_points: ^0.0.5
   mapbox_maps_flutter: ^0.4.3
+  country_picker: ^2.0.25
+  logger: ^2.3.0
+  
+  image_picker: ^1.1.1
+  image_cropper: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -31,25 +36,36 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   build_runner: ^2.4.9
   json_serializable: ^6.8.0
-
+  
 flutter:
   uses-material-design: true
   
   assets:
     # - assets/animations/
+    - assets/geojson/
     - assets/images/
     - assets/svg/
     - assets/svg/music_provider/
     - assets/images/actions/
+    - assets/images/music/
     - assets/images/map_anotations/
     - assets/images/basic_activities/
     - assets/images/activities_details/
+    - assets/images/details_route_images/
+    - assets/images/details_route_images/runners/
     - assets/svg/
+    - assets/svg/music/
     - assets/svg/preparation/
-    - assets/svg/preparation/map_anotations/
+    - assets/svg/ready_to_run/
+    - assets/svg/preparation/add_new_route/
+    - assets/svg/preparation/details_route/
+    - assets/svg/preparation/alert_dialog/
+    - assets/svg/preparation/map_annotations/
     - assets/svg/preparation/route_item_options/
     - assets/svg/preparation/route_vector/
     - assets/svg/preparation/rpe/
+    - assets/svg/preparation/rate_rpe/
     - assets/svg/preparation/
     - assets/svg/activities/
+    - assets/svg/runing_finished_stastitic/
     - assets/svg/bottom_bar/

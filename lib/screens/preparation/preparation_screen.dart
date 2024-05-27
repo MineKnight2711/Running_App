@@ -1,111 +1,131 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/controllers/map_controller.dart';
+import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/sheet_grabber_title.dart';
+import '../../config/config_export.dart';
 import 'package:get/get.dart';
-import '../../models/top_route_model/top_route_model.dart';
-import '../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
-import '../performance/components/period_button_row.dart';
+import '../../controllers/preparation_map_controller.dart';
+import '../../widgets/custom_map_widget/custom_map_widget.dart';
 import 'components/components_export.dart';
+import 'data/list_top_route_model.dart';
 
-class PreparationScreen extends StatelessWidget {
-  PreparationScreen({super.key});
+class PreparationScreen extends StatefulWidget {
+  const PreparationScreen({super.key});
 
+  @override
+  State<PreparationScreen> createState() => _PreparationScreenState();
+}
+
+class _PreparationScreenState extends State<PreparationScreen>
+    with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
+  late TabController _tabController;
   final mapController = Get.find<MapController>();
 
   @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: PreparationType.values.length,
+      vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final tempTopRoute = [
-      TopRouteModel(
-        attemps: 100,
-        rpePoint: 7,
-        latitude: 10.727392,
-        longitude: 106.724228,
-        distance: 10,
-        imagePath: "vector_1",
-        routeTitle: "Raymondienne",
-        time: const Duration(minutes: 55),
-      ),
-      TopRouteModel(
-        attemps: 3,
-        rpePoint: 9,
-        latitude: 10.726371,
-        longitude: 106.724881,
-        distance: 3,
-        imagePath: "vector_2",
-        routeTitle: "Tran Van Tra",
-        time: const Duration(minutes: 11),
-      ),
-      TopRouteModel(
-        attemps: 32,
-        rpePoint: 4,
-        latitude: 10.727318,
-        longitude: 106.721855,
-        distance: 20,
-        imagePath: "vector_2",
-        routeTitle: "Morison",
-        time: const Duration(minutes: 32),
-      ),
-      TopRouteModel(
-        attemps: 11,
-        rpePoint: 9,
-        latitude: 10.725190,
-        longitude: 106.722959,
-        distance: 4,
-        imagePath: "vector_3",
-        routeTitle: "Nam Sai Gon School",
-        time: const Duration(minutes: 22),
-      ),
-      TopRouteModel(
-        attemps: 11,
-        rpePoint: 9,
-        latitude: 10.7285405,
-        longitude: 106.7161719,
-        distance: 4,
-        imagePath: "vector_1",
-        routeTitle: "Cresent Mall route",
-        time: const Duration(minutes: 22),
-      ),
-      TopRouteModel(
-        attemps: 11,
-        rpePoint: 9,
-        latitude: 10.7294681,
-        longitude: 106.7173091,
-        distance: 4,
-        imagePath: "vector_3",
-        routeTitle: "Saigon Exhibition and Convention Center",
-        time: const Duration(minutes: 22),
-      ),
-    ];
-    final List<String> periodButtonRow = [
-      'Favorites',
-      'Add_new',
-      'Upcoming',
-    ];
+    super.build(context);
+
     return Scaffold(
       body: Stack(
         children: [
           CustomMapWidget(
-            onMapLoad: (p0) => mapController.createTempTopRoutes(tempTopRoute),
+            onMapCreate: (mapBoxMap) {
+              mapController.onMapCreated(mapBoxMap);
+              mapController.createTempTopRoutes();
+            },
           ),
+          Obx(() {
+            return mapController.isReadyToRun.value
+                ? Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: ReadyToRunHeader(
+                      onClosePressed: () {
+                        mapController.isReadyToRun.value = false;
+                      },
+                    ),
+                  )
+                : Positioned(top: 40, child: HorizontalAnnotations());
+          }),
           Positioned(
-            top: 40,
-            // left: 10,
-            child: HorizontalAnnotations(),
-          ),
-          Positioned(top: 270, left: 366, child: VerticalAnnotations()),
-          CustomDraggableSheet(
-            dragSensitivity: 800,
-            grabberBottomWidget: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: PeriodButtonRow(
-                listButton: periodButtonRow,
+            top: 150,
+            right: 0,
+            child: Obx(
+              () => VerticalAnnotations(
+                isRouteAdd: mapController.selectedRouteToAdd.value != null,
+                isRouteSelected: mapController.isRouteSelected.value,
+                onUndoPress: () {
+                  mapController.isRouteSelected.toggle();
+                  mapController.selectedRoute.value = null;
+                },
+                onRotateMapPressed: () => mapController.changeMapDirection(),
+                onChangeStylePressed: () => mapController.changeMapStyle(),
+                onCheckPress: () {
+                  mapController.isRouteSelected.toggle();
+                  mapController.isRouteAdd.toggle();
+                  mapController.selectRouteToAdd();
+                },
+                onClosePress: () => mapController.isRouteSelected.toggle(),
+                onHandPress: () => mapController.isRouteSelected.toggle(),
+                onAddUndoPress: () {
+                  mapController.isRouteAdd.value =
+                      mapController.isRouteSelected.value = false;
+                  mapController.selectedRouteToAdd.value = null;
+                  mapController.resetPointAndAnotation();
+                  mapController.createTempTopRoutes();
+                },
+                onPrepareRoutePressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    useRootNavigator: false,
+                    backgroundColor: AppColors.sheetBackground,
+                    builder: (context) => DraggableScrollableSheet(
+                      expand: false,
+                      maxChildSize: 0.9,
+                      minChildSize: 0.25,
+                      initialChildSize: 0.9,
+                      builder: (context, scrollController) =>
+                          SingleChildScrollView(
+                        controller: scrollController,
+                        child: PreparedRouteMapSheetWidget(
+                          scrollController: scrollController,
+                          scheduleRoutes: tempTopRoute.sublist(2, 4),
+                          readyForAnytimeRoutes: tempTopRoute.sublist(3, 6),
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
-            sheetBody: ListTopRoutes(
-              topRoutes: tempTopRoute,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: ScreenBottomSheets(
+              preparationScreenContext: context,
+              tabController: _tabController,
             ),
-          )
+          ),
         ],
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
