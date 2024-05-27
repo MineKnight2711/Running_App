@@ -3,17 +3,15 @@ import 'package:flutter_running_demo/screens/home_screen/home_screen.dart';
 import 'package:flutter_running_demo/screens/performance/performance_screen.dart';
 import 'package:flutter_running_demo/screens/progress/details_route_screen/details_route_screen.dart';
 import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/ready_to_run/load_prepared_road_map.dart';
-import 'package:flutter_running_demo/screens/run/show_clock/components/music_pause_clock.dart';
-import 'package:flutter_running_demo/screens/run/show_clock/components/music_play_clock.dart';
-import 'package:flutter_running_demo/screens/run/show_clock/components/run_finished.dart';
-import 'package:flutter_running_demo/screens/run/show_clock/runstop.dart';
+import 'package:flutter_running_demo/screens/run/components/music_pause_clock.dart';
+import 'package:flutter_running_demo/screens/run/components/run_finished.dart';
 import 'package:flutter_running_demo/test_widgets/metric_info.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_complete.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_note.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/prepared_screen.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sending_location.dart';
 import 'package:flutter_running_demo/test_widgets_demo/test_screen/run_map_setting/run_setting/sensor_status.dart';
-import 'package:flutter_running_demo/screens/run/show_clock/running_show_clock_screen.dart';
+import 'package:flutter_running_demo/screens/run/running_show_clock_screen.dart';
 import 'package:get/get.dart';
 import '../screens/app_tabbar_view/app_tabbar_view.dart';
 import '../test_widgets_demo/test_alertdialog/test_remove_confirmation.dart';
@@ -36,11 +34,10 @@ class AppRoutes {
   static const String _authorizemusicprovider = '/authorizemusicprovider';
   static const String _audioguidance = '/audioguidance';
   static const String _sennorstatus = '/sennorstatus';
-  static const String _runningclock = '/runningclock';
+  static const String _runShowClock = '/runShowClock';
   static const String _runshowmap = '/runshowmap';
   static const String _metricinfo = '/metricinfo';
   static const String _sendinglocation = '/sendinglocation';
-  static const String _musicplaylock = '/musicplaylock';
   static const String _musicpauselock = '/musicpauselock';
   static const String _runfinished = '/runfinished';
   static const String _loadpreparedroadmap = '/loadpreparedroadmap';
@@ -60,11 +57,10 @@ class AppRoutes {
   static String get authorizemusicprovider => _authorizemusicprovider;
   static String get audioguidance => _audioguidance;
   static String get sennorstatus => _sennorstatus;
-  static String get runningclock => _runningclock;
+  static String get runShowClock => _runShowClock;
   static String get runshowmap => _runshowmap;
   static String get metricinfo => _metricinfo;
   static String get sendinglocation => _sendinglocation;
-  static String get musicplaylock => _musicplaylock;
   static String get musicpauselock => _musicpauselock;
   static String get runfinished => _runfinished;
   static String get loadpreparedroadmap => _loadpreparedroadmap;
@@ -149,13 +145,9 @@ class AppRoutes {
         page: () => const SensorStatus(),
         transition: Transition.rightToLeft),
     GetPage(
-        name: _runningclock,
-        page: () => RunningClock(),
-        transition: Transition.rightToLeft),
-    GetPage(
-        name: _runshowmap,
-        page: () => const RunStop(),
-        transition: Transition.rightToLeft),
+        name: _runShowClock,
+        page: () => RunShowClock(),
+        transition: Transition.downToUp),
     GetPage(
         name: _metricinfo,
         page: () => const MetricInfo(),
@@ -163,10 +155,6 @@ class AppRoutes {
     GetPage(
         name: _sendinglocation,
         page: () => const SendingLocation(),
-        transition: Transition.rightToLeft),
-    GetPage(
-        name: _musicplaylock,
-        page: () => const MusicPlayClock(),
         transition: Transition.rightToLeft),
     GetPage(
         name: _musicpauselock,

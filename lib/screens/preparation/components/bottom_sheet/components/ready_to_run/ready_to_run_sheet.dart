@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/config/config_export.dart';
-import 'package:flutter_running_demo/controllers/preparation_map_controller.dart';
-import 'package:flutter_running_demo/extensions/duration_extension.dart';
-import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/ready_to_run/components/ready_to_run_sheet_item.dart';
-import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/map_settings/map_setting_sheet.dart';
+import 'package:flutter_running_demo/controllers/map_controller.dart';
+import 'package:flutter_running_demo/controllers/running_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../../../../../config/routes.dart';
+import 'components.dart';
 
-import 'components/ready_to_run_sheet_go_button.dart';
-
-class ReadyToRunSheet extends StatelessWidget {
+class ReadyToRunSheet extends GetView<RunningController> {
   final BuildContext secondaryNavigatorContext;
   ReadyToRunSheet({
     super.key,
@@ -23,6 +20,7 @@ class ReadyToRunSheet extends StatelessWidget {
     'music',
   ];
   final mapController = Get.find<MapController>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,12 +41,12 @@ class ReadyToRunSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ReadyToRunSheetItem(
-                  label: mapController.isRunning.value
-                      ? "${mapController.selectedRoute.value?.distance} m"
+                  label: controller.isRunning.value
+                      ? "${controller.selectedRoute.value?.distance} m"
                       : null,
                   svgAssetsIcon:
-                      mapController.isRunning.value ? "road_16" : "road",
-                  onItemTap: mapController.isRunning.value
+                      controller.isRunning.value ? "road_16" : "road",
+                  onItemTap: controller.isRunning.value
                       ? () {}
                       : () {
                           Navigator.pop(context);
@@ -60,32 +58,33 @@ class ReadyToRunSheet extends StatelessWidget {
                           );
                         },
                 ),
-                ReadyToRunSheetItem(
-                  label: mapController.isRunning.value
-                      ? "${mapController.selectedRoute.value?.time.durationToString()} m"
-                      : null,
-                  svgAssetsIcon: mapController.isRunning.value
-                      ? "time_16"
-                      : "road_speaker",
-                  onItemTap: () {},
+                Obx(
+                  () => ReadyToRunSheetItem(
+                    label: controller.isRunning.value
+                        ? "${controller.elapsedTimeString} "
+                        : null,
+                    svgAssetsIcon:
+                        controller.isRunning.value ? "time_16" : "road_speaker",
+                    onItemTap: () {},
+                  ),
                 ),
                 ReadyToRunSheetItem(
-                  label: mapController.isRunning.value
-                      ? "${mapController.selectedRoute.value?.pace}/km"
-                      : null,
-                  svgAssetsIcon:
-                      mapController.isRunning.value ? "velocity_16" : "heart",
-                  onItemTap: () {},
-                ),
-                ReadyToRunSheetItem(
-                  label: mapController.isRunning.value
-                      ? "${mapController.selectedRoute.value?.ascent}"
+                  label: controller.isRunning.value
+                      ? "${controller.selectedRoute.value?.pace}/km"
                       : null,
                   svgAssetsIcon:
-                      mapController.isRunning.value ? "heart_16" : "sos",
+                      controller.isRunning.value ? "velocity_16" : "heart",
                   onItemTap: () {},
                 ),
-                mapController.isRunning.value
+                ReadyToRunSheetItem(
+                  label: controller.isRunning.value
+                      ? "${controller.selectedRoute.value?.ascent}"
+                      : null,
+                  svgAssetsIcon:
+                      controller.isRunning.value ? "heart_16" : "sos",
+                  onItemTap: () {},
+                ),
+                controller.isRunning.value
                     ? const SizedBox.shrink()
                     : ReadyToRunSheetItem(
                         svgAssetsIcon: "music",
@@ -95,40 +94,18 @@ class ReadyToRunSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 40),
-          Obx(() => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  AnimatedSlide(
-                    offset: mapController.isRunning.value
-                        ? const Offset(0, 0)
-                        : const Offset(0, 5),
-                    duration: const Duration(milliseconds: 300),
-                    child: ReadyToRunSheetItem(
-                      svgAssetsIcon: "music",
-                      onItemTap: () {},
-                    ),
-                  ),
-                  ReadyToRunSheetGoButton(
-                    buttonText: mapController.isRunning.value ? "Stop" : "Go",
-                    goButtonColor: mapController.isRunning.value
-                        ? AppColors.cancleButton
-                        : AppColors.appButton,
-                    onGoPressed: () {
-                      mapController.isRunning.toggle();
-                    },
-                  ),
-                  AnimatedSlide(
-                    offset: mapController.isRunning.value
-                        ? const Offset(0, 0)
-                        : const Offset(0, 5),
-                    duration: const Duration(milliseconds: 300),
-                    child: ReadyToRunSheetItem(
-                      svgAssetsIcon: "show_map",
-                      onItemTap: () {},
-                    ),
-                  ),
-                ],
-              )),
+          Hero(
+            tag: "running_buttons",
+            child: Material(
+              type: MaterialType.transparency,
+              child: RunningButtons(
+                showMapButtonColor: const Color(0xfff26322).withOpacity(0.3),
+                mapController: mapController,
+                onShowMapPressed: () =>
+                    AppRoutes.navigate(AppRoutes.runShowClock),
+              ),
+            ),
+          ),
         ],
       ),
     );

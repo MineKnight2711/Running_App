@@ -27,7 +27,7 @@ jobs:
           flutter-version: '3.19.3'  # Specify the Flutter version you need
       - run: flutter pub get
       # - run: flutter test
-      - run: flutter build apk --debug
+      - run: flutter build apk --release
       # - run: |
       #     flutter build ios --no-codesign
       #     cd build/ios/iphoneos

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../../../../config/config_export.dart';
-import 'components/map_type_options.dart';
+import '../../../../../../../config/config_export.dart';
+import 'map_type_options.dart';
 
 class RunMapSettingsSheet extends StatefulWidget {
   const RunMapSettingsSheet({super.key});

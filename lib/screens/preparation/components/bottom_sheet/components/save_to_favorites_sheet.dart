@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../config/config_export.dart';
-import '../../../../../controllers/preparation_map_controller.dart';
+import '../../../../../controllers/map_controller.dart';
 import '../../../../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';
 
 class RouteSaveToFavoriteBottomSheet extends StatelessWidget {

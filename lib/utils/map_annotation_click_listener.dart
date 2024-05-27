@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
-import '../controllers/preparation_map_controller.dart';
+import '../controllers/map_controller.dart';
 
 class AnnotationClickListener extends OnPointAnnotationClickListener {
   final mapController = Get.find<MapController>();

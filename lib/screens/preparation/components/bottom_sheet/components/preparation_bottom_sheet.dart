@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
-import 'package:flutter_running_demo/controllers/preparation_map_controller.dart';
+import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import '../../../../../widgets/custom_draggable_sheet/custom_draggable_sheet.dart';

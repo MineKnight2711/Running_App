@@ -2,12 +2,16 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
+import '../models/route_model/route_model.dart';
+
 class RunningController extends GetxController {
   final Rx<Stopwatch> stopwatch = Stopwatch().obs;
-  final RxBool isRunnig = false.obs;
+  final RxBool isRunning = false.obs;
   late Duration elapsedTime;
   late RxString elapsedTimeString;
   late Timer timer;
+
+  final Rxn<RouteModel> selectedRoute = Rxn<RouteModel>();
 
   @override
   void onInit() {
@@ -25,15 +29,15 @@ class RunningController extends GetxController {
 
   void startStopwatch() {
     if (!stopwatch.value.isRunning) {
-      // Start the stopwatch and update elapsed time
+      isRunning.value = true;
 
       stopwatch.value.start();
       _updateElapsedTime();
     } else {
+      isRunning.value = false;
       // Stop the stopwatch
       stopwatch.value.stop();
     }
-    isRunnig.toggle();
   }
 
   // Reset button callback

@@ -2,7 +2,7 @@ export 'add_new/add_new_route_action_guide.dart';
 export 'favorites/favorite_route_list.dart';
 export 'upcoming/upcoming_list_route.dart';
 export 'ready_to_run/ready_to_run_sheet.dart';
-export 'map_settings/map_setting_sheet.dart';
+export 'ready_to_run/components/map_setting_sheet.dart';
 export 'preparation_tabbar.dart';
 export 'sheet_grabber_title.dart';
 export 'route_item.dart';

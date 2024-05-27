@@ -29,7 +29,7 @@ class ReadyToRunSheetItem extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(5),
         child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
+          scrollDirection: label != null ? Axis.horizontal : Axis.vertical,
           child: Row(
             mainAxisAlignment: label != null
                 ? MainAxisAlignment.spaceBetween

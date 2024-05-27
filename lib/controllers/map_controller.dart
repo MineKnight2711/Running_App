@@ -26,7 +26,7 @@ class MapController extends GetxController {
   final RxBool isRouteSelected = false.obs;
   final RxBool isRouteAdd = false.obs;
   final RxBool isReadyToRun = false.obs;
-  final RxBool isRunning = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -42,6 +42,7 @@ class MapController extends GetxController {
   void resetPointAndAnotation() {
     pointManager.value?.deleteAll();
     polylineManager.value?.deleteAll();
+    // pointManager.value = polylineManager.value = null;
   }
 
   onMapCreated(MapboxMap mapboxMapCreate) {
@@ -54,7 +55,14 @@ class MapController extends GetxController {
     if (listRoute.isNotEmpty &&
         (anotationIndex >= 0 && anotationIndex < listRoute.length) &&
         selectedRouteToAdd.value == null) {
+      resetPointAndAnotation();
       selectedRoute.value = listRoute[anotationIndex];
+
+      centerCameraOnCoordinate(
+        selectedRoute.value?.longitude ?? 0,
+        selectedRoute.value?.latitude ?? 0,
+        anotationPng: "selected_route",
+      );
     }
   }
 
@@ -129,32 +137,42 @@ class MapController extends GetxController {
   void _centerCameraOnCenterPoint(List<Position> positions) async {
     final pos = _getCenterPoint(positions);
 
-    _centerCameraOnCoordinate(pos);
+    centerCameraOnCoordinate(
+      pos.lng.toDouble(),
+      pos.lat.toDouble(),
+      anotationPng: "position",
+    );
   }
 
-  void _centerCameraOnCoordinate(Position postition) async {
-    final centeredPoint = Point(coordinates: postition);
+  void centerCameraOnCoordinate(double lng, double lat,
+      {required String anotationPng}) async {
+    final position = Position(lng, lat);
+    final centeredPoint = Point(coordinates: position);
 
-    final Uint8List images =
-        await loadImageToUnit8List("assets/images/map_anotations/position.png");
-    pointManager.value?.create(PointAnnotationOptions(
-      geometry: centeredPoint.toJson(),
-      image: images,
-      iconSize: 2,
-    ));
+    final Uint8List images = await loadImageToUnit8List(
+        "assets/images/map_anotations/$anotationPng.png");
+    pointManager.value?.create(
+      PointAnnotationOptions(
+        geometry: centeredPoint.toJson(),
+        iconSize: 2.5,
+        image: images,
+      ),
+    );
     mapboxMap.value?.flyTo(
-        CameraOptions(
-          anchor: ScreenCoordinate(x: 0, y: 0),
-          zoom: 14,
-          center: Point(
-            coordinates: postition,
-          ).toJson(),
-          bearing: MapDirection.north.numericValue,
-        ),
-        MapAnimationOptions(duration: 3000, startDelay: 0));
+      CameraOptions(
+        anchor: ScreenCoordinate(x: 0, y: 0),
+        zoom: 14,
+        center: Point(
+          coordinates: position,
+        ).toJson(),
+        bearing: MapDirection.north.numericValue,
+      ),
+      MapAnimationOptions(duration: 3000, startDelay: 0),
+    );
   }
 
   void createTempTopRoutes() {
+    resetPointAndAnotation();
     mapboxMap.value?.annotations
         .createPointAnnotationManager()
         .then((pointAnnotationManager) async {
@@ -174,7 +192,7 @@ class MapController extends GetxController {
           .toList());
       pointManager.value?.createMulti(positions
           .map((e) => PointAnnotationOptions(
-              iconSize: 3,
+              iconSize: 2.5,
               geometry: Point(coordinates: e).toJson(),
               image: images))
           .toList());
@@ -200,44 +218,39 @@ class MapController extends GetxController {
     int startPosition = 0;
     int middlePosition = (coordinates.length / 2).floor();
     int endPosition = coordinates.length - 1;
-    _centerCameraOnCoordinate(Position(
+    centerCameraOnCoordinate(
       coordinates[middlePosition][0],
       coordinates[middlePosition][1],
-    ));
+      anotationPng: "position",
+    );
     List<Map<int, String>> preparedRoutePolylineAndPoints = [
       {startPosition: "start"},
       {middlePosition: "position"},
       {endPosition: "stop"}
     ];
 
-    mapboxMap.value?.annotations
-        .createPointAnnotationManager()
-        .then((pointAnnotationManager) async {
-      pointManager.value = pointAnnotationManager;
-      final listPosition = <Map<Uint8List, Position>>[];
-      for (final point in preparedRoutePolylineAndPoints) {
-        Logger().i("Key index ${point.keys.first}");
-        final Uint8List image = await loadImageToUnit8List(
-            "assets/images/map_anotations/${point.values.first}.png");
-        listPosition.add({
-          image: Position(
-            coordinates[point.keys.first][0],
-            coordinates[point.keys.first][1],
-          )
-        });
-      }
+    final listPosition = <Map<Uint8List, Position>>[];
+    for (final point in preparedRoutePolylineAndPoints) {
+      Logger().i("Key index ${point.keys.first}");
+      final Uint8List image = await loadImageToUnit8List(
+          "assets/images/map_anotations/${point.values.first}.png");
+      listPosition.add({
+        image: Position(
+          coordinates[point.keys.first][0],
+          coordinates[point.keys.first][1],
+        )
+      });
+    }
 
-      pointManager.value?.createMulti(listPosition
-          .map(
-            (position) => PointAnnotationOptions(
-              geometry: Point(coordinates: position.values.first).toJson(),
-              iconSize: 2,
-              image: position.keys.first,
-            ),
-          )
-          .toList());
-    });
-
+    pointManager.value?.createMulti(listPosition
+        .map(
+          (position) => PointAnnotationOptions(
+            geometry: Point(coordinates: position.values.first).toJson(),
+            iconSize: 2,
+            image: position.keys.first,
+          ),
+        )
+        .toList());
     final List<Position> routeLinePositions =
         coordinates.map((cor) => Position(cor[0], cor[1])).toList();
     mapboxMap.value?.annotations
