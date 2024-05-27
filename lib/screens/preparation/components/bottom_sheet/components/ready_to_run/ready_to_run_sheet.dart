@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_running_demo/controllers/preparation_map_controller.dart';
 import 'package:flutter_running_demo/extensions/duration_extension.dart';
-
 import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/ready_to_run/components/ready_to_run_sheet_item.dart';
 import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/map_settings/map_setting_sheet.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
