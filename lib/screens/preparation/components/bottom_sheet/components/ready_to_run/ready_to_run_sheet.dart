@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:flutter_running_demo/controllers/running_controller.dart';
+import 'package:flutter_running_demo/utils/navigator_key.dart';
+import 'package:flutter_running_demo/widgets/custom_bottom_sheet/custom_bottom_sheet.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../../config/routes.dart';
@@ -50,11 +52,23 @@ class ReadyToRunSheet extends GetView<RunningController> {
                       ? () {}
                       : () {
                           Navigator.pop(context);
-                          showBottomSheet(
+                          showModalBottomSheet(
+                            isScrollControlled: true,
                             context: secondaryNavigatorContext,
-                            builder: (context) {
-                              return const RunMapSettingsSheet();
-                            },
+                            builder: (context) => const CustomBottomSheet(
+                              sheetHeight: 0.85,
+                              sheetTitle: "Audio Guidance",
+                              sheetBody: AudioGuidance(),
+                              sheetFooter: CustomBottomSheetButton(
+                                buttonLabel: "Done",
+                              ),
+                            ),
+                          ).whenComplete(
+                            () => showBottomSheet(
+                              context: NavigatorKeys
+                                  .secondaryNavigatorKey.currentContext!,
+                              builder: (context) => this,
+                            ),
                           );
                         },
                 ),
@@ -65,7 +79,29 @@ class ReadyToRunSheet extends GetView<RunningController> {
                         : null,
                     svgAssetsIcon:
                         controller.isRunning.value ? "time_16" : "road_speaker",
-                    onItemTap: () {},
+                    onItemTap: !controller.isRunning.value
+                        ? () {
+                            Navigator.pop(context);
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              context: secondaryNavigatorContext,
+                              builder: (context) => const CustomBottomSheet(
+                                sheetHeight: 0.85,
+                                sheetTitle: "Audio Guidance",
+                                sheetBody: AudioGuidance(),
+                                sheetFooter: CustomBottomSheetButton(
+                                  buttonLabel: "Done",
+                                ),
+                              ),
+                            ).whenComplete(
+                              () => showBottomSheet(
+                                context: NavigatorKeys
+                                    .secondaryNavigatorKey.currentContext!,
+                                builder: (context) => this,
+                              ),
+                            );
+                          }
+                        : () {},
                   ),
                 ),
                 ReadyToRunSheetItem(
@@ -74,7 +110,26 @@ class ReadyToRunSheet extends GetView<RunningController> {
                       : null,
                   svgAssetsIcon:
                       controller.isRunning.value ? "velocity_16" : "heart",
-                  onItemTap: () {},
+                  onItemTap: !controller.isRunning.value
+                      ? () {
+                          Navigator.pop(context);
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            context: secondaryNavigatorContext,
+                            builder: (context) => const CustomBottomSheet(
+                              sheetHeight: 0.85,
+                              sheetTitle: "Sensor Status",
+                              sheetBody: SensorStatus(),
+                            ),
+                          ).whenComplete(
+                            () => showBottomSheet(
+                              context: NavigatorKeys
+                                  .secondaryNavigatorKey.currentContext!,
+                              builder: (context) => this,
+                            ),
+                          );
+                        }
+                      : () {},
                 ),
                 ReadyToRunSheetItem(
                   label: controller.isRunning.value
@@ -82,13 +137,57 @@ class ReadyToRunSheet extends GetView<RunningController> {
                       : null,
                   svgAssetsIcon:
                       controller.isRunning.value ? "heart_16" : "sos",
-                  onItemTap: () {},
+                  onItemTap: !controller.isRunning.value
+                      ? () {
+                          Navigator.pop(context);
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            context: secondaryNavigatorContext,
+                            builder: (context) => const CustomBottomSheet(
+                              sheetHeight: 0.85,
+                              sheetTitle: "Sending location for safety",
+                              sheetBody: SendingLocation(),
+                              sheetFooter: CustomBottomSheetButton(
+                                buttonLabel: "Done",
+                              ),
+                            ),
+                          ).whenComplete(
+                            () => showBottomSheet(
+                              context: NavigatorKeys
+                                  .secondaryNavigatorKey.currentContext!,
+                              builder: (context) => this,
+                            ),
+                          );
+                        }
+                      : () {},
                 ),
                 controller.isRunning.value
                     ? const SizedBox.shrink()
                     : ReadyToRunSheetItem(
                         svgAssetsIcon: "music",
-                        onItemTap: () {},
+                        onItemTap: !controller.isRunning.value
+                            ? () {
+                                Navigator.pop(context);
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  context: secondaryNavigatorContext,
+                                  builder: (context) => const CustomBottomSheet(
+                                    sheetHeight: 0.85,
+                                    sheetTitle: "Authorize music provider",
+                                    sheetBody: AuthorizeMusicProvider(),
+                                    sheetFooter: CustomBottomSheetButton(
+                                      buttonLabel: "Done",
+                                    ),
+                                  ),
+                                ).whenComplete(
+                                  () => showBottomSheet(
+                                    context: NavigatorKeys
+                                        .secondaryNavigatorKey.currentContext!,
+                                    builder: (context) => this,
+                                  ),
+                                );
+                              }
+                            : () {},
                       ),
               ],
             ),

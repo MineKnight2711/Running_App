@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/screens/preparation/components/load_prepare_route_sheet/components/load_prepare_route_dropdown_button.dart';
+import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/load_prepare_route_sheet/components/load_prepare_route_dropdown_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../config/config_export.dart';
-import '../../../../models/route_model/route_model.dart';
+import '../../../../../../config/config_export.dart';
+import '../../../../../../models/route_model/route_model.dart';
 
 class PreparedRouteMapSheetWidget extends StatelessWidget {
   final ScrollController scrollController;
   final List<RouteModel> scheduleRoutes;
   final List<RouteModel> readyForAnytimeRoutes;
+  final BuildContext preparationScreenContext;
+
   const PreparedRouteMapSheetWidget({
     super.key,
+    required this.preparationScreenContext,
     required this.scheduleRoutes,
     required this.readyForAnytimeRoutes,
     required this.scrollController,
@@ -58,20 +61,20 @@ class PreparedRouteMapSheetWidget extends StatelessWidget {
           ),
           SizedBox(height: AppSpacings.vs10),
           PrepareRouteMapDropdownButtonWidget(
+            preparationScreenContext: preparationScreenContext,
             routes: scheduleRoutes,
             scrollController: scrollController,
             title: scheduleRoutes.isNotEmpty
                 ? "Today, 8/15/2023, 5:30 AM"
                 : 'No scheduled route for today',
-            haveCancelButton: false,
-            onLoadPress: () {},
+            haveCancelButton: true,
           ),
           PrepareRouteMapDropdownButtonWidget(
+            preparationScreenContext: preparationScreenContext,
             routes: readyForAnytimeRoutes,
             scrollController: scrollController,
             title: "Ready for anytime",
             haveCancelButton: false,
-            onLoadPress: () {},
           )
         ],
       ),

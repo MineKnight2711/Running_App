@@ -48,7 +48,7 @@ class SliverHeaderButtons extends StatelessWidget {
                       transForm: isScrolledUnder,
                       title: "Search",
                       onPressed: onSearchPress,
-                      imageAsset: "assets/images/activities_details/search.png",
+                      imageAsset: "assets/svg/search.svg",
                     ),
                   ),
                   SizedBox(
@@ -61,7 +61,7 @@ class SliverHeaderButtons extends StatelessWidget {
                       transForm: isScrolledUnder,
                       title: "Chart",
                       onPressed: onChartPress,
-                      imageAsset: "assets/images/activities_details/chart.png",
+                      imageAsset: "assets/svg/chart.svg",
                     ),
                   ),
                 ],

@@ -1,4 +1,4 @@
-import '../../../../../config/config_export.dart';
+import '../../../../../../../config/config_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,18 +22,19 @@ class PreparedRouteItemActionWidget extends StatelessWidget {
           haveCancleButton
               ? InkWell(
                   onTap: onCancelPress,
+                  borderRadius: BorderRadius.circular(12),
                   child: Container(
                     height: 30.h,
                     width: 120.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppColors.appButton)),
+                        border: Border.all(color: AppColors.white100)),
                     alignment: Alignment.center,
                     child: Text(
                       "Cancel",
                       style: CustomGoogleFonts.roboto(
                           fontSize: AppFontSizes.size12,
-                          color: AppColors.appButton),
+                          color: AppColors.white100),
                     ),
                   ),
                 )
@@ -43,6 +44,7 @@ class PreparedRouteItemActionWidget extends StatelessWidget {
           ),
           InkWell(
             onTap: onLoadPress,
+            borderRadius: BorderRadius.circular(12),
             child: Container(
               height: 30.h,
               width: 120.w,

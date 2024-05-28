@@ -52,7 +52,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         showHomeButton!
             ? ActionButton(
-                imagePath: "assets/images/home.png",
+                imagePath: "assets/svg/home.svg",
                 onTap: () => AppRoutes.navigateOffUntil(AppRoutes.home),
               )
             : const SizedBox.shrink(),

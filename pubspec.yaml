@@ -24,11 +24,12 @@ dependencies:
   json_annotation: ^4.9.0
   mapbox_polyline_points: ^0.0.5
   mapbox_maps_flutter: ^0.4.3
-  country_picker: ^2.0.25
+  country_code_picker: ^3.0.0
   logger: ^2.3.0
   
   image_picker: ^1.1.1
   image_cropper: ^6.0.0
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:

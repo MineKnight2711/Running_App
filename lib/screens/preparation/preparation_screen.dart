@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/sheet_grabber_title.dart';
 import 'package:flutter_running_demo/utils/navigator_key.dart';
+import 'package:logger/logger.dart';
 import '../../config/config_export.dart';
 import 'package:get/get.dart';
 import '../../controllers/map_controller.dart';
@@ -38,11 +39,15 @@ class _PreparationScreenState extends State<PreparationScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
+    //Logger().i("Coordinate: ${coordinate.x}, ${coordinate.y}");
     return Scaffold(
       body: Stack(
         children: [
           CustomMapWidget(
+            onTapListener: (coordinate) {
+              mapController.selectDirection(coordinate);
+              Logger().i("Coordinate: ${coordinate.x}, ${coordinate.y}");
+            },
             onMapCreate: (mapBoxMap) {
               mapController.onMapCreated(mapBoxMap);
               mapController.createTempTopRoutes();
@@ -88,7 +93,14 @@ class _PreparationScreenState extends State<PreparationScreen>
                   mapController.selectRouteToAdd();
                 },
                 onClosePress: () => mapController.isRouteSelected.toggle(),
-                onHandPress: () => mapController.isRouteSelected.toggle(),
+                onHandPress: () {
+                  mapController.resetPointAndAnotation();
+                  mapController.isRouteSelected.toggle();
+                  mapController.centerCameraOnCoordinate(
+                      mapController.selectedRoute.value?.longitude ?? 0,
+                      mapController.selectedRoute.value?.latitude ?? 0,
+                      anotationPng: "position");
+                },
                 onAddUndoPress: () {
                   mapController.isRouteAdd.value =
                       mapController.isRouteSelected.value = false;
@@ -102,15 +114,15 @@ class _PreparationScreenState extends State<PreparationScreen>
                     isScrollControlled: true,
                     useRootNavigator: false,
                     backgroundColor: AppColors.sheetBackground,
-                    builder: (context) => DraggableScrollableSheet(
+                    builder: (bottomSheetContext) => DraggableScrollableSheet(
                       expand: false,
                       maxChildSize: 0.9,
                       minChildSize: 0.25,
                       initialChildSize: 0.9,
-                      builder: (context, scrollController) =>
-                          SingleChildScrollView(
+                      builder: (con, scrollController) => SingleChildScrollView(
                         controller: scrollController,
                         child: PreparedRouteMapSheetWidget(
+                          preparationScreenContext: context,
                           scrollController: scrollController,
                           scheduleRoutes: tempTopRoute.sublist(2, 4),
                           readyForAnytimeRoutes: tempTopRoute.sublist(3, 6),

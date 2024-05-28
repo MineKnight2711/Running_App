@@ -1,8 +1,52 @@
 import 'package:flutter/material.dart';
+import '../../../../../../../config/config_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../config/fonts.dart';
+class AuthorizeMusicProvider extends StatefulWidget {
+  const AuthorizeMusicProvider({super.key});
+
+  @override
+  AuthorizeMusicProviderState createState() => AuthorizeMusicProviderState();
+}
+
+class AuthorizeMusicProviderState extends State<AuthorizeMusicProvider> {
+  late String _selectedMusicProvider;
+  List<String> musicProviders = ['spotify', 'applemusic', 'nhaccuatui'];
+  @override
+  void initState() {
+    super.initState();
+    _selectedMusicProvider = musicProviders.first;
+  }
+
+  void _handleMusicProviderChange(String provider) {
+    setState(() {
+      _selectedMusicProvider = provider;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: MusicProviderOption(
+                selectedProvider: _selectedMusicProvider,
+                onSelected: (provider) {
+                  _handleMusicProviderChange(provider);
+                },
+                provider: musicProviders[index],
+              ),
+            ),
+        separatorBuilder: (context, index) => const Divider(
+              thickness: 0.5,
+              height: 5,
+            ),
+        itemCount: musicProviders.length);
+  }
+}
 
 class MusicProviderOption extends StatelessWidget {
   final String provider, selectedProvider;

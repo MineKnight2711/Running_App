@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../../models/route_model/route_model.dart';
-import '../../../../../widgets/custom_dropdown/custom_dropdown_widget.dart';
-import '../../bottom_sheet/components/route_item.dart';
+import '../../../../../../../controllers/map_controller.dart';
+import '../../../../../../../controllers/running_controller.dart';
+import '../../../../../../../models/route_model/route_model.dart';
+import '../../../../../../../widgets/custom_dropdown/custom_dropdown_widget.dart';
+import '../../ready_to_run/ready_to_run_sheet.dart';
+import '../../route_item.dart';
 import 'load_prepare_route_item_option.dart';
 
 class PrepareRouteMapDropdownButtonWidget extends StatelessWidget {
@@ -12,14 +15,17 @@ class PrepareRouteMapDropdownButtonWidget extends StatelessWidget {
   final ScrollController scrollController;
   final bool haveCancelButton;
   final VoidCallback? onLoadPress, onCancelPress;
-  const PrepareRouteMapDropdownButtonWidget(
+  final mapController = Get.find<MapController>();
+  final BuildContext preparationScreenContext;
+  PrepareRouteMapDropdownButtonWidget(
       {super.key,
       required this.routes,
       required this.scrollController,
       this.haveCancelButton = true,
       this.onLoadPress,
       this.onCancelPress,
-      required this.title});
+      required this.title,
+      required this.preparationScreenContext});
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +61,30 @@ class PrepareRouteMapDropdownButtonWidget extends StatelessWidget {
               route: routes[index],
               isSelectedWidget: PreparedRouteItemActionWidget(
                 haveCancleButton: haveCancelButton,
-                onCancelPress: haveCancelButton ? () {} : null,
-                onLoadPress: () {},
+                onCancelPress: haveCancelButton
+                    ? () {
+                        selectedRoute.value = null;
+                      }
+                    : null,
+                onLoadPress: () {
+                  Navigator.pop(context);
+                  mapController.isReadyToRun.value = true;
+                  mapController.resetPointAndAnotation();
+                  mapController.centerCameraOnCoordinate(
+                      selectedRoute.value?.longitude ?? 0,
+                      selectedRoute.value?.latitude ?? 0,
+                      anotationPng: "position");
+
+                  final runningController = Get.put(RunningController());
+                  runningController.selectedRoute.value = selectedRoute.value;
+
+                  showBottomSheet(
+                    context: preparationScreenContext,
+                    builder: (c) => ReadyToRunSheet(
+                      secondaryNavigatorContext: context,
+                    ),
+                  );
+                },
               ),
             ),
           ),

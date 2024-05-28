@@ -46,8 +46,10 @@ class PerformanceMetricsScreen extends GetView {
         onBackPress: () => AppRoutes.navigateBack(),
         title: "Performance metrics",
         secondaryAction: ActionButton(
-          imagePath: "assets/images/activities_details/info.png",
-          onTap: () {},
+          imagePath: "assets/svg/info.svg",
+          onTap: () {
+            AppRoutes.navigate(AppRoutes.metricinfo);
+          },
         ),
       ),
       body: Container(

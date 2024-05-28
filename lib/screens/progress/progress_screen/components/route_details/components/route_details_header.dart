@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/extensions/datetime_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../config/colors.dart';
 import '../../../../../../config/fonts.dart';
@@ -35,10 +36,7 @@ class RouteDetailsHeader extends StatelessWidget {
               child: SizedBox(
                 width: 25.w,
                 height: 25.w,
-                child: Image.asset(
-                  "assets/images/actions/walk.png",
-                  fit: BoxFit.contain,
-                ),
+                child: SvgPicture.asset("assets/svg/walk.svg"),
               ),
             ),
           ),
@@ -60,41 +58,34 @@ class RouteDetailsHeader extends StatelessWidget {
                     SizedBox(
                       width: 5.w,
                     ),
-                    Image.asset("assets/images/activities_details/people.png"),
+                    SvgPicture.asset("assets/svg/people.svg"),
                     const Spacer(),
                     route.haveInfo
-                        ? Image.asset(
-                            "assets/images/activities_details/info.png",
-                            scale: 0.9,
-                          )
+                        ? SvgPicture.asset("assets/svg/info.svg")
                         : const SizedBox.shrink(),
                     SizedBox(
                       width: 10.w,
                     ),
                     GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
                             ),
-                          ),
-                          backgroundColor: const Color(0xff222222),
-                          builder: (context) {
-                            return ShareSheet(
-                              route: route,
-                            );
-                          },
-                        );
-                      },
-                      child: Image.asset(
-                        "assets/images/activities_details/share.png",
-                        scale: 0.9,
-                      ),
-                    )
+                            backgroundColor: const Color(0xff222222),
+                            builder: (context) {
+                              return ShareSheet(
+                                route: route,
+                              );
+                            },
+                          );
+                        },
+                        child: SvgPicture.asset("assets/svg/share.svg"))
                   ],
                 ),
               ),

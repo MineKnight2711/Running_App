@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:flutter_running_demo/apis/goong_api.dart';
 import 'package:flutter_running_demo/controllers/map_direction.dart';
+import 'package:flutter_running_demo/models/direction_model/route_model/location_model/location_model.dart';
 import 'package:flutter_running_demo/models/route_model/route_model.dart';
 import 'package:flutter_running_demo/screens/preparation/data/list_top_route_model.dart';
 import 'package:get/get.dart';
-// ignore: unused_import
 import 'package:logger/logger.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
@@ -12,6 +13,7 @@ import '../config/colors.dart';
 import '../utils/map_annotation_click_listener.dart';
 
 class MapController extends GetxController {
+  final _mapApi = GoongApi();
   RxString currentMapViewStyle = MapboxStyles.MAPBOX_STREETS.obs;
   MapDirection currentMapDirection = MapDirection.north;
   late Rxn<MapboxMap> mapboxMap;
@@ -63,6 +65,74 @@ class MapController extends GetxController {
         selectedRoute.value?.latitude ?? 0,
         anotationPng: "selected_route",
       );
+    }
+  }
+
+  selectDirection(ScreenCoordinate coordinate) async {
+    if (selectedRoute.value != null && isRouteSelected.value) {
+      resetPointAndAnotation();
+      //Get api đường đi từ điểm bắt đầu đến điểm kết thúc
+      final direction = await _mapApi.getRoute(
+        startLocation: LocationModel(
+          lat: selectedRoute.value!.latitude,
+          lng: selectedRoute.value!.longitude,
+        ),
+        endLocation: LocationModel(
+          lat: coordinate.x,
+          lng: coordinate.y,
+        ),
+      );
+      //Tạo điểm bắt đầu và kết thúc
+      final startAndEndPoint = <Position>[
+        Position(selectedRoute.value!.longitude, selectedRoute.value!.latitude),
+        Position(coordinate.y, coordinate.x),
+      ];
+
+      final Uint8List images = await loadImageToUnit8List(
+          "assets/images/map_anotations/position.png");
+      //Tạo điểm bắt đầu và kết thúc
+      pointManager.value?.createMulti(
+        startAndEndPoint
+            .map(
+              (e) => PointAnnotationOptions(
+                geometry: Point(coordinates: e).toJson(),
+                iconSize: 2.5,
+                image: images,
+              ),
+            )
+            .toList(),
+      );
+      //khởi tạo listWayPoint sau đó duyệt qua các điểm trong direction.routes[0].legs[0].steps
+      //Thêm các điểm bắt đầu và kết thúc vào listWayPoint
+      final listWayPoint = <List<Position>>[];
+      for (var route in direction.routes[0].legs[0].steps) {
+        listWayPoint.add([
+          Position(
+            route.startLocation.lng,
+            route.startLocation.lat,
+          ),
+          Position(
+            route.endLocation.lng,
+            route.endLocation.lat,
+          )
+        ]);
+      }
+      //Tạo các polyline từ các điểm trong listWayPoint
+      mapboxMap.value?.annotations
+          .createPolylineAnnotationManager()
+          .then((polylineAnnotationManager) async {
+        polylineManager.value = polylineAnnotationManager;
+        polylineManager.value?.createMulti(
+          listWayPoint
+              .map(
+                (lineStartEndPositions) => PolylineAnnotationOptions(
+                  geometry:
+                      LineString(coordinates: lineStartEndPositions).toJson(),
+                ),
+              )
+              .toList(),
+        );
+      });
     }
   }
 
@@ -269,127 +339,3 @@ class MapController extends GetxController {
     });
   }
 }
-
-
-
-
-// Future<String> predictLocation(String predictString) async {
-  //   ResponseBaseModel responseBaseModel =
-  //       await _mapApi.getPredictLocation(predictString);
-
-  //   if (responseBaseModel.message == "Success") {
-  //     PredictLocationResponse locationResponse =
-  //         PredictLocationResponse.fromJson(responseBaseModel.data);
-  //     places.value = locationResponse.predictions;
-  //     isShow.value = true;
-  //     isHidden.value = true;
-
-  //     return "Success";
-  //   }
-
-  //   return responseBaseModel.message ?? "";
-  // }
-
-  // Future<String> getLocation(String placesID) async {
-  //   searchController.clear();
-  //   isShow.value = false;
-  //   isHidden.value = false;
-  //   ResponseBaseModel responseBaseModel =
-  //       await _mapApi.getLocationByID(placesID);
-
-  //   if (responseBaseModel.message == "Success") {
-  //     LocationResponse locationResult =
-  //         LocationResponse.fromJson(responseBaseModel.data);
-  //     details.value = locationResult.results;
-  //     latitude.value = "${details.value?.geometry.location.lat}";
-  //     longLatitude.value = "${details.value?.geometry.location.lng}";
-  //     centerCameraOnCoordinate(
-  //         double.parse(latitude.value), double.parse(longLatitude.value));
-  //     selectedLocation.value = locationResult;
-  //   }
-
-  //   return responseBaseModel.message ?? "";
-  // }
-
-  // Future<String> findCurrentLocation() async {
-  //   return await getCurrentPosition();
-  // }
-
-  // void selectAddress() {}
-  // Future<String> getCurrentPosition() async {
-  //   String result = "";
-  //   geolocator.LocationPermission permission =
-  //       await geolocator.Geolocator.checkPermission();
-  //   if (permission == geolocator.LocationPermission.deniedForever) {
-  //     result = 'DeniedForever';
-  //   } else if (permission == geolocator.LocationPermission.denied) {
-  //     result = "Denied";
-  //     geolocator.LocationPermission requestPermission =
-  //         await geolocator.Geolocator.requestPermission();
-  //     if (requestPermission == geolocator.LocationPermission.deniedForever) {
-  //       return "DeniedForever";
-  //     }
-  //   } else if (permission == geolocator.LocationPermission.whileInUse ||
-  //       permission == geolocator.LocationPermission.always) {
-  //     gpi.Position position = await geolocator.Geolocator.getCurrentPosition(
-  //         desiredAccuracy: geolocator.LocationAccuracy.high);
-  //     Position getPositon = Position(position.longitude, position.latitude);
-  //     final locationResult =
-  //         await getLocationByLatitude("${getPositon.lat}", "${getPositon.lng}");
-  //     if (locationResult == "Success") {
-  //       centerCameraOnCoordinate(
-  //           getPositon.lat.toDouble(), getPositon.lng.toDouble());
-  //     }
-  //     return "Success";
-  //   }
-
-  //   return result;
-  // }
-
-  // Future<String> getLocationByLatitude(String lat, String longLat) async {
-  //   searchController.clear();
-  //   isShow.value = false;
-  //   isHidden.value = false;
-  //   ResponseBaseModel responseBaseModel =
-  //       await _mapApi.getLocationByLatitude(lat, longLat);
-
-  //   if (responseBaseModel.message == "Success") {
-  //     LocationByLatitudeResponse locationResult =
-  //         LocationByLatitudeResponse.fromJson(responseBaseModel.data);
-  //     final resultAddress = locationResult.results[0];
-  //     selectedLocation.value =
-  //         LocationResponse(results: resultAddress, status: "OK");
-  //     return responseBaseModel.message ?? "";
-  //   }
-
-  //   return responseBaseModel.message ?? "";
-  // }
-
-  // void centerCameraOnCoordinate(double lat, double longLat) {
-  //   circleManager.value?.deleteAll();
-  //   mapboxMap.value?.setCamera(CameraOptions(
-  //       center: Point(
-  //         coordinates: Position(longLat, lat),
-  //       ).toJson(),
-  //       zoom: 12.0));
-
-  //   mapboxMap.value?.flyTo(
-  //       CameraOptions(
-  //           anchor: ScreenCoordinate(x: 0, y: 0),
-  //           zoom: 15,
-  //           bearing: 180,
-  //           pitch: 30),
-  //       MapAnimationOptions(duration: 3000, startDelay: 0));
-  //   mapboxMap.value?.annotations
-  //       .createCircleAnnotationManager()
-  //       .then((value) async {
-  //     circleManager.value = value;
-  //     value.create(
-  //       CircleAnnotationOptions(
-  //         geometry: Point(coordinates: Position(longLat, lat)).toJson(),
-  //         circleColor: Colors.orange.value,
-  //         circleRadius: 12.0,
-  //       ),
-  //     );
-  //   });
-  // }

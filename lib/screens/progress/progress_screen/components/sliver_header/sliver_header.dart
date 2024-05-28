@@ -64,21 +64,20 @@ class SliverHeader extends StatelessWidget {
               duration: const Duration(milliseconds: 500),
               scale: isScrolledUnder ? 1 : 0,
               child: ActionButton(
-                  imagePath: "assets/images/activities_details/search.png",
-                  onTap: onSearchPress),
+                  imagePath: "assets/svg/search.svg", onTap: onSearchPress),
             ),
             const SizedBox(width: 12),
             AnimatedScale(
               duration: const Duration(milliseconds: 500),
               scale: isScrolledUnder ? 1 : 0,
               child: ActionButton(
-                imagePath: "assets/images/activities_details/chart.png",
+                imagePath: "assets/svg/chart.svg",
                 onTap: onChartPress,
               ),
             ),
             const SizedBox(width: 12),
             ActionButton(
-              imagePath: "assets/images/home.png",
+              imagePath: "assets/svg/home.svg",
               onTap: onHomeTap,
             ),
             const SizedBox(width: 12),

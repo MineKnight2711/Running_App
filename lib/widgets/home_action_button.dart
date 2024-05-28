@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../config/colors.dart';
 
@@ -19,10 +20,7 @@ class ActionButton extends StatelessWidget {
       child: CircleAvatar(
         radius: 16,
         backgroundColor: AppColors.white100.withOpacity(0.1),
-        child: Image.asset(
-          imagePath,
-          scale: 1.3,
-        ),
+        child: SvgPicture.asset(imagePath),
       ),
     );
   }

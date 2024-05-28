@@ -8,7 +8,7 @@ class MetricInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
+      body: Container(
         height: 1.sh,
         decoration: const BoxDecoration(
           color: Color(0xFF222222),

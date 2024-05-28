@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_running_demo/config/routes.dart';
 import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:flutter_running_demo/utils/navigator_key.dart';
@@ -29,6 +27,7 @@ class MainApp extends StatelessWidget {
         initialRoute: AppRoutes.tabbarview,
         getPages: AppRoutes.getPages,
         navigatorKey: NavigatorKeys.mainNavigatorKey,
+
         navigatorObservers: [
           MyNavigatorObserver(),
         ],

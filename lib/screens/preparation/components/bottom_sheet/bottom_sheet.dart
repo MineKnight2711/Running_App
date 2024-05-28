@@ -16,7 +16,8 @@ class ScreenBottomSheets extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        return mapController.isRouteSelected.value
+        return mapController.isRouteSelected.value &&
+                mapController.selectedRoute.value != null
             ? RouteAddBottomSheet(
                 onCompletePressed: () {
                   mapController.isRouteSelected.toggle();

@@ -105,7 +105,8 @@ class VerticalAnnotations extends StatelessWidget {
         }),
         SizedBox(height: 10.h),
         Obx(() {
-          return mapController.selectedRouteToAdd.value == null
+          return mapController.selectedRoute.value == null &&
+                  mapController.selectedRouteToAdd.value == null
               ? showEditButton
                   ? MapAnnotationItem(
                       onPressed: !isRouteSelected && !isRouteAdd

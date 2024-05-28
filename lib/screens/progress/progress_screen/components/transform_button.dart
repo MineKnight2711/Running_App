@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/widgets/home_action_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../config/colors.dart';
 import '../../../../config/fonts.dart';
@@ -36,11 +37,7 @@ class TransformButton extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    imageAsset,
-                    // fit: BoxFit.fill,
-                    scale: 1,
-                  ),
+                  SvgPicture.asset(imageAsset),
                   SizedBox(
                     width: 15.w,
                   ),
