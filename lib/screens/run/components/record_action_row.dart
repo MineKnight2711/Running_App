@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../running_controller.dart';
+import '../../../controllers/running_controller.dart';
 
-class RecordActionRowWidget extends StatelessWidget {
-  const RecordActionRowWidget({
-    super.key,
-    required this.runningController,
-  });
-
-  final RunningController runningController;
+class RecordActionRowWidget extends GetView<RunningController> {
+  const RecordActionRowWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +16,17 @@ class RecordActionRowWidget extends StatelessWidget {
         Obx(
           () => ElevatedButton(
             onPressed: () {
-              runningController.startStopwatch();
+              controller.startStopwatch();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: runningController.isRunnig.value
+              backgroundColor: controller.selectedRoute.value != null
                   ? const Color(0xffff4747)
                   : Colors.green,
               padding: const EdgeInsets.all(16),
               shape: const CircleBorder(),
             ),
             child: Text(
-              runningController.isRunnig.value ? 'Stop' : "Start",
+              controller.selectedRoute.value != null ? 'Stop' : "Start",
               style: const TextStyle(fontSize: 20, color: Colors.white),
             ),
           ),

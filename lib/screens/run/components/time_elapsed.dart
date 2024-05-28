@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
-import 'package:flutter_running_demo/screens/run/show_clock/running_controller.dart';
+import 'package:flutter_running_demo/controllers/running_controller.dart';
 import 'package:get/get.dart';
 
 class TimeElapsedWidget extends StatelessWidget {

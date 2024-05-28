@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/controllers/preparation_map_controller.dart';
+import 'package:flutter_running_demo/controllers/map_controller.dart';
+import 'package:flutter_running_demo/controllers/running_controller.dart';
 import 'package:get/get.dart';
 import 'components/components_export.dart';
 
@@ -21,6 +22,17 @@ class ScreenBottomSheets extends StatelessWidget {
                   mapController.isRouteSelected.toggle();
                   mapController.isRouteAdd.toggle();
                   mapController.isReadyToRun.value = true;
+                  mapController.resetPointAndAnotation();
+                  mapController.centerCameraOnCoordinate(
+                      mapController.selectedRoute.value?.longitude ?? 0,
+                      mapController.selectedRoute.value?.latitude ?? 0,
+                      anotationPng: "position");
+
+                  final runningController = Get.put(RunningController());
+                  runningController.selectedRoute.value =
+                      mapController.selectedRoute.value;
+                  mapController.selectedRoute.value = null;
+
                   showBottomSheet(
                     context: preparationScreenContext,
                     builder: (c) => ReadyToRunSheet(

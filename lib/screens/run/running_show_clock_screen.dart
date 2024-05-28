@@ -1,37 +1,32 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
-import 'package:flutter_running_demo/screens/run/show_clock/components/custom_record_widget.dart';
+import 'package:flutter_running_demo/controllers/map_controller.dart';
+import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/ready_to_run/components.dart';
+import 'package:flutter_running_demo/screens/run/components/custom_record_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import 'components/record_action_row.dart';
 import 'components/record_field_widget.dart';
 import 'components/slpit_avarage_widget.dart';
-import 'running_controller.dart';
+import '../../controllers/running_controller.dart';
 import 'components/time_elapsed.dart';
 
-class RunningClock extends StatelessWidget {
-  final runningController = Get.put(RunningController());
-  RunningClock({super.key});
+class RunShowClock extends GetView<RunningController> {
+  const RunShowClock({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
+      body: Container(
         height: 1.sh,
         decoration: const BoxDecoration(
           color: Color(0xFF222222),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12),
-            topRight: Radius.circular(12),
-          ),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 40),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Row(
@@ -42,19 +37,15 @@ class RunningClock extends StatelessWidget {
                         fontSize: 18, color: Colors.white),
                   ),
                   const Spacer(),
-                  const Icon(
-                    CupertinoIcons.bitcoin_circle_fill,
-                    color: Colors.white,
-                    size: 30,
-                  ),
+                  SvgPicture.asset(
+                      'assets/svg/preparation/map_annotations/gps.svg'),
                 ],
               ),
             ),
             const SizedBox(height: 20),
             RecordFieldWidget(
                 label: "Time",
-                recordField:
-                    TimeElapsedWidget(runningController: runningController)),
+                recordField: TimeElapsedWidget(runningController: controller)),
             const SizedBox(height: 15),
             const RecordFieldWidget(
                 label: "Avg. pace",
@@ -81,7 +72,18 @@ class RunningClock extends StatelessWidget {
                   unit: "BPM",
                 )),
             const SizedBox(height: 60),
-            RecordActionRowWidget(runningController: runningController),
+            GetBuilder<MapController>(
+              builder: (controller) => Hero(
+                tag: "running_buttons",
+                child: Material(
+                  type: MaterialType.transparency,
+                  child: RunningButtons(
+                      showMapButtonSvg: 'show_map_white',
+                      onShowMapPressed: () => Get.back(),
+                      mapController: controller),
+                ),
+              ),
+            ),
           ],
         ),
       ),

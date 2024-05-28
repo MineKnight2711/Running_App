@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/sheet_grabber_title.dart';
+import 'package:flutter_running_demo/utils/navigator_key.dart';
 import '../../config/config_export.dart';
 import 'package:get/get.dart';
-import '../../controllers/preparation_map_controller.dart';
+import '../../controllers/map_controller.dart';
 import '../../widgets/custom_map_widget/custom_map_widget.dart';
 import 'components/components_export.dart';
 import 'data/list_top_route_model.dart';
@@ -56,6 +57,12 @@ class _PreparationScreenState extends State<PreparationScreen>
                     child: ReadyToRunHeader(
                       onClosePressed: () {
                         mapController.isReadyToRun.value = false;
+                        mapController.createTempTopRoutes();
+                        if (NavigatorKeys.mainNavigatorKey.currentState!
+                                .canPop() &&
+                            mapController.isReadyToRun.value == false) {
+                          NavigatorKeys.mainNavigatorKey.currentState!.pop();
+                        }
                       },
                     ),
                   )
@@ -71,6 +78,7 @@ class _PreparationScreenState extends State<PreparationScreen>
                 onUndoPress: () {
                   mapController.isRouteSelected.toggle();
                   mapController.selectedRoute.value = null;
+                  mapController.createTempTopRoutes();
                 },
                 onRotateMapPressed: () => mapController.changeMapDirection(),
                 onChangeStylePressed: () => mapController.changeMapStyle(),

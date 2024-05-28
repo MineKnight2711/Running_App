@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_running_demo/controllers/running_controller.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../../config/config_export.dart';
-import '../../../controllers/preparation_map_controller.dart';
+import '../../../../../../../config/config_export.dart';
 
-class ReadyToRunHeader extends StatelessWidget {
+class ReadyToRunHeader extends GetView<RunningController> {
   final VoidCallback onClosePressed;
 
-  ReadyToRunHeader({
+  const ReadyToRunHeader({
     super.key,
     required this.onClosePressed,
   });
-  final mapController = Get.find<MapController>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class ReadyToRunHeader extends StatelessWidget {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            mapController.isRunning.value
+            controller.isRunning.value
                 ? const SizedBox.shrink()
                 : IconButton(
                     onPressed: onClosePressed,
@@ -32,7 +31,7 @@ class ReadyToRunHeader extends StatelessWidget {
                   ),
             SizedBox(width: AppSpacings.hs10),
             Text(
-              mapController.isRunning.value ? "Running" : "Ready to Run",
+              controller.isRunning.value ? "Running" : "Ready to Run",
               style: CustomGoogleFonts.roboto(
                 fontSize: AppFontSizes.size18,
                 color: TextColor.white,

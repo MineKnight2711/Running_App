@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../controllers/preparation_map_controller.dart';
+import '../../../../controllers/map_controller.dart';
 import 'map_annotation_item.dart';
 
 class VerticalAnnotations extends StatelessWidget {

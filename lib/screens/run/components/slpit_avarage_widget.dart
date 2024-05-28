@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../config/spacings.dart';
+import '../../../config/spacings.dart';
 
 class SplitAvaragePaceWidget extends StatelessWidget {
   const SplitAvaragePaceWidget({super.key});

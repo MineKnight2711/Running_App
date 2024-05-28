@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../config/config_export.dart';
+import '../../../config/config_export.dart';
 
 class RecordFieldWidget extends StatelessWidget {
   final String label;
