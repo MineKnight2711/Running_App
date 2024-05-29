@@ -1,10 +1,9 @@
 import 'dart:math';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../config/config_export.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'components/components.dart';
+import '../../../widgets/image_picker/image_picker.dart';
 import '../../progress/details_route_screen/components/route_details_elevation_chart.dart';
 import '../../progress/details_route_screen/components/route_details_map_terrain.dart';
 
@@ -31,13 +30,9 @@ class RunFinished extends GetView {
 
     return Scaffold(
       body: Container(
-        height: 1.sh,
+        height: AppSpacings.sh(1),
         decoration: const BoxDecoration(
           color: Color(0xFF222222),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12),
-            topRight: Radius.circular(12),
-          ),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: SingleChildScrollView(
@@ -69,21 +64,8 @@ class RunFinished extends GetView {
               const SizedBox(
                 height: 20,
               ),
-              DottedBorder(
-                radius: const Radius.circular(20),
-                padding: EdgeInsets.zero,
-                borderType: BorderType.RRect,
-                color: const Color(0xFFFFFFFF).withOpacity(0.2),
-                strokeWidth: 1.5,
-                dashPattern: const [10, 5],
-                child: Container(
-                  width: 400,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFFFFFFFF).withOpacity(0.2),
-                  ),
-                ),
+              ImagePickerWidget(
+                onImageSelected: (selectedImage) {},
               ),
               const SizedBox(
                 height: 20,
@@ -102,71 +84,16 @@ class RunFinished extends GetView {
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SvgPicture.asset('assets/svg/preparation/rate_rpe/1.svg'),
-                      SvgPicture.asset(
-                          'assets/svg/preparation/rate_rpe/2-3.svg'),
-                      SvgPicture.asset(
-                          'assets/svg/preparation/rate_rpe/4-5.svg'),
-                      SvgPicture.asset(
-                          'assets/svg/preparation/rate_rpe/10.svg'),
-                      SvgPicture.asset(
-                          'assets/svg/preparation/rate_rpe/8-9.svg'),
-                      SvgPicture.asset(
-                          'assets/svg/preparation/rate_rpe/6-7.svg'),
-                    ],
-                  )
+                  const RpeRating(),
                 ],
               ),
               const SizedBox(
                 height: 30,
               ),
               const RouteDetailsMapAndTerrain(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SvgPicture.asset(
-                      "assets/svg/runing_finished_stastitic/route.svg"),
-                  Text(
-                    ' 1,6km',
-                    style: CustomGoogleFonts.roboto(
-                        color: Colors.white, fontSize: 14),
-                  ),
-                  const Spacer(),
-                  SvgPicture.asset(
-                      "assets/svg/runing_finished_stastitic/time.svg"),
-                  Text(
-                    ' 2h 15p',
-                    style: CustomGoogleFonts.roboto(
-                        color: Colors.white, fontSize: 14),
-                  ),
-                  const Spacer(),
-                  SvgPicture.asset(
-                      "assets/svg/runing_finished_stastitic/velocity.svg"),
-                  Text(
-                    ' 5.21/km',
-                    style: CustomGoogleFonts.roboto(
-                        color: Colors.white, fontSize: 14),
-                  ),
-                  const Spacer(),
-                  SvgPicture.asset(
-                      "assets/svg/runing_finished_stastitic/pace.svg"),
-                  Text(
-                    ' 5m',
-                    style: CustomGoogleFonts.roboto(
-                        color: Colors.white, fontSize: 14),
-                  ),
-                  const Spacer(),
-                  SvgPicture.asset(
-                      "assets/svg/runing_finished_stastitic/water_drop.svg"),
-                  Text(
-                    ' 32%',
-                    style: CustomGoogleFonts.roboto(
-                        color: Colors.white, fontSize: 14),
-                  ),
-                ],
+              const StatisticIndex(),
+              const SizedBox(
+                height: 30,
               ),
               RouteDetailsElevationChart(datas: generateFakeData(20)),
               Row(
@@ -199,7 +126,7 @@ class RunFinished extends GetView {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.star, color: Colors.white),
+                        const Icon(Icons.star_border, color: Colors.white),
                         const SizedBox(width: 8),
                         Text(
                           'Save to favorite',

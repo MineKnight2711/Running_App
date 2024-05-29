@@ -14,51 +14,46 @@ class HomeScreen extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      onPopInvoked: (didPop) {
-        AppRoutes.navigateReplace(AppRoutes.tabbarview);
-      },
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: CustomAppBar(
-          title: "Be active",
-          onBackPress: () => AppRoutes.navigateReplace(AppRoutes.tabbarview),
-        ),
-        body: Container(
-          clipBehavior: Clip.none,
-          decoration: const BoxDecoration(gradient: AppColors.appTheme),
-          padding: EdgeInsets.only(top: 70.h),
-          child: SizedBox(
-            width: 1.sw,
-            height: 1.sh,
-            child: Column(
-              children: [
-                const ProgressBanner(),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Basic Activities",
-                        style: CustomGoogleFonts.roboto(
-                          fontSize: 18.r,
-                          color: AppColors.white100,
-                        ),
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: CustomAppBar(
+        title: "Be active",
+        onBackPress: () => AppRoutes.navigateBack(),
+      ),
+      body: Container(
+        clipBehavior: Clip.none,
+        decoration: const BoxDecoration(gradient: AppColors.appTheme),
+        padding: EdgeInsets.only(top: 70.h),
+        child: SizedBox(
+          width: 1.sw,
+          height: 1.sh,
+          child: Column(
+            children: [
+              const ProgressBanner(),
+              SizedBox(
+                height: 10.h,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Basic Activities",
+                      style: CustomGoogleFonts.roboto(
+                        fontSize: 18.r,
+                        color: AppColors.white100,
                       ),
-                      const SleepReport(),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      const WalkReport()
-                    ],
-                  ),
+                    ),
+                    const SleepReport(),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    const WalkReport()
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

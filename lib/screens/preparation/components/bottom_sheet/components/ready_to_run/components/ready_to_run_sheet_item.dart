@@ -22,14 +22,15 @@ class ReadyToRunSheetItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: Container(
         width: label == null ? AppSpacings.hs25 * 2 : AppSpacings.hs25 * 3,
-        height: AppSpacings.vs25,
+        height: AppSpacings.vs25 * 1.2,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: label == null ? itemBackGroundColor : null,
         ),
+        alignment: Alignment.center,
         padding: const EdgeInsets.all(5),
         child: SingleChildScrollView(
-          scrollDirection: label != null ? Axis.horizontal : Axis.vertical,
+          scrollDirection: Axis.horizontal,
           child: Row(
             mainAxisAlignment: label != null
                 ? MainAxisAlignment.spaceBetween

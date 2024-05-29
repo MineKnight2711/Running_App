@@ -4,19 +4,25 @@ import 'package:get/get.dart';
 import '../../../../controllers/map_controller.dart';
 import 'map_annotation_item.dart';
 
-class VerticalAnnotations extends StatelessWidget {
+class VerticalAnnotations extends GetView<MapController> {
   final bool isRouteSelected, isRouteAdd, showEditButton;
   final VoidCallback onPrepareRoutePressed,
       onClosePress,
+      onCompassPress,
+      onViewModePress,
       onHandPress,
+      onTargetPress,
       onCheckPress,
       onAddUndoPress,
       onUndoPress;
   final VoidCallback? onRotateMapPressed, onChangeStylePressed;
-  final mapController = Get.find<MapController>();
-  VerticalAnnotations({
+
+  const VerticalAnnotations({
     super.key,
     required this.onPrepareRoutePressed,
+    required this.onCompassPress,
+    required this.onViewModePress,
+    required this.onTargetPress,
     required this.isRouteSelected,
     required this.onClosePress,
     required this.onHandPress,
@@ -35,11 +41,7 @@ class VerticalAnnotations extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         MapAnnotationItem(
-          onPressed: !isRouteSelected && !isRouteAdd
-              ? () {
-                  mapController.changeMapDirection();
-                }
-              : null,
+          onPressed: !isRouteSelected && !isRouteAdd ? onCompassPress : null,
           assetSvg: "compass",
         ),
         SizedBox(height: 10.h),
@@ -48,9 +50,7 @@ class VerticalAnnotations extends StatelessWidget {
                 children: [
                   MapAnnotationItem(
                     onPressed: !isRouteSelected && !isRouteAdd
-                        ? () {
-                            mapController.changeMapStyle();
-                          }
+                        ? onViewModePress
                         : null,
                     assetSvg: "viewmode_2d",
                   ),
@@ -64,9 +64,9 @@ class VerticalAnnotations extends StatelessWidget {
         ),
         SizedBox(height: 10.h),
         Obx(() {
-          return mapController.selectedRoute.value == null
+          return controller.selectedRoute.value == null
               ? MapAnnotationItem(
-                  onPressed: isRouteAdd ? null : () {},
+                  onPressed: isRouteAdd ? null : onTargetPress,
                   assetSvg: "target",
                 )
               : Row(
@@ -105,8 +105,8 @@ class VerticalAnnotations extends StatelessWidget {
         }),
         SizedBox(height: 10.h),
         Obx(() {
-          return mapController.selectedRoute.value == null &&
-                  mapController.selectedRouteToAdd.value == null
+          return controller.selectedRoute.value == null &&
+                  controller.selectedRouteToAdd.value == null
               ? showEditButton
                   ? MapAnnotationItem(
                       onPressed: !isRouteSelected && !isRouteAdd
@@ -118,7 +118,7 @@ class VerticalAnnotations extends StatelessWidget {
               : Row(
                   children: [
                     AnimatedSlide(
-                      offset: mapController.selectedRouteToAdd.value != null
+                      offset: controller.selectedRouteToAdd.value != null
                           ? const Offset(0.25, 0)
                           : const Offset(-10, 0),
                       duration: const Duration(milliseconds: 500),
@@ -128,7 +128,7 @@ class VerticalAnnotations extends StatelessWidget {
                       ),
                     ),
                     MapAnnotationItem(
-                      onPressed: mapController.selectedRouteToAdd.value != null
+                      onPressed: controller.selectedRouteToAdd.value != null
                           ? onAddUndoPress
                           : null,
                       assetSvg: "pen",

@@ -1,9 +1,9 @@
 import 'package:flutter_running_demo/screens/home_screen/home_screen.dart';
 import 'package:flutter_running_demo/screens/performance/performance_screen.dart';
 import 'package:flutter_running_demo/screens/progress/details_route_screen/details_route_screen.dart';
-import 'package:flutter_running_demo/screens/run/components/run_finished.dart';
+import 'package:flutter_running_demo/screens/run/run_finished/run_finished.dart';
 import 'package:flutter_running_demo/test_widgets/metric_info.dart';
-import 'package:flutter_running_demo/screens/run/running_show_clock_screen.dart';
+import 'package:flutter_running_demo/screens/run/show_clock/running_show_clock_screen.dart';
 import 'package:get/get.dart';
 import '../screens/app_tabbar_view/app_tabbar_view.dart';
 
@@ -46,7 +46,11 @@ class AppRoutes {
   }
 
   static navigateReplace(String query) {
-    Get.offNamed(query);
+    Get.offAndToNamed(query);
+  }
+
+  static navigateOffAll(String query) {
+    Get.offAllNamed(query);
   }
 
   static navigateOffUntil(String query) {

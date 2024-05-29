@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_running_demo/controllers/running_controller.dart';
 import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/sheet_grabber_title.dart';
 import 'package:flutter_running_demo/utils/navigator_key.dart';
 import 'package:logger/logger.dart';
@@ -20,6 +21,7 @@ class _PreparationScreenState extends State<PreparationScreen>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   late TabController _tabController;
   final mapController = Get.find<MapController>();
+  final runningController = Get.put(RunningController());
 
   @override
   void initState() {
@@ -39,7 +41,6 @@ class _PreparationScreenState extends State<PreparationScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    //Logger().i("Coordinate: ${coordinate.x}, ${coordinate.y}");
     return Scaffold(
       body: Stack(
         children: [
@@ -61,6 +62,7 @@ class _PreparationScreenState extends State<PreparationScreen>
                     right: 0,
                     child: ReadyToRunHeader(
                       onClosePressed: () {
+                        runningController.selectedRoute.value = null;
                         mapController.isReadyToRun.value = false;
                         mapController.createTempTopRoutes();
                         if (NavigatorKeys.mainNavigatorKey.currentState!
@@ -80,6 +82,10 @@ class _PreparationScreenState extends State<PreparationScreen>
               () => VerticalAnnotations(
                 isRouteAdd: mapController.selectedRouteToAdd.value != null,
                 isRouteSelected: mapController.isRouteSelected.value,
+                showEditButton: runningController.selectedRoute.value == null,
+                onCompassPress: () => mapController.changeMapDirection(),
+                onViewModePress: () => mapController.changeMapStyle(),
+                onTargetPress: () => AppRoutes.navigate(AppRoutes.runfinished),
                 onUndoPress: () {
                   mapController.isRouteSelected.toggle();
                   mapController.selectedRoute.value = null;

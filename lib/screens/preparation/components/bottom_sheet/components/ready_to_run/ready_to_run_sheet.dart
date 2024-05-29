@@ -3,9 +3,8 @@ import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:flutter_running_demo/controllers/running_controller.dart';
 import 'package:flutter_running_demo/utils/navigator_key.dart';
 import 'package:flutter_running_demo/widgets/custom_bottom_sheet/custom_bottom_sheet.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../../../config/routes.dart';
+import '../../../../../../config/config_export.dart';
 import 'components.dart';
 
 class ReadyToRunSheet extends GetView<RunningController> {
@@ -26,15 +25,15 @@ class ReadyToRunSheet extends GetView<RunningController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 0.25.sh,
-      width: 1.sw,
+      height: AppSpacings.sh(0.25),
+      width: AppSpacings.sw(1),
       decoration: const BoxDecoration(
         color: Color(0xFF222222),
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(24),
         ),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -57,8 +56,8 @@ class ReadyToRunSheet extends GetView<RunningController> {
                             context: secondaryNavigatorContext,
                             builder: (context) => const CustomBottomSheet(
                               sheetHeight: 0.85,
-                              sheetTitle: "Audio Guidance",
-                              sheetBody: AudioGuidance(),
+                              sheetTitle: "Map Settings",
+                              sheetBody: RunMapSettingsSheet(),
                               sheetFooter: CustomBottomSheetButton(
                                 buttonLabel: "Done",
                               ),
@@ -176,7 +175,7 @@ class ReadyToRunSheet extends GetView<RunningController> {
                                     sheetTitle: "Authorize music provider",
                                     sheetBody: AuthorizeMusicProvider(),
                                     sheetFooter: CustomBottomSheetButton(
-                                      buttonLabel: "Done",
+                                      buttonLabel: "Agree",
                                     ),
                                   ),
                                 ).whenComplete(

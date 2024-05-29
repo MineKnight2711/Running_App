@@ -58,9 +58,9 @@ class SendingLocation extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        Row(
-          children: [
-            CountryCodePicker(
+        TextField(
+          decoration: InputDecoration(
+            prefixIcon: CountryCodePicker(
               onChanged: (code) {},
               textStyle: CustomGoogleFonts.roboto(
                 color: AppColors.white100,
@@ -74,24 +74,20 @@ class SendingLocation extends StatelessWidget {
               showOnlyCountryWhenClosed: false,
               alignLeft: false,
             ),
-            const SizedBox(width: 20),
-            Text(
-              'Contact 1 number',
-              style: CustomGoogleFonts.roboto(
-                color: TextColor.secondaryText,
-                fontSize: AppFontSizes.size16,
-                fontWeight: FontWeight.w500,
-              ),
+            hintText: 'Contact 1 number',
+            hintStyle: CustomGoogleFonts.roboto(
+              color: TextColor.secondaryText,
+              fontSize: AppFontSizes.size16,
+              fontWeight: FontWeight.w500,
             ),
-          ],
+          ),
         ),
-        const Divider(
-          thickness: 0.5,
-          height: 32,
+        const SizedBox(
+          height: 20,
         ),
-        Row(
-          children: [
-            CountryCodePicker(
+        TextField(
+          decoration: InputDecoration(
+            prefixIcon: CountryCodePicker(
               onChanged: (code) {},
               textStyle: CustomGoogleFonts.roboto(
                 color: AppColors.white100,
@@ -105,20 +101,13 @@ class SendingLocation extends StatelessWidget {
               showOnlyCountryWhenClosed: false,
               alignLeft: false,
             ),
-            const SizedBox(width: 20),
-            Text(
-              'Contact 2 number',
-              style: CustomGoogleFonts.roboto(
-                color: TextColor.secondaryText,
-                fontSize: AppFontSizes.size16,
-                fontWeight: FontWeight.w500,
-              ),
+            hintText: 'Contact 2 number',
+            hintStyle: CustomGoogleFonts.roboto(
+              color: TextColor.secondaryText,
+              fontSize: AppFontSizes.size16,
+              fontWeight: FontWeight.w500,
             ),
-          ],
-        ),
-        const Divider(
-          thickness: 0.5,
-          height: 32,
+          ),
         ),
         const SizedBox(
           height: 10,

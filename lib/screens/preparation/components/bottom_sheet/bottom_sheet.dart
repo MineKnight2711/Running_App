@@ -4,7 +4,7 @@ import 'package:flutter_running_demo/controllers/running_controller.dart';
 import 'package:get/get.dart';
 import 'components/components_export.dart';
 
-class ScreenBottomSheets extends StatelessWidget {
+class ScreenBottomSheets extends GetView<RunningController> {
   final BuildContext preparationScreenContext;
   final TabController tabController;
   ScreenBottomSheets(
@@ -28,9 +28,7 @@ class ScreenBottomSheets extends StatelessWidget {
                       mapController.selectedRoute.value?.longitude ?? 0,
                       mapController.selectedRoute.value?.latitude ?? 0,
                       anotationPng: "position");
-
-                  final runningController = Get.put(RunningController());
-                  runningController.selectedRoute.value =
+                  controller.selectedRoute.value =
                       mapController.selectedRoute.value;
                   mapController.selectedRoute.value = null;
 

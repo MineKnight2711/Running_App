@@ -27,7 +27,6 @@ class MainApp extends StatelessWidget {
         initialRoute: AppRoutes.tabbarview,
         getPages: AppRoutes.getPages,
         navigatorKey: NavigatorKeys.mainNavigatorKey,
-
         navigatorObservers: [
           MyNavigatorObserver(),
         ],

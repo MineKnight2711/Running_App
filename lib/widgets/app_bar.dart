@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../config/colors.dart';
-import '../config/fonts.dart';
-import '../config/routes.dart';
+import '../config/config_export.dart';
 import 'home_action_button.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -24,7 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
-      leadingWidth: 55.w,
+      leadingWidth: AppSpacings.cvs(55),
       titleSpacing: 5,
       leading: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -42,27 +38,27 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Text(
         title,
-        style:
-            CustomGoogleFonts.roboto(color: AppColors.white100, fontSize: 14.r),
+        style: CustomGoogleFonts.roboto(
+            color: AppColors.white100, fontSize: AppFontSizes.size14),
       ),
       actions: [
         secondaryAction ?? const SizedBox.shrink(),
         SizedBox(
-          width: 5.w,
+          width: AppSpacings.hs5,
         ),
         showHomeButton!
             ? ActionButton(
                 imagePath: "assets/svg/home.svg",
-                onTap: () => AppRoutes.navigateOffUntil(AppRoutes.home),
+                onTap: () => AppRoutes.navigate(AppRoutes.home),
               )
             : const SizedBox.shrink(),
         SizedBox(
-          width: 10.w,
+          width: AppSpacings.hs10,
         )
       ],
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(40.h);
+  Size get preferredSize => Size.fromHeight(AppSpacings.vs20 * 2);
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/running_controller.dart';
+import '../../../../controllers/running_controller.dart';
 
 class RecordActionRowWidget extends GetView<RunningController> {
   const RecordActionRowWidget({super.key});

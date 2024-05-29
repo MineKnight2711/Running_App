@@ -34,7 +34,7 @@ class ProgressScreen extends GetView {
                   },
                 );
               },
-              onHomeTap: () => AppRoutes.navigateReplace(AppRoutes.home),
+              onHomeTap: () => AppRoutes.navigate(AppRoutes.home),
             ),
           ];
         },

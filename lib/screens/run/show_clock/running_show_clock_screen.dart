@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:flutter_running_demo/screens/preparation/components/bottom_sheet/components/ready_to_run/components.dart';
-import 'package:flutter_running_demo/screens/run/components/custom_record_widget.dart';
+import 'package:flutter_running_demo/screens/run/show_clock/components/custom_record_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'components/record_field_widget.dart';
 import 'components/slpit_avarage_widget.dart';
-import '../../controllers/running_controller.dart';
+import '../../../controllers/running_controller.dart';
 import 'components/time_elapsed.dart';
 
 class RunShowClock extends GetView<RunningController> {
@@ -71,7 +71,7 @@ class RunShowClock extends GetView<RunningController> {
                   value: "126",
                   unit: "BPM",
                 )),
-            const SizedBox(height: 60),
+            const SizedBox(height: 40),
             GetBuilder<MapController>(
               builder: (controller) => Hero(
                 tag: "running_buttons",

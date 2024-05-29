@@ -67,7 +67,6 @@ class HeartRateChart extends StatelessWidget {
 
     return SfCartesianChart(
       margin: EdgeInsets.zero,
-
       primaryXAxis: const CategoryAxis(
         axisLine: AxisLine(width: 0),
         minimum: 0.5,
@@ -78,7 +77,6 @@ class HeartRateChart extends StatelessWidget {
         // crossesAt: 10,
         isVisible: false,
       ),
-
       primaryYAxis: CategoryAxis(
         majorGridLines: const MajorGridLines(width: 0),
         axisLine: const AxisLine(
@@ -92,7 +90,6 @@ class HeartRateChart extends StatelessWidget {
         interval: 100 / (44 + 1),
         majorTickLines: const MajorTickLines(width: 0),
       ),
-
       plotAreaBorderWidth: 0,
       plotAreaBorderColor: Colors.transparent,
       axes: const [
@@ -121,11 +118,6 @@ class HeartRateChart extends StatelessWidget {
           width: 1,
         ),
       ],
-
-      // tooltipBehavior: TooltipBehavior(
-      //   shouldAlwaysShow: false,
-      //   format: '(%s, %s)',
-      // ),
       annotations: [
         ...thresholds.map((threshold) => CartesianChartAnnotation(
               horizontalAlignment: ChartAlignment.center,

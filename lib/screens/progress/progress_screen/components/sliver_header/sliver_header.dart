@@ -6,9 +6,8 @@ import '../../../../../widgets/home_action_button.dart';
 import 'sliver_header_buttons.dart';
 
 class SliverHeader extends StatelessWidget {
-  final VoidCallback onSearchPress;
-  final VoidCallback onChartPress;
-  final VoidCallback onHomeTap;
+  final VoidCallback onSearchPress, onChartPress, onHomeTap;
+
   const SliverHeader({
     super.key,
     required this.onSearchPress,

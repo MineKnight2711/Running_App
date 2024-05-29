@@ -1,11 +1,8 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/config/colors.dart';
-import 'package:flutter_running_demo/config/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../config/fonts.dart';
+import '../../../config/config_export.dart';
 
 List<Map<String, dynamic>> actions = [
   {
@@ -93,7 +90,7 @@ class ProgressBanner extends StatelessWidget {
                 final item = actions[index];
 
                 return GestureDetector(
-                  onTap: () => AppRoutes.navigateReplace(AppRoutes.tabbarview),
+                  onTap: () {},
                   child: Column(
                     children: [
                       CircleAvatar(

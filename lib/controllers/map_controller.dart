@@ -58,6 +58,7 @@ class MapController extends GetxController {
         (anotationIndex >= 0 && anotationIndex < listRoute.length) &&
         selectedRouteToAdd.value == null) {
       resetPointAndAnotation();
+      // isRouteSelected.value = true;
       selectedRoute.value = listRoute[anotationIndex];
 
       centerCameraOnCoordinate(
