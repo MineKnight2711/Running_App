@@ -89,8 +89,8 @@ class RouteDetailsMapWidget extends StatelessWidget {
           child: Image.asset("assets/images/activities_details/vertor.png"),
         ),
         Positioned(
-          top: 168,
-          left: 382,
+          top: 130,
+          right: 20,
           child: GestureDetector(
             onTap: () {},
             child: CircleAvatar(

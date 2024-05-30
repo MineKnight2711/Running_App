@@ -8,7 +8,6 @@ import 'package:flutter_running_demo/screens/preparation/data/list_top_route_mod
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
-
 import '../config/colors.dart';
 import '../utils/map_annotation_click_listener.dart';
 
@@ -42,6 +41,7 @@ class MapController extends GetxController {
   }
 
   void resetPointAndAnotation() {
+
     pointManager.value?.deleteAll();
     polylineManager.value?.deleteAll();
     // pointManager.value = polylineManager.value = null;

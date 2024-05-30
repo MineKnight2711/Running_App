@@ -31,10 +31,7 @@ class RouteDetailsWidget extends StatelessWidget {
                             .image,
                     fit: BoxFit.cover),
               ),
-              child: RouteDetailsMapWidget(
-                // haveRPE: false,
-                route: route,
-              ),
+              child: RouteDetailsMapWidget(route: route),
             ),
           ],
         )

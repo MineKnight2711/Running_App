@@ -15,15 +15,15 @@ class RouteAddBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDraggableSheetWidget(
-      showGrabber: false,
-      inititalSize: 0.3,
-      maxSize: 0.3,
-      minSize: 0.3,
-      grabberBottom: AddBottomSheetGrabberBottom(
-          onCompletePressed: onCompletePressed,
-          distance: distance,
-          elevation: elevation),
+    return CustomDraggableSheet(
+      inititalSize: 0.28,
+      maxSize: 0.28,
+      minSize: 0.28,
+      child: (context, scrollController) => AddBottomSheetGrabberBottom(
+        onCompletePressed: onCompletePressed,
+        distance: distance,
+        elevation: elevation,
+      ),
     );
   }
 }

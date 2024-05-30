@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/config/colors.dart';
-import 'package:flutter_running_demo/config/fonts.dart';
-import 'package:flutter_running_demo/screens/progress/progress_screen/components/search_sheet/sheet_row.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../../../../../config/config_export.dart';
 import '../../../../../models/route_model/route_model.dart';
 import '../route_details/components/route_details_map.dart';
 
@@ -13,78 +9,48 @@ class ShareSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      initialChildSize: 0.75, //Kích cỡ sheet khi vừa hiện lên
-      minChildSize: 0.3, //Khi ta kéo sheet về 0.3 chiều cao của nó, nó sẽ đóng
-      maxChildSize: 0.95, //Chiều cao tối đa của sheet được phép kéo lên
-      expand: false,
-      builder: (context, scrollController) {
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.w),
-          child: Column(
-            children: [
-              SheetRow(
-                rowTitle: "Share option",
-                spaceBetween: 140.w,
-                trailing: IconButton(
-                  icon: Icon(
-                    Icons.close,
-                    color: Colors.white,
-                    size: 24.r,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              Divider(
-                thickness: 0.5.r,
-                height: 16.h,
-              ),
-              Container(
-                width: 1.sw,
-                height: 0.3.sh,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: Image.asset(
-                                "assets/images/activities_details/map.png")
-                            .image,
-                        fit: BoxFit.cover),
-                    borderRadius: BorderRadius.circular(12)),
-                child: RouteDetailsMapWidget(
-                  haveRPE: false,
-                  titleInFooter: true,
-                  route: route,
-                ),
-              ),
-              SizedBox(
-                height: 24.h,
-              ),
-              ShareOption(
-                image: "location_map",
-                option: "Publish on running map",
-                onTap: () {},
-              ),
-              SizedBox(
-                height: 24.h,
-              ),
-              ShareOption(
-                image: "g_logo_white",
-                option: "Share to genki community",
-                onTap: () {},
-              ),
-              SizedBox(
-                height: 24.h,
-              ),
-              ShareOption(
-                image: "more_option",
-                option: "More option",
-                onTap: () {},
-              ),
-            ],
+    return Column(
+      children: [
+        Container(
+          width: AppSpacings.sw(1),
+          height: AppSpacings.sh(0.3),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: Image.asset("assets/images/activities_details/map.png")
+                      .image,
+                  fit: BoxFit.cover),
+              borderRadius: BorderRadius.circular(12)),
+          child: RouteDetailsMapWidget(
+            haveRPE: false,
+            titleInFooter: true,
+            route: route,
           ),
-        );
-      },
+        ),
+        SizedBox(
+          height: AppSpacings.cvs(24),
+        ),
+        ShareOption(
+          image: "location_map",
+          option: "Publish on running map",
+          onTap: () {},
+        ),
+        SizedBox(
+          height: AppSpacings.cvs(24),
+        ),
+        ShareOption(
+          image: "g_logo_white",
+          option: "Share to genki community",
+          onTap: () {},
+        ),
+        SizedBox(
+          height: AppSpacings.cvs(24),
+        ),
+        ShareOption(
+          image: "more_option",
+          option: "More option",
+          onTap: () {},
+        ),
+      ],
     );
   }
 }
@@ -105,10 +71,12 @@ class ShareOption extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       onTap: onTap,
       child: Container(
-        height: 40.h,
+        height: AppSpacings.cvs(40),
         decoration: BoxDecoration(
           border: Border.all(
-              width: 1, color: const Color(0xFFFFFFFF).withOpacity(0.2)),
+            width: 1,
+            color: const Color(0xFFFFFFFF).withOpacity(0.2),
+          ),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -118,12 +86,14 @@ class ShareOption extends StatelessWidget {
               "assets/images/activities_details/$image.png",
             ),
             SizedBox(
-              width: 12.w,
+              width: AppSpacings.chs(12),
             ),
             Text(
               option,
               style: CustomGoogleFonts.roboto(
-                  fontSize: 16.r, color: AppColors.white100),
+                fontSize: AppFontSizes.size14,
+                color: AppColors.white100,
+              ),
             )
           ],
         ),

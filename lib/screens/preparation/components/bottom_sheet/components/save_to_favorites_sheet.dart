@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_running_demo/config/spacings.dart';
 import 'package:get/get.dart';
 import '../../../../../config/config_export.dart';
 import '../../../../../controllers/map_controller.dart';
@@ -11,12 +12,11 @@ class RouteSaveToFavoriteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDraggableSheetWidget(
-      showGrabber: false,
+    return CustomDraggableSheet(
       inititalSize: 0.43,
       maxSize: 0.43,
       minSize: 0.43,
-      grabberBottom: SaveToFavoriteBottomSheetBody(
+      child: (context, scrollController) => SaveToFavoriteBottomSheetBody(
         mapController: mapController,
       ),
     );
@@ -187,6 +187,9 @@ class SaveToFavoriteBottomSheetBody extends StatelessWidget {
                     CustomGoogleFonts.roboto(fontSize: 16, color: Colors.white),
               ),
             ),
+          ),
+          SizedBox(
+            height: AppSpacings.hs25,
           ),
         ],
       ),

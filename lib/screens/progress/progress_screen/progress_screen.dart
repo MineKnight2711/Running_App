@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_running_demo/utils/navigator_key.dart';
+import 'package:flutter_running_demo/widgets/custom_bottom_sheet/custom_bottom_sheet.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../config/config_export.dart';
@@ -20,17 +22,14 @@ class ProgressScreen extends GetView {
                   AppRoutes.navigate(AppRoutes.performanceMetrics),
               onSearchPress: () {
                 showModalBottomSheet(
-                  context: context,
+                  context: NavigatorKeys.mainNavigatorKey.currentContext!,
                   isScrollControlled: true,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                  ),
-                  backgroundColor: const Color(0xff222222),
                   builder: (context) {
-                    return const SearchSheet();
+                    return const CustomBottomSheet(
+                      sheetTitle: "Search",
+                      sheetHeight: 0.5,
+                      sheetBody: SearchSheet(),
+                    );
                   },
                 );
               },
