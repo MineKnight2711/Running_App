@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_running_demo/config/spacings.dart';
 import 'package:get/get.dart';
 import '../../../../../config/config_export.dart';
 import '../../../../../controllers/map_controller.dart';
