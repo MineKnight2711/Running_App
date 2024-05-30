@@ -22,7 +22,7 @@ class CustomDraggableSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       initialChildSize: inititalSize ?? 0.25,
-      maxChildSize: maxSize ?? 0.85,
+      maxChildSize: maxSize ?? 0.9,
       minChildSize: minSize ?? 0.25,
       builder: (context, scrollController) {
         return SingleChildScrollView(
