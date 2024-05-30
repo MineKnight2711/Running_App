@@ -70,23 +70,23 @@ class CustomBottomSheetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        // Xử lý khi nhấn nút "Complete"
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.appButton,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 160.0,
-          vertical: 10.0,
+    return SizedBox(
+      width: AppSpacings.sw(1),
+      height: AppSpacings.cvs(40),
+      child: ElevatedButton(
+        onPressed: () {
+          // Xử lý khi nhấn nút "Complete"
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.appButton,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+        child: Text(
+          buttonLabel,
+          style: CustomGoogleFonts.roboto(fontSize: 20, color: Colors.white),
         ),
-      ),
-      child: Text(
-        buttonLabel,
-        style: CustomGoogleFonts.roboto(fontSize: 20, color: Colors.white),
       ),
     );
   }

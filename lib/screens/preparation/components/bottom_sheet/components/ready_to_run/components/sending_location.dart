@@ -59,6 +59,11 @@ class SendingLocation extends StatelessWidget {
           height: 20,
         ),
         TextField(
+          style: CustomGoogleFonts.roboto(
+            color: TextColor.white,
+            fontSize: AppFontSizes.size16,
+            fontWeight: FontWeight.w500,
+          ),
           decoration: InputDecoration(
             prefixIcon: CountryCodePicker(
               onChanged: (code) {},
@@ -86,6 +91,11 @@ class SendingLocation extends StatelessWidget {
           height: 20,
         ),
         TextField(
+          style: CustomGoogleFonts.roboto(
+            color: TextColor.white,
+            fontSize: AppFontSizes.size16,
+            fontWeight: FontWeight.w500,
+          ),
           decoration: InputDecoration(
             prefixIcon: CountryCodePicker(
               onChanged: (code) {},
