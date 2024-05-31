@@ -10,7 +10,9 @@ class SearchSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FocusNode searchFocusNode = FocusNode();
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         const SheetRow(
           iconData: CupertinoIcons.arrow_2_circlepath,
@@ -39,6 +41,14 @@ class SearchSheet extends StatelessWidget {
           trailing: SizedBox(
             width: AppSpacings.sw(0.75),
             child: TextField(
+              onTap: () {
+                searchFocusNode.requestFocus();
+              },
+              focusNode: searchFocusNode,
+              style: CustomGoogleFonts.roboto(
+                fontSize: AppFontSizes.size16,
+                color: TextColor.white,
+              ),
               decoration: InputDecoration(
                 hintText: "By event name",
                 hintStyle: CustomGoogleFonts.roboto(

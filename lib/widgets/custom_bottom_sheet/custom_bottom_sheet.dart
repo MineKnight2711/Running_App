@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
 
 class CustomBottomSheet extends StatelessWidget {
-  final String sheetTitle;
+  final bool showSheetTitle;
+  final String? sheetTitle;
   final double? sheetHeight;
   final Widget? sheetBody, sheetFooter;
   const CustomBottomSheet({
     super.key,
+    this.showSheetTitle = true,
     this.sheetHeight,
-    required this.sheetTitle,
+    this.sheetTitle,
     this.sheetBody,
     this.sheetFooter,
   });
@@ -27,32 +29,43 @@ class CustomBottomSheet extends StatelessWidget {
           topRight: Radius.circular(12),
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: EdgeInsets.only(
+        left: 15,
+        right: 15,
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                sheetTitle,
-                style: CustomGoogleFonts.roboto(
-                  fontSize: AppFontSizes.size18,
-                  color: AppColors.white100,
-                  fontWeight: FontWeight.w700,
+          if (showSheetTitle)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "$sheetTitle",
+                  style: CustomGoogleFonts.roboto(
+                    fontSize: AppFontSizes.size18,
+                    color: AppColors.white100,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(CupertinoIcons.xmark),
-                color: AppColors.white100,
-              ),
-            ],
-          ),
-          const Divider(
-            thickness: 0.5,
-            height: 32,
-          ),
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(CupertinoIcons.xmark),
+                  color: AppColors.white100,
+                ),
+              ],
+            )
+          else
+            const SizedBox.shrink(),
+          if (showSheetTitle)
+            const Divider(
+              thickness: 0.5,
+              height: 32,
+            )
+          else
+            const SizedBox.shrink(),
           sheetBody ?? const SizedBox.shrink(),
           const SizedBox(
             height: 20,

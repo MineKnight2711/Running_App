@@ -37,45 +37,42 @@ class _TabBarViewScreenState extends State<TabBarViewScreen>
             Logger().i('Secondary navigator was popped');
           }
         },
-        child: SafeArea(
-          top: false,
-          child: Scaffold(
-              body: Stack(
-            children: [
-              PopScope(
-                canPop: canPop.value,
-                onPopInvoked: (didPop) async {
-                  if (NavigatorKeys.secondaryNavigatorKey.currentState!
-                      .canPop()) {
-                    Logger().i('Secondary navigator was popped');
-                  }
+        child: Scaffold(
+            body: Stack(
+          children: [
+            PopScope(
+              canPop: canPop.value,
+              onPopInvoked: (didPop) async {
+                if (NavigatorKeys.secondaryNavigatorKey.currentState!
+                    .canPop()) {
+                  Logger().i('Secondary navigator was popped');
+                }
+              },
+              child: Navigator(
+                key: NavigatorKeys.secondaryNavigatorKey,
+                onGenerateRoute: (settings) {
+                  return MaterialPageRoute(
+                    builder: (context) => TabBarView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: _tabController,
+                      children: const [
+                        ProgressScreen(),
+                        PreparationScreen(),
+                      ],
+                    ),
+                  );
                 },
-                child: Navigator(
-                  key: NavigatorKeys.secondaryNavigatorKey,
-                  onGenerateRoute: (settings) {
-                    return MaterialPageRoute(
-                      builder: (context) => TabBarView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        controller: _tabController,
-                        children: const [
-                          ProgressScreen(),
-                          PreparationScreen(),
-                        ],
-                      ),
-                    );
-                  },
-                ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: BottomNavigationTabBar(
-                  tabController: _tabController,
-                  onTabChange: (index) {},
-                ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: BottomNavigationTabBar(
+                tabController: _tabController,
+                onTabChange: (index) {},
               ),
-            ],
-          )),
-        ),
+            ),
+          ],
+        )),
       ),
     );
   }

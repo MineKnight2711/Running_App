@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 
+///This class is used to create and control  global navigator keys
 class NavigatorKeys {
   static final GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey();
   static final GlobalKey<NavigatorState> secondaryNavigatorKey = GlobalKey();
 }
 
+///This class is used to observe the navigation of the app
 class MyNavigatorObserver extends NavigatorObserver {
   @override
   void didPop(Route route, Route? previousRoute) {
@@ -23,6 +25,7 @@ class MyNavigatorObserver extends NavigatorObserver {
   }
 }
 
+///This class is used to observe the lifecycle of the app
 class MyAppLifecycleObserver extends WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {

@@ -28,6 +28,7 @@ class AppColors {
 
   static const Color white100 = Color(0xffffffff);
   static const Color sheetBackground = Color(0xff222222);
+  static const Color bottomBarBackground = Color(0xFF2C2A2D);
   static const Color transparent = Colors.transparent;
   static const Color cancleButton = Color(0xffff4747);
   static const Color appButton = Color(0xfff26322);

@@ -11,6 +11,7 @@ import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import '../config/colors.dart';
 import '../utils/map_annotation_click_listener.dart';
 
+///This class is used to control the map box with all the function to interact with the map
 class MapController extends GetxController {
   final _mapApi = GoongApi();
   RxString currentMapViewStyle = MapboxStyles.MAPBOX_STREETS.obs;
@@ -40,19 +41,20 @@ class MapController extends GetxController {
     listRoute = tempTopRoute.obs;
   }
 
+  ///Reset all the point and annotation on the map
   void resetPointAndAnotation() {
-
     pointManager.value?.deleteAll();
     polylineManager.value?.deleteAll();
-    // pointManager.value = polylineManager.value = null;
   }
 
+  ///This function is called when the map is created
   onMapCreated(MapboxMap mapboxMapCreate) {
     mapboxMap.value = mapboxMapCreate;
     mapboxMap.value?.scaleBar.updateSettings(ScaleBarSettings(enabled: false));
     mapboxMap.value?.compass.updateSettings(CompassSettings(enabled: false));
   }
 
+  ///This function is called when the user choose a map annotation
   selectAnotation(int anotationIndex) {
     if (listRoute.isNotEmpty &&
         (anotationIndex >= 0 && anotationIndex < listRoute.length) &&
@@ -69,6 +71,7 @@ class MapController extends GetxController {
     }
   }
 
+  ///Chose the start and end point of the route and get the direction
   selectDirection(ScreenCoordinate coordinate) async {
     if (selectedRoute.value != null && isRouteSelected.value) {
       resetPointAndAnotation();
@@ -137,6 +140,7 @@ class MapController extends GetxController {
     }
   }
 
+  ///Zoom in the map
   void zoomIn() {
     zoomLevel.value++;
     mapboxMap.value?.flyTo(
@@ -148,6 +152,7 @@ class MapController extends GetxController {
         MapAnimationOptions(duration: 2000, startDelay: 0));
   }
 
+  ///Zoom out the map
   void zoomOut() {
     zoomLevel.value--;
     mapboxMap.value?.flyTo(
@@ -160,6 +165,7 @@ class MapController extends GetxController {
         MapAnimationOptions(duration: 2000, startDelay: 0));
   }
 
+  ///Change the style of the map
   changeMapStyle() {
     if (currentMapViewStyle.value == MapboxStyles.MAPBOX_STREETS) {
       currentMapViewStyle.value = MapboxStyles.SATELLITE_STREETS;
@@ -170,6 +176,7 @@ class MapController extends GetxController {
     }
   }
 
+  ///Change the direction of the map
   changeMapDirection() {
     currentMapDirection = currentMapDirection.next;
     mapboxMap.value?.flyTo(
@@ -178,6 +185,7 @@ class MapController extends GetxController {
     );
   }
 
+  ///Get the center point of all the annotation being created by the user
   Position _getCenterPoint(List<Position> points) {
     if (points.isEmpty) {
       return Position(0, 0);
@@ -215,6 +223,7 @@ class MapController extends GetxController {
     );
   }
 
+  ///Center the camera on a specific coordinate with adding annotation image
   void centerCameraOnCoordinate(double lng, double lat,
       {required String anotationPng}) async {
     final position = Position(lng, lat);
@@ -242,6 +251,7 @@ class MapController extends GetxController {
     );
   }
 
+  ///Create a temporary list of top route
   void createTempTopRoutes() {
     resetPointAndAnotation();
     mapboxMap.value?.annotations
@@ -272,11 +282,13 @@ class MapController extends GetxController {
     });
   }
 
+  ///Load image to Uint8List using path of the image
   Future<Uint8List> loadImageToUnit8List(String path) async {
     final ByteData bytes = await rootBundle.load(path);
     return bytes.buffer.asUint8List();
   }
 
+  ///Create the constant running route
   void selectRouteToAdd() async {
     selectedRouteToAdd.value = selectedRoute.value;
     selectedRoute.value = null;

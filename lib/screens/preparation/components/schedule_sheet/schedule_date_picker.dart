@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../config/config_export.dart';
 import '../../../../widgets/alert_dialogs/confirm_alert_dialogs.dart';
-import '../../../../widgets/alert_dialogs/warning_alert_dialogs.dart';
 import 'schedule_date_picker_column.dart';
 import 'schedule_sheet_action_buttons.dart';
 
@@ -128,7 +127,8 @@ class ScheduleDatePicker extends StatelessWidget {
         SizedBox(
           width: AppSpacings.sw(0.5),
           height: AppSpacings.sh(0.7),
-          child: WarningAlertDialogs(
+          child: ConfirmAlertDialogs(
+            confirmButtonText: "Ok",
             title: "You have successfully choose schedule time!",
             content: Text(
               timeSelected,
@@ -145,7 +145,8 @@ class ScheduleDatePicker extends StatelessWidget {
         SizedBox(
           width: AppSpacings.sw(0.5),
           height: AppSpacings.sh(0.7),
-          child: const WarningAlertDialogs(
+          child: const ConfirmAlertDialogs(
+            confirmButtonText: "Ok",
             title: "You haven't choose the times yet!",
             content: SizedBox.shrink(),
             iconSvgPath: "assets/svg/preparation/rpe/7-8.svg",

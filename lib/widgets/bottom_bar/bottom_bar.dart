@@ -13,7 +13,7 @@ class BottomNavigationTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final RxInt currentIndex = tabController.index.obs;
     return Container(
-      color: AppColors.sheetBackground,
+      color: AppColors.bottomBarBackground,
       height: 50.h,
       child: Obx(
         () => TabBar(

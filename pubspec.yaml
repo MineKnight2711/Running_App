@@ -19,14 +19,12 @@ dependencies:
   fl_chart: ^0.67.0
   syncfusion_flutter_charts: ^25.1.42+1
   card_swiper: ^3.0.1
-  draggable_home: ^1.0.5
   flutter_svg: ^2.0.10+1
   json_annotation: ^4.9.0
   mapbox_polyline_points: ^0.0.5
   mapbox_maps_flutter: ^0.4.3
   country_code_picker: ^3.0.0
   logger: ^2.3.0
-  
   image_picker: ^1.1.1
   image_cropper: ^6.0.0
   http: ^1.2.1

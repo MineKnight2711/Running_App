@@ -1,9 +1,8 @@
 import 'dart:async';
-
 import 'package:get/get.dart';
-
 import '../models/route_model/route_model.dart';
 
+///This class is used to control the stopwatch and the running screen
 class RunningController extends GetxController {
   final Rx<Stopwatch> stopwatch = Stopwatch().obs;
   final RxBool isRunning = false.obs;

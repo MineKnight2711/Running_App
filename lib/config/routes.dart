@@ -7,6 +7,7 @@ import '../screens/run/show_clock/running_show_clock_screen.dart';
 import 'package:get/get.dart';
 import '../screens/app_tabbar_view/app_tabbar_view.dart';
 
+///This class contain all the routes of the app
 class AppRoutes {
   static const String _home = '/';
   static const String _tabbarview = '/tabbarview';
