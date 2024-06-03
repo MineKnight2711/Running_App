@@ -24,11 +24,23 @@ class ProgressScreen extends GetView {
                 showModalBottomSheet(
                   context: NavigatorKeys.mainNavigatorKey.currentContext!,
                   isScrollControlled: true,
-                  builder: (context) {
-                    return const CustomBottomSheet(
+                  isDismissible: true,
+                  builder: (c) {
+                    return CustomBottomSheet(
                       sheetTitle: "Search",
-                      sheetHeight: 0.5,
-                      sheetBody: SearchSheet(),
+                      sheetHeight: 0.55,
+                      sheetBody: LayoutBuilder(
+                        builder: (context, constraints) => AnimatedPadding(
+                          padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(NavigatorKeys
+                                      .mainNavigatorKey.currentContext!)
+                                  .viewInsets
+                                  .bottom),
+                          duration: const Duration(milliseconds: 150),
+                          curve: Curves.easeOut,
+                          child: SearchSheet(),
+                        ),
+                      ),
                     );
                   },
                 );

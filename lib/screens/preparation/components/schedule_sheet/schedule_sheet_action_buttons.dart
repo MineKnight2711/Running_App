@@ -14,21 +14,24 @@ class ScheduleSheetActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ElevatedButton(
-          onPressed: onSavePressed,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.appButton,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 130.0,
-              vertical: 10,
+        SizedBox(
+          height: AppSpacings.cvs(35),
+          width: AppSpacings.sw(1),
+          child: ElevatedButton(
+            onPressed: onSavePressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.appButton,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+            child: Text(
+              'Save',
+              style: CustomGoogleFonts.roboto(
+                fontSize: AppFontSizes.size16,
+                color: Colors.white,
+              ),
             ),
-          ),
-          child: Text(
-            'Save',
-            style: CustomGoogleFonts.roboto(fontSize: 20, color: Colors.white),
           ),
         ),
         const SizedBox(
@@ -40,7 +43,7 @@ class ScheduleSheetActionButtons extends StatelessWidget {
             child: Text(
               'Delete the scheduled route',
               style: CustomGoogleFonts.roboto(
-                fontSize: 20,
+                fontSize: AppFontSizes.size16,
                 color: const Color(0xffff4747),
               ),
             ),

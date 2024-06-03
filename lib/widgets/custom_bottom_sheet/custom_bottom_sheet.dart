@@ -30,20 +30,26 @@ class CustomBottomSheet extends StatelessWidget {
         ),
       ),
       padding: EdgeInsets.only(
-        left: 15,
-        right: 15,
-        bottom: MediaQuery.of(context).viewInsets.bottom,
+        left: AppSpacings.chs(10),
+        right: AppSpacings.chs(10),
+        bottom: MediaQuery.viewInsetsOf(context).bottom,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
           if (showSheetTitle)
+            const SizedBox(
+              height: 10,
+            )
+          else
+            const SizedBox.shrink(),
+          if (showSheetTitle)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "$sheetTitle",
+                  sheetTitle ?? 'Bottom Sheet Title',
                   style: CustomGoogleFonts.roboto(
                     fontSize: AppFontSizes.size18,
                     color: AppColors.white100,
@@ -62,7 +68,7 @@ class CustomBottomSheet extends StatelessWidget {
           if (showSheetTitle)
             const Divider(
               thickness: 0.5,
-              height: 32,
+              height: 20,
             )
           else
             const SizedBox.shrink(),

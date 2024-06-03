@@ -5,9 +5,9 @@ import '../../../../widgets/alert_dialogs/confirm_alert_dialogs.dart';
 import 'schedule_date_picker_column.dart';
 import 'schedule_sheet_action_buttons.dart';
 
-class ScheduleDatePicker extends StatelessWidget {
+class ScheduleDatePickerSheet extends StatelessWidget {
   final DateTime initialDate;
-  const ScheduleDatePicker({
+  const ScheduleDatePickerSheet({
     super.key,
     required this.initialDate,
   });
@@ -42,7 +42,7 @@ class ScheduleDatePicker extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ScheduleDatePickerColumn(
+              ScheduleDatePickerSheetColumn(
                 initialValue: seletedHours.value,
                 values: List.generate(24, (index) => index),
                 onChanged: (value) {
@@ -50,7 +50,7 @@ class ScheduleDatePicker extends StatelessWidget {
                 },
                 label: 'Hour',
               ),
-              ScheduleDatePickerColumn(
+              ScheduleDatePickerSheetColumn(
                 initialValue: seletedMinutes.value,
                 values: List.generate(60, (index) => index),
                 onChanged: (value) {
@@ -66,7 +66,7 @@ class ScheduleDatePicker extends StatelessWidget {
                 color: Colors.grey,
               ),
               Obx(
-                () => ScheduleDatePickerColumn(
+                () => ScheduleDatePickerSheetColumn(
                   initialValue: selectedDay.value - 1,
                   values: List.generate(
                       getDaysInMonth(selectedYear.value, selectedMonth.value),
@@ -77,7 +77,7 @@ class ScheduleDatePicker extends StatelessWidget {
                   label: 'Date',
                 ),
               ),
-              ScheduleDatePickerColumn(
+              ScheduleDatePickerSheetColumn(
                 initialValue: selectedMonth.value - 1,
                 values: listMonth,
                 onChanged: (value) {
@@ -85,7 +85,7 @@ class ScheduleDatePicker extends StatelessWidget {
                 },
                 label: 'Month',
               ),
-              ScheduleDatePickerColumn(
+              ScheduleDatePickerSheetColumn(
                 initialValue: listYear.indexOf(selectedYear.value),
                 values: listYear,
                 onChanged: (value) {
@@ -98,8 +98,13 @@ class ScheduleDatePicker extends StatelessWidget {
         ),
         ScheduleSheetActionButtons(
           onSavePressed: () {
-            seletecScheduleTime(seletedHours.value, seletedMinutes.value,
-                selectedDay.value, selectedMonth.value, selectedYear.value);
+            seletecScheduleTime(
+              seletedHours.value,
+              seletedMinutes.value,
+              selectedDay.value,
+              selectedMonth.value,
+              selectedYear.value,
+            );
           },
           onDeletePressed: () {
             Get.dialog(ConfirmAlertDialogs(
@@ -108,7 +113,9 @@ class ScheduleDatePicker extends StatelessWidget {
                   "Are you sure you want to remove the route for upcoming run?",
                   textAlign: TextAlign.center,
                   style: CustomGoogleFonts.roboto(
-                      color: Colors.white, fontWeight: FontWeight.w400),
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
                 confirmButtonText: "Yes, remove",
                 iconSvgPath: "delete_schedule"));
@@ -133,7 +140,9 @@ class ScheduleDatePicker extends StatelessWidget {
             content: Text(
               timeSelected,
               style: CustomGoogleFonts.roboto(
-                  fontSize: AppFontSizes.size16, color: TextColor.white),
+                fontSize: AppFontSizes.size16,
+                color: TextColor.white,
+              ),
               textAlign: TextAlign.center,
             ),
             iconSvgPath: "assets/svg/preparation/rpe/4-6.svg",

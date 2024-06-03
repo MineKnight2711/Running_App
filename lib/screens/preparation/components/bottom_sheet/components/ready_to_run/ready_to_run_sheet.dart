@@ -28,7 +28,7 @@ class ReadyToRunSheet extends GetView<RunningController> {
       height: AppSpacings.sh(0.25),
       width: AppSpacings.sw(1),
       decoration: const BoxDecoration(
-        color: Color(0xFF222222),
+        color: AppColors.sheetBackground,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(24),
         ),

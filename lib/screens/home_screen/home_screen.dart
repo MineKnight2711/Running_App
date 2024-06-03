@@ -4,10 +4,9 @@ import 'package:flutter_running_demo/widgets/app_bar.dart';
 import 'package:flutter_running_demo/screens/home_screen/components/walk_report.dart';
 import 'package:flutter_running_demo/screens/home_screen/components/progress_banner.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'components/sleep_report.dart';
 
-class HomeScreen extends GetView {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({
     super.key,
   });

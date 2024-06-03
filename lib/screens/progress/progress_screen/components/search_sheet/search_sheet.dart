@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_running_demo/utils/navigator_key.dart';
 import '../../../../../config/config_export.dart';
 import 'package:flutter_running_demo/screens/progress/progress_screen/components/search_sheet/sheet_row.dart';
 import '../../../../../widgets/date_time_picker.dart';
 import 'activites_drow_down.dart';
 
 class SearchSheet extends StatelessWidget {
-  const SearchSheet({super.key});
+  SearchSheet({super.key});
+  final FocusNode searchFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    final FocusNode searchFocusNode = FocusNode();
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         const SheetRow(

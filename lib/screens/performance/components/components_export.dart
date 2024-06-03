@@ -3,3 +3,7 @@ export 'dropdown_activities.dart';
 export 'nested_chart.dart';
 export 'performance_summary.dart';
 export 'period_button_row.dart';
+export 'performance_basic_widget.dart';
+export 'performance_intensity_widget.dart';
+export 'performance_pulse_rate_widget.dart';
+export 'performance_record_widget.dart';

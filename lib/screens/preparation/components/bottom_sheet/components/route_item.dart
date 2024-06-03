@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/extensions/duration_extension.dart';
 import 'package:flutter_running_demo/extensions/integer_extension.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../config/config_export.dart';
 import '../../../../../models/route_model/route_model.dart';
@@ -24,12 +23,12 @@ class RouteItemWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 1.sw,
-          height: isSelected ? 134.h : 74.h,
+          width: AppSpacings.sw(1),
+          height: isSelected ? AppSpacings.cvs(134) : AppSpacings.cvs(74),
           padding: isSelected
-              ? EdgeInsets.symmetric(vertical: 5.h)
+              ? EdgeInsets.symmetric(vertical: AppSpacings.vs5)
               : EdgeInsets.zero,
-          margin: EdgeInsets.symmetric(vertical: 5.h),
+          margin: EdgeInsets.symmetric(vertical: AppSpacings.vs5),
           alignment: Alignment.center,
           decoration: BoxDecoration(
               color: isSelected
@@ -44,8 +43,8 @@ class RouteItemWidget extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      width: 0.2.sw,
-                      height: 0.2.sw,
+                      width: AppSpacings.sw(0.2),
+                      height: AppSpacings.sw(0.2),
                       decoration: BoxDecoration(
                         color: haveSelectedBackGround
                             ? (isSelected
@@ -58,9 +57,11 @@ class RouteItemWidget extends StatelessWidget {
                       child: SvgPicture.asset(
                           "assets/svg/preparation/route_vector/${route.imagePath}.svg"),
                     ),
-                    SizedBox(width: 10.w),
+                    SizedBox(width: AppSpacings.chs(10)),
                     SizedBox(
-                      width: 1.sw - (10.w + 0.2.sw) - 48,
+                      width: AppSpacings.sw(1) -
+                          (AppSpacings.chs(10) + AppSpacings.sw(0.2)) -
+                          48,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -72,7 +73,7 @@ class RouteItemWidget extends StatelessWidget {
                                   route.title,
                                   overflow: TextOverflow.ellipsis,
                                   style: CustomGoogleFonts.roboto(
-                                      fontSize: 16.r,
+                                      fontSize: AppFontSizes.size16,
                                       color: AppColors.white100),
                                 ),
                               ),
@@ -80,17 +81,19 @@ class RouteItemWidget extends StatelessWidget {
                               SvgPicture.asset(
                                   "assets/svg/preparation/public.svg"),
                               SizedBox(
-                                width: 15.w,
+                                width: AppSpacings.chs(15),
                               ),
                               SvgPicture.asset(
                                   "assets/svg/preparation/rpe/${route.rpe.getRpeSvgAsset()}.svg"),
                               SizedBox(
-                                width: 5.w,
+                                width: AppSpacings.chs(5),
                               ),
                               Text(
                                 "RPE",
                                 style: CustomGoogleFonts.roboto(
-                                    fontSize: 16.r, color: AppColors.white100),
+                                  fontSize: AppFontSizes.size16,
+                                  color: AppColors.white100,
+                                ),
                               ),
                             ],
                           ),
@@ -101,18 +104,18 @@ class RouteItemWidget extends StatelessWidget {
                               Text(
                                 " ${route.distance.toStringAsFixed(1)}",
                                 style: CustomGoogleFonts.roboto(
-                                    fontSize: 14.r,
+                                    fontSize: AppFontSizes.size14,
                                     color: TextColor.secondaryText),
                               ),
                               SizedBox(
-                                width: 60.w,
+                                width: AppSpacings.chs(60),
                               ),
                               SvgPicture.asset(
                                   "assets/svg/preparation/time.svg"),
                               Text(
                                 " ${route.time.durationToString()}",
                                 style: CustomGoogleFonts.roboto(
-                                    fontSize: 16.r,
+                                    fontSize: AppFontSizes.size16,
                                     color: TextColor.secondaryText),
                               ),
                             ],
@@ -125,7 +128,7 @@ class RouteItemWidget extends StatelessWidget {
                                     Text(
                                       " ${route.attemps} runners attempted",
                                       style: CustomGoogleFonts.roboto(
-                                          fontSize: 16.r,
+                                          fontSize: AppFontSizes.size16,
                                           color: TextColor.secondaryText),
                                     ),
                                   ],
@@ -138,7 +141,7 @@ class RouteItemWidget extends StatelessWidget {
                 ),
                 isSelected
                     ? SizedBox(
-                        height: 10.h,
+                        height: AppSpacings.cvs(10),
                       )
                     : const SizedBox.shrink(),
                 isSelected ? isSelectedWidget : const SizedBox.shrink(),
@@ -148,7 +151,7 @@ class RouteItemWidget extends StatelessWidget {
         ),
         showDivider
             ? Divider(
-                height: 5.h,
+                height: AppSpacings.cvs(5),
                 thickness: 0.4,
               )
             : const SizedBox.shrink(),

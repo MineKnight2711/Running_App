@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../../config/config_export.dart';
 
-class ScheduleDatePickerColumn extends StatelessWidget {
+class ScheduleDatePickerSheetColumn extends StatelessWidget {
   final List<dynamic> values;
   final ValueChanged<dynamic> onChanged;
   final String label;
   final int initialValue;
-  const ScheduleDatePickerColumn({
+  const ScheduleDatePickerSheetColumn({
     super.key,
     required this.values,
     required this.onChanged,
@@ -18,12 +18,12 @@ class ScheduleDatePickerColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // const SizedBox(
-        //   height: 8,
-        // ),
         Text(
           label,
-          style: CustomGoogleFonts.roboto(fontSize: 16, color: Colors.white),
+          style: CustomGoogleFonts.roboto(
+            fontSize: AppFontSizes.size16,
+            color: Colors.white,
+          ),
         ),
         SizedBox(
           width: AppSpacings.chs(60),
@@ -43,7 +43,7 @@ class ScheduleDatePickerColumn extends StatelessWidget {
                 child: Text(
                   value.toString(),
                   style: CustomGoogleFonts.roboto(
-                    fontSize: 20.0,
+                    fontSize: AppFontSizes.size20,
                     color: Colors.white,
                   ),
                 ),

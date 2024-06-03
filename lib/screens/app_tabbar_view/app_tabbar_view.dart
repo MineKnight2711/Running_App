@@ -31,7 +31,6 @@ class _TabBarViewScreenState extends State<TabBarViewScreen>
         onPopInvoked: (didPop) async {
           if (!NavigatorKeys.mainNavigatorKey.currentState!.canPop()) {
             Logger().i('Main navigator was popped');
-            // NavigatorKeys.secondaryNavigatorKey.currentState!.pop();
           }
           if (!NavigatorKeys.secondaryNavigatorKey.currentState!.canPop()) {
             Logger().i('Secondary navigator was popped');

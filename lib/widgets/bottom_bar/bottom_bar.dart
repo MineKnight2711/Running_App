@@ -14,7 +14,7 @@ class BottomNavigationTabBar extends StatelessWidget {
     final RxInt currentIndex = tabController.index.obs;
     return Container(
       color: AppColors.bottomBarBackground,
-      height: 50.h,
+      height: AppSpacings.vs25 * 2,
       child: Obx(
         () => TabBar(
           isScrollable: false,
