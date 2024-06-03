@@ -16,7 +16,7 @@ class RouteAddBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomSheet(
       showSheetTitle: false,
-      sheetHeight: 0.3,
+      sheetHeight: 0.24,
       sheetBody: AddBottomSheet(
         onCompletePressed: onCompletePressed,
         distance: distance,

@@ -76,7 +76,7 @@ class AppRoutes {
         transition: Transition.rightToLeft),
     GetPage(
         name: _performanceMetrics,
-        page: () => PerformanceMetricsScreen(),
+        page: () => const PerformanceMetricsScreen(),
         transition: Transition.rightToLeft),
     GetPage(
         name: _detailRoute,

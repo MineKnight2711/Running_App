@@ -6,6 +6,7 @@ import '../models/route_model/route_model.dart';
 class RunningController extends GetxController {
   final Rx<Stopwatch> stopwatch = Stopwatch().obs;
   final RxBool isRunning = false.obs;
+  final RxBool runningSheetCanPop = false.obs;
   late Duration elapsedTime;
   late RxString elapsedTimeString;
   late Timer timer;

@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'components/record_field_widget.dart';
 import 'components/slpit_avarage_widget.dart';
 import '../../../controllers/running_controller.dart';
-import 'components/time_elapsed.dart';
 
 class RunShowClock extends GetView<RunningController> {
   const RunShowClock({super.key});
@@ -44,8 +43,19 @@ class RunShowClock extends GetView<RunningController> {
             ),
             const SizedBox(height: 20),
             RecordFieldWidget(
-                label: "Time",
-                recordField: TimeElapsedWidget(runningController: controller)),
+              label: "Time",
+              recordField: Center(
+                child: Obx(
+                  () => Text(
+                    controller.elapsedTimeString.value,
+                    style: CustomGoogleFonts.roboto(
+                      fontSize: AppFontSizes.customSize(52),
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(height: 15),
             const RecordFieldWidget(
                 label: "Avg. pace",
@@ -71,7 +81,7 @@ class RunShowClock extends GetView<RunningController> {
                   value: "126",
                   unit: "BPM",
                 )),
-            const SizedBox(height: 40),
+            SizedBox(height: AppSpacings.hs20),
             GetBuilder<MapController>(
               builder: (controller) => Hero(
                 tag: "running_buttons",

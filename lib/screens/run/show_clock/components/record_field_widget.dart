@@ -10,7 +10,7 @@ class RecordFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       height: AppSpacings.cvs(90),
       width: 400,
       decoration: BoxDecoration(
@@ -23,7 +23,10 @@ class RecordFieldWidget extends StatelessWidget {
           Text(
             label,
             style: CustomGoogleFonts.roboto(
-                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+              fontSize: AppFontSizes.size18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
           recordField
         ],

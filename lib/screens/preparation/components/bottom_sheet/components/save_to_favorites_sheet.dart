@@ -13,7 +13,7 @@ class RouteSaveToFavoriteBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomSheet(
       showSheetTitle: false,
-      sheetHeight: 0.43,
+      sheetHeight: 0.37,
       sheetBody: SaveToFavoriteBottomSheetBody(
         mapController: mapController,
       ),
@@ -30,8 +30,6 @@ class SaveToFavoriteBottomSheetBody extends StatelessWidget {
     final RxBool isAddToUpcoming = false.obs;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(
           height: 5,

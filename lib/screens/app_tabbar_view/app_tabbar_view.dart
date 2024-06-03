@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_running_demo/config/config_export.dart';
 import 'package:flutter_running_demo/screens/preparation/preparation_screen.dart';
 import 'package:flutter_running_demo/screens/progress/progress_screen/progress_screen.dart';
 import 'package:flutter_running_demo/utils/navigator_key.dart';
@@ -39,28 +42,31 @@ class _TabBarViewScreenState extends State<TabBarViewScreen>
         child: Scaffold(
             body: Stack(
           children: [
-            PopScope(
-              canPop: canPop.value,
-              onPopInvoked: (didPop) async {
-                if (NavigatorKeys.secondaryNavigatorKey.currentState!
-                    .canPop()) {
-                  Logger().i('Secondary navigator was popped');
-                }
-              },
-              child: Navigator(
-                key: NavigatorKeys.secondaryNavigatorKey,
-                onGenerateRoute: (settings) {
-                  return MaterialPageRoute(
-                    builder: (context) => TabBarView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      controller: _tabController,
-                      children: const [
-                        ProgressScreen(),
-                        PreparationScreen(),
-                      ],
-                    ),
-                  );
+            SizedBox(
+              height: AppSpacings.sh(1) - (AppSpacings.vs25 * 2),
+              child: PopScope(
+                canPop: canPop.value,
+                onPopInvoked: (didPop) async {
+                  if (NavigatorKeys.secondaryNavigatorKey.currentState!
+                      .canPop()) {
+                    Logger().i('Secondary navigator was popped');
+                  }
                 },
+                child: Navigator(
+                  key: NavigatorKeys.secondaryNavigatorKey,
+                  onGenerateRoute: (settings) {
+                    return MaterialPageRoute(
+                      builder: (context) => TabBarView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        controller: _tabController,
+                        children: const [
+                          ProgressScreen(),
+                          PreparationScreen(),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
             Align(

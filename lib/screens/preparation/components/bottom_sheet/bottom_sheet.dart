@@ -34,6 +34,7 @@ class ScreenBottomSheets extends GetView<RunningController> {
 
                   showBottomSheet(
                     context: preparationScreenContext,
+                    enableDrag: controller.runningSheetCanPop.value,
                     builder: (c) => ReadyToRunSheet(
                       secondaryNavigatorContext: context,
                     ),
