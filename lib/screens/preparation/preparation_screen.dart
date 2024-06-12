@@ -21,7 +21,7 @@ class _PreparationScreenState extends State<PreparationScreen>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   late TabController _tabController;
   final mapController = Get.find<MapController>();
-  final runningController = Get.put(RunningController());
+  final runningController = Get.find<RunningController>();
 
   @override
   void initState() {
@@ -73,7 +73,12 @@ class _PreparationScreenState extends State<PreparationScreen>
                       },
                     ),
                   )
-                : Positioned(top: 40, child: HorizontalAnnotations());
+                : Positioned(
+                    top: 40,
+                    child: HorizontalAnnotations(
+                      onBackPressed: () {},
+                    ),
+                  );
           }),
           Positioned(
             top: 150,

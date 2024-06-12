@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76f1d53-f173-43fc-8253-f8471a0e5fc9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/app_tabbar_view/app_tabbar_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/app_tabbar_view/app_tabbar_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/preparation/components/bottom_sheet/components/ready_to_run/ready_to_run_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/preparation/components/bottom_sheet/components/ready_to_run/ready_to_run_sheet.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/preparation/components/map_anotations/horizontal_annotations.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/preparation/components/map_anotations/horizontal_annotations.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/preparation/preparation_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/preparation/preparation_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/progress/progress_screen/components/search_sheet/search_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/progress/progress_screen/components/search_sheet/search_sheet.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/progress/progress_screen/progress_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/progress/progress_screen/progress_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/bottom_bar/bottom_bar.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/custom_bottom_sheet/custom_bottom_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/custom_bottom_sheet/custom_bottom_sheet.dart" afterDir="false" />
     </list>
+    <list id="7e22d535-4203-4c6a-ba93-1921080164fe" name="Changes by Admin" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,23 +62,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Administrator/Desktop/Flutter/Running_App&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "io.flutter.reload.alreadyRun": "true",
+    "last_opened_file_path": "C:/Users/Administrator/Desktop/Flutter/RecordVideo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -74,6 +90,8 @@
       <workItem from="1716775541313" duration="2602000" />
       <workItem from="1716861425606" duration="480000" />
       <workItem from="1716906824342" duration="45000" />
+      <workItem from="1717466351762" duration="753000" />
+      <workItem from="1717553664273" duration="24000" />
     </task>
     <servers />
   </component>

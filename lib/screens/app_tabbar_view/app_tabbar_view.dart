@@ -1,84 +1,97 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_running_demo/config/config_export.dart';
+import 'package:flutter_running_demo/controllers/tabbar_controller.dart';
 import 'package:flutter_running_demo/screens/preparation/preparation_screen.dart';
 import 'package:flutter_running_demo/screens/progress/progress_screen/progress_screen.dart';
 import 'package:flutter_running_demo/utils/navigator_key.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
-import '../../widgets/bottom_bar/bottom_bar.dart';
+import '../../widgets/bottom_bar/bottom_tab_bar.dart';
 
-class TabBarViewScreen extends StatefulWidget {
+class TabBarViewScreen extends GetView<TabBarController> {
   const TabBarViewScreen({super.key});
 
   @override
-  State<TabBarViewScreen> createState() => _TabBarViewScreenState();
-}
-
-class _TabBarViewScreenState extends State<TabBarViewScreen>
-    with TickerProviderStateMixin {
-  late TabController _tabController;
-  final RxBool canPop = false.obs;
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => PopScope(
-        canPop: canPop.value,
-        onPopInvoked: (didPop) async {
-          if (!NavigatorKeys.mainNavigatorKey.currentState!.canPop()) {
-            Logger().i('Main navigator was popped');
-          }
-          if (!NavigatorKeys.secondaryNavigatorKey.currentState!.canPop()) {
-            Logger().i('Secondary navigator was popped');
-          }
-        },
-        child: Scaffold(
-            body: Stack(
-          children: [
-            SizedBox(
-              height: AppSpacings.sh(1) - (AppSpacings.vs25 * 2),
-              child: PopScope(
-                canPop: canPop.value,
-                onPopInvoked: (didPop) async {
-                  if (NavigatorKeys.secondaryNavigatorKey.currentState!
-                      .canPop()) {
-                    Logger().i('Secondary navigator was popped');
-                  }
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (!NavigatorKeys.mainNavigatorKey.currentState!.canPop()) {
+          Logger().i('Main navigator was popped');
+        }
+        if (!NavigatorKeys.secondaryNavigatorKey.currentState!.canPop()) {
+          Logger().i('Secondary navigator was popped');
+        }
+      },
+      child: Scaffold(
+          body: Stack(
+        children: [
+          SizedBox(
+            height: AppSpacings.sh(1) - (AppSpacings.vs25 * 2),
+            child: PopScope(
+              canPop: false,
+              onPopInvoked: (didPop) async {
+                if (NavigatorKeys.secondaryNavigatorKey.currentState!
+                    .canPop()) {
+                  Logger().i('Secondary navigator was popped');
+                }
+              },
+              child: Navigator(
+                key: NavigatorKeys.secondaryNavigatorKey,
+                onGenerateRoute: (settings) {
+                  return MaterialPageRoute(
+                    builder: (context) => TabBarView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: controller.tabController,
+                      children: [
+                        const ProgressScreen(),
+                        const PreparationScreen(),
+                        Container(
+                          decoration:
+                              const BoxDecoration(gradient: AppColors.appTheme),
+                          width: AppSpacings.sw(1),
+                          height: AppSpacings.sh(1),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            "Ready",
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          decoration:
+                              const BoxDecoration(gradient: AppColors.appTheme),
+                          width: AppSpacings.sw(1),
+                          height: AppSpacings.sh(1),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            "Train",
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          decoration:
+                              const BoxDecoration(gradient: AppColors.appTheme),
+                          width: AppSpacings.sw(1),
+                          height: AppSpacings.sh(1),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            "Challenge",
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
                 },
-                child: Navigator(
-                  key: NavigatorKeys.secondaryNavigatorKey,
-                  onGenerateRoute: (settings) {
-                    return MaterialPageRoute(
-                      builder: (context) => TabBarView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        controller: _tabController,
-                        children: const [
-                          ProgressScreen(),
-                          PreparationScreen(),
-                        ],
-                      ),
-                    );
-                  },
-                ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: BottomNavigationTabBar(
-                tabController: _tabController,
-                onTabChange: (index) {},
-              ),
-            ),
-          ],
-        )),
-      ),
+          ),
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: BottomNavigationTabBar(),
+          ),
+        ],
+      )),
     );
   }
 }

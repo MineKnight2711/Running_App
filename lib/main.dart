@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/config/routes.dart';
-import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:flutter_running_demo/utils/navigator_key.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -11,7 +10,6 @@ void main() {
       .addObserver(MyAppLifecycleObserver());
 
   runApp(const MainApp());
-  Get.put(MapController());
 }
 
 class MainApp extends StatelessWidget {
@@ -26,6 +24,7 @@ class MainApp extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.tabbarview,
+        // home: TestBottomSheet(),
         getPages: AppRoutes.getPages,
         navigatorKey: NavigatorKeys.mainNavigatorKey,
         navigatorObservers: [

@@ -7,6 +7,7 @@ class CustomBottomSheet extends StatelessWidget {
   final String? sheetTitle;
   final double? sheetHeight;
   final Widget? sheetBody, sheetFooter;
+  final bool isviewInsetsBottomPadding;
   const CustomBottomSheet({
     super.key,
     this.showSheetTitle = true,
@@ -14,6 +15,7 @@ class CustomBottomSheet extends StatelessWidget {
     this.sheetTitle,
     this.sheetBody,
     this.sheetFooter,
+    this.isviewInsetsBottomPadding = true,
   });
 
   @override
@@ -32,7 +34,9 @@ class CustomBottomSheet extends StatelessWidget {
       padding: EdgeInsets.only(
         left: AppSpacings.chs(10),
         right: AppSpacings.chs(10),
-        bottom: MediaQuery.viewInsetsOf(context).bottom,
+        bottom: isviewInsetsBottomPadding
+            ? MediaQuery.of(context).viewInsets.bottom
+            : 0,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

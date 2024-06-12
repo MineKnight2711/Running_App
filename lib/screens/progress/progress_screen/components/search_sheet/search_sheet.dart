@@ -6,14 +6,11 @@ import '../../../../../widgets/date_time_picker.dart';
 import 'activites_drow_down.dart';
 
 class SearchSheet extends StatelessWidget {
-  SearchSheet({super.key});
-  final FocusNode searchFocusNode = FocusNode();
+  const SearchSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
       children: [
         const SheetRow(
           iconData: CupertinoIcons.arrow_2_circlepath,
@@ -42,10 +39,6 @@ class SearchSheet extends StatelessWidget {
           trailing: SizedBox(
             width: AppSpacings.sw(0.75),
             child: TextField(
-              onTap: () {
-                searchFocusNode.requestFocus();
-              },
-              focusNode: searchFocusNode,
               style: CustomGoogleFonts.roboto(
                 fontSize: AppFontSizes.size16,
                 color: TextColor.white,
@@ -97,11 +90,14 @@ class SearchSheet extends StatelessWidget {
                 width: AppSpacings.sw(0.3),
                 height: AppSpacings.cvs(35),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    gradient: const LinearGradient(colors: [
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: const LinearGradient(
+                    colors: [
                       Color(0xFFFF783A),
                       Color(0xFFF26322),
-                    ])),
+                    ],
+                  ),
+                ),
                 child: Text(
                   "Select",
                   style: CustomGoogleFonts.roboto(

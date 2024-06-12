@@ -1,3 +1,4 @@
+import '../binding/bindings.dart';
 import '../screens/home_screen/home_screen.dart';
 import '../screens/performance/performance_screen.dart';
 import '../screens/progress/details_route_screen/details_route_screen.dart';
@@ -71,9 +72,15 @@ class AppRoutes {
         page: () => const HomeScreen(),
         transition: Transition.rightToLeft),
     GetPage(
-        name: _tabbarview,
-        page: () => const TabBarViewScreen(),
-        transition: Transition.rightToLeft),
+      name: _tabbarview,
+      page: () => const TabBarViewScreen(),
+      transition: Transition.rightToLeft,
+      bindings: [
+        TabbarControllerBiding(),
+        MapControllerBiding(),
+        RunningControllerBiding(),
+      ],
+    ),
     GetPage(
         name: _performanceMetrics,
         page: () => const PerformanceMetricsScreen(),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_running_demo/controllers/map_controller.dart';
 import 'package:flutter_running_demo/controllers/running_controller.dart';
 import 'package:flutter_running_demo/utils/navigator_key.dart';
-import 'package:flutter_running_demo/widgets/alert_dialogs/confirm_alert_dialogs.dart';
 import 'package:flutter_running_demo/widgets/custom_bottom_sheet/custom_bottom_sheet.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -32,20 +31,6 @@ class ReadyToRunSheet extends GetView<RunningController> {
         if (NavigatorKeys.mainNavigatorKey.currentState!.canPop()) {
           Logger().i(
               "mainNavigatorKey was popped, the Ready to run sheet will pop");
-          Get.dialog(
-            ConfirmAlertDialogs(
-              title: "Cancle Running",
-              content: Text(
-                "Are you sure you want to cancel the run?",
-                style: CustomGoogleFonts.roboto(
-                  color: AppColors.white100,
-                  fontSize: AppFontSizes.size16,
-                ),
-              ),
-              confirmButtonText: "Yes",
-              iconSvgPath: "delete",
-            ),
-          );
         }
       },
       child: Container(
