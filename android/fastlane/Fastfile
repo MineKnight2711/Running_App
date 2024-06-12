@@ -1,0 +1,28 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Deploy project to firebase_app_distribution"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    firebase_app_distribution(
+      app: "1:650562453326:android:6aed887d3bf585e226e81f",
+      app_bundle_file: "./app/build/outputs/apk/release/app-release.apk",
+      release_notes: "hello world"
+    )
+  end
+end
