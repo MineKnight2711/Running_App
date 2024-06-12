@@ -18,11 +18,26 @@ default_platform(:android)
 platform :android do
   desc "Deploy project to firebase_app_distribution"
   lane :deploy do
-    gradle(task: "clean assembleRelease")
+    gradle(
+      task: 'assemble',
+      build_type: 'Release'
+    )
     firebase_app_distribution(
       app: "1:650562453326:android:6aed887d3bf585e226e81f",
-      app_bundle_file: "./app/build/outputs/apk/release/app-release.apk",
-      release_notes: "hello world"
+      # app_bundle_file: "./app/build/outputs/apk/release/app-release.apk",
+      groups: "RunningAppTesters",
+      release_notes: "hello world",
+      android_artifact_type: "APK",
+      apk_path: "../build/app/outputs/apk/release/app-release.apk",
+      # firebase_cli_path:"C:\Users\Administrator\AppData\Roaming\npm\firebase",
+      # firebase_cli_token:"1//0eIWa9MA0cI3tCgYIARAAGA4SNwF-L9IrCZfSF970ntq763sXfd6mQsV9QTIgt7vYVQe6H9R3W0mLqQrXAR8eiNzbzMnIYY67qAA"
     )
+    
+  end
+  lane :increment_version do
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: "1:650562453326:android:6aed887d3bf585e226e81f"
+    )
+    increment_version_code({ version_code: latest_release[:buildVersion].to_i + 1 })
   end
 end
