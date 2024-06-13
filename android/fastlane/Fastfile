@@ -17,27 +17,48 @@ default_platform(:android)
 
 platform :android do
   desc "Deploy project to firebase_app_distribution"
+  lane :bump_version_name do
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: "1:650562453326:android:6aed887d3bf585e226e81f"
+    )
+    puts "latest_release: #{latest_release}"
+    version_name=android_get_version_name()
+    puts "version_name: #{version_name}"
+    version_components_name = latest_release[:displayVersion].split("_")
+    version_components = version_components_name[1].split(".")
+    version_components[2] = version_components[2].to_i + 1
+    new_version = version_components.join(".")
+    puts "new_version: #{new_version}"
+    android_set_version_name(version_name: "'RunningApp_#{new_version}'")
+  end
+  lane :bump_version_code do
+    current_version_code = android_get_version_code()
+    new_version_code = current_version_code.to_i + 1
+    puts "current_version_code: #{current_version_code}"
+    android_set_version_code(version_code: "#{new_version_code}")
+  end
+
   lane :deploy do
+    
+
+    # increment_version_code({ version_code: latest_release[:buildVersion].to_i + 1 })
+
     gradle(
       task: 'assemble',
-      build_type: 'Release'
+      build_type: 'Release',
+      flags: "--warning-mode none -x lint",
     )
     firebase_app_distribution(
       app: "1:650562453326:android:6aed887d3bf585e226e81f",
-      # app_bundle_file: "./app/build/outputs/apk/release/app-release.apk",
       groups: "RunningAppTesters",
-      release_notes: "hello world",
+      release_notes: "AppRelease",
+      release_notes_file: "release_notes.txt",
       android_artifact_type: "APK",
       apk_path: "../build/app/outputs/apk/release/app-release.apk",
-      # firebase_cli_path:"C:\Users\Administrator\AppData\Roaming\npm\firebase",
+
       # firebase_cli_token:"1//0eIWa9MA0cI3tCgYIARAAGA4SNwF-L9IrCZfSF970ntq763sXfd6mQsV9QTIgt7vYVQe6H9R3W0mLqQrXAR8eiNzbzMnIYY67qAA"
     )
     
   end
-  lane :increment_version do
-    latest_release = firebase_app_distribution_get_latest_release(
-      app: "1:650562453326:android:6aed887d3bf585e226e81f"
-    )
-    increment_version_code({ version_code: latest_release[:buildVersion].to_i + 1 })
-  end
+  
 end

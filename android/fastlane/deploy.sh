@@ -1,0 +1,3 @@
+fastlane bump_version_name
+fastlane bump_version_code
+fastlane deploy
