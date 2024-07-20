@@ -39,12 +39,16 @@ Before you begin, ensure you have met the following requirements:
 
 ## Running the Application
 
-1. **Run the application:**
+1. **Resovle the packages:**
+    ```sh
+    flutter pub get
+    ```
+2. **Run the application:**
     ```sh
     flutter run
     ```
 
-2. **Build and run for a specific platform:**
+3. **Build and run for a specific platform:**
     - For Android:
       ```sh
       flutter run -d android
@@ -70,24 +74,6 @@ The project directory structure is as follows:
 - **pubspec.yaml**: Specifies dependencies and project metadata.
 - **README.md**: This file.
 
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch:
-    ```sh
-    git checkout -b feature/your-feature-name
-    ```
-3. Make your changes and commit them:
-    ```sh
-    git commit -m 'Add some feature'
-    ```
-4. Push to the branch:
-    ```sh
-    git push origin feature/your-feature-name
-    ```
-5. Create a pull request.
 
 ## License
 
